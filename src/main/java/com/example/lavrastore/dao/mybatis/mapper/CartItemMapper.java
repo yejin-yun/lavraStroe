@@ -1,11 +1,10 @@
-package com.example.lavrastore.mybatis.mapper;
+package com.example.lavrastore.dao.mybatis.mapper;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
 import com.example.lavrastore.domain.CartItem;
-
 
 
 @Mapper //이거 붙여줘야 함. MyBatis~Dao에는 @Repository 붙여줘야 함.

@@ -14,13 +14,14 @@
  *    limitations under the License.
  */
 
-package com.example.lavrastore.mybatis.mapper;
+package com.example.lavrastore.dao.mybatis.mapper;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
 import com.example.lavrastore.domain.Category;
+
 
 /**
  * @author Eduardo Macarron

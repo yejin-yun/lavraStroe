@@ -8,8 +8,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.example.lavrastore.dao.ItemDao;
+import com.example.lavrastore.dao.mybatis.mapper.ItemMapper;
 import com.example.lavrastore.domain.Item;
-import com.example.lavrastore.mybatis.mapper.ItemMapper;
 
 @Repository
 public class MybatisItemDao implements ItemDao {

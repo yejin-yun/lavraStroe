@@ -67,8 +67,8 @@ public class PetStoreImpl implements PetStoreFacade {
 	}
 	
 	@Override
-	public Product getProductByName(String name) {
-		return productDao.getProductByName(name);
+	public Product getProductByName(String name, int categoryId) {
+		return productDao.getProductByName(name, categoryId);
 	}
 
 	public Category getCategoryByProId(int productId) {

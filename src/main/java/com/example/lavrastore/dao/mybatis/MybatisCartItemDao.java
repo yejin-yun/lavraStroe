@@ -7,8 +7,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.example.lavrastore.dao.CartItemDao;
+import com.example.lavrastore.dao.mybatis.mapper.CartItemMapper;
 import com.example.lavrastore.domain.CartItem;
-import com.example.lavrastore.mybatis.mapper.CartItemMapper;
 
 @Repository
 public class MybatisCartItemDao implements CartItemDao {

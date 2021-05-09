@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.example.lavrastore.mybatis.mapper;
+package com.example.lavrastore.dao.mybatis.mapper;
 
 import java.util.List;
 
@@ -22,7 +22,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.example.lavrastore.domain.Category;
 import com.example.lavrastore.domain.Product;
-
 
 /**
  * @author Eduardo Macarron
@@ -34,8 +33,7 @@ public interface ProductMapper {
 	List<Product> getProductListByCategory(int categoryId);
 
 	Product getProductById(int productId);
-	Product getProductByName(String name);
-
+	Product getProductByName(String name, int categoryId); //유정이 item name이랑 겹쳐서 categoryId가 필요함. 
 	
 	Category getCategoryByProId(int productId); //ppt에는 반환값을 Product라고 했으나 Category가 맞음.
 	

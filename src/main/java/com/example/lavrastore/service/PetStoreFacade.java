@@ -29,7 +29,7 @@ public interface PetStoreFacade {
 	
 	List<Product> getProductListByCategory(int categoryId);
 	Product getProductById(int productId);
-	Product getProductByName(String name);
+	Product getProductByName(String name, int categoryId);
 	Category getCategoryByProId(int productId);
 	int insertProduct(Product product);
 	int updateProduct(Product product); // 기존에 설계한 것을 합쳐버림(ppt 참고)

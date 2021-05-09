@@ -6,8 +6,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.example.lavrastore.dao.CategoryDao;
+import com.example.lavrastore.dao.mybatis.mapper.CategoryMapper;
 import com.example.lavrastore.domain.Category;
-import com.example.lavrastore.mybatis.mapper.CategoryMapper;
 
 
 @Repository

@@ -22,7 +22,7 @@ public interface ProductDao {
 	
 	int deleteProduct(Product product) throws DataAccessException;
 	
-	Product getProductByName(String name) throws DataAccessException;
+	Product getProductByName(String name, int categoryId) throws DataAccessException;
 	
 
 }

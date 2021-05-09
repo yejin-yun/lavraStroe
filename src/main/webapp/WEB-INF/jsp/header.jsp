@@ -16,30 +16,30 @@
 	 <meta http-equiv="Pragma" content="no-cache">
      <!--JQuery -->
     <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
-    <script src="<c:url value='../js/base.js' />" ></script>
+    <script src="<c:url value='/js/base.js' />" ></script>
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="text/html; charset=iso-8859-2" http-equiv="Content-Type">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link type="text/css" rel="stylesheet" href="<c:url value='../style/base.css' />" >
+    <link type="text/css" rel="stylesheet" href="<c:url value='/style/base.css' />" >
 
 </head>
 <body>
 <header>
        <div class="search_header">
-            <a href="#"><img id="serch_btn" src="<c:url value='../images/bagic/magnifier-32.png' />"  style="padding-left: 40px; padding-top: 10px;"></a>
+            <a href="#"><img id="serch_btn" src="<c:url value='/images/bagic/magnifier-32.png' />"  style="padding-left: 40px; padding-top: 10px;"></a>
             <form method="get" action="<c:url value='/search' />" style="display: inline-block; margin-left: 20px; margin-top:20px; width:80%; height: 50%;">
                 <input type="text" name="searchKey" class="keyword" placeholder="상품명을 검색하세요" style="width:100%; height: 100%; border:0; background:#f3f3f3 " >
             </form>
         </div>
         <div class="wrapper" style="z-index:1000;">
-        <h1 id="logo"><a href="<c:url value='/' />" title="Home"><img src="<c:url value='../images/bagic/lavra_logo.PNG' />" alt="lavra" ></a></h1>
+        <h1 id="logo"><a href="<c:url value='/' />" title="Home"><img src="<c:url value='/images/bagic/lavra_logo.PNG' />" alt="lavra" ></a></h1>
         <nav>
             <h2><strong>
             <ul class="main_menu"> <!-- style="postion:relative;" -->
                 <li id="work"><a>악세사리</a>
                     <ul class="work_sub_menu sub_menu" style="z-index:1000; position:absolute;">
-                        <li><a href="<c:url value='/accessory/earring' />">귀걸이</a></li> 
+                        <li><a href="<c:url value='/accessory/earring/1' />">귀걸이</a></li> 
                         <li><a href="<c:url value='' />">목걸이</a></li>
                         <li><a href="<c:url value='' />">반지</a></li>
                         <li><a href="<c:url value='' />">팔찌</a></li>
@@ -51,17 +51,17 @@
             </ul></strong>
             </h2>
         </nav>
-       <div class="search_btn"><a href="#"><img id="search_img" src="<c:url value='../images/bagic/magnifier-32.png' />"></a></div>
+       <div class="search_btn"><a href="#"><img id="search_img" src="<c:url value='/images/bagic/magnifier-32.png' />"></a></div>
         <div class="menu_header">
             <!-- https://ddorang-d.tistory.com/104 -->
             <div class="menubar_btn"><a href="#">
-                <img id="menubar" src="<c:url value='../images/bagic/menubar.PNG' />" border="0">
+                <img id="menubar" src="<c:url value='/images/bagic/menubar.PNG' />" border="0">
             </a></div>
         </div>
         <div class="menu_bg" style="z-index:1000;"></div>
         <div class="sidebar_menu" style="z-index:1000;">
             <div class="close_btn"><a href="#">
-                <img src="<c:url value='../images/bagic/x-mark.png' />" border="0" width="10px" height="10px">
+                <img src="<c:url value='/images/bagic/x-mark.png' />" border="0" width="10px" height="10px">
             </a></div>
             <ul class="menu_wrap">
             	<%-- <c:if test="${isLogined == 0}" >

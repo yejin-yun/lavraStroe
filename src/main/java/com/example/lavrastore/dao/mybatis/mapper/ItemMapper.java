@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.example.lavrastore.mybatis.mapper;
+package com.example.lavrastore.dao.mybatis.mapper;
 
 import java.util.List;
 import java.util.Map;
@@ -60,5 +60,4 @@ public interface ItemMapper {
 	/* Delete */
 	
 	int deleteItem(int itemId);
-
 }

@@ -9,9 +9,9 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.example.lavrastore.dao.ProductDao;
+import com.example.lavrastore.dao.mybatis.mapper.ProductMapper;
 import com.example.lavrastore.domain.Category;
 import com.example.lavrastore.domain.Product;
-import com.example.lavrastore.mybatis.mapper.ProductMapper;
 
 @Repository
 public class MybatisProductDao implements ProductDao {
@@ -43,8 +43,8 @@ public class MybatisProductDao implements ProductDao {
 	}
 
 	@Override
-	public Product getProductByName(String name) throws DataAccessException {
-		return productMapper.getProductByName(name);			
+	public Product getProductByName(String name, int categoryId) throws DataAccessException {
+		return productMapper.getProductByName(name, categoryId);			
 	}
 	
 	/* Inner Classes */
