@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.jpetstore.dao.mybatis.mapper.CartItemMapper">
+  <cache />
+	<select id="getAllCartList" resultType="CartItem">
+		SELECT cartItemId, quantity, itemId, categoryId, memberId
+		FROM CARTITEM
+	</select>
+	
+	<select id="getCartListByGeneralCategory" parameterType="int" resultType="CartItem">
+		SELECT cartItemId, quantity, itemId, categoryId, memberId
+		FROM CARTITEM
+		WHERE categoryId = #{value}
+	</select>
+	
+	<select id="getCartListByGroupCategory" parameterType="int" resultType="CartItem">
+		SELECT cartItemId, quantity, itemId, categoryId, memberId
+		FROM CARTITEM
+		WHERE categoryId = #{value}
+	</select>
+	
+	<select id="getCartListByPTPCategory" parameterType="int" resultType="CartItem">
+		SELECT cartItemId, quantity, itemId, categoryId, memberId
+		FROM CARTITEM
+		WHERE categoryId = #{value}
+	</select>
+	
+	<select id="getItemByCartItemId" parameterType="int" resultType="Item">
+		SELECT 
+		i.itemId,
+		poductId,
+		image,
+		description,
+		title,
+		price,
+		isSoldout,
+		likeCnt
+		i.quantity
+		FROM ITEM i, CARTITEM c
+		WHERE i.itemId = c.itemId
+		 AND c.itemId = #{value}
+	</select>
+  
+  	<insert id="insertCartItem" parameterType="CartItem">
+		<selectKey keyProperty="cartItemId" resultType="int" order="BEFORE">
+			SELECT seq_pk.nextval AS cartItemId FROM DUAL
+		</selectKey>
+		INSERT INTO CARTITEM (cartItemId, quantity, itemId, categoryId, memberId)
+		VALUES (#{cartItemId}, #{quantity}, #{item.itemId}, #{categoryId}, #{memberId})
+	</insert>
+
+	<update id="updateCartItem" parameterType="CartItem">
+		UPDATE CARTITEM
+		SET cartItemId = #{cartItemId}, quantity = #{quantity}, itemId = #{item.itemId}, categoryId = #{categoryId}, memberId = #{memberId}
+		WHERE cartItemId = #{value}
+	</update>
+
+	<delete id="deleteCartItem" parameterType="CartItem">
+		DELETE FROM
+		CARTITEM
+		WHERE
+		cartItemId = #{value}
+	</delete>
+ </mapper>

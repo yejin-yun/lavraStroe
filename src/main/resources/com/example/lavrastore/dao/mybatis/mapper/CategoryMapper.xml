@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.example.jpetstore.dao.mybatis.mapper.CategoryMapper">
+
+	<cache />
+
+	<select id="getCategoryById" resultType="Category">
+		SELECT
+		categoryId,
+		name,
+		FROM shopCategory
+		WHERE categoryId = #{categoryId}
+	</select>
+
+	<select id="getCategoryList" resultType="Category">
+		SELECT
+		categoryId,
+		name,
+		FROM shopCategory
+	</select>
+	
+	<insert id="insertCategory" parameterType="Category">
+		<selectKey keyProperty="categoryId" resultType="int" order="BEFORE">
+			SELECT seq_pk.nextval AS categoryId FROM DUAL
+		</selectKey>
+		INSERT INTO shopCategory (categoryId, name)
+		VALUES (#{categoryId}, #{name})
+	</insert>
+	
+	<update id="updateCategory" parameterType="Category">
+		UPDATE shopCategory
+		SET name = #{name}
+		WHERE categoryId = #{categoryId}
+	</update>
+	
+	<delete id="deleteCategory" parameterType="Category">
+		DELETE FROM shopCategory
+		WHERE categoryId = #{categoryId}
+	</delete>
+
+</mapper>
