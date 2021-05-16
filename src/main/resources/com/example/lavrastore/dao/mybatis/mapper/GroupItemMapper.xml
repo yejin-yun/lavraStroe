@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.example.lavrastore.dao.mybatis.mapper.GroupItemMapper">
+	<cache/>
+<!-- 
+	/* Read */
+	GroupItem getGItem(int itemId) throws DataAccessException;
+	
+	//groupItem용 - read
+	List<GroupItem> getAllGItemList() throws DataAccessException;
+	List<GroupItem> getGItemListByProduct(String productId) throws DataAccessException;
+	
+	//내 주문목록 조회용(login)
+	List<GroupItem> getGItemListByMember(String memberId) throws DataAccessException; 
+	
+	//group- 마감일 임박순 
+	List<GroupItem> getGItemListByDeadline() throws DataAccessException;
+	//group - 마감된 것
+	List<GroupItem> getGItemListByWindUp() throws DataAccessException;
+	
+	//group - 인기순
+	List<GroupItem> getGItmeListByPercent() throws DataAccessException;
+		
+	/* Create */
+	int insertGItem() throws DataAccessException;
+	
+	/* Update */
+	int updateGItem(int itemId) throws DataAccessException; 
+	
+	/* Delete */
+	int deleteGItem(int itemId) throws DataAccessException;
+	
+	ITEMID
+IMAGE
+DESCRIPTION
+TITLE
+PRICE
+LIKECNT
+QUANTITY
+ISSOLDOUT
+PRODUCTID
+
+REGIDATE
+PAYMENTDATE
+NOWBALANCE
+TARGETBALANCE
+STATUS
+ITEMID
+
+-->	
+	<select id="getGItem" resultType="GroupItem">
+		SELECT
+	</select>
+
+</mapper>
