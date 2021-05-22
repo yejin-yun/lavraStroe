@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class WishList {
-	private int ItemId;
 	private int wishListId;
+	private int ItemId;
 	private String MemberID;
 	
 	public int getItemId() {

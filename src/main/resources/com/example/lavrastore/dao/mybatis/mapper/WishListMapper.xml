@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 수정중 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.lavrastore.dao.mybatis.mapper.WishListMapper">
+  <cache />
+	<select id="getAllWishList" resultType="WishList">
+		SELECT itemId, wishListId, MemderId
+		FROM WISHLIST
+	</select>
+
+	
+	<select id="getItemByCartItemId" parameterType="int" resultType="Item">
+		SELECT 
+		i.itemId,
+		poductId,
+		image,
+		description,
+		title,
+		price,
+		isSoldout,
+		likeCnt
+		i.quantity
+		FROM ITEM i, CARTITEM c
+		WHERE i.itemId = c.itemId
+		 AND c.itemId = #{value}
+	</select>
+  
+  	<insert id="insertCartItem" parameterType="CartItem">
+		<selectKey keyProperty="wishListId" resultType="int" order="BEFORE">
+			SELECT seq_pk.nextval AS wishListId FROM DUAL
+		</selectKey>
+		INSERT INTO CARTITEM (cartItemId, quantity, itemId, categoryId, memberId)
+		VALUES (#{cartItemId}, #{quantity}, #{item.itemId}, #{categoryId}, #{memberId})
+	</insert>
+
+	<update id="updateCartItem" parameterType="CartItem">
+		UPDATE CARTITEM
+		SET cartItemId = #{cartItemId}, quantity = #{quantity}, itemId = #{item.itemId}, categoryId = #{categoryId}, memberId = #{memberId}
+		WHERE cartItemId = #{value}
+	</update>
+
+	<delete id="deleteCartItem" parameterType="CartItem">
+		DELETE FROM
+		WISHLIST
+		WHERE
+		cartItemId = #{value}
+	</delete>
+ </mapper>
