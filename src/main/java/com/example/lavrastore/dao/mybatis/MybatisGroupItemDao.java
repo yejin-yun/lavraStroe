@@ -6,11 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.example.lavrastore.dao.GroupItemDao;
 import com.example.lavrastore.dao.mybatis.mapper.GroupItemMapper;
 import com.example.lavrastore.domain.GroupItem;
 
 @Repository
-public class MybatisGroupItemDao {
+public class MybatisGroupItemDao implements GroupItemDao{
 
 	@Autowired
 	private GroupItemMapper groupItemMapper;
@@ -23,7 +24,7 @@ public class MybatisGroupItemDao {
 		return groupItemMapper.getAllGItemList();
 	}
 	
-	public List<GroupItem> getGItemListByProduct(String productId) throws DataAccessException{
+	public List<GroupItem> getGItemListByProduct(int productId) throws DataAccessException {
 		return groupItemMapper.getGItemListByProduct(productId);
 	}
 	
@@ -39,7 +40,7 @@ public class MybatisGroupItemDao {
 		return groupItemMapper.getGItemListByWindUp();
 	}
 	
-	public List<GroupItem> getGItemListByPercent() throws DataAccessException{
+	public List<GroupItem> getGItmeListByPercent() throws DataAccessException{
 		return groupItemMapper.getGItmeListByPercent();
 	}
 	
@@ -54,5 +55,6 @@ public class MybatisGroupItemDao {
 	public int deleteGItem(int itemId) throws DataAccessException{
 		return groupItemMapper.deleteGItem(itemId);
 	}
+
 	
 }

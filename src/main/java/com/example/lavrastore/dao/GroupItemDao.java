@@ -14,7 +14,7 @@ public interface GroupItemDao {
 	
 	//groupItem용 - read
 	List<GroupItem> getAllGItemList() throws DataAccessException;
-	List<GroupItem> getGItemListByProduct(String productId) throws DataAccessException;
+	List<GroupItem> getGItemListByProduct(int productId) throws DataAccessException;
 	
 	//내 주문목록 조회용(login)
 	List<GroupItem> getGItemListByMember(String memberId) throws DataAccessException; 

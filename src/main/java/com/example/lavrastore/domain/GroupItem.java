@@ -5,7 +5,7 @@ import com.example.lavrastore.domain.Item;
 @SuppressWarnings("serial")
 public class GroupItem implements Serializable {
 	
-	Item gitem;
+	Item item;
 	String regiDate;
 	String payDate;
 	int nowBalance;
@@ -14,11 +14,11 @@ public class GroupItem implements Serializable {
 	int status; //0 : 진행 1 : 마감-성공 2: 마감-실패
 	
 	
-	public Item getGitem() {
-		return gitem;
+	public Item getItem() {
+		return item;
 	}
-	public void setGitem(Item gitem) {
-		this.gitem = gitem;
+	public void setGitem(Item item) {
+		this.item = item;
 	}
 	public String getRegiDate() {
 		return regiDate;
@@ -37,6 +37,7 @@ public class GroupItem implements Serializable {
 	}
 	public void setNowBalance(int nowBalance) {
 		this.nowBalance = nowBalance;
+		setPercent();
 	}
 	public int getTargetBalance() {
 		return targetBalance;
@@ -54,7 +55,7 @@ public class GroupItem implements Serializable {
 	public double getPercent() {
 		return percent;
 	}
-	public void setStatus() {
+	public void setPercent() {
 		this.percent = nowBalance / (double) targetBalance;
 	}
 	
