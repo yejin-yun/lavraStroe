@@ -3,8 +3,11 @@ package com.example.lavrastore.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.dao.DataAccessException;
+
 import com.example.lavrastore.domain.CartItem;
 import com.example.lavrastore.domain.Category;
+import com.example.lavrastore.domain.GroupItem;
 import com.example.lavrastore.domain.Item;
 import com.example.lavrastore.domain.Product;
 
@@ -54,6 +57,33 @@ public interface PetStoreFacade {
 	int insertItem(int itemId);
 	int updateItem(int itemId); // ppt ItemDao의 update 부분의 기능들을 다 합침.
 	int deleteItem(int itemId);
+	
+	
+	
+	/* groupItem */
+	
+	//groupItem용 - read
+	List<GroupItem> getAllGItemList();
+	List<GroupItem> getGItemListByProduct(int productId);
+	
+	//내 주문목록 조회용(login)
+	List<GroupItem> getGItemListByMember(String memberId);
+	
+	//group- 마감일 임박순 
+	List<GroupItem> getGItemListByDeadline();
+	//group - 마감된 것
+	List<GroupItem> getGItemListByWindUp();
+	
+	//group - 인기순
+	List<GroupItem> getGItmeListByPercent();
+		
+	
+	int insertGItem() throws DataAccessException;
+	
+	int updateGItem(int itemId) throws DataAccessException; 
+	
+	int deleteGItem(int itemId) throws DataAccessException;
+	
 	
 	/* CartItem */
 	

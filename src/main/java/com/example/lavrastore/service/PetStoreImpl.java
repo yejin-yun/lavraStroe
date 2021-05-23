@@ -4,15 +4,18 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.lavrastore.dao.CartItemDao;
 import com.example.lavrastore.dao.CategoryDao;
+import com.example.lavrastore.dao.GroupItemDao;
 import com.example.lavrastore.dao.ItemDao;
 import com.example.lavrastore.dao.ProductDao;
 import com.example.lavrastore.domain.CartItem;
 import com.example.lavrastore.domain.Category;
+import com.example.lavrastore.domain.GroupItem;
 import com.example.lavrastore.domain.Item;
 import com.example.lavrastore.domain.Product;
 
@@ -27,6 +30,8 @@ public class PetStoreImpl implements PetStoreFacade {
 	private ItemDao itemDao;
 	@Autowired
 	private CartItemDao cartItemDao;
+	@Autowired
+	private GroupItemDao groupItemDao;
 
 	// -------------------------------------------------------------------------
 	// Operation methods, implementing the PetStoreFacade interface
@@ -185,8 +190,50 @@ public class PetStoreImpl implements PetStoreFacade {
 	}
 
 	
+	/*group Item */
+	@Override
+	public List<GroupItem> getAllGItemList() {
+		return groupItemDao.getAllGItemList();
+	}
 
+	@Override
+	public List<GroupItem> getGItemListByProduct(int productId) {
+		return groupItemDao.getGItemListByProduct(productId);
+	}
 
-	
+	@Override
+	public List<GroupItem> getGItemListByMember(String memberId) {
+		return groupItemDao.getGItemListByMember(memberId);
+	}
+
+	@Override
+	public List<GroupItem> getGItemListByDeadline() {
+		return groupItemDao.getGItemListByDeadline();
+	}
+
+	@Override
+	public List<GroupItem> getGItemListByWindUp() {
+		return groupItemDao.getGItemListByWindUp();
+	}
+
+	@Override
+	public List<GroupItem> getGItmeListByPercent() {
+		return groupItemDao.getGItmeListByPercent();
+	}
+
+	@Override
+	public int insertGItem() throws DataAccessException {
+		return groupItemDao.insertGItem();
+	}
+
+	@Override
+	public int updateGItem(int itemId) throws DataAccessException {
+		return groupItemDao.updateGItem(itemId);
+	}
+
+	@Override
+	public int deleteGItem(int itemId) throws DataAccessException {
+		return groupItemDao.deleteGItem(itemId);
+	}
 
 }

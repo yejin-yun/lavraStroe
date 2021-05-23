@@ -31,6 +31,7 @@ public interface ItemDao {
 	List<Item> getItemOrderByLowPriceForUser(String memberId) throws DataAccessException;
 	List<Item> getItemOrderByLowPriceForNotUser() throws DataAccessException;
 	
+	
 	/* Create */
 	
 	int insertItem(int itemId) throws DataAccessException;

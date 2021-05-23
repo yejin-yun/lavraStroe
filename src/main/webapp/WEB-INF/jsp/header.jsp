@@ -55,7 +55,7 @@
                         <li><a href="<c:url value='' />">헤어장식</a></li>
                     </ul>
                 </li>
-                <li><a href="<c:url value='' />">공동구매</a></li>
+                <li><a href="<c:url value='/group' />">공동구매</a></li>
             </ul></strong>
             </h2>
         </nav>
