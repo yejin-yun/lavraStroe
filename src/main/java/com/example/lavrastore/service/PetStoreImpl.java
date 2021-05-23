@@ -55,6 +55,9 @@ public class PetStoreImpl implements PetStoreFacade {
 	public int deleteCategory(String categoryId) {
 		return categoryDao.deleteCategory(categoryId);
 	}
+	
+
+	
 
 	/* Product */
 
@@ -73,6 +76,10 @@ public class PetStoreImpl implements PetStoreFacade {
 
 	public Category getCategoryByProId(int productId) {
 		return productDao.getCategoryByProId(productId);
+	}
+	
+	public List<Product> searchProductList(String keywords){
+		return productDao.searchProductList(keywords);
 	}
 
 	public int insertProduct(Product product) {

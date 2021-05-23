@@ -25,6 +25,12 @@ public class MybatisProductDao implements ProductDao {
 	public Product getProductById(int productId) throws DataAccessException {
 		return productMapper.getProductById(productId);
 	}
+	
+	public List<Product> searchProductList(String keywords) 
+			throws DataAccessException {
+	    return productMapper.searchProductList(
+	    	"%" + keywords.toLowerCase() + "%");
+	}
 
 	public int insertProduct(Product product) throws DataAccessException {
 		return productMapper.insertProduct(product);

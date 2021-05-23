@@ -16,6 +16,8 @@ public interface ProductDao {
 	
 	Category getCategoryByProId(int productId) throws DataAccessException;
 	
+	List<Product> searchProductList(String keywords) throws DataAccessException;
+	
 	int insertProduct(Product product) throws DataAccessException;
 	
 	int updateProduct(Product product) throws DataAccessException; // 기존에 설계한 것을 합쳐버림(ppt 참고)
