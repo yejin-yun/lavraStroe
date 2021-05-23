@@ -17,6 +17,24 @@
         {
             $(".work_sub_menu").slideUp();
         });
+        
+        $("#work1").click(function(){
+            
+            if( $(".work_sub_menu1").is(":visible") ){
+                $(".work_sub_menu1").slideUp();
+            }else{
+                if($(".trade_sub_menu").is(":visible")){
+                     $(".trade_sub_menu").slideUp();
+                }
+                $(".work_sub_menu1").slideDown();
+            }
+        }).mouseover(function()
+        {
+            $(".work_sub_menu1").slideDown();
+        }).mouseleave(function()
+        {
+            $(".work_sub_menu1").slideUp();
+        });
 
         $("#trade").click(function(){
 
