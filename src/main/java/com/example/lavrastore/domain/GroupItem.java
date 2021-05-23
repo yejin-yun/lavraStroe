@@ -56,7 +56,12 @@ public class GroupItem implements Serializable {
 		return percent;
 	}
 	public void setPercent() {
-		this.percent = nowBalance / (double) targetBalance;
+		if(nowBalance == 0 ) {
+			this.percent = 0;
+		} else if (targetBalance != 0) {
+			double p = 100 * nowBalance / (double)targetBalance;
+			this.percent = Math.round(p*100)/100.0;
+		}
 	}
 	
 }

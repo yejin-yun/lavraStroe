@@ -236,4 +236,9 @@ public class PetStoreImpl implements PetStoreFacade {
 		return groupItemDao.deleteGItem(itemId);
 	}
 
+	@Override
+	public GroupItem getGItem(int itemid) {
+		return groupItemDao.getGItem(itemid);
+	}
+
 }

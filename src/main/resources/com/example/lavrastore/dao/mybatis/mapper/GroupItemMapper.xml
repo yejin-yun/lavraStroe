@@ -5,7 +5,7 @@
 	namespace="com.example.lavrastore.dao.mybatis.mapper.GroupItemMapper">
 	
 	<select id="getGItem" parameterType="int" resultType="groupItem">
-		select
+		select 
 		i.itemid as "item.itemid",
 		i.productId as "item.productid",
 		i.image as "item.image",
@@ -20,8 +20,8 @@
 		g.nowbalance, 
 		g.targetbalance, 
 		g.status 
-		from item i inner join groupitem g on i.itemid = g.itemid 
-		where i.itemid = #{itemid};
+		from item i inner join groupitem g on i.itemid = g.itemid
+		where i.itemid = #{itemid}
 	</select>
 	
 	<select id="getAllGItemList" resultType="groupItem">
@@ -40,6 +40,7 @@
 		g.nowbalance, 
 		g.targetbalance, 
 		g.status 
+		
 		from item i inner join groupitem g on i.itemid = g.itemid
 	</select>
 	

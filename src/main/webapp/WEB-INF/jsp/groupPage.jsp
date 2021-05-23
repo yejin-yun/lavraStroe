@@ -55,7 +55,7 @@
 				<c:set var="fillUpSize" value="${4 - listSize % 4}" />
 			</c:if>
 			<c:forEach var="groupitem" items="${gitemList}" varStatus="status">
-				<c:if test="${status.index % 4 == 0}">
+				<c:if test="${status.index % 3 == 0}">
 					<tr>
 				</c:if>
 					<td>
@@ -64,7 +64,7 @@
                            	<img class="main_img" src="<c:url value='${groupitem.item.image}' />" />
                         </div>
                        	<div class="content">
-                       		<a href="<c:url value='/group/detail'>
+                       		<a href="<c:url value='/group/viewItem'>
             					<c:param name='itemNo' value='${groupitem.item.itemId}' />
             					</c:url>"> 
                             	<h2>${groupitem.item.title}</h2>
@@ -75,7 +75,7 @@
                     </div>
                   </td>
                 
-				<c:if test="${status.index % 4 == 3}">
+				<c:if test="${status.index % 3 == 2}">
 					</tr>
 				</c:if>
 			</c:forEach>

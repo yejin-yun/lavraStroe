@@ -63,6 +63,9 @@ public interface PetStoreFacade {
 	/* groupItem */
 	
 	//groupItem용 - read
+	
+	GroupItem getGItem(int itemid);
+	
 	List<GroupItem> getAllGItemList();
 	List<GroupItem> getGItemListByProduct(int productId);
 	

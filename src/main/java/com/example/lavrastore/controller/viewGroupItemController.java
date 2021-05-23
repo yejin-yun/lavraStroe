@@ -50,11 +50,25 @@ public class viewGroupItemController {
 		
 		List<GroupItem> gitemList = gitemListPage.getPageList();
 		for(GroupItem g : gitemList) {
-			System.out.println("itemid : " + g.getItem().getItemId() + "진행도 : " + g.getPercent());
+			g.setPercent();
+			System.out.println("itemid : " + g.getItem().getItemId() + " 진행도 : " + g.getPercent());
 		}
 		model.addAttribute("gitemList", gitemList);
 		
 		return "groupPage";
+	}
+	
+	@GetMapping
+	@RequestMapping("/group/viewItem")
+	public String viewGroupItem(
+			@RequestParam(value="itemNo", defaultValue="11024") int itemid, Model model
+			) {
+		
+		GroupItem gitem = petStore.getGItem(itemid);
+		model.addAttribute("gitem", gitem);
+		System.out.println("itemid : " + gitem.getItem().getItemId() + " 진행도 : " + gitem.getRegiDate());
+		return "groupItemPage";
+	
 	}
 	
 	
