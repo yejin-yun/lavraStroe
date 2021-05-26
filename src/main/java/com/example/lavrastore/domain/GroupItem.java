@@ -7,7 +7,7 @@ public class GroupItem implements Serializable {
 	
 	Item item;
 	String regiDate;
-	String payDate;
+	String paymentDate;
 	int nowBalance;
 	int targetBalance;
 	double percent; // nowB / targetB
@@ -26,11 +26,11 @@ public class GroupItem implements Serializable {
 	public void setRegiDate(String regiDate) {
 		this.regiDate = regiDate;
 	}
-	public String getPayDate() {
-		return payDate;
+	public String getPaymentDate() {
+		return paymentDate;
 	}
-	public void setPayDate(String payDate) {
-		this.payDate = payDate;
+	public void setPayDate(String paymentDate) {
+		this.paymentDate = paymentDate;
 	}
 	public int getNowBalance() {
 		return nowBalance;
