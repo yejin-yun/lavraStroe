@@ -74,14 +74,6 @@ public class viewGroupItemController {
 		return "groupItemPage";
 	
 	}
-	
-	@PostMapping
-	@RequestMapping("/group/order")
-	public String viewGroupItemOrder(
-				@Path
-			) {
+
 		
-	}
-	
-	
 }
