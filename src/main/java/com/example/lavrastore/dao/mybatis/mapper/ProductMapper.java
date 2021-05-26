@@ -34,6 +34,7 @@ public interface ProductMapper {
 
 	Product getProductById(int productId);
 	Product getProductByName(String name, int categoryId); //유정이 item name이랑 겹쳐서 categoryId가 필요함. 
+	List<Product> searchProductList(String keywords); // 검색
 	
 	Category getCategoryByProId(int productId); //ppt에는 반환값을 Product라고 했으나 Category가 맞음.
 	

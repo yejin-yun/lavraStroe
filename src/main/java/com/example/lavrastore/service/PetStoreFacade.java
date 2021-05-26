@@ -37,6 +37,7 @@ public interface PetStoreFacade {
 	int insertProduct(Product product);
 	int updateProduct(Product product); // 기존에 설계한 것을 합쳐버림(ppt 참고)
 	int deleteProduct(Product product);
+	List<Product> searchProductList(String keywords);
 	
 
 	/* Item */
