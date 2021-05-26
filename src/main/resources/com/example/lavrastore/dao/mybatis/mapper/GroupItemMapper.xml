@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.example.lavrastore.dao.mybatis.mapper.GroupItemMapper">
+	
+	<select id="getGItem" parameterType="int" resultType="groupItem">
+		select 
+		i.itemid as "item.itemid",
+		i.productId as "item.productid",
+		i.image as "item.image",
+		i.description as "item.description",
+		i.title as "item.title", 
+		i.price as "item.price", 
+		i.isSoldout as "item.issoldout", 
+		i.likecnt as "item.likecnt", 
+		i.quantity as "item.quantity", 
+		g.regidate, 
+		g.paymentdate, 
+		g.nowbalance, 
+		g.targetbalance, 
+		g.status 
+		from item i inner join groupitem g on i.itemid = g.itemid
+		where i.itemid = #{itemid}
+	</select>
+	
+	<select id="getAllGItemList" resultType="groupItem">
+		select 
+		i.itemid as "item.itemid",
+		i.productId as "item.productid",
+		i.image as "item.image",
+		i.description as "item.description",
+		i.title as "item.title", 
+		i.price as "item.price", 
+		i.isSoldout as "item.issoldout", 
+		i.likecnt as "item.likecnt", 
+		i.quantity as "item.quantity", 
+		g.regidate, 
+		g.paymentdate, 
+		g.nowbalance, 
+		g.targetbalance, 
+		g.status 
+		
+		from item i inner join groupitem g on i.itemid = g.itemid
+	</select>
+	
+</mapper>
