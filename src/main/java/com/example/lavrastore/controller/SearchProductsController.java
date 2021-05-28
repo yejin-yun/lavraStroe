@@ -40,13 +40,13 @@ public class SearchProductsController {
 			PagedListHolder<Product> productList = (PagedListHolder<Product>)request.getSession().getAttribute("SearchProductsController_productList");
 			/*if (productList == null) {
 				return new ModelAndView("Error", "message", "Your session has timed out. Please start over again.");
-			}
+			}*/
 			if ("next".equals(page)) {
 				productList.nextPage();
 			}
 			else if ("previous".equals(page)) {
 				productList.previousPage();
-			}*/
+			}
 			return new ModelAndView("SearchProducts", "productList", productList);
 		}
 	}

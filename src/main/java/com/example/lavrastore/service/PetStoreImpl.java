@@ -12,11 +12,13 @@ import com.example.lavrastore.dao.CartItemDao;
 import com.example.lavrastore.dao.CategoryDao;
 import com.example.lavrastore.dao.GroupItemDao;
 import com.example.lavrastore.dao.ItemDao;
+import com.example.lavrastore.dao.MemberDao;
 import com.example.lavrastore.dao.ProductDao;
 import com.example.lavrastore.domain.CartItem;
 import com.example.lavrastore.domain.Category;
 import com.example.lavrastore.domain.GroupItem;
 import com.example.lavrastore.domain.Item;
+import com.example.lavrastore.domain.Member;
 import com.example.lavrastore.domain.Product;
 
 @Service
@@ -32,12 +34,35 @@ public class PetStoreImpl implements PetStoreFacade {
 	private CartItemDao cartItemDao;
 	@Autowired
 	private GroupItemDao groupItemDao;
+	@Autowired
+	private MemberDao memberDao;
 
 	// -------------------------------------------------------------------------
 	// Operation methods, implementing the PetStoreFacade interface
 	// -------------------------------------------------------------------------
 
 
+	/* Member */
+	
+	public Member getMember(String memberId) {
+		return memberDao.getMember(memberId);
+	}
+
+	public Member getMember(String memberId, String password) {
+		return memberDao.getMember(memberId, password);
+	}
+
+	public void insertMember(Member member) {
+		memberDao.insertMember(member);
+	}
+
+	public void updateMember(Member member) {
+		memberDao.updateMember(member);
+	}
+
+	public List<String> getUsernameList() {
+		return memberDao.getUsernameList();
+	}
 
 	/* Category */
 

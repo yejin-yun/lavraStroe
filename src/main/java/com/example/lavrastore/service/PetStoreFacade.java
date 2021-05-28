@@ -9,6 +9,7 @@ import com.example.lavrastore.domain.CartItem;
 import com.example.lavrastore.domain.Category;
 import com.example.lavrastore.domain.GroupItem;
 import com.example.lavrastore.domain.Item;
+import com.example.lavrastore.domain.Member;
 import com.example.lavrastore.domain.Product;
 
 /**
@@ -27,6 +28,19 @@ public interface PetStoreFacade {
 	int insertCategory(Category category); // 0이면 실패, 0 초과는 성공
 	int updateCategory(Category category);
 	int deleteCategory(String categoryId);
+	
+	
+	/* Member */
+	
+	Member getMember(String memberid);
+
+	Member getMember(String memberid, String password);
+
+	void insertMember(Member member);
+
+	void updateMember(Member member);
+
+	List<String> getUsernameList();
 
 	/* Product */
 	
