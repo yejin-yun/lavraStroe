@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.example.lavrastore.dao.CartItemDao;
 import com.example.lavrastore.dao.mybatis.mapper.CartItemMapper;
 import com.example.lavrastore.domain.CartItem;
+import com.example.lavrastore.domain.Item;
 
 @Repository
 public class MybatisCartItemDao implements CartItemDao {
@@ -36,7 +37,7 @@ public class MybatisCartItemDao implements CartItemDao {
 	}
 
 	@Override
-	public List<CartItem> getItemByCartItemId(int cartItemId) throws DataAccessException {
+	public Item getItemByCartItemId(int cartItemId) throws DataAccessException {
 		return cartItemMapper.getItemByCartItemId(cartItemId);
 	}
 

@@ -202,7 +202,7 @@ public class PetStoreImpl implements PetStoreFacade {
 	}
 
 	@Override
-	public List<CartItem> getItemByCartItemId(int cartItemId) {
+	public Item getItemByCartItemId(int cartItemId) {
 		return cartItemDao.getItemByCartItemId(cartItemId);
 	}
 

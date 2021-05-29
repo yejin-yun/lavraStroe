@@ -34,6 +34,7 @@ import com.example.lavrastore.service.PetStoreFacade;
 public class ViewItemController { 
 
 	private PetStoreFacade petStore;
+	private int perPageSize = 12;
 	private int totalPageSize;
 	UserSession userSession;
 
@@ -96,11 +97,11 @@ public class ViewItemController {
 		}
 		
 		PagedListHolder<Item> itemListPage = new PagedListHolder<Item>(tmpList);
-		itemListPage.setPageSize(12);
+		itemListPage.setPageSize(perPageSize);
 
 		itemListPage.setPage(page - 1);
-		totalPageSize = tmpList.size() / 12;
-		if(tmpList.size() % 12 != 0) {
+		totalPageSize = tmpList.size() / perPageSize;
+		if(tmpList.size() % perPageSize != 0) {
 			totalPageSize++;
 		}
 		

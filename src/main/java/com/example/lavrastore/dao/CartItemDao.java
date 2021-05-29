@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 
 import com.example.lavrastore.domain.CartItem;
+import com.example.lavrastore.domain.Item;
 
 
 public interface CartItemDao {
@@ -13,7 +14,7 @@ public interface CartItemDao {
 	List<CartItem> getCartListByGeneralCategory(int categoryId) throws DataAccessException;
 	List<CartItem> getCartListByGroupCategory(int categoryId) throws DataAccessException;
 	List<CartItem> getCartListByPTPCategory(int categoryId) throws DataAccessException;
-	List<CartItem> getItemByCartItemId(int cartItemId) throws DataAccessException; //cartItemId로 cartItem에 있는 Item 가져오기
+	Item getItemByCartItemId(int cartItemId) throws DataAccessException; //cartItemId로 cartItem에 있는 Item 가져오기
 	
 	/* Create */
 	int insertCartItem(CartItem cartItem) throws DataAccessException;
