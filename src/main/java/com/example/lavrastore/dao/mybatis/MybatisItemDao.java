@@ -15,11 +15,8 @@ import com.example.lavrastore.domain.Item;
 public class MybatisItemDao implements ItemDao {
 	@Autowired
 	private ItemMapper itemMapper;
-	
 
-
-	public List<Item> getItemListByProduct(int productId) 
-			throws DataAccessException {
+	public List<Item> getItemListByProduct(int productId) throws DataAccessException {
 		return itemMapper.getItemListByProduct(productId);
 	}
 
@@ -27,28 +24,28 @@ public class MybatisItemDao implements ItemDao {
 		return itemMapper.getItem(itemId);
 	}
 
-	public List<Item> getItemForNotUser() throws DataAccessException {
-		return itemMapper.getItemForNotUser();
+	public List<Item> getItemForNotUser(int productId) throws DataAccessException {
+		return itemMapper.getItemForNotUser(productId);
 	}
 
-	public List<Item> getItemForUser(String memberId) throws DataAccessException {
-		return itemMapper.getItemForUser(memberId);
+	public List<Item> getItemForUser(String memberId, int productId) throws DataAccessException {
+		return itemMapper.getItemForUser(memberId, productId);
 	}
 
-	public List<Item> getItemOrderByHighPriceForUser(String memberId) throws DataAccessException {
-		return itemMapper.getItemOrderByHighPriceForUser(memberId);
+	public List<Item> getItemOrderByHighPriceForUser(String memberId, int productId) throws DataAccessException {
+		return itemMapper.getItemOrderByHighPriceForUser(memberId, productId);
 	}
 
-	public List<Item> getItemOrderByHighPriceForNotUser() throws DataAccessException {
-		return itemMapper.getItemOrderByHighPriceForNotUser();
+	public List<Item> getItemOrderByHighPriceForNotUser(int productId) throws DataAccessException {
+		return itemMapper.getItemOrderByHighPriceForNotUser(productId);
 	}
 
-	public List<Item> getItemOrderByLowPriceForUser(String memberId) throws DataAccessException {
-		return itemMapper.getItemOrderByLowPriceForUser(memberId);
+	public List<Item> getItemOrderByLowPriceForUser(String memberId, int productId) throws DataAccessException {
+		return itemMapper.getItemOrderByLowPriceForUser(memberId, productId);
 	}
 
-	public List<Item> getItemOrderByLowPriceForNotUser() throws DataAccessException {
-		return itemMapper.getItemOrderByLowPriceForNotUser();
+	public List<Item> getItemOrderByLowPriceForNotUser(int productId) throws DataAccessException {
+		return itemMapper.getItemOrderByLowPriceForNotUser(productId);
 	}
 
 	public int insertItem(int itemId) throws DataAccessException {
@@ -62,5 +59,5 @@ public class MybatisItemDao implements ItemDao {
 	public int deleteItem(int itemId) throws DataAccessException {
 		return itemMapper.deleteItem(itemId);
 	}
-	 
+
 }

@@ -13,8 +13,8 @@ public class Item implements Serializable {
 	private int price;
 	private int isSoldout;
 	private int likeCnt;
-	private int isInWishlist;
-	private int isInCart;
+	private int isInWishlist; //wishistId가 들어옴. 
+	private int isInCart; //cartItemId가 들어옴.
 	private Product product;
 	private int quantity;
 

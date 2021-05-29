@@ -58,16 +58,16 @@ public interface PetStoreFacade {
 	
 	List<Item> getItemListByProduct(int productId);
 	Item getItem(int itemId);
-	List<Item> getItemForNotUser(); // 인기순으로 되어 있음. 비로그인 용
-	List<Item> getItemForUser(String memberId);
+	List<Item> getItemForNotUser(int productId); // 인기순으로 되어 있음. 비로그인 용
+	List<Item> getItemForUser(String memberId, int productId);
 
 	//높은 가격순
-	List<Item> getItemOrderByHighPriceForUser(String memberId);
-	List<Item> getItemOrderByHighPriceForNotUser();
+	List<Item> getItemOrderByHighPriceForUser(String memberId, int productId);
+	List<Item> getItemOrderByHighPriceForNotUser(int productId);
 	
 	// 낮은 가격순
-	List<Item> getItemOrderByLowPriceForUser(String memberId);
-	List<Item> getItemOrderByLowPriceForNotUser();
+	List<Item> getItemOrderByLowPriceForUser(String memberId, int productId);
+	List<Item> getItemOrderByLowPriceForNotUser(int productId);
 
 	int insertItem(int itemId);
 	int updateItem(int itemId); // ppt ItemDao의 update 부분의 기능들을 다 합침.

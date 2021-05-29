@@ -1,6 +1,9 @@
 package com.example.lavrastore.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.lavrastore.controller.UserSession;
 import com.example.lavrastore.domain.Item;
 import com.example.lavrastore.domain.Product;
 import com.example.lavrastore.service.PetStoreFacade;
@@ -31,10 +35,26 @@ public class ViewItemController {
 
 	private PetStoreFacade petStore;
 	private int totalPageSize;
+	UserSession userSession;
 
 	@Autowired
 	public void setPetStore(PetStoreFacade petStore) {
 		this.petStore = petStore;
+	}
+	
+	@ModelAttribute
+	protected void checkLogin(HttpServletRequest request) {
+		userSession = (UserSession) request.getSession().getAttribute("userSession");
+	}
+	
+	@ModelAttribute("sortData") //객체 이름 설정안하면 메소드 이름이랑 동일. 
+	public List<String> sortData(){
+		List<String> list = new ArrayList<String>();
+		list.add("popularity");
+		list.add("highPrice");
+		list.add("lowPrice");
+		
+		return list;
 	}
 	
 	//getItemListByProduct 대신 로그인 여부 확인하는 거 사용하기 로그인 세션 이용해섷 
@@ -44,10 +64,37 @@ public class ViewItemController {
 			@PathVariable int categoryId,
 			@PathVariable String productName, 
 			@RequestParam(value="page", defaultValue="1") int page,
+			@RequestParam(value="sort", defaultValue="popularity") String sort,
 			Model model) { //@RequestParam(value="page", required=false) String page // https://pythonq.com/so/spring/1003345
+		
 		Product prd = petStore.getProductByName(productName, categoryId);
 		//System.out.println("rests = " + prd.getName() + ", test = " + prd.getProductId());
-		List<Item> tmpList = petStore.getItemListByProduct(prd.getProductId());
+		
+		List<Item> tmpList = null;
+		switch (sort) {
+			case "popularity":
+				if(userSession == null) {
+					tmpList = petStore.getItemForNotUser(prd.getProductId());
+				} else {
+					tmpList = petStore.getItemForUser(userSession.getMember().getMemberId(), prd.getProductId());
+				}
+				break;
+			case "highPrice":
+				if(userSession == null) {
+					tmpList = petStore.getItemOrderByHighPriceForNotUser(prd.getProductId());
+				} else {
+					tmpList = petStore.getItemOrderByHighPriceForUser(userSession.getMember().getMemberId(), prd.getProductId());
+				}
+				break;
+			case "lowPrice":
+				if(userSession == null) {
+					tmpList = petStore.getItemOrderByLowPriceForNotUser(prd.getProductId());
+				} else {
+					tmpList = petStore.getItemOrderByLowPriceForUser(userSession.getMember().getMemberId(), prd.getProductId());
+				}
+				break;
+		}
+		
 		PagedListHolder<Item> itemListPage = new PagedListHolder<Item>(tmpList);
 		itemListPage.setPageSize(12);
 
@@ -58,14 +105,18 @@ public class ViewItemController {
 		}
 		
 		List<Item> itemList = itemListPage.getPageList();
-		for(Item i : itemList) {
-			System.out.println(i.getTitle());
-		}
 		model.addAttribute("itemList", itemList);
 		model.addAttribute("totalPageSize", totalPageSize);
-		
+		model.addAttribute("sort", sort);
 		return "EarringItem";
 	}
+	
+	/*
+	 * @GetMapping
+	 * 
+	 * @RequestMapping("/accessory/earring/detail") public String
+	 * earringItemDetail()
+	 */
 
 	/*
 	 * @RequestMapping("/shop/viewItem.do") public String handleRequest(

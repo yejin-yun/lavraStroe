@@ -135,33 +135,33 @@ public class PetStoreImpl implements PetStoreFacade {
 	}
 
 	@Override
-	public List<Item> getItemForNotUser() {
-		return itemDao.getItemForNotUser();
+	public List<Item> getItemForNotUser(int productId) {
+		return itemDao.getItemForNotUser(productId);
 	}
 
 	@Override
-	public List<Item> getItemForUser(String memberId) {
-		return itemDao.getItemForUser(memberId);
+	public List<Item> getItemForUser(String memberId, int productId) {
+		return itemDao.getItemForUser(memberId, productId);
 	}
 
 	@Override
-	public List<Item> getItemOrderByHighPriceForUser(String memberId) {
-		return itemDao.getItemOrderByHighPriceForUser(memberId);
+	public List<Item> getItemOrderByHighPriceForUser(String memberId, int productId) {
+		return itemDao.getItemOrderByHighPriceForUser(memberId, productId);
 	}
 
 	@Override
-	public List<Item> getItemOrderByHighPriceForNotUser() {
-		return itemDao.getItemOrderByHighPriceForNotUser();
+	public List<Item> getItemOrderByHighPriceForNotUser(int productId) {
+		return itemDao.getItemOrderByHighPriceForNotUser(productId);
 	}
 
 	@Override
-	public List<Item> getItemOrderByLowPriceForUser(String memberId) {
-		return itemDao.getItemOrderByLowPriceForUser(memberId);
+	public List<Item> getItemOrderByLowPriceForUser(String memberId, int productId) {
+		return itemDao.getItemOrderByLowPriceForUser(memberId, productId);
 	}
 
 	@Override
-	public List<Item> getItemOrderByLowPriceForNotUser() {
-		return itemDao.getItemOrderByLowPriceForNotUser();
+	public List<Item> getItemOrderByLowPriceForNotUser(int productId) {
+		return itemDao.getItemOrderByLowPriceForNotUser(productId);
 	}
 
 	@Override

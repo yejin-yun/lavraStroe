@@ -57,14 +57,14 @@
    $(document).ready(function(){
 
         $('.menubar_btn>a').click(function(){
-            $('.menu_bg').show(); 
+            //$('.menu_bg').show(); 
             $('.sidebar_menu').animate({
                 right:0
             });
              setTimeout(carousel, 5000);  
         });
         $('.close_btn>a').click(function(){
-            $('.menu_bg').hide(); 
+            //$('.menu_bg').hide(); 
             $('.sidebar_menu').animate({
                 right: '-' + 50 + '%'
             });

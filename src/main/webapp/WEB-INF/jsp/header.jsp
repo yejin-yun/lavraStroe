@@ -32,7 +32,7 @@
                 <input type="text" name="searchKey" class="keyword" placeholder="상품명을 검색하세요" style="width:100%; height: 100%; border:0; background:#f3f3f3 " >
             </form>
         </div>
-        <div class="wrapper" style="z-index:1000;">
+        <div class="wrapper" style="z-index:1000; margin-left: auto; margin-right: auto; width: 90%;">
         <h1 id="logo"><a href="<c:url value='/' />" title="Home"><img src="<c:url value='/images/bagic/lavra_logo.PNG' />" alt="lavra" ></a></h1>
         <nav>
             <h2><strong>
@@ -71,7 +71,7 @@
             <div class="close_btn"><a href="#">
                 <img src="<c:url value='/images/bagic/x-mark.png' />" border="0" width="10px" height="10px">
             </a></div>
-            <ul class="menu_wrap">
+            <ul class="menu_wrap"> <%-- 메뉴 펼쳤을 때 배경 어두워지는 js 주석처리해둠. wrapper class div를 중앙 처리해서   --%>
             	<%-- <c:if test="${isLogined == 0}" >
                 	<li><a href="<c:url value='/user/login' />">Login</a></li>
                 </c:if>
