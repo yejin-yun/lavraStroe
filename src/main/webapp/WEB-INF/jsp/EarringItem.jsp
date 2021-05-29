@@ -95,6 +95,13 @@
                 	<c:when test="${fillUpSize == 3}"><td></td><td></td><td></td></tr></c:when>
             </c:choose>
 		</table>
+		<div id="paging">
+			<c:forEach var="val" begin="1" end="${totalPageSize}" varStatus="status">
+				<a href='<c:url value="/accessory/earring/1?page=${val}"/>'>
+            	<font color="black"><B>${val}</B></font></a>
+            	<c:if test="${!status.last}">&nbsp;|&nbsp;</c:if>
+			</c:forEach> 
+        </div>
 	</section>
 
 

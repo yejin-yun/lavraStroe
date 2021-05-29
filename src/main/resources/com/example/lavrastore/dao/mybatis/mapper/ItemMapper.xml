@@ -150,7 +150,7 @@
 	<insert id="insertItem" parameterType="Item">
 		<selectKey keyProperty="itemId" resultType="int"
 			order="BEFORE">
-			SELECT seq_pk.nextval AS itemId FROM DUAL
+			SELECT seq_pk_item.nextval AS itemId FROM DUAL
 		</selectKey>
 		INSERT INTO Item (itemId, productId, image, description, title, price,
 		isSoldout, likeCnt, quantity)

@@ -30,6 +30,7 @@ import com.example.lavrastore.service.PetStoreFacade;
 public class ViewItemController { 
 
 	private PetStoreFacade petStore;
+	private int totalPageSize;
 
 	@Autowired
 	public void setPetStore(PetStoreFacade petStore) {
@@ -45,18 +46,23 @@ public class ViewItemController {
 			@RequestParam(value="page", defaultValue="1") int page,
 			Model model) { //@RequestParam(value="page", required=false) String page // https://pythonq.com/so/spring/1003345
 		Product prd = petStore.getProductByName(productName, categoryId);
-		System.out.println("rests = " + prd.getName() + ", test = " + prd.getProductId());
-		PagedListHolder<Item> itemListPage = new PagedListHolder<Item>(petStore.getItemListByProduct(prd.getProductId()));
+		//System.out.println("rests = " + prd.getName() + ", test = " + prd.getProductId());
+		List<Item> tmpList = petStore.getItemListByProduct(prd.getProductId());
+		PagedListHolder<Item> itemListPage = new PagedListHolder<Item>(tmpList);
 		itemListPage.setPageSize(12);
 
-		itemListPage.setPage(page);
-
+		itemListPage.setPage(page - 1);
+		totalPageSize = tmpList.size() / 12;
+		if(tmpList.size() % 12 != 0) {
+			totalPageSize++;
+		}
 		
 		List<Item> itemList = itemListPage.getPageList();
 		for(Item i : itemList) {
 			System.out.println(i.getTitle());
 		}
 		model.addAttribute("itemList", itemList);
+		model.addAttribute("totalPageSize", totalPageSize);
 		
 		return "EarringItem";
 	}
