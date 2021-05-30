@@ -3,7 +3,6 @@ package com.example.lavrastore.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +23,7 @@ public class LoginController {
 		this.petStore = petStore;
 	}
 
-	@RequestMapping("/shop/signon.do")
+	@RequestMapping("/shop/login.do")
 	public ModelAndView handleRequest(HttpServletRequest request,
 			@RequestParam("memberid") String memberid,
 			@RequestParam("password") String password,
@@ -33,7 +32,7 @@ public class LoginController {
 		Member member = petStore.getMember(memberid, password);
 		if (member == null) {
 			return new ModelAndView("Error", "message", 
-					"Invalid username or password.  Signon failed.");
+					"Invalid userid or password.  loginon failed.");
 		}
 		else {
 			UserSession userSession = new UserSession(member);

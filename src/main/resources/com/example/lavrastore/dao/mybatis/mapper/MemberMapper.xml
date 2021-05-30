@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.lavrastore.dao.mybatis.mapper.MemberMapper">
+  <cache />
+
+  <select id="getMemberByUserId" resultType="Member">
+    SELECT SIGNON.MEMBERID,
+          MEMBER.EMAIL,
+          MEMBER.ACCSTATUS,
+          MEMBER.ADDR1 AS address1,
+          MEMBER.ADDR2 AS address2,
+          MEMBER.ZIP,
+          MEMBER.PHONE,
+    FROM MEMBER, SIGNON
+    WHERE MEMBER.USERID = #{userId}
+      AND SIGNON.USERID = MEMBER.USERID
+  </select>
+
+  <select id="getMemberByUserIdAndPassword" resultType="Member">
+   SELECT SIGNON.MEMBERID,
+          MEMBER.EMAIL,
+          MEMBER.ACCSTATUS,
+          MEMBER.ADDR1 AS address1,
+          MEMBER.ADDR2 AS address2,
+          MEMBER.ZIP,
+          MEMBER.PHONE,
+    FROM MEMBER, SIGNON
+    WHERE MEMBER.USERID = #{param1}
+      AND SIGNON.PASSWORD = #{param2}
+      AND SIGNON.USERID = MEMBER.USERID
+  </select>
+
+  <select id="getUsernameList" resultType="java.lang.String">
+    SELECT USERNAME AS VALUE FROM MEMBER
+  </select>
+
+  <update id="updatemember" parameterType="Member">
+    UPDATE MEMBER SET
+      EMAIL = #{email},
+      USERNAME = #{username},
+      STATUS = #{status},
+      ADDR1 = #{address1},
+      ADDR2 = #{address2,jdbcType=VARCHAR},
+      CITY = #{city},
+      ACCSTATE = #{accstate},
+      ZIP = #{zip},
+      COUNTRY = #{country},
+      PHONE = #{phone}
+    WHERE USERID = #{userId}
+  </update>
+
+  <insert id="insertMember" parameterType="Member">
+    INSERT INTO MEMBER
+      (EMAIL, USERNAME, ACCSTATUS, ADDR1, ADDR2, ZIP, PHONE, USERID)
+    VALUES
+      (#{email}, #{username}, #{status}, #{address1}, #{address2,jdbcType=VARCHAR}, #{zip}, #{phone}, #{userId})
+  </insert>
+
+  <!--  
+  TODO MyBatis 3 does not map booleans to integers
+  <update id="updateProfile" parameterType="Account">
+    UPDATE PROFILE SET
+      LANGPREF = #{languagePreference},
+      FAVCATEGORY = #{favouriteCategoryId},
+      MYLISTOPT = #{listOption},
+      BANNEROPT = #{bannerOption}
+    WHERE USERID = #{username}
+  </update>
+  -->
+
+  <!--  
+  TODO MyBatis 3 does not map booleans to integers
+  <insert id="insertProfile" parameterType="Account">
+    INSERT INTO PROFILE (LANGPREF, FAVCATEGORY, MYLISTOPT, BANNEROPT, USERID)
+    VALUES (#{languagePreference}, #{favouriteCategoryId}, #{listOption}, #{bannerOption}, #{username})
+  </insert>
+  -->
+
+
+  <update id="updateSignon" parameterType="Member">
+    UPDATE SIGNON SET PASSWORD = #{password}
+    WHERE USERID = #{userId}
+  </update>
+
+  <insert id="insertSignon" parameterType="Member">
+    INSERT INTO SIGNON (PASSWORD,USERID)
+    VALUES (#{password}, #{userId})
+  </insert>
+</mapper>

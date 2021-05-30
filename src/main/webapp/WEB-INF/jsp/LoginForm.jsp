@@ -20,14 +20,14 @@
 </c:if>
 
 <div align="center">
-  <form action='<c:url value="/shop/signon.do"/>' method="POST">
+  <form action='<c:url value="/shop/login.do"/>' method="POST">
     <c:if test="${!empty signonForwardAction}">
       <input type="hidden" name="forwardAction"
         value='<c:url value="${signonForwardAction}"/>' />
     </c:if>
     <table>
       <tr>
-        <td colspan="2">Please enter your username and password. <br />&nbsp;
+        <td colspan="2">Please enter your Id and password. <br />&nbsp;
         </td>
       </tr>
       <tr>
