@@ -23,8 +23,8 @@
             if( $(".work_sub_menu1").is(":visible") ){
                 $(".work_sub_menu1").slideUp();
             }else{
-                if($(".trade_sub_menu").is(":visible")){
-                     $(".trade_sub_menu").slideUp();
+                if($(".trade_sub_menu1").is(":visible")){
+                     $(".trade_sub_menu1").slideUp();
                 }
                 $(".work_sub_menu1").slideDown();
             }
