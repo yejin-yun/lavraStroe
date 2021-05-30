@@ -22,17 +22,21 @@ public class LoginController {
 	public void setPetStore(PetStoreFacade petStore) {
 		this.petStore = petStore;
 	}
+	
+	@RequestMapping("/shop/loginForm.do")
+	public ModelAndView handleRequest(HttpServletRequest request, Model model){
+		return new ModelAndView("LoginForm");
+	}
 
 	@RequestMapping("/shop/login.do")
 	public ModelAndView handleRequest(HttpServletRequest request,
-			@RequestParam("memberid") String memberid,
+			@RequestParam("memberId") String memberId,
 			@RequestParam("password") String password,
 			@RequestParam(value="forwardAction", required=false) String forwardAction,
 			Model model) throws Exception {
-		Member member = petStore.getMember(memberid, password);
+		Member member = petStore.getMember(memberId, password);
 		if (member == null) {
-			return new ModelAndView("Error", "message", 
-					"Invalid userid or password.  loginon failed.");
+			return new ModelAndView("LoginForm");
 		}
 		else {
 			UserSession userSession = new UserSession(member);
@@ -40,7 +44,7 @@ public class LoginController {
 			if (forwardAction != null) 
 				return new ModelAndView("redirect:" + forwardAction);
 			else 
-				return new ModelAndView("tiles/index");	// use Tiles
+				return new ModelAndView("index");
 		}
 	}
 }

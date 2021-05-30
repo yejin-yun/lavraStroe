@@ -32,15 +32,15 @@
       </tr>
       <tr>
         <td>ID:</td>
-        <td><input type="text" name="username" size="20" value="j2ee" /></td>
+        <td><input type="text" name="memberId" size="20"/></td>
       </tr>
       <tr>
         <td>Password:</td>
-        <td><input type="password" name="password" size="20" value="j2ee" /></td>
+        <td><input type="password" name="password" size="20"/></td>
       </tr>
       <tr>
         <td>&nbsp;</td>
-        <td><input name="update" type="image" src="../images/button_submit.gif" /></td>
+        <td><input name="update" type="image" src="../images/bagic/login.png" /></td>
       </tr>
     </table>
   </form>

@@ -60,28 +60,34 @@
             </ul></strong>
             </h2>
         </nav>
-        <div>
-         <c:if test="${empty UserSession.member}" >
-	        	<a href="<c:url value="/shop/loginForm.do"/>">
-	          		<img border="0" name="img_login" src="../images/bagic/login.png" style="width:50px"/></a>
-	      	</c:if>
-	      	<c:if test="${!empty UserSession.member}" >
-	        	<a href="<c:url value="/shop/signoff.do"/>">
-	          		<img border="0" name="img_logout" src="../images/bagic/logout.png" /></a>
-	        	<img border="0" src="../images/separator.gif" />
-	        	<a href="<c:url value="/shop/editAccount.do"/>">
-	          		<img border="0" name="img_myaccount" src="../images/my_account.gif" /></a>
-	      	</c:if>
-        </div>
-       <div class="search_btn"><a href="#"><img id="search_img" src="<c:url value='/images/bagic/magnifier-32.png' />"></a></div>
-        <div class="menu_header">
-            <!-- https://ddorang-d.tistory.com/104 -->
-            <div class="menubar_btn"><a href="#">
-                <img id="menubar" src="<c:url value='/images/bagic/menubar.PNG' />" border="0">
-            </a>
-            </div>
-           
-        </div>
+        <table>
+         <tr>
+	       <div>
+	         <c:if test="${empty UserSession.member}" >
+		        	<a href="<c:url value="/shop/loginForm.do"/>">
+		          		<img border="0" name="img_login" src="../images/bagic/login.png" style="width:50px"/></a>
+		      	</c:if>
+		      	<c:if test="${!empty UserSession.member}" >
+		        	<a href="<c:url value="/shop/signoff.do"/>">
+		          		<img border="0" name="img_logout" src="../images/bagic/logout.png" /></a>
+		        	<img border="0" src="../images/separator.gif" />
+		        	<a href="<c:url value="/shop/editAccount.do"/>">
+		          		<img border="0" name="img_myaccount" src="../images/my_account.gif" /></a>
+		      	</c:if>
+	        </div>
+	      </tr>
+		  <tr>
+	      	 <div class="search_btn"><a href="#"><img id="search_img" src="<c:url value='/images/bagic/magnifier-32.png' />"></a></div>
+	      </tr>
+	       <tr>
+	        <div class="menu_header">
+	            <!-- https://ddorang-d.tistory.com/104 -->
+	            <div class="menubar_btn"><a href="#">
+	                <img id="menubar" src="<c:url value='/images/bagic/menubar.PNG' />" border="0">
+	            </a>
+	            </div>   
+	        </div>
+	       </tr>
         <div class="menu_bg" style="z-index:1000;"></div>
         <div class="sidebar_menu" style="z-index:1000;">
             <div class="close_btn"><a href="#">
@@ -99,6 +105,8 @@
                 <li><a href="<c:url value='/user/mypage' />">Mypage</a></li>
             </ul>
         </div>
+        </table>
+        
     </div>
     </header>
 </body>

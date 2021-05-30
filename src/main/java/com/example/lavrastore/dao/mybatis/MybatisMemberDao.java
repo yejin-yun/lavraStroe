@@ -12,6 +12,7 @@ import com.example.lavrastore.domain.Member;
 @Repository
 public class MybatisMemberDao implements MemberDao {
 	
+	@Autowired
 	private MemberMapper memberMapper;
 	
 	public Member getMember(String memberId) throws DataAccessException {

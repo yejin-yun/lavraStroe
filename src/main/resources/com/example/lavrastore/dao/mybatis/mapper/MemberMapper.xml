@@ -4,31 +4,33 @@
 <mapper namespace="com.example.lavrastore.dao.mybatis.mapper.MemberMapper">
   <cache />
 
-  <select id="getMemberByUserId" resultType="Member">
-    SELECT SIGNON.MEMBERID,
-          MEMBER.EMAIL,
-          MEMBER.ACCSTATUS,
-          MEMBER.ADDR1 AS address1,
-          MEMBER.ADDR2 AS address2,
-          MEMBER.ZIP,
-          MEMBER.PHONE,
-    FROM MEMBER, SIGNON
-    WHERE MEMBER.USERID = #{userId}
-      AND SIGNON.USERID = MEMBER.USERID
+  <select id="getMemberByMemberId" resultType="Member">
+    SELECT  MEMBERID,
+          EMAIL,
+          ACCSTATUS,
+          USERNAME,
+          ADDR1,
+          ADDR2,
+          ZIP,
+          PHONE
+    FROM MEMBER
+    FROM MEMBER
+    WHERE MEMBER.MEMBERID = #{memberId}
+
   </select>
 
-  <select id="getMemberByUserIdAndPassword" resultType="Member">
-   SELECT SIGNON.MEMBERID,
-          MEMBER.EMAIL,
-          MEMBER.ACCSTATUS,
-          MEMBER.ADDR1 AS address1,
-          MEMBER.ADDR2 AS address2,
-          MEMBER.ZIP,
-          MEMBER.PHONE,
-    FROM MEMBER, SIGNON
-    WHERE MEMBER.USERID = #{param1}
-      AND SIGNON.PASSWORD = #{param2}
-      AND SIGNON.USERID = MEMBER.USERID
+  <select id="getMemberByMemberIdAndPassword" resultType="Member">
+   SELECT MEMBERID,
+          EMAIL,
+          ACCSTATUS,
+          USERNAME,
+          ADDR1,
+          ADDR2,
+          ZIP,
+          PHONE
+    FROM MEMBER
+    WHERE MEMBER.MEMBERID = #{param1}
+      AND MEMBER.PASSWORD = #{param2}
   </select>
 
   <select id="getUsernameList" resultType="java.lang.String">
