@@ -26,20 +26,32 @@
 		WHERE categoryId = #{value}
 	</select>
 	
+	<!-- 	<resultMap id="cartItemResult" type="CartItem">
+		<id column="cartItemId" property="cartItemId"/>
+		<result column="quantity" property="quantity"/>
+		<result column="itemId" property="itemId"/>
+		<result column="categoryId" property="categoryId"/>
+		<result column="memberId" property="memberId"/>
+		
+		<association property="item" column="itemId" javaType="Item">
+		
+		</association>
+	</resultMap> -->
+
 	<select id="getItemByCartItemId" parameterType="int" resultType="Item">
 		SELECT 
 		i.itemId,
-		poductId,
+		productId,
 		image,
 		description,
 		title,
 		price,
 		isSoldout,
-		likeCnt
+		likeCnt,
 		i.quantity
 		FROM ITEM i, CARTITEM c
 		WHERE i.itemId = c.itemId
-		 AND c.itemId = #{value}
+		 AND c.cartItemId = #{cartItemId}
 	</select>
   
   	<insert id="insertCartItem" parameterType="CartItem">

@@ -66,10 +66,17 @@
 
 	<select id="getItemForNotUser" resultType="Item">
 		SELECT
-		itemId, productId, image, description, title, price,
-		isSoldout, likeCnt, quantity
-		FROM ITEM
-		WHRE isSoldout = 0
+		itemId,
+		i.productId,
+		image,
+		description,
+		title,
+		price,
+		isSoldout,
+		likeCnt
+		quantity
+		FROM ITEM i, PRODUCT p
+		WHERE p.productId = i.productId AND i.productId = #{productId} AND isSoldout = 0
 		ORDER BY likeCnt DESC
 	</select>
 
@@ -103,10 +110,17 @@
 
 	<select id="getItemOrderByHighPriceForNotUser" resultType="Item">
 		SELECT
-		itemId, productId, image, description, title, price,
-		isSoldout, likeCnt, quantity
-		FROM ITEM
-		WHRE isSoldout = 0
+		itemId,
+		i.productId,
+		image,
+		description,
+		title,
+		price,
+		isSoldout,
+		likeCnt
+		quantity
+		FROM ITEM i, PRODUCT p
+		WHERE p.productId = i.productId AND i.productId = #{productId} AND isSoldout = 0
 		ORDER BY price DESC
 	</select>
 
@@ -140,10 +154,17 @@
 
 	<select id="getItemOrderByLowPriceForNotUser" resultType="Item">
 		SELECT
-		itemId, productId, image, description, title, price,
-		isSoldout, likeCnt, quantity
-		FROM ITEM
-		WHRE isSoldout = 0
+		itemId,
+		i.productId,
+		image,
+		description,
+		title,
+		price,
+		isSoldout,
+		likeCnt
+		quantity
+		FROM ITEM i, PRODUCT p
+		WHERE p.productId = i.productId AND i.productId = #{productId} AND isSoldout = 0
 		ORDER BY price ASC
 	</select>
 

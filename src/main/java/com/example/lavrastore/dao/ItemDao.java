@@ -14,8 +14,8 @@ public interface ItemDao {
 	
 	List<Item> getItemListByProduct(int productId) throws DataAccessException;
 	Item getItem(int itemId) throws DataAccessException;
-	List<Item> getItemForNotUser() throws DataAccessException; // 인기순으로 되어 있음. 비로그인 용 
-	List<Item> getItemForUser(String memberId) throws DataAccessException;
+	List<Item> getItemForNotUser(int productId) throws DataAccessException; // 인기순으로 되어 있음. 비로그인 용 
+	List<Item> getItemForUser(String memberId, int productId) throws DataAccessException;
 	
 	/*
 	 * //인기순 
@@ -24,12 +24,12 @@ public interface ItemDao {
 	 */
 	
 	//높은 가격순
-	List<Item> getItemOrderByHighPriceForUser(String memberId) throws DataAccessException;
-	List<Item> getItemOrderByHighPriceForNotUser() throws DataAccessException;
+	List<Item> getItemOrderByHighPriceForUser(String memberId, int productId) throws DataAccessException;
+	List<Item> getItemOrderByHighPriceForNotUser(int productId) throws DataAccessException;
 	
 	// 낮은 가격순
-	List<Item> getItemOrderByLowPriceForUser(String memberId) throws DataAccessException;
-	List<Item> getItemOrderByLowPriceForNotUser() throws DataAccessException;
+	List<Item> getItemOrderByLowPriceForUser(String memberId, int productId) throws DataAccessException;
+	List<Item> getItemOrderByLowPriceForNotUser(int productId) throws DataAccessException;
 	
 	
 	/* Create */

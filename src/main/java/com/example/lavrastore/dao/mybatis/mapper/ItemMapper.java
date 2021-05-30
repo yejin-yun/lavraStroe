@@ -34,20 +34,20 @@ public interface ItemMapper {
 	
 	List<Item> getItemListByProduct(int productId);
 	Item getItem(int itemId);
-	List<Item> getItemForNotUser(); // 인기순으로 되어 있음. 비로그인 용
-	List<Item> getItemForUser(String memberId);
+	List<Item> getItemForNotUser(int productId); // 인기순으로 되어 있음. 비로그인 용. defult로 출
+	List<Item> getItemForUser(String memberId, int productId); 
 	
 	/*
 	 * //인기순 List<Item> getItemOrderByHighLikeCntForUser(String memberId);
 	 * List<Item> getItemOrderByHighLikeCntForNotUser();
 	 */
 	//높은 가격순
-	List<Item> getItemOrderByHighPriceForUser(String memberId);
-	List<Item> getItemOrderByHighPriceForNotUser();
+	List<Item> getItemOrderByHighPriceForUser(String memberId, int productId);
+	List<Item> getItemOrderByHighPriceForNotUser(int productId);
 	
 	// 낮은 가격순
-	List<Item> getItemOrderByLowPriceForUser(String memberId);
-	List<Item> getItemOrderByLowPriceForNotUser();
+	List<Item> getItemOrderByLowPriceForUser(String memberId, int productId);
+	List<Item> getItemOrderByLowPriceForNotUser(int productId);
 	
 	/* Create */
 	

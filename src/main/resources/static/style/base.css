@@ -152,3 +152,12 @@ footer{
     padding: 20px 0;
 }
 .work_sub_menu, .trade_sub_menu {display:none;}
+
+a {
+	text-decoration: none !important; /*!important 없으면 부트스트랩 때문에 밑줄 나옴*/
+    color: black;
+}
+
+a:hover {
+	color: black;
+}
