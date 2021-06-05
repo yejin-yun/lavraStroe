@@ -9,13 +9,13 @@ import com.example.lavrastore.domain.WishList;
 public interface WishListMapper {
 	/* Read */
 	List<WishList> getAllWishList();
-	List<WishList> getItemByWishListId(int wishListId); //cartItemId로 cartItem에 있는 Item 가져오기
+	List<WishList> getItemByWishListId(int wishListId);
 	
 	/* Create */
 	int insertWishList(WishList wishList);
 	
 	/* Update */
-	int updateWishList(WishList wishList); // ppt에 있는 메소드들 합침. 
+	int updateWishList(WishList wishList); 
 	
 	/* Delete */
 	int deleteWishList(WishList wishList);

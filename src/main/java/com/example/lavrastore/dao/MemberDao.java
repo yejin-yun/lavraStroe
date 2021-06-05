@@ -1,6 +1,9 @@
 package com.example.lavrastore.dao;
 
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.dao.DataAccessException;
 import com.example.lavrastore.domain.Member;
 
@@ -14,5 +17,12 @@ public interface MemberDao {
 	void updateMember(Member Member) throws DataAccessException;
 
 	List<String> getUsernameList() throws DataAccessException;
-
+	
+	/*
+	public boolean loginCheck(Member member);
+	
+	public Member viewMember(Member member);
+	
+	public void logout(HttpSession session);
+	*/
 }

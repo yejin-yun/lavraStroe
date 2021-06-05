@@ -26,8 +26,8 @@
 
 </head>
 <body>
-<header>
-       <div class="search_header">
+<header style = "background : yellow;">
+       <div class="search_header ">
             <a href="#"><img id="serch_btn" src="<c:url value='/images/bagic/magnifier-32.png' />"  style="padding-left: 40px; padding-top: 10px;"></a>
             <form method="post" action="<c:url value='/shop/searchProducts.do' />" style="display: inline-block; margin-left: 20px; margin-top:20px; width:80%; height: 50%;">
                 <input type="text" name="searchKey" class="keyword" placeholder="상품명을 검색하세요" style="width:100%; height: 100%; border:0; background:#f3f3f3 " >
@@ -62,19 +62,6 @@
         </nav>
         <table>
          <tr>
-	       <div>
-	         <c:if test="${empty UserSession.member}" >
-		        	<a href="<c:url value="/shop/loginForm.do"/>">
-		          		<img border="0" name="img_login" src="../images/bagic/login.png" style="width:50px"/></a>
-		      	</c:if>
-		      	<c:if test="${!empty UserSession.member}" >
-		        	<a href="<c:url value="/shop/signoff.do"/>">
-		          		<img border="0" name="img_logout" src="../images/bagic/logout.png" /></a>
-		        	<img border="0" src="../images/separator.gif" />
-		        	<a href="<c:url value="/shop/editAccount.do"/>">
-		          		<img border="0" name="img_myaccount" src="../images/my_account.gif" /></a>
-		      	</c:if>
-	        </div>
 	      </tr>
 		  <tr>
 	      	 <div class="search_btn"><a href="#"><img id="search_img" src="<c:url value='/images/bagic/magnifier-32.png' />"></a></div>
@@ -94,15 +81,26 @@
                 <img src="<c:url value='/images/bagic/x-mark.png' />" border="0" width="10px" height="10px">
             </a></div>
             <ul class="menu_wrap"> <%-- 메뉴 펼쳤을 때 배경 어두워지는 js 주석처리해둠. wrapper class div를 중앙 처리해서   --%>
-            	<%-- <c:if test="${isLogined == 0}" >
-                	<li><a href="<c:url value='/user/login' />">Login</a></li>
-                </c:if>
-                <c:if test="${isLogined == 1}" >
-                	<li><a href="<c:url value='/user/logout' />">LogOut</a></li>
-                </c:if> --%>
+            	
                 <li><a href="<c:url value='/cart/1' />">Cart</a></li>
                 <li><a href="<c:url value='/user/wishlist' />">Wishlist</a></li>
-                <li><a href="<c:url value='/user/mypage' />">Mypage</a></li>
+                
+                <c:if test="${empty userSession.member}" >
+                <li>
+		        	<a href="<c:url value="/shop/loginForm.do"/>">login</a>
+		      	</li>
+		      	</c:if>
+
+		      	<c:if test="${!empty userSession.member}" >
+		      		<li>
+		        		<a href="<c:url value="/shop/logout.do"/>">logout</a>
+                	</li>
+		      		<li>
+		        		<a href="<c:url value="/shop/editAccount.do"/>">Mypage</a>
+		         	</li>
+		      	</c:if>
+                
+                
             </ul>
         </div>
         </table>

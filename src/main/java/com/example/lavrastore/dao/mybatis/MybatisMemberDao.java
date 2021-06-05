@@ -1,6 +1,8 @@
 package com.example.lavrastore.dao.mybatis;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
@@ -26,20 +28,29 @@ public class MybatisMemberDao implements MemberDao {
 
 	public void insertMember(Member member) throws DataAccessException {
 		memberMapper.insertMember(member);
-		memberMapper.insertProfile(member);
-		memberMapper.insertSignon(member);
 	}
 
 	public void updateMember(Member member) throws DataAccessException {
 		memberMapper.updateMember(member);
-		memberMapper.updateProfile(member);
-		if (member.getPassword() != null && member.getPassword().length() > 0) 
-		{
-			memberMapper.updateSignon(member);
-		}
 	}
  
 	public List<String> getUsernameList() throws DataAccessException {
 		return memberMapper.getUsernameList();
 	}
+	
+	
+	
+	/*
+	public boolean loginCheck(Member member) throws DataAccessException {
+		return memberMapper.loginCheck(member);
+	};
+	
+	public Member viewMember(Member member) {
+		return memberMapper.viewMember(member);
+	};
+	
+	public void logout(HttpSession session) {
+		memberMapper.logout(session);
+	};
+	*/
 }

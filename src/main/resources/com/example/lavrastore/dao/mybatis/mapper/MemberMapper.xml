@@ -18,6 +18,8 @@
     WHERE MEMBER.MEMBERID = #{memberId}
 
   </select>
+  
+  
 
   <select id="getMemberByMemberIdAndPassword" resultType="Member">
    SELECT MEMBERID,
