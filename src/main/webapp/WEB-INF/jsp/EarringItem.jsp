@@ -14,8 +14,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Lavra: Earring</title>
-<link type="text/css" rel="stylesheet"
-	href="<c:url value='/style/view.css' />">
+<link type="text/css" rel="stylesheet" href="<c:url value='/style/view.css' />">
 
 <script>
 	//위시리스트 
@@ -125,8 +124,7 @@
 		<div id="paging">
 			<c:forEach var="val" begin="1" end="${totalPageSize}"
 				varStatus="status">
-				<a
-					href='<c:url value="/accessory/earring/1?page=${val}&sort=${sort}"/>'>
+				<a href='<c:url value="/accessory/earring/1?page=${val}&sort=${sort}"/>'>
 					<font color="black"><B>${val}</B></font>
 				</a>
 				<c:if test="${!status.last}">&nbsp;|&nbsp;</c:if>
