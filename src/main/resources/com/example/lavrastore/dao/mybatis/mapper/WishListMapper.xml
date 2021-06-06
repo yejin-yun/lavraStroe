@@ -10,40 +10,40 @@
 	</select>
 
 	
-	<select id="getItemByCartItemId" parameterType="int" resultType="Item">
+	<select id="getWishListById" parameterType="String" resultType="Item">
 		SELECT 
-		i.itemId,
-		poductId,
-		image,
-		description,
-		title,
-		price,
-		isSoldout,
-		likeCnt
+		w.itemId,
+		i.poductId,
+		i.image,
+		i.description,
+		i.title,
+		i.price,
+		i.isSoldout,
+		i.likeCnt
 		i.quantity
-		FROM ITEM i, CARTITEM c
-		WHERE i.itemId = c.itemId
-		 AND c.itemId = #{value}
+		FROM WISHLIST w, ITEM i
+		WHERE i.itemId = w.itemId
+		 AND w.MemberID = #{value}
 	</select>
   
-  	<insert id="insertCartItem" parameterType="CartItem">
+  	<insert id="insertWishList" parameterType="WishList">
 		<selectKey keyProperty="wishListId" resultType="int" order="BEFORE">
 			SELECT seq_pk.nextval AS wishListId FROM DUAL
 		</selectKey>
-		INSERT INTO CARTITEM (cartItemId, quantity, itemId, categoryId, memberId)
-		VALUES (#{cartItemId}, #{quantity}, #{item.itemId}, #{categoryId}, #{memberId})
+		INSERT INTO WISHLIST (wishlistId, ItemId, MemberId)
+		VALUES (#{ItemId}, #{MemberId})
 	</insert>
 
-	<update id="updateCartItem" parameterType="CartItem">
+	<update id="updateWishList" parameterType="CartItem">
 		UPDATE CARTITEM
 		SET cartItemId = #{cartItemId}, quantity = #{quantity}, itemId = #{item.itemId}, categoryId = #{categoryId}, memberId = #{memberId}
 		WHERE cartItemId = #{value}
 	</update>
 
-	<delete id="deleteCartItem" parameterType="CartItem">
+	<delete id="deleteWishList" parameterType="wishList">
 		DELETE FROM
 		WISHLIST
 		WHERE
-		cartItemId = #{value}
+		wishListId = #{value}
 	</delete>
  </mapper>

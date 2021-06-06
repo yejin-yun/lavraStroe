@@ -14,12 +14,14 @@ import com.example.lavrastore.dao.GroupItemDao;
 import com.example.lavrastore.dao.ItemDao;
 import com.example.lavrastore.dao.MemberDao;
 import com.example.lavrastore.dao.ProductDao;
+import com.example.lavrastore.dao.WishListDao;
 import com.example.lavrastore.domain.CartItem;
 import com.example.lavrastore.domain.Category;
 import com.example.lavrastore.domain.GroupItem;
 import com.example.lavrastore.domain.Item;
 import com.example.lavrastore.domain.Member;
 import com.example.lavrastore.domain.Product;
+import com.example.lavrastore.domain.WishList;
 
 @Service
 @Transactional
@@ -36,6 +38,8 @@ public class PetStoreImpl implements PetStoreFacade {
 	private GroupItemDao groupItemDao;
 	@Autowired
 	private MemberDao memberDao;
+	@Autowired
+	private WishListDao wishlistDao;
 
 	// -------------------------------------------------------------------------
 	// Operation methods, implementing the PetStoreFacade interface
@@ -271,6 +275,33 @@ public class PetStoreImpl implements PetStoreFacade {
 	@Override
 	public GroupItem getGItem(int itemid) {
 		return groupItemDao.getGItem(itemid);
+	}
+	
+	@Override
+	public List<WishList> getAllWishList() throws DataAccessException{
+		return wishlistDao.getAllWishList();
+	}
+	
+	@Override
+	public List<Item> getItemByWishListId(String MemberId) throws DataAccessException{
+		return (List<Item>) wishlistDao.getWishListById(MemberId);
+	}
+
+	@Override
+	public int insertWishList(WishList wishList) throws DataAccessException{
+		return wishlistDao.insertWishList(wishList); // 0이면 실패, 0 초과는 성공
+	}
+
+	@Override
+	public int updateWishList(WishList wishList) throws DataAccessException{
+		return wishlistDao.updateWishList(wishList);
+	}
+
+	// Delete
+
+	@Override
+	public int deleteWishList(WishList wishList) throws DataAccessException{
+		return wishlistDao.deleteWishList(wishList);
 	}
 
 }

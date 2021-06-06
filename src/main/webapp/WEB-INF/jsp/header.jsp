@@ -83,7 +83,6 @@
             <ul class="menu_wrap"> <%-- 메뉴 펼쳤을 때 배경 어두워지는 js 주석처리해둠. wrapper class div를 중앙 처리해서   --%>
             	
                 <li><a href="<c:url value='/cart/1' />">Cart</a></li>
-                <li><a href="<c:url value='/user/wishlist' />">Wishlist</a></li>
                 
                 <c:if test="${empty userSession.member}" >
                 <li>
@@ -98,6 +97,8 @@
 		      		<li>
 		        		<a href="<c:url value="/shop/editAccount.do"/>">Mypage</a>
 		         	</li>
+		         	<li><a href="<c:url value='/shop/wishList.do' />">Wishlist</a></li>
+                
 		      	</c:if>
                 
                 

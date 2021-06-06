@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.lavrastore.dao.WishListDao;
 import com.example.lavrastore.dao.mybatis.mapper.WishListMapper;
+import com.example.lavrastore.domain.Item;
 import com.example.lavrastore.domain.WishList;
 
 @Repository
@@ -22,8 +23,8 @@ public class MybatisWishListDao implements WishListDao {
 
 
 	@Override
-	public WishList getWishListById(int wishListId) throws DataAccessException {
-		return (WishList) wishListMapper.getItemByWishListId(wishListId);
+	public Item getWishListById(String MemberId) throws DataAccessException {
+		return (Item) wishListMapper.getItemByWishListId(MemberId);
 	}
 
 	@Override

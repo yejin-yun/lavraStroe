@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>Wish list</title>
 </head>
 <body>
 <%@ include file="header.jsp"%>
@@ -26,20 +26,21 @@
   <table class="n23">
     <tr bgcolor="#CCCCCC">
       <td>&nbsp;</td>
-      <td><b>Product ID</b></td>
+      <td><b>image</b></td>
       <td><b>Name</b></td>
+      <td>설명</td>
     </tr>
     <c:forEach var="wishlist" items="${wishlist.pageList}">
       <tr bgcolor="#FFFF88">
         <td><a
           href='<c:url value="/shop/viewProduct.do"><c:param name="productId" value="${wishlist.productId}"/></c:url>'>
-            <c:out value="${product.description}" escapeXml="false" />
+            <c:out value="${item.description}" escapeXml="false" />
         </a></td>
         <td><b><a
             href='<c:url value="/shop/viewProduct.do"><c:param name="productId" value="${wishlist.productId}"/></c:url>'>
               <font color="BLACK"><c:out value="${wishlist.productId}" /></font>
           </a></b></td>
-        <td><c:out value="${product.name}" /></td>
+        <td><c:out value="${item.name}" /></td>
       </tr>
     </c:forEach>
     <tr>

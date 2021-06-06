@@ -11,6 +11,7 @@ import com.example.lavrastore.domain.GroupItem;
 import com.example.lavrastore.domain.Item;
 import com.example.lavrastore.domain.Member;
 import com.example.lavrastore.domain.Product;
+import com.example.lavrastore.domain.WishList;
 
 /**
  * JPetStore's central business interface.
@@ -114,6 +115,21 @@ public interface PetStoreFacade {
 	int insertCartItem(CartItem cartItem);
 	int updateCartItem(CartItem cartItem); // ppt에 있는 메소드들 합침. 
 	int deleteCartItem(int cartItemId);
+	
+	/*wishlist */
+	
+	/* Read */
+	List<WishList> getAllWishList();
+	List<Item> getItemByWishListId(String MemberId);
+	
+	/* Create */
+	int insertWishList(WishList wishList);
+	
+	/* Update */
+	int updateWishList(WishList wishList); 
+	
+	/* Delete */
+	int deleteWishList(WishList wishList);
 	
 
 }
