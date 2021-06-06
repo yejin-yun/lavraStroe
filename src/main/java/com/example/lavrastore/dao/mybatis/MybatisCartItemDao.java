@@ -22,23 +22,23 @@ public class MybatisCartItemDao implements CartItemDao {
 	}
 
 	@Override
-	public List<CartItem> getCartListByGeneralCategory(int categoryId, String memberId) throws DataAccessException {
-		return cartItemMapper.getCartListByGeneralCategory(categoryId, memberId);
+	public List<CartItem> getCartListByGeneralCategory(int categoryId) throws DataAccessException {
+		return cartItemMapper.getCartListByGeneralCategory(categoryId);
 	}
 
 	@Override
-	public List<CartItem> getCartListByGroupCategory(int categoryId, String memberId) throws DataAccessException {
-		return cartItemMapper.getCartListByGroupCategory(categoryId, memberId);
+	public List<CartItem> getCartListByGroupCategory(int categoryId) throws DataAccessException {
+		return cartItemMapper.getCartListByGroupCategory(categoryId);
 	}
 
 	@Override
-	public List<CartItem> getCartListByPTPCategory(int categoryId, String memberId) throws DataAccessException {
-		return cartItemMapper.getCartListByPTPCategory(categoryId, memberId);
+	public List<CartItem> getCartListByPTPCategory(int categoryId) throws DataAccessException {
+		return cartItemMapper.getCartListByPTPCategory(categoryId);
 	}
 
 	@Override
-	public Item getItemByCartItemId(int cartItemId, String memberId) throws DataAccessException {
-		return cartItemMapper.getItemByCartItemId(cartItemId, memberId);
+	public Item getItemByCartItemId(int cartItemId) throws DataAccessException {
+		return cartItemMapper.getItemByCartItemId(cartItemId);
 	}
 
 	@Override

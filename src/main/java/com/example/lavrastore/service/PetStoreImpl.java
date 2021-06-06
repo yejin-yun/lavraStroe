@@ -177,7 +177,7 @@ public class PetStoreImpl implements PetStoreFacade {
 	public int updateItem(int itemId) {
 		return itemDao.updateItem(itemId);
 	}
-	 
+
 	@Override
 	public int deleteItem(int itemId) {
 		return itemDao.deleteItem(itemId);
@@ -191,23 +191,23 @@ public class PetStoreImpl implements PetStoreFacade {
 	}
 
 	@Override
-	public List<CartItem> getCartListByGeneralCategory(int categoryId, String memberId) {
-		return cartItemDao.getCartListByGeneralCategory(categoryId, memberId);
+	public List<CartItem> getCartListByGeneralCategory(int categoryId) {
+		return cartItemDao.getCartListByGeneralCategory(categoryId);
 	}
 
 	@Override
-	public List<CartItem> getCartListByGroupCategory(int categoryId, String memberId) {
-		return cartItemDao.getCartListByGroupCategory(categoryId, memberId);
+	public List<CartItem> getCartListByGroupCategory(int categoryId) {
+		return cartItemDao.getCartListByGroupCategory(categoryId);
 	}
 
 	@Override
-	public List<CartItem> getCartListByPTPCategory(int categoryId, String memberId) {
-		return cartItemDao.getCartListByPTPCategory(categoryId, memberId);
+	public List<CartItem> getCartListByPTPCategory(int categoryId) {
+		return cartItemDao.getCartListByPTPCategory(categoryId);
 	}
 
 	@Override
-	public Item getItemByCartItemId(int cartItemId, String memberId) {
-		return cartItemDao.getItemByCartItemId(cartItemId, memberId);
+	public Item getItemByCartItemId(int cartItemId) {
+		return cartItemDao.getItemByCartItemId(cartItemId);
 	}
 
 	@Override
