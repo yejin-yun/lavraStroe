@@ -33,7 +33,7 @@
                 <input type="text" name="searchKey" class="keyword" placeholder="상품명을 검색하세요" style="width:100%; height: 100%; border:0; background:#f3f3f3 " >
             </form>
         </div>
-        <div class="wrapper" style="z-index:1000; margin-left: auto; margin-right: auto; width: 90%;">
+         <div class="wrapper" style="z-index:1000; margin-left: auto; margin-right: auto; width: 90%;"> <%--style="z-index:1000; margin-left: auto; margin-right: auto; width: 90%;" z-index를 왜 넣었었지..? --%>
         <h1 id="logo"><a href="<c:url value='/' />" title="Home"><img src="<c:url value='/images/bagic/lavra_logo.PNG' />" alt="lavra" ></a></h1>
         <nav>
             <h2><strong>

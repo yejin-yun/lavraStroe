@@ -7,25 +7,23 @@
 		SELECT cartItemId, quantity, itemId, categoryId, memberId
 		FROM CARTITEM
 	</select>
-	
-	<select id="getCartListByGeneralCategory" parameterType="int" resultType="CartItem">
+	<!-- parameter가 2개 이상인 경우 Mapper 메소드의 parameter의 이름과  #{} 안의 이름이 다르면 안되는 듯-->
+	<select id="getCartListByGeneralCategory" resultType="CartItem"> <!-- <select id="getCartListByGeneralCategory" parameterType="int" resultType="CartItem"> -->
 		SELECT cartItemId, quantity, itemId, categoryId, memberId
 		FROM CARTITEM
-		WHERE categoryId = #{value}
+		WHERE categoryId = #{categoryId} AND memberId = #{memberId}
 	</select>
-	
-	<select id="getCartListByGroupCategory" parameterType="int" resultType="CartItem">
+	<select id="getCartListByGroupCategory" resultType="CartItem">
 		SELECT cartItemId, quantity, itemId, categoryId, memberId
 		FROM CARTITEM
-		WHERE categoryId = #{value}
+		WHERE categoryId = #{categoryId} AND memberId = #{memberId}
 	</select>
-	
-	<select id="getCartListByPTPCategory" parameterType="int" resultType="CartItem">
+	<select id="getCartListByPTPCategory" resultType="CartItem">
 		SELECT cartItemId, quantity, itemId, categoryId, memberId
 		FROM CARTITEM
-		WHERE categoryId = #{value}
+		WHERE categoryId = #{categoryId} AND memberId = #{memberId}
 	</select>
-	
+ 	
 	<!-- 	<resultMap id="cartItemResult" type="CartItem">
 		<id column="cartItemId" property="cartItemId"/>
 		<result column="quantity" property="quantity"/>
@@ -37,8 +35,7 @@
 		
 		</association>
 	</resultMap> -->
-
-	<select id="getItemByCartItemId" parameterType="int" resultType="Item">
+	<select id="getItemByCartItemId" resultType="Item"> <!--  parameterType="int" 제거해줘야 함. memberId는 String임 -->
 		SELECT 
 		i.itemId,
 		productId,
@@ -51,7 +48,7 @@
 		i.quantity
 		FROM ITEM i, CARTITEM c
 		WHERE i.itemId = c.itemId
-		 AND c.cartItemId = #{cartItemId}
+		AND c.cartItemId = #{cartItemId} AND memberId = #{memberId}
 	</select>
   
   	<insert id="insertCartItem" parameterType="CartItem">

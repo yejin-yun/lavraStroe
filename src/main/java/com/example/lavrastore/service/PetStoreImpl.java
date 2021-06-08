@@ -191,23 +191,23 @@ public class PetStoreImpl implements PetStoreFacade {
 	}
 
 	@Override
-	public List<CartItem> getCartListByGeneralCategory(int categoryId) {
-		return cartItemDao.getCartListByGeneralCategory(categoryId);
+	public List<CartItem> getCartListByGeneralCategory(int categoryId, String memberId) {
+		return cartItemDao.getCartListByGeneralCategory(categoryId, memberId);
 	}
 
 	@Override
-	public List<CartItem> getCartListByGroupCategory(int categoryId) {
-		return cartItemDao.getCartListByGroupCategory(categoryId);
+	public List<CartItem> getCartListByGroupCategory(int categoryId, String memberId) {
+		return cartItemDao.getCartListByGroupCategory(categoryId, memberId);
 	}
 
 	@Override
-	public List<CartItem> getCartListByPTPCategory(int categoryId) {
-		return cartItemDao.getCartListByPTPCategory(categoryId);
+	public List<CartItem> getCartListByPTPCategory(int categoryId, String memberId) {
+		return cartItemDao.getCartListByPTPCategory(categoryId, memberId);
 	}
 
 	@Override
-	public Item getItemByCartItemId(int cartItemId) {
-		return cartItemDao.getItemByCartItemId(cartItemId);
+	public Item getItemByCartItemId(int cartItemId, String memberId) {
+		return cartItemDao.getItemByCartItemId(cartItemId, memberId);
 	}
 
 	@Override

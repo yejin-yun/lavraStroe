@@ -107,10 +107,10 @@ public interface PetStoreFacade {
 	/* CartItem */
 	
 	List<CartItem> getAllCartList();
-	List<CartItem> getCartListByGeneralCategory(int categoryId);
-	List<CartItem> getCartListByGroupCategory(int categoryId);
-	List<CartItem> getCartListByPTPCategory(int categoryId);
-	Item getItemByCartItemId(int cartItemId); //cartItemId로 cartItem에 있는 Item 가져오기
+	List<CartItem> getCartListByGeneralCategory(int categoryId, String memberId);
+	List<CartItem> getCartListByGroupCategory(int categoryId, String memberId);
+	List<CartItem> getCartListByPTPCategory(int categoryId, String memberId);
+	Item getItemByCartItemId(int cartItemId, String memberId); //cartItemId로 cartItem에 있는 Item 가져오기
 	
 	int insertCartItem(CartItem cartItem);
 	int updateCartItem(CartItem cartItem); // ppt에 있는 메소드들 합침. 
