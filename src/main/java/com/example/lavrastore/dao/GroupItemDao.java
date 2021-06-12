@@ -31,7 +31,8 @@ public interface GroupItemDao {
 	int insertGItem() throws DataAccessException;
 	
 	/* Update */
-	int updateGItem(int itemId) throws DataAccessException; 
+	int updateGItem(GroupItem gItem) throws DataAccessException; 
+	int updateNowBalance(int totalPrice) throws DataAccessException; 
 	
 	/* Delete */
 	int deleteGItem(int itemId) throws DataAccessException;

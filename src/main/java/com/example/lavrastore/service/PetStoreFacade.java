@@ -10,6 +10,7 @@ import com.example.lavrastore.domain.Category;
 import com.example.lavrastore.domain.GroupItem;
 import com.example.lavrastore.domain.Item;
 import com.example.lavrastore.domain.Member;
+import com.example.lavrastore.domain.Order;
 import com.example.lavrastore.domain.Product;
 import com.example.lavrastore.domain.WishList;
 
@@ -99,10 +100,16 @@ public interface PetStoreFacade {
 	
 	int insertGItem() throws DataAccessException;
 	
-	int updateGItem(int itemId) throws DataAccessException; 
+	int updateGItem(GroupItem gitem) throws DataAccessException; 
 	
 	int deleteGItem(int itemId) throws DataAccessException;
 	
+	
+	//order
+	void insertOrder(Order myOrder);
+	 // -- 해야할 일 정리 : 먼저 Order랑 groupOrder 테이블에 정보 insert
+	// payment insert, payment가 카드 일 경우 creditcard 정보 insert
+	 // total price만큼 groupItem의 nowBalance update; -> nowBalance update
 	
 	/* CartItem */
 	

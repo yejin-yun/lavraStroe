@@ -48,12 +48,16 @@ public class MybatisGroupItemDao implements GroupItemDao{
 		return groupItemMapper.insertGItem();
 	}
 	
-	public int updateGItem(int itemId) throws DataAccessException{
-		return groupItemMapper.updateGItem(itemId);
+	public int updateGItem(GroupItem gitem) throws DataAccessException{
+		return groupItemMapper.updateGItem(gitem);
 	}
 	
 	public int deleteGItem(int itemId) throws DataAccessException{
 		return groupItemMapper.deleteGItem(itemId);
+	}
+
+	public int updateNowBalance(int totalPrice) throws DataAccessException {
+		return groupItemMapper.updateNowBalance(totalPrice);
 	}
 
 	

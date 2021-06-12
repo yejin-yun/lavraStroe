@@ -33,9 +33,11 @@ public interface GroupItemMapper {
 	int insertGItem();
 	
 	/* Update */
-	int updateGItem(int itemId); 
+	int updateGItem(GroupItem gItem); 
+	int updateNowBalance(int totalPrice);
 	
 	/* Delete */
 	int deleteGItem(int itemId);
+
 	
 }

@@ -70,7 +70,7 @@
 					
 					<tr align="center">
 						<td colspan="2">
-							<form name="form1" method="post" action="">
+							<form name="form1" method="post" action="<c:url value='/group/newOrder.do'/>">
 								<input type="hidden" name="itemId" value="${gitem.item.itemId}">
 								<select name="amount">
 									<c:forEach begin="1" end="10" var="i">

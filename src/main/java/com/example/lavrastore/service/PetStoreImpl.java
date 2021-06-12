@@ -13,6 +13,7 @@ import com.example.lavrastore.dao.CategoryDao;
 import com.example.lavrastore.dao.GroupItemDao;
 import com.example.lavrastore.dao.ItemDao;
 import com.example.lavrastore.dao.MemberDao;
+import com.example.lavrastore.dao.OrderDao;
 import com.example.lavrastore.dao.ProductDao;
 import com.example.lavrastore.dao.WishListDao;
 import com.example.lavrastore.data.jpa.CartItemRepository;
@@ -21,6 +22,7 @@ import com.example.lavrastore.domain.Category;
 import com.example.lavrastore.domain.GroupItem;
 import com.example.lavrastore.domain.Item;
 import com.example.lavrastore.domain.Member;
+import com.example.lavrastore.domain.Order;
 import com.example.lavrastore.domain.Product;
 import com.example.lavrastore.domain.WishList;
 
@@ -40,10 +42,14 @@ public class PetStoreImpl implements PetStoreFacade {
 	@Autowired
 	private MemberDao memberDao;
 	@Autowired
+
 	private WishListDao wishlistDao;
 	
 	@Autowired
 	private CartItemRepository cartItemRepository;
+
+	@Autowired
+	private OrderDao orderDao;
 
 	// -------------------------------------------------------------------------
 	// Operation methods, implementing the PetStoreFacade interface
@@ -279,8 +285,8 @@ public class PetStoreImpl implements PetStoreFacade {
 	}
 
 	@Override
-	public int updateGItem(int itemId) throws DataAccessException {
-		return groupItemDao.updateGItem(itemId);
+	public int updateGItem(GroupItem gitem) throws DataAccessException {
+		return groupItemDao.updateGItem(gitem);
 	}
 
 	@Override
@@ -318,6 +324,16 @@ public class PetStoreImpl implements PetStoreFacade {
 	@Override
 	public int deleteWishList(WishList wishList) throws DataAccessException{
 		return wishlistDao.deleteWishList(wishList);
+	}
+
+	@Override
+	public void insertOrder(Order myOrder) {
+		orderDao.insertOrder(myOrder);
+		// -- 해야할 일 정리 : 먼저 Order랑 groupOrder 테이블에 정보 insert
+		// payment insert, payment가 카드 일 경우 creditcard 정보 insert
+		 // total price만큼 groupItem의 nowBalance update; -> nowBalance update
+		//트랜잭션 처리하기...
+		
 	}
 
 }

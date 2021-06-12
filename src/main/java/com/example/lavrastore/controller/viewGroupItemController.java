@@ -8,6 +8,7 @@ import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,7 @@ import com.example.lavrastore.domain.Product;
 import com.example.lavrastore.service.PetStoreFacade;
 
 @Controller
-@SessionAttributes("groupItemListPage")
+@SessionAttributes("gitemListPage")
 public class viewGroupItemController {
 	private PetStoreFacade petStore;
 
@@ -29,7 +30,6 @@ public class viewGroupItemController {
 		this.petStore = petStore;
 	}
 	
-	@GetMapping
 	@RequestMapping("/group")
 	public String viewAllGroupItem(
 			@RequestParam(value="page", defaultValue="1") int page,
@@ -37,14 +37,7 @@ public class viewGroupItemController {
 		
 		PagedListHolder<GroupItem> gitemListPage;
 		gitemListPage = new PagedListHolder<GroupItem>(petStore.getAllGItemList());
-//		if(productName.equals("all")) {
-//			gitemListPage = new PagedListHolder<GroupItem>(petStore.getAllGItemList());
-//		}else {
-//			Product prd = petStore.getProductByName(productName, 2);
-//			System.out.println("rests = " + prd.getName() + ", test = " + prd.getProductId());
-//			gitemListPage = new PagedListHolder<GroupItem>(petStore.getGItemListByProduct(prd.getProductId()));
-//		}
-//		이 부분은 따로 request mapping해서 product랑 sort 받도록 변경.
+
 		gitemListPage.setPageSize(12);
 
 		gitemListPage.setPage(page);
@@ -55,10 +48,13 @@ public class viewGroupItemController {
 			g.setPercent();
 			System.out.println("itemid : " + g.getItem().getItemId() + " 진행도 : " + g.getPercent());
 		}
+		
 		model.addAttribute("gitemList", gitemList);
 		
 		return "groupPage";
 	}
+	
+	
 	
 	@GetMapping
 	@RequestMapping("/group/viewItem")
@@ -74,6 +70,6 @@ public class viewGroupItemController {
 		return "groupItemPage";
 	
 	}
-
+	
 		
 }
