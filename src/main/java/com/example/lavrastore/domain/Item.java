@@ -1,23 +1,40 @@
 package com.example.lavrastore.domain;
 
+
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name="ITEM")
 @SuppressWarnings("serial")
 public class Item implements Serializable {
 	/* Private Fields */
+	@Id
 	private int itemId;
 	private int productId;
 	private String image;
 	private String description;
 	private String title;
 	private int price;
+	@Transient //데이터 베이스에 저장되지 않는 비영속적 필드 
 	private int isSoldout;
 	private int likeCnt;
+	@Transient
 	private int isInWishlist; //wishistId가 들어옴. 
+	@Transient
 	private int isInCart; //cartItemId가 들어옴.
-	private Product product;
+	@Transient
+	private Product product; //여기 OneToOne, @JoinColumn(name="productId")하니까 에러남... productId 관련해서 에러나는 듯.
 	private int quantity;
 
+	public Item() {}
+	
 	/* JavaBeans Properties */
 
 	public int getItemId() {

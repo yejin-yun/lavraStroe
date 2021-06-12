@@ -2,13 +2,15 @@ package com.example.lavrastore.domain;
 
 import java.io.Serializable;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Component;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-import com.example.lavrastore.dao.CartItemDao;
-import com.example.lavrastore.service.PetStoreFacade;
 
+@Entity
+@Table(name="CartItem")
 @SuppressWarnings("serial")
 public class CartItem implements Serializable {
 
@@ -19,12 +21,16 @@ public class CartItem implements Serializable {
 	 * 안돼지...?
 	 * componentscan이 기본적으로 되는 곳은 메인 클래스가 있는 패키지임. 
 	 */	 
-
+	@Id
 	private int cartItemId;
 	private int categoryId;
 	private String memberId;
+	@OneToOne
+	@JoinColumn(name="itemId")
 	private Item item;
 	private int quantity;
+	
+	public CartItem() {};
 	
 
 	public int getCartItemId() {

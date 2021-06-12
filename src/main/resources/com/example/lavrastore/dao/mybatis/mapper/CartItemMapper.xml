@@ -8,6 +8,7 @@
 		FROM CARTITEM
 	</select>
 	<!-- parameter가 2개 이상인 경우 Mapper 메소드의 parameter의 이름과  #{} 안의 이름이 다르면 안되는 듯-->
+	<!-- 아래 3개 sql문 사실상 같은 거네.... -->
 	<select id="getCartListByGeneralCategory" resultType="CartItem"> <!-- <select id="getCartListByGeneralCategory" parameterType="int" resultType="CartItem"> -->
 		SELECT cartItemId, quantity, itemId, categoryId, memberId
 		FROM CARTITEM

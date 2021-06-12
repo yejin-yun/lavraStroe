@@ -131,5 +131,10 @@ public interface PetStoreFacade {
 	/* Delete */
 	int deleteWishList(WishList wishList);
 	
+	
+	/* cartItem Repository */
+	List<CartItem> findByCategoryIdAndMemberId(int categoryId, String memberId);
+	Item findItemByCategoryIdAndMemberId(int cartItemId, String memberId);
+	void deleteCartItemById(int cartItemId);
 
 }

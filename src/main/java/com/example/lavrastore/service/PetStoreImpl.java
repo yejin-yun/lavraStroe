@@ -15,6 +15,7 @@ import com.example.lavrastore.dao.ItemDao;
 import com.example.lavrastore.dao.MemberDao;
 import com.example.lavrastore.dao.ProductDao;
 import com.example.lavrastore.dao.WishListDao;
+import com.example.lavrastore.data.jpa.CartItemRepository;
 import com.example.lavrastore.domain.CartItem;
 import com.example.lavrastore.domain.Category;
 import com.example.lavrastore.domain.GroupItem;
@@ -40,6 +41,9 @@ public class PetStoreImpl implements PetStoreFacade {
 	private MemberDao memberDao;
 	@Autowired
 	private WishListDao wishlistDao;
+	
+	@Autowired
+	private CartItemRepository cartItemRepository;
 
 	// -------------------------------------------------------------------------
 	// Operation methods, implementing the PetStoreFacade interface
@@ -224,7 +228,19 @@ public class PetStoreImpl implements PetStoreFacade {
 	public int deleteCartItem(int cartItemId) {
 		return cartItemDao.deleteCartItem(cartItemId);
 	}
-
+	
+	/* cartItem Repository */
+	public List<CartItem> findByCategoryIdAndMemberId(int categoryId, String memberId) {
+		return cartItemRepository.findByCategoryIdAndMemberId(categoryId, memberId);
+	}
+	
+	public Item findItemByCategoryIdAndMemberId(int cartItemId, String memberId) {
+		return cartItemRepository.findItemByCategoryIdAndMemberId(cartItemId, memberId);
+	}
+	
+	public void deleteCartItemById(int cartItemId) {
+		cartItemRepository.deleteById(cartItemId);
+	}
 	
 	/*group Item */
 	@Override

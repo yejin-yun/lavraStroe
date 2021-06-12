@@ -7,15 +7,17 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-
+import com.example.lavrastore.data.jpa.CartItemRepository;
 import com.example.lavrastore.domain.CartItem;
 import com.example.lavrastore.domain.Member;
 import com.example.lavrastore.service.PetStoreFacade;
@@ -40,7 +42,7 @@ public class CartController {
 	
 	
 	  @GetMapping
-	  @RequestMapping("/cart/{categoryId}") 
+	  @RequestMapping("/cart/view/{categoryId}") 
 	  public String viewCartList(
 			  @PathVariable int categoryId,
 			  @RequestParam(value="page", defaultValue="1") int page,
@@ -56,12 +58,12 @@ public class CartController {
 			  
 			  switch(categoryId) {
 			  	case 1:	  
-			  		cartItemList = lavraStore.getCartListByGeneralCategory(categoryId, member.getMemberId());
+			  		//cartItemList = lavraStore.getCartListByGeneralCategory(categoryId, member.getMemberId());
+			  		cartItemList = lavraStore.findByCategoryIdAndMemberId(categoryId, member.getMemberId());
 			  		break;
 			  		
 			  	default: //사용자가 categoryId 부분을 지울 수 있음. 
-			  		cartItemList = lavraStore.getCartListByGeneralCategory(categoryId, member.getMemberId());
-			  		break;
+			  		return "redirect:error";
 			  }
 			 
 			  PagedListHolder<CartItem> itemListPage = new PagedListHolder<CartItem>(cartItemList);
@@ -77,6 +79,7 @@ public class CartController {
 			  System.out.println("totalPageSize = " + totalPageSize);
 			  for(CartItem cartItem : CartItemListPerPage) {
 				  cartItem.setItem(lavraStore.getItemByCartItemId(cartItem.getCartItemId(), member.getMemberId()));
+				  //cartItem.setItem(lavraStore.findItemByCategoryIdAndMemberId(cartItem.getCartItemId(), member.getMemberId())); //에러남
 			  }
 			  
 			  model.addAttribute("cartItemList", CartItemListPerPage);
@@ -84,5 +87,41 @@ public class CartController {
 				
 			  return "cart";
 		  }
+	  
+	  @Transactional
+	  @PostMapping("/cart/handling/{kind}")
+	  public String handleCart(
+			  @PathVariable String kind,
+			  HttpServletRequest request) {
+		  
+		 Member member;
+		 if(userSession == null) { return "LoginForm"; }
+		 else {
+			 member = userSession.getMember(); 
+		 }
 		 
+		 String memberId = member.getMemberId();
+		 
+		 String[] checkCartItem = request.getParameterValues("checkCartItem");
+		 
+		 if(checkCartItem == null) {
+			 return "redirect:error";
+		 }
+		 
+		 switch(kind) {
+		 	case "del":
+		 		for(int i = 0; i < checkCartItem.length; i++) {
+					 int cartItemId = Integer.parseInt(checkCartItem[i]);
+					 lavraStore.deleteCartItemById(cartItemId);
+				}
+		 		break;
+		 	case "order":
+		 		
+		 		break;
+		 	default:
+		 		return "redirect:error";
+		 }
+		 
+		 return "redirect:/cart/view/1";
 	}
+}

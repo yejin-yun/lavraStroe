@@ -44,72 +44,58 @@
 		}
 	</style>
 	<script>
-		$(function() {
-			$('ul li').click(function() {
-				console.log('test');
-				//$(this).css("background-color", "red");
-				//$(this).attr('class', 'active');
-				$(this).addClass('active');
+		$(document).ready(function() {
+			$('#allCheck').click(function(){
+				$('input[name=checkCartItem]:checkbox').attr('checked', true); // input type 중 name이 checkCartItem이고, type이 checkbox인 경우 
+			});
+			$('#allReset').click(function(){
+				$('input[name=checkCartItem]:checkbox').attr('checked', false); 
 			});
 		});
+	</script>
+	<script>
+		function moveTarget(targetUri) {
+			form.action = targetUri;
+			form.submit();
+		}
 		
-/* 		 //위시리스트
-        function moveTarget(targetUri) {
-      		//alert(targetUri);
-          form.action = targetUri; // 삭제면 삭제, 카트 이동이면 카드 이동
-          form.submit();
-       }
-        */
-      function checkConfirm(targetUri) {
-   	   //alert(targetUri);
-	       var isChk = false;
-	       var products = document.getElementsByName("checkArtwork");
-	       console.log('console' + products[0]);
-	       for(var i=0;i<products.length;i++){
-	           if(products[i].checked == true) {
-	               isChk = true;
-	               break;
-	           }
-	       }
-	     if(!isChk) {
-	    	 alert("상품을 한개 이상 선택해주세요.");
-	         return false;
-	     }
-	     
-	     moveTarget(targetUri);
-      }
-       
-      function delWish(paraValue, targetUri) {
-	        if($("input:checkbox[id='" + paraValue + "']").is(':checked') == true) {
-	        	 moveTarget(targetUri);
-	        } else {
-	        	alert('해당 상품이 선택되어 있지 않습니다.');
-	        }
-	    }
-      
-      function moveToCart(paraValue, targetUri) {
-	        if($("input:checkbox[id='" + paraValue + "']").is(':checked') == true) {
-	        	 moveTarget(targetUri);
-	        } else {
-	        	alert('해당 상품이 선택되어 있지 않습니다.');
-	        }
-	    }
+		function checkConfirm(targetUri) {
+			//alert(targetUri);
+			var isChk = false;
+			
+			var products = document.getElementsByName("checkCartItem");
+			//console.log('console' + products[0]);
+			for(var i = 0; i < products.length; i++) {
+				if(products[i].checked == true){
+					isChk = true;
+					break;
+				}
+			}
+			
+			if(!isChk) {
+				alert('상품을 1개 이상 선택해주세요.');
+				return false;
+			}
+			
+			moveTarget(targetUri);
+		}
+		
 	</script>
 </head>
 <body>
 	<%@ include file="header.jsp" %>
-<div class="container"  style="margin-left: auto; margin-right: auto; width: 90%; margin-top:5%;">
+	<div class="container"  style="margin-left: auto; margin-right: auto; width: 90%; margin-top:5%;">
 		<ul class="nav nav-tabs">
-		  <li><a href="/cart/1">악세사리</a></li>
-		  <li><a href="/cart/2">개인거래</a></li>
-		  <li><a href="/cart/3">공동구매</a></li>
+		  <li  class="active"><a href="/cart/view/1">악세사리</a></li>
+		  <%--<li><a href="/cart/view/2">개인거래</a></li>
+		  <li><a href="/cart/view/3">공동구매</a></li>--%>
 		</ul>
-	</div>
-	<c:if test="${cartItemList == '' || cartItemList eq null}">
+	</div> 
+<%-- <c:if test="${cartItemList == '' || cartItemList eq null}"> 
 		<div style="width: 50%; margin-left: auto; margin-right: auto;">
 		아직 상품 준비가 되지 않았습니다.</div>
-	</c:if>
-	<form method="POST"> <%-- action이 없으면 얘를 부른 컨트롤러로 넘어간다. 체크한 것만 넘어가면 돼서 Command 객체 필요 없음. form:form을 사용안 한 건 여기서 하나만 선택한 결과를 알고 싶은 게 아니고, 어떤 것들이 선택 되었는지가 중요하기 때문. 즉 path를 설정할  게 없음--%>
+	</c:if> --%>
+	<form method="POST" name="form"> <%-- action이 없으면 얘를 부른 컨트롤러로 넘어간다. 체크한 것만 넘어가면 돼서 Command 객체 필요 없음. form:form을 사용안 한 건 여기서 하나만 선택한 결과를 알고 싶은 게 아니고, 어떤 것들이 선택 되었는지가 중요하기 때문. 즉 path를 설정할  게 없음--%>
 			<div class="container" style="margin-top: 5%;">
 		<table class="table table-hover">
 	    <thead>
@@ -133,7 +119,7 @@
 	    			<td><img style="height: 50px;" src="<c:url value='${item.image}' />" /></td>
 	    			<td>${item.title}</td>
 	    			<td>${item.price}</td>
-	    			<td>${cartItem.quantity}</td>
+	    			<td><input type="text" value="${cartItem.quantity}" size="2" style="text-align:center;"/>&nbsp;<button onClick="updateQuantity()">수정</button></td> 
 	    			<td>${itemTotalCost}</td>
 	    			<c:set var="allTotalCost" value="${allTotalCost + itemTotalCost}" />
 	    		</tr>
@@ -143,7 +129,7 @@
 	    <div id="paging">
 			<c:forEach var="val" begin="1" end="${totalPageSize}"
 				varStatus="status">
-				<a href='<c:url value="/cart/${categoryId}?page=${val}"/>'>
+				<a href='<c:url value="/cart/view/${categoryId}?page=${val}"/>'>
 					<font color="black"><B>${val}</B></font>
 				</a>
 				<c:if test="${!status.last}">&nbsp;|&nbsp;</c:if>
@@ -152,8 +138,8 @@
 		<div class="w3-center funcs">
          	<input type="button" value="전체 선택" id="allCheck" > 
          	<input type="button" value="전체 해제" id="allReset">
-			<input type="button" value="선택 상품 모두 삭제" onClick="checkConfirm('<c:url value='/user/deletewishlist' />')">
-			<input type="button" value="선택 상품 장바구니 이동" onClick="checkConfirm('<c:url value='/user/fromWishToCart' />')">
+			<input type="button" value="선택 상품 모두 삭제" onClick="checkConfirm('<c:url value='/cart/handling/del' />')">
+			<input type="button" value="선택 상품 장바구니 이동" onClick="checkConfirm('<c:url value='/cart/handling/order' />')">
 		 </div>
     </div>
 	</form>

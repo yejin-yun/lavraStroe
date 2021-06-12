@@ -2,30 +2,53 @@ package com.example.lavrastore.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
 @SuppressWarnings("serial")
+@Table(name = "PRODUCT")
 public class Product implements Serializable {
 
-  /* Private Fields */
+	/* Private Fields */
 
-  private int productId;
-  private int categoryId;
-  private String name;
+	@Id
+	private int productId;
+	private int categoryId;
+	private String name;
 
-  /* JavaBeans Properties */
+	public Product() {}
+	
+	/* JavaBeans Properties */
 
-  public int getProductId() { return productId; }
-  public void setProductId(int productId) { this.productId = productId; }
+	public int getProductId() {
+		return productId;
+	}
 
-  public int getCategoryId() { return categoryId; }
-  public void setCategoryId(int categoryId) { this.categoryId = categoryId; }
+	public void setProductId(int productId) {
+		this.productId = productId;
+	}
 
-  public String getName() { return name; }
-  public void setName(String name) { this.name = name; }
+	public int getCategoryId() {
+		return categoryId;
+	}
 
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}
 
-  /* Public Methods*/
+	public String getName() {
+		return name;
+	}
 
-  public String toString() {
-    return getName();
-  }
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/* Public Methods */
+
+	public String toString() {
+		return getName();
+	}
 }
