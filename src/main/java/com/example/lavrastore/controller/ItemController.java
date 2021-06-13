@@ -13,13 +13,20 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.lavrastore.controller.UserSession;
+import com.example.lavrastore.domain.CartItem;
+import com.example.lavrastore.domain.Category;
+import com.example.lavrastore.domain.DetailItem;
 import com.example.lavrastore.domain.Item;
+import com.example.lavrastore.domain.Member;
 import com.example.lavrastore.domain.Product;
 import com.example.lavrastore.service.PetStoreFacade;
 
@@ -31,16 +38,16 @@ import com.example.lavrastore.service.PetStoreFacade;
  */
 @Controller
 @SessionAttributes("itemListPage")
-public class ViewItemController { 
+public class ItemController { 
 
-	private PetStoreFacade petStore;
+	private PetStoreFacade lavraStore;
 	private int perPageSize = 12;
 	private int totalPageSize;
 	UserSession userSession;
 
 	@Autowired
 	public void setPetStore(PetStoreFacade petStore) {
-		this.petStore = petStore;
+		this.lavraStore = petStore;
 	}
 	
 	@ModelAttribute
@@ -68,30 +75,30 @@ public class ViewItemController {
 			@RequestParam(value="sort", defaultValue="popularity") String sort,
 			Model model) { //@RequestParam(value="page", required=false) String page // https://pythonq.com/so/spring/1003345
 		
-		Product prd = petStore.getProductByName(productName, categoryId);
+		Product prd = lavraStore.getProductByName(productName, categoryId);
 		//System.out.println("rests = " + prd.getName() + ", test = " + prd.getProductId());
 		
 		List<Item> tmpList = null;
 		switch (sort) {
 			case "popularity":
 				if(userSession == null) {
-					tmpList = petStore.getItemForNotUser(prd.getProductId());
+					tmpList = lavraStore.getItemForNotUser(prd.getProductId());
 				} else {
-					tmpList = petStore.getItemForUser(userSession.getMember().getMemberId(), prd.getProductId());
+					tmpList = lavraStore.getItemForUser(userSession.getMember().getMemberId(), prd.getProductId());
 				}
 				break;
 			case "highPrice":
 				if(userSession == null) {
-					tmpList = petStore.getItemOrderByHighPriceForNotUser(prd.getProductId());
+					tmpList = lavraStore.getItemOrderByHighPriceForNotUser(prd.getProductId());
 				} else {
-					tmpList = petStore.getItemOrderByHighPriceForUser(userSession.getMember().getMemberId(), prd.getProductId());
+					tmpList = lavraStore.getItemOrderByHighPriceForUser(userSession.getMember().getMemberId(), prd.getProductId());
 				}
 				break;
 			case "lowPrice":
 				if(userSession == null) {
-					tmpList = petStore.getItemOrderByLowPriceForNotUser(prd.getProductId());
+					tmpList = lavraStore.getItemOrderByLowPriceForNotUser(prd.getProductId());
 				} else {
-					tmpList = petStore.getItemOrderByLowPriceForUser(userSession.getMember().getMemberId(), prd.getProductId());
+					tmpList = lavraStore.getItemOrderByLowPriceForUser(userSession.getMember().getMemberId(), prd.getProductId());
 				}
 				break;
 		}
@@ -110,6 +117,82 @@ public class ViewItemController {
 		model.addAttribute("totalPageSize", totalPageSize);
 		model.addAttribute("sort", sort);
 		return "EarringItem";
+	}
+	
+	@GetMapping("/accessory/detail")
+	public String viewDetailPage(@RequestParam(value="no", defaultValue="-1") int no, Model model) {
+		if(no == -1) return "redirect:error";
+		
+		Item item = lavraStore.getItem(no);
+		if(userSession != null) {
+			Member member = userSession.getMember(); 
+			CartItem cartItem = lavraStore.findCartItemByItemItemIdAndMemberId(no, member.getMemberId());
+			if(cartItem != null) {
+				item.setIsInCart(1);
+			} else {
+				item.setIsInCart(0);
+			}
+		}
+		
+		DetailItem dItem = new DetailItem();
+		
+		dItem.setItem(item);
+		dItem.setQuantity(1);
+		dItem.setItemTotalCost(item.getPrice());
+		dItem.setPrice(item.getPrice());
+		
+		model.addAttribute("dItem", dItem);
+		
+		return "ItemPage";
+	}
+	
+	@PostMapping("/item/cart")
+	@ResponseBody
+	public String moveCart(@RequestBody CartItem cartItem) {  //int itemId
+		Member member;
+		 if(userSession == null) { return "LoginForm"; }
+		 else {
+			 member = userSession.getMember(); 
+		 }
+		
+		System.out.println(cartItem.getItem().getItemId());
+		//itemId = Integer.parseInt(itemId);
+		Item item = lavraStore.getItem(cartItem.getItem().getItemId());
+		Category cat = lavraStore.getCategoryByProId(item.getProductId());
+		
+		
+		cartItem.setItem(item);
+		cartItem.setCategoryId(cat.getCategoryId());
+		cartItem.setMemberId(member.getMemberId());
+		
+		System.out.println("test");
+		
+		int rst = lavraStore.insertCartItem(cartItem);
+		if(rst == 0) {
+			return "falid";
+		} else {
+			return "success";
+		}
+	}
+	
+	@PostMapping("/item/cart_uq") 
+	public String updateCart(
+			@RequestParam(value="no", defaultValue="-1") int no,
+			@RequestParam(value="q", defaultValue="-1") int q
+			) {
+		//System.out.println("testtest" + no + q);
+		if(no == -1) return "redirect:error";
+		
+		Member member;
+		if(userSession == null) { return "LoginForm"; }
+		
+		
+		
+		member = userSession.getMember(); 
+		CartItem cartItem = lavraStore.findCartItemByItemItemIdAndMemberId(no, member.getMemberId());
+		lavraStore.updateQuantity(cartItem.getCartItemId(), cartItem.getQuantity() + q);
+		
+		return "redirect:/accessory/detail?no="+no;
 	}
 	
 	/*

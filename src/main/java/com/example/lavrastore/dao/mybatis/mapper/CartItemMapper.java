@@ -22,6 +22,7 @@ public interface CartItemMapper {
 	
 	/* Update */
 	int updateCartItem(CartItem cartItem); // ppt에 있는 메소드들 합침. 
+	int updateQuantity(int cartItemId, int quantity);
 	
 	/* Delete */
 	int deleteCartItem(int cartItemId);

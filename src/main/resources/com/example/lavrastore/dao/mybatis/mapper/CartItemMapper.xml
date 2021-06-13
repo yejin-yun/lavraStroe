@@ -9,6 +9,7 @@
 	</select>
 	<!-- parameter가 2개 이상인 경우 Mapper 메소드의 parameter의 이름과  #{} 안의 이름이 다르면 안되는 듯-->
 	<!-- 아래 3개 sql문 사실상 같은 거네.... -->
+	
 	<select id="getCartListByGeneralCategory" resultType="CartItem"> <!-- <select id="getCartListByGeneralCategory" parameterType="int" resultType="CartItem"> -->
 		SELECT cartItemId, quantity, itemId, categoryId, memberId
 		FROM CARTITEM
@@ -54,7 +55,7 @@
   
   	<insert id="insertCartItem" parameterType="CartItem">
 		<selectKey keyProperty="cartItemId" resultType="int" order="BEFORE">
-			SELECT seq_pk.nextval AS cartItemId FROM DUAL
+			SELECT seq_pk_cart.nextval AS cartItemId FROM DUAL
 		</selectKey>
 		INSERT INTO CARTITEM (cartItemId, quantity, itemId, categoryId, memberId)
 		VALUES (#{cartItemId}, #{quantity}, #{item.itemId}, #{categoryId}, #{memberId})
@@ -64,6 +65,12 @@
 		UPDATE CARTITEM
 		SET cartItemId = #{cartItemId}, quantity = #{quantity}, itemId = #{item.itemId}, categoryId = #{categoryId}, memberId = #{memberId}
 		WHERE cartItemId = #{value}
+	</update>
+	
+	<update id="updateQuantity">
+		UPDATE CARTITEM
+		SET quantity = #{quantity}
+		WHERE cartItemId = #{cartItemId}
 	</update>
 
 	<delete id="deleteCartItem" parameterType="CartItem">

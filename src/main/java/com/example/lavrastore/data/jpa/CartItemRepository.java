@@ -9,4 +9,5 @@ import com.example.lavrastore.domain.Item;
 public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
 	List<CartItem> findByCategoryIdAndMemberId(int categoryId, String memberId);
 	Item findItemByCategoryIdAndMemberId(int cartItemId, String memberId);
+	CartItem findCartItemByItemItemIdAndMemberId(int itemId, String memberId);
 }

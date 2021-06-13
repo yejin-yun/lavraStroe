@@ -21,6 +21,7 @@ public interface CartItemDao {
 	
 	/* Update */
 	int updateCartItem(CartItem cartItem) throws DataAccessException; // ppt에 있는 메소드들 합침. 
+	int updateQuantity(int cartItemId, int quantity) throws DataAccessException;
 	
 	/* Delete */
 	int deleteCartItem(int cartItemId) throws DataAccessException;

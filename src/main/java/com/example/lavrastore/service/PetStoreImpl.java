@@ -229,6 +229,10 @@ public class PetStoreImpl implements PetStoreFacade {
 	public int updateCartItem(CartItem cartItem) {
 		return cartItemDao.updateCartItem(cartItem);
 	}
+	
+	public int updateQuantity(int cartItemId, int quantity) {
+		return cartItemDao.updateQuantity(cartItemId, quantity);
+	}
 
 	@Override
 	public int deleteCartItem(int cartItemId) {
@@ -246,6 +250,10 @@ public class PetStoreImpl implements PetStoreFacade {
 	
 	public void deleteCartItemById(int cartItemId) {
 		cartItemRepository.deleteById(cartItemId);
+	}
+	
+	public CartItem findCartItemByItemItemIdAndMemberId(int itemId, String memberId) {
+		return cartItemRepository.findCartItemByItemItemIdAndMemberId(itemId, memberId);
 	}
 	
 	/*group Item */
@@ -335,5 +343,6 @@ public class PetStoreImpl implements PetStoreFacade {
 		//트랜잭션 처리하기...
 		
 	}
+
 
 }

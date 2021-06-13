@@ -74,22 +74,22 @@
 						</c:if>
 						<div class="contain_div" style="position: relative;">
 							<div class="img_wish" style="position: absolute; margin-left: 85%; margin-top: 8%;">
-									<a href="<c:url value='/accessory/earring/wish'>
+									<a href="<c:url value='/accessory//wish'>
 									<c:param name='no' value='${item.itemId}' /></c:url>" >
 										<img src="<c:url value='${like_src}' />" id="like_img"
 											alt="하트(좋아요)" />
 									</a>
 							</div>
 							<div class="img_div">
-								<a href="<c:url value='/accessory/earring/detail'>
+								<a href="<c:url value='/accessory/detail'>
 		            				<c:param name='no' value='${item.itemId}' /></c:url>">
 									<img class="main_img" src="<c:url value='${item.image}' />" />
 								</a> 	
 							</div>
 						</div>
 						<div class="content">
-							<a href="<c:url value='/artwork/detail'>
-	            				<c:param name='artworkNo' value='${artworkNo}' />
+							<a href="<c:url value='/accessory/detail'>
+	            				<c:param name='no' value='${item.itemId}' />
 	            				<%-- <c:param name='isLogined' value='${isLogined}' /> --%></c:url>">
 								<%-- 컨트롤러에서 로그인 세션으로 검증하기 --%>
 								<h3>${item.title}</h3> 

@@ -23,29 +23,35 @@
 	<select id="getItem" resultType="Item">
 		SELECT
 		itemId,
-		poductId,
+		productId,
 		image,
 		description,
 		title,
 		price,
 		isSoldout,
-		likeCnt
+		likeCnt,
 		quantity
 		FROM ITEM
 		WHERE itemId
-		= #{value}
+		= #{itemId}
 	</select>
 
-	<select id="getItemForUser" parameterType="String"
+	<select id="getItemForUser"
 		resultMap="itemForUser">
 		SELECT
-		itemId, productId, image, description, title, price,
-		isSoldout, likeCnt, quantity,NVL(w.whishlistId, 0) AS whishlistId,
-		NVL(c.cartItemId, 0) AS cartItemId
-		FROM ITEM i, WISHLIST w, CARTITEM c
+		i.itemId AS itemId, 
+        i.productId AS productId, 
+        i.image AS image, 
+        i.description AS description, 
+        i.title AS title, 
+        i.price AS price,
+		i.isSoldout AS isSoldout, 
+        i.likeCnt AS likeCnt, 
+        i.quantity AS quantity, NVL(w.wishlistId, 0) AS wishlistId
+		FROM ITEM i, WISHLIST w
 		WHERE i.itemId = w.itemId(+)
-		AND i.itemId = c.itemId(+)
-		AND w.memberId (+) = #{value}
+		AND w.memberId(+) = #{memberId}
+		AND i.productId = #{productId}
 		AND i.isSoldout = 0
 		ORDER BY likeCnt DESC
 	</select>
@@ -81,15 +87,21 @@
 	</select>
 
 	<select id="getItemOrderByHighPriceForUser"
-		parameterType="String" resultMap="itemOrderByHighPriceForUser">
+		resultMap="itemOrderByHighPriceForUser">
 		SELECT
-		itemId, productId, image, description, title, price,
-		isSoldout, likeCnt, quantity,NVL(w.whishlistId, 0) AS whishlistId,
-		NVL(c.cartItemId, 0) AS cartItemId
-		FROM ITEM i, WISHLIST w, CARTITEM c
+		i.itemId AS itemId, 
+        i.productId AS productId, 
+        i.image AS image, 
+        i.description AS description, 
+        i.title AS title, 
+        i.price AS price,
+		i.isSoldout AS isSoldout, 
+        i.likeCnt AS likeCnt, 
+        i.quantity AS quantity, NVL(w.wishlistId, 0) AS wishlistId
+		FROM ITEM i, WISHLIST w
 		WHERE i.itemId = w.itemId(+)
-		AND i.itemId = c.itemId(+)
-		AND w.memberId (+) = #{value}
+		AND w.memberId(+) = #{memberId}
+		AND i.productId = #{productId}
 		AND i.isSoldout = 0
 		ORDER BY price DESC
 	</select>
@@ -125,15 +137,21 @@
 	</select>
 
 	<select id="getItemOrderByLowPriceForUser"
-		parameterType="String" resultMap="itemOrderByLowPriceForUser">
+		resultMap="itemOrderByLowPriceForUser">
 		SELECT
-		itemId, productId, image, description, title, price,
-		isSoldout, likeCnt, quantity,NVL(w.whishlistId, 0) AS whishlistId,
-		NVL(c.cartItemId, 0) AS cartItemId
-		FROM ITEM i, WISHLIST w, CARTITEM c
+		i.itemId AS itemId, 
+        i.productId AS productId, 
+        i.image AS image, 
+        i.description AS description, 
+        i.title AS title, 
+        i.price AS price,
+		i.isSoldout AS isSoldout, 
+        i.likeCnt AS likeCnt, 
+        i.quantity AS quantity, NVL(w.wishlistId, 0) AS wishlistId
+		FROM ITEM i, WISHLIST w
 		WHERE i.itemId = w.itemId(+)
-		AND i.itemId = c.itemId(+)
-		AND w.memberId (+) = #{value}
+		AND w.memberId(+) = #{memberId}
+		AND i.productId = #{productId}
 		AND i.isSoldout = 0
 		ORDER BY price ASC
 	</select>

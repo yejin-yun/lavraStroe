@@ -56,4 +56,9 @@ public class MybatisCartItemDao implements CartItemDao {
 		return cartItemMapper.deleteCartItem(cartItemId);
 	}
 
+	@Override
+	public int updateQuantity(int cartItemId, int quantity) throws DataAccessException {
+		return cartItemMapper.updateQuantity(cartItemId, quantity);
+	}
+
 }

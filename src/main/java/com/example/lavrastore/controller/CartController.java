@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.lavrastore.data.jpa.CartItemRepository;
@@ -84,6 +86,7 @@ public class CartController {
 			  
 			  model.addAttribute("cartItemList", CartItemListPerPage);
 			  model.addAttribute("totalPageSize", totalPageSize);
+			  model.addAttribute("curPage", page);
 				
 			  return "cart";
 		  }
@@ -123,5 +126,17 @@ public class CartController {
 		 }
 		 
 		 return "redirect:/cart/view/1";
-	}
+	  }
+	  
+	  @PostMapping("/cart/uq")
+	  //@Transactional
+	  @ResponseBody
+	  public CartItem updateQuantity(@RequestBody CartItem cartItem) {
+		  //System.out.println(cartItem.getCartItemId()); //잘넘어옴. 
+		  lavraStore.updateQuantity(cartItem.getCartItemId(), cartItem.getQuantity());
+		  String quantity = String.valueOf(cartItem.getQuantity());
+		  System.out.println("quantity= " + quantity);
+		  //req.setAttribute("quantity"+cartItem.getCartItemId(), cartItem.getQuantity());
+		  return cartItem;
+	  }
 }

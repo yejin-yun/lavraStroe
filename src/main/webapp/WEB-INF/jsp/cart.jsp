@@ -46,11 +46,13 @@
 	<script>
 		$(document).ready(function() {
 			$('#allCheck').click(function(){
-				$('input[name=checkCartItem]:checkbox').attr('checked', true); // input type 중 name이 checkCartItem이고, type이 checkbox인 경우 
+				$('input[name=checkCartItem]:checkbox').attr('checked', true); // input type 중 name이 checkCartItem이고, type이 checkbox인 경우
+				//$('#quantity'+1029).val(String(1121));
 			});
 			$('#allReset').click(function(){
 				$('input[name=checkCartItem]:checkbox').attr('checked', false); 
 			});
+		
 		});
 	</script>
 	<script>
@@ -81,6 +83,51 @@
 		}
 		
 	</script>
+	<script>	
+
+		function updateQuantity(id, itemQuantity, page){
+			var quantity = document.getElementById("quantity"+id).value;
+		
+			//document.getElementById("quantity"+id).value = quantity;
+			//$('#quantity'+id).val(quantity);
+			//alert(quantity + ' ' + "quantity"+id);
+			//console.log($.isNumeric(quantity));
+			if(quantity <= 0) {
+				alert('입력하신 값이 올바르지 않습니다.');
+				return false;
+			}
+			if(quantity > itemQuantity) {
+				alert('현재 재고가 충분하지 않습니다.');
+				return false;
+			} 
+			
+			var msg = {
+				"cartItemId" : id,
+				"quantity": quantity
+			}
+			var jsonStr = JSON.stringify(msg);
+
+			$.ajax({
+				type: "POST",
+				url: "/cart/uq",
+				contentType : "application/json",
+				data: jsonStr,
+				processData: false,
+				success: function(response) {
+					//alert('success = ' + response.cartItemId);
+					//alert(JSON.stringify(response));
+					//document.getElementById(response.cartItemId).value = response.quantity;
+					//$('#quantity'+response.cartItemId).val(String(response.quantity));
+					//$('input[name=quantity]').val(response.quantity); //.attr('value', response)
+					moveTarget('/cart/view/1?page='+page);
+					
+				},
+				error: function(){
+					alert("ERROR", arguments);
+				}
+			});
+		}
+	</script>
 </head>
 <body>
 	<%@ include file="header.jsp" %>
@@ -96,8 +143,8 @@
 		아직 상품 준비가 되지 않았습니다.</div>
 	</c:if> --%>
 	<form method="POST" name="form"> <%-- action이 없으면 얘를 부른 컨트롤러로 넘어간다. 체크한 것만 넘어가면 돼서 Command 객체 필요 없음. form:form을 사용안 한 건 여기서 하나만 선택한 결과를 알고 싶은 게 아니고, 어떤 것들이 선택 되었는지가 중요하기 때문. 즉 path를 설정할  게 없음--%>
-			<div class="container" style="margin-top: 5%;">
-		<table class="table table-hover">
+		<div class="container" style="margin-top: 5%;">
+		<table > <!-- class="table table-hover" -->
 	    <thead>
 	      <tr>
 	        <th>선택</th>
@@ -118,9 +165,18 @@
 	    			<td><input type="checkbox" name="checkCartItem" value="${cartItem.cartItemId}" id="${cartItem.cartItemId}" class="checkWish allCheckbox"/> </td>
 	    			<td><img style="height: 50px;" src="<c:url value='${item.image}' />" /></td>
 	    			<td>${item.title}</td>
-	    			<td>${item.price}</td>
-	    			<td><input type="text" value="${cartItem.quantity}" size="2" style="text-align:center;"/>&nbsp;<button onClick="updateQuantity()">수정</button></td> 
-	    			<td>${itemTotalCost}</td>
+	    			<td>
+	    			<c:choose>
+						<c:when test="${item.isSoldout == 0}">
+							<fmt:formatNumber value="${item.price}" pattern="###,###,###"/>원
+						</c:when>
+						<c:when test="${item.isSoldout == 1}">
+							<span>품절</span>
+						</c:when>
+					</c:choose>
+	    			</td>
+	    			<td><input type="text" id="quantity${cartItem.cartItemId}" name="quantity" value="${cartItem.quantity}" size="2" style="text-align:center;"/>&nbsp;<button id="btnQuan" onClick="updateQuantity(${cartItem.cartItemId}, ${item.quantity}, ${curPage})">수정</button></td> 
+	    			<td><fmt:formatNumber value="${itemTotalCost}" pattern="###,###,###"/>원</td>
 	    			<c:set var="allTotalCost" value="${allTotalCost + itemTotalCost}" />
 	    		</tr>
 	    	</c:forEach>

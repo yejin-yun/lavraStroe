@@ -121,6 +121,7 @@ public interface PetStoreFacade {
 	
 	int insertCartItem(CartItem cartItem);
 	int updateCartItem(CartItem cartItem); // ppt에 있는 메소드들 합침. 
+	int updateQuantity(int cartItemId, int quantity);
 	int deleteCartItem(int cartItemId);
 	
 	/*wishlist */
@@ -143,5 +144,6 @@ public interface PetStoreFacade {
 	List<CartItem> findByCategoryIdAndMemberId(int categoryId, String memberId);
 	Item findItemByCategoryIdAndMemberId(int cartItemId, String memberId);
 	void deleteCartItemById(int cartItemId);
+	CartItem findCartItemByItemItemIdAndMemberId(int itemId, String memberId);
 
 }
