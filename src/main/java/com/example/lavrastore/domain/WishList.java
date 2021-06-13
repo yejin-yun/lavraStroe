@@ -2,28 +2,34 @@ package com.example.lavrastore.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="WishList")
 @SuppressWarnings("serial")
-public class WishList {
+public class WishList implements Serializable  {
+	@Id
 	private int wishListId;
-	private int ItemId;
-	private String MemberID;
+	@OneToOne
+	@JoinColumn(name="itemId")
+	private Item item;
+	private String memberId;
 	
-	public int getItemId() {
-		return ItemId;
-	}
-	public void setItemId(int itemId) {
-		ItemId = itemId;
-	}
+	
 	public int getWishListId() {
 		return wishListId;
 	}
 	public void setWishListId(int wishListId) {
 		this.wishListId = wishListId;
 	}
-	public String getMemberID() {
-		return MemberID;
+	public String getMemberId() {
+		return memberId;
 	}
-	public void setMemberID(String memberID) {
-		MemberID = memberID;
+	public void setMemberID(String MemberId) {
+		memberId = MemberId;
 	}
 }

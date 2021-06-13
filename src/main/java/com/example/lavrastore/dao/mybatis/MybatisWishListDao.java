@@ -32,14 +32,10 @@ public class MybatisWishListDao implements WishListDao {
 		return wishListMapper.insertWishList(wishList);
 	}
 
-	@Override
-	public int updateWishList(WishList wishList) throws DataAccessException {
-		return wishListMapper.updateWishList(wishList);
-	}
 
 	@Override
-	public int deleteWishList(WishList wishList) throws DataAccessException {
-		return wishListMapper.deleteWishList(wishList);
+	public int deleteWishList(int wishListId) throws DataAccessException {
+		return wishListMapper.deleteWishList(wishListId);
 	}
 
 }

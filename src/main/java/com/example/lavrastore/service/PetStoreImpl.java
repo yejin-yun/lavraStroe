@@ -17,6 +17,7 @@ import com.example.lavrastore.dao.OrderDao;
 import com.example.lavrastore.dao.ProductDao;
 import com.example.lavrastore.dao.WishListDao;
 import com.example.lavrastore.data.jpa.CartItemRepository;
+import com.example.lavrastore.data.jpa.WishListRepository;
 import com.example.lavrastore.domain.CartItem;
 import com.example.lavrastore.domain.Category;
 import com.example.lavrastore.domain.GroupItem;
@@ -47,7 +48,9 @@ public class PetStoreImpl implements PetStoreFacade {
 	
 	@Autowired
 	private CartItemRepository cartItemRepository;
-
+	@Autowired
+	private WishListRepository wishListRepository;
+	
 	@Autowired
 	private OrderDao orderDao;
 
@@ -321,17 +324,15 @@ public class PetStoreImpl implements PetStoreFacade {
 	public int insertWishList(WishList wishList) throws DataAccessException{
 		return wishlistDao.insertWishList(wishList); // 0이면 실패, 0 초과는 성공
 	}
-
-	@Override
-	public int updateWishList(WishList wishList) throws DataAccessException{
-		return wishlistDao.updateWishList(wishList);
+	public List<WishList> findByMemberId(String MemberId){
+		return wishListRepository.findByMemberId(MemberId);
 	}
 
 	// Delete
 
 	@Override
-	public int deleteWishList(WishList wishList) throws DataAccessException{
-		return wishlistDao.deleteWishList(wishList);
+	public int deleteWishList(int wishListId) throws DataAccessException{
+		return wishlistDao.deleteWishList(wishListId);
 	}
 
 	@Override

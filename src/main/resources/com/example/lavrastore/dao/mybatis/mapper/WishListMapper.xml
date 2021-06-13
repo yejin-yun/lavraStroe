@@ -34,13 +34,7 @@
 		VALUES (#{ItemId}, #{MemberId})
 	</insert>
 
-	<update id="updateWishList" parameterType="CartItem">
-		UPDATE CARTITEM
-		SET cartItemId = #{cartItemId}, quantity = #{quantity}, itemId = #{item.itemId}, categoryId = #{categoryId}, memberId = #{memberId}
-		WHERE cartItemId = #{value}
-	</update>
-
-	<delete id="deleteWishList" parameterType="wishList">
+	<delete id="deleteWishList" parameterType="WishList">
 		DELETE FROM
 		WISHLIST
 		WHERE

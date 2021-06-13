@@ -15,10 +15,8 @@ public interface WishListDao {
 	// Create
 	int insertWishList(WishList wishList) throws DataAccessException; // 0이면 실패, 0 초과는 성공
 
-	// Update
-	int updateWishList(WishList wishList) throws DataAccessException;
 
 	// Delete
 
-	int deleteWishList(WishList wishList) throws DataAccessException;
+	int deleteWishList(int wishListId) throws DataAccessException;
 }

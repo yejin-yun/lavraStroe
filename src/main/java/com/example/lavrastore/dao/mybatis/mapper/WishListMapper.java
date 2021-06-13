@@ -16,9 +16,6 @@ public interface WishListMapper {
 	/* Create */
 	int insertWishList(WishList wishList);
 	
-	/* Update */
-	int updateWishList(WishList wishList); 
-	
 	/* Delete */
-	int deleteWishList(WishList wishList);
+	int deleteWishList(int wishListId);
 }
