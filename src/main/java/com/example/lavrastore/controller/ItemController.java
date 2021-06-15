@@ -123,6 +123,7 @@ public class ItemController {
 		model.addAttribute("itemList", itemList);
 		model.addAttribute("totalPageSize", totalPageSize);
 		model.addAttribute("sort", sort);
+		model.addAttribute("productName", productName);
 		return "EarringItem";
 	}
 

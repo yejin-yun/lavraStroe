@@ -22,7 +22,7 @@
 	
 	<style>
 .funcs {
-			margin-top: 3%;
+			margin-top: 5%;
 			margin-bottom: 10%;
 		}
 		.funcs input 
@@ -42,6 +42,13 @@
 			color:white; 
 			background-color: #646EFF; 
 		}
+		
+		.cart_info {
+			float:right; 
+			position:absolute; 
+			left: 70%;
+			right: 5%;
+		}
 	</style>
 	<script>
 		$(document).ready(function() {
@@ -52,10 +59,12 @@
 			$('#allReset').click(function(){
 				$('input[name=checkCartItem]:checkbox').attr('checked', false); 
 			});
-		
+					
 		});
+		
 	</script>
 	<script>
+	
 		function moveTarget(targetUri) {
 			form.action = targetUri;
 			form.submit();
@@ -123,7 +132,7 @@
 					
 				},
 				error: function(){
-					alert("ERROR", arguments);
+					alert("입력하신 형식이 옳지 않습니다.", arguments);
 				}
 			});
 		}
@@ -162,7 +171,8 @@
 	    		<tr>
 	    			<c:set var="item" value="${cartItem.item}" />
 	    			<c:set var="itemTotalCost" value="${item.price * cartItem.quantity}" />
-	    			<td><input type="checkbox" name="checkCartItem" value="${cartItem.cartItemId}" id="${cartItem.cartItemId}" class="checkWish allCheckbox"/> </td>
+	    			
+	    			<td><input type="checkbox" name="checkCartItem" value="${cartItem.cartItemId}" id="${cartItem.cartItemId}" class="checkWish allCheckbox"/></td>
 	    			
 	    			<td>
 	    			<a href="<c:url value='/accessory/detail'>
@@ -177,7 +187,7 @@
 							<fmt:formatNumber value="${item.price}" pattern="###,###,###"/>원
 						</c:when>
 						<c:when test="${item.isSoldout == 1}">
-							<span>품절</span>
+							<span><font color="red">[품절]</font></span>
 						</c:when>
 					</c:choose>
 	    			</td>
@@ -196,6 +206,23 @@
 				</a>
 				<c:if test="${!status.last}">&nbsp;|&nbsp;</c:if>
 			</c:forEach>
+		</div>
+		<div class="well-lg" style=" border: 1px solid black; width: 90%; height: auto; position:relative; vertical-align: middle; min-height: 200px; overflow: auto; margin: auto;">
+			<div class="cart_info well-sm" style="top: 20%;">상품합계 금액: <fmt:formatNumber value="${allTotalCost}" pattern="###,###,###"/>원</div>
+			<div class="cart_info well-sm" style="top: 40%;">
+				<c:if test="${allTotalCost < 200000}">
+					<c:set var="deliver" value="3000" />
+					배송비: 3,000원
+				</c:if>
+				<c:if test="${allTotalCost >= 200000}">
+					<c:set var="deliver" value="0" />
+					배송비: 무료 
+				</c:if>
+			</div>
+			<c:set var="allTotalCost" value="${allTotalCost + deliver}" />
+			<div class="well-sm" style="left: 35%; top: 65%; position:absolute; ">
+				<B>전체 상품 주문 금액: <fmt:formatNumber value="${allTotalCost}" pattern="###,###,###"/>원</B></div>
+			<div class="well-sm" style="left:70%; top: 75%; position:absolute; "><font color="red">**20만원 이상 주문 시 <B>무료배송</B></font></div>
 		</div>
 		<div class="w3-center funcs">
          	<input type="button" value="전체 선택" id="allCheck" > 

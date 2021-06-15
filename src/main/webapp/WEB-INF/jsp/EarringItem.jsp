@@ -56,7 +56,7 @@
 			processData: false,
 			success: function(response) {
 				if(response === "success") {
-					//alert('success');
+					//alert(wish);
 				}
 				else if(response === "LoginForm") {
 					var allow = confirm('로그인을 먼저 해주세요');
@@ -72,6 +72,7 @@
 				
 			},
 			error: function(){
+				//alert(wish);
 				alert("이미 위시리스트에 담겨 있습니다.", arguments);
 			}
 		});
@@ -90,7 +91,7 @@
 			</form:select>
 		</form:form> --%>
 		<c:forEach var="element" items="${sortData}" varStatus="status">
-			<a href='<c:url value="/accessory/earring/1?sort=${element}"/>'>
+			<a href='<c:url value="/accessory/${productName}/1?sort=${element}"/>'>
 				<font color="black"><B>${element}</B></font>
 			</a>
 			<c:if test="${!status.last}">&nbsp;|&nbsp;</c:if>
@@ -124,7 +125,7 @@
 						</c:if>
 						<div class="contain_div" style="position: relative;">
 							<div class="img_wish" style="position: absolute; margin-left: 85%; margin-top: 8%;">
-									<a href="#" id="like" onClick="changeLikeImg(${item.itemId}, ${isInWish})">					<!--  <c:url value='/accessory/wish'>
+									<a href="javascript:;" id="like" onClick="changeLikeImg(${item.itemId}, ${isInWish})">					<!--  <c:url value='/accessory/wish'>
 										<c:param name="no" value="${item.itemId}" />
 										<c:param name="isInWish" value="${isInWish}" /> 
 										</c:url> --> <!-- onClick="wishItem(${item.itemId}, ${isInWish})" -->
@@ -144,7 +145,7 @@
 	            				<%-- <c:param name='isLogined' value='${isLogined}' /> --%></c:url>">
 								<%-- 컨트롤러에서 로그인 세션으로 검증하기 --%>
 								<h3>${item.title}</h3> 
-								<p>${item.price}원</p>
+								<p><fmt:formatNumber value="${item.price}" pattern="###,###,###"/>원</p>
 							</a>
 						</div>
 					</div>
@@ -175,7 +176,7 @@
 		<div id="paging">
 			<c:forEach var="val" begin="1" end="${totalPageSize}"
 				varStatus="status">
-				<a href='<c:url value="/accessory/earring/1?page=${val}&sort=${sort}"/>'>
+				<a href='<c:url value="/accessory/${productName}/1?page=${val}&sort=${sort}"/>'>
 					<font color="black"><B>${val}</B></font>
 				</a>
 				<c:if test="${!status.last}">&nbsp;|&nbsp;</c:if>
