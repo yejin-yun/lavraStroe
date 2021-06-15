@@ -77,6 +77,5 @@ public class viewGroupItemController {
 		return "groupItemPage";
 	
 	}
-	
 		
 }

@@ -7,17 +7,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.lavrastore.domain.GroupItem;
 import com.example.lavrastore.domain.Member;
 import com.example.lavrastore.domain.Order;
+import com.example.lavrastore.service.OrderValidator;
 import com.example.lavrastore.service.PetStoreFacade;
 
 @Controller
@@ -26,6 +29,9 @@ public class groupOrderController {
 	
 	private PetStoreFacade petStore;
 	UserSession userSession;
+	
+	@Autowired
+	private OrderValidator orderValidator;
 	
 	@ModelAttribute
 	protected void checkLogin(HttpServletRequest request) {
@@ -78,18 +84,33 @@ public class groupOrderController {
 	}
 	
 	@RequestMapping("/group/newOrderSubmitted.do")
-	public String validateAndConfirmNewGroupOrder(
+	public ModelAndView validateAndConfirmNewGroupOrder(
 			@RequestParam(value="itemId") int itemid,
 			@ModelAttribute("myOrder") Order myOrder,
-			@RequestParam(value="page", defaultValue="1") int page,
-			Model model) {
+			BindingResult result,
+			SessionStatus status) {
 		System.out.println("newOrder에서 넘어온 값 확인 :" + myOrder.getCardNum() + ", " + myOrder.getPayType() +
 				"," + myOrder.getGroupOrder().getStatus() + "," + myOrder.getShipAddr1());
 		
 		
+		orderValidator.validateCreditCard(myOrder, result);
+		orderValidator.validateShippingAddress(myOrder, result);
+		
+		if (result.hasErrors()) {
+			ModelAndView mav = new ModelAndView("groupOrderForm");
+			mav.addObject("gitem", myOrder.getGroupOrder().getGroupItem());
+			return mav; 
+		}
+		
 		petStore.insertOrder(myOrder);
 		
-		model.addAttribute("success", true);
-		return "groupOrderConfirm";
+		ModelAndView mav = new ModelAndView("groupOrderConfirm");
+		mav.addObject("myOrder", myOrder);
+		mav.addObject("success", true);
+		mav.addObject("groupOrder", myOrder.getGroupOrder());
+		mav.addObject("gItem", myOrder.getGroupOrder().getGroupItem());
+		
+		status.setComplete();  // remove sessionCart and orderForm from session
+		return mav;
 	}
 }
