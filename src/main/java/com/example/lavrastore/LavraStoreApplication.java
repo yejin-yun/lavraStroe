@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages="com.example.lavrastore.*")
 public class LavraStoreApplication {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) {//
 		SpringApplication.run(LavraStoreApplication.class, args);
 	}
 

@@ -32,4 +32,11 @@ public class WishList implements Serializable  {
 	public void setMemberID(String MemberId) {
 		memberId = MemberId;
 	}
+	public Item getItem() {
+		return item;
+	}
+	public void setItem(Item item) {
+		this.item = item;
+	}
+
 }

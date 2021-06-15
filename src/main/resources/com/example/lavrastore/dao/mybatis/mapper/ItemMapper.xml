@@ -47,16 +47,39 @@
         i.price AS price,
 		i.isSoldout AS isSoldout, 
         i.likeCnt AS likeCnt, 
-        i.quantity AS quantity, NVL(w.wishlistId, 0) AS wishlistId
-		FROM ITEM i, WISHLIST w
+        i.quantity AS quantity, 
+        NVL(w.wishlistId, 0) AS isInWishlist,
+		NVL(c.cartItemId, 0) AS isInCart
+		FROM ITEM i, WISHLIST w, CARTITEM c
 		WHERE i.itemId = w.itemId(+)
+		AND i.itemId = c.itemId(+)
 		AND w.memberId(+) = #{memberId}
 		AND i.productId = #{productId}
 		AND i.isSoldout = 0
 		ORDER BY likeCnt DESC
 	</select>
+	
+	<!-- SELECT
+		i.itemId AS itemId, 
+        i.productId AS productId, 
+        i.image AS image, 
+        i.description AS description, 
+        i.title AS title, 
+        i.price AS price,
+		i.isSoldout AS isSoldout, 
+        i.likeCnt AS likeCnt, 
+        i.quantity AS quantity, 
+        NVL(w.wishlistId, 0) AS isInWishlist,
+		NVL(c.cartItemId, 0) AS isInCart
+		FROM ITEM i, WISHLIST w, CARTITEM c
+		WHERE i.itemId = w.itemId(+)
+		AND i.itemId = c.itemId(+)
+		AND w.memberId(+) = #{memberId}
+		AND i.productId = #{productId}
+		AND i.isSoldout = 0
+		ORDER BY likeCnt DESC -->
 
-	<resultMap id="itemForUser" type="Item"> <!-- 데베프 교재 649p -->
+	<resultMap id="itemForUser" type="com.example.lavrastore.domain.Item"> <!-- 데베프 교재 649p resultMap으로 연결해야 함.-->
 		<id column="itemId" property="itemId" />
 		<result column="productId" property="productId" />
 		<result column="image" property="image" />
@@ -66,8 +89,8 @@
 		<result column="isSoldout" property="isSoldout" />
 		<result column="likeCnt" property="likeCnt" />
 		<result column="quantity" property="quantity" />
-		<result column="wishlistId" property="isInWishlist" />
-		<result column="cartItemId" property="isInCart" />
+		<result column="isInWishlist" property="isInWishlist" />
+		<result column="isInCart" property="isInCart" />
 	</resultMap>
 
 	<select id="getItemForNotUser" resultType="Item">
@@ -87,7 +110,7 @@
 	</select>
 
 	<select id="getItemOrderByHighPriceForUser"
-		resultMap="itemOrderByHighPriceForUser">
+		resultMap="itemForUser">
 		SELECT
 		i.itemId AS itemId, 
         i.productId AS productId, 
@@ -97,28 +120,17 @@
         i.price AS price,
 		i.isSoldout AS isSoldout, 
         i.likeCnt AS likeCnt, 
-        i.quantity AS quantity, NVL(w.wishlistId, 0) AS wishlistId
-		FROM ITEM i, WISHLIST w
+        i.quantity AS quantity, 
+        NVL(w.wishlistId, 0) AS isInWishlist,
+		NVL(c.cartItemId, 0) AS isInCart
+		FROM ITEM i, WISHLIST w, CARTITEM c
 		WHERE i.itemId = w.itemId(+)
+		AND i.itemId = c.itemId(+)
 		AND w.memberId(+) = #{memberId}
 		AND i.productId = #{productId}
 		AND i.isSoldout = 0
 		ORDER BY price DESC
 	</select>
-
-	<resultMap id="itemOrderByHighPriceForUser" type="Item"> <!-- 데베프 교재 649p -->
-		<id column="itemId" property="itemId" />
-		<result column="productId" property="productId" />
-		<result column="image" property="image" />
-		<result column="description" property="description" />
-		<result column="title" property="title" />
-		<result column="price" property="price" />
-		<result column="isSoldout" property="isSoldout" />
-		<result column="likeCnt" property="likeCnt" />
-		<result column="quantity" property="quantity" />
-		<result column="wishlistId" property="isInWishlist" />
-		<result column="cartItemId" property="isInCart" />
-	</resultMap>
 
 	<select id="getItemOrderByHighPriceForNotUser" resultType="Item">
 		SELECT
@@ -137,7 +149,7 @@
 	</select>
 
 	<select id="getItemOrderByLowPriceForUser"
-		resultMap="itemOrderByLowPriceForUser">
+		resultMap="itemForUser">
 		SELECT
 		i.itemId AS itemId, 
         i.productId AS productId, 
@@ -147,28 +159,17 @@
         i.price AS price,
 		i.isSoldout AS isSoldout, 
         i.likeCnt AS likeCnt, 
-        i.quantity AS quantity, NVL(w.wishlistId, 0) AS wishlistId
-		FROM ITEM i, WISHLIST w
+        i.quantity AS quantity, 
+        NVL(w.wishlistId, 0) AS isInWishlist,
+		NVL(c.cartItemId, 0) AS isInCart
+		FROM ITEM i, WISHLIST w, CARTITEM c
 		WHERE i.itemId = w.itemId(+)
+		AND i.itemId = c.itemId(+)
 		AND w.memberId(+) = #{memberId}
 		AND i.productId = #{productId}
 		AND i.isSoldout = 0
 		ORDER BY price ASC
 	</select>
-
-	<resultMap id="itemOrderByLowPriceForUser" type="Item"> <!-- 데베프 교재 649p -->
-		<id column="itemId" property="itemId" />
-		<result column="productId" property="productId" />
-		<result column="image" property="image" />
-		<result column="description" property="description" />
-		<result column="title" property="title" />
-		<result column="price" property="price" />
-		<result column="isSoldout" property="isSoldout" />
-		<result column="likeCnt" property="likeCnt" />
-		<result column="quantity" property="quantity" />
-		<result column="wishlistId" property="isInWishlist" />
-		<result column="cartItemId" property="isInCart" />
-	</resultMap>
 
 	<select id="getItemOrderByLowPriceForNotUser" resultType="Item">
 		SELECT

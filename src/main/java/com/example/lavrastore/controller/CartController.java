@@ -61,6 +61,7 @@ public class CartController {
 			  switch(categoryId) {
 			  	case 1:	  
 			  		//cartItemList = lavraStore.getCartListByGeneralCategory(categoryId, member.getMemberId());
+			  		System.out.println(categoryId + " " + member.getMemberId());
 			  		cartItemList = lavraStore.findByCategoryIdAndMemberId(categoryId, member.getMemberId());
 			  		break;
 			  		

@@ -72,10 +72,8 @@
 			
 			moveTarget(url); //여기에 직접 넣으면 파라미터가 -1로 전달됨.
 			
-			var temp = confirm("카트에 추가했습니다. 이동하시겠습니까?");
-			if(temp) {
-				moveTarget("/cart/view/1");
-			}
+			// 카트로 이동하면 DB에 업데이트가 안됨
+			alert("카트에 추가했습니다.");
 		}
 	}
 	
@@ -104,7 +102,7 @@
 					moveTarget("/shop/loginForm.do");
 				}
 				else {
-					alert('카트에 추가하는 것을 실패했습니다');
+					alert('카트에 추가하는 것을 실패했습니다'); //사실상 failed면 error:에서 처리됨. 
 				}
 				
 			},

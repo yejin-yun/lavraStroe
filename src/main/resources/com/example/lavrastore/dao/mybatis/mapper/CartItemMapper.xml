@@ -73,7 +73,7 @@
 		WHERE cartItemId = #{cartItemId}
 	</update>
 
-	<delete id="deleteCartItem" parameterType="CartItem">
+	<delete id="deleteCartItem">
 		DELETE FROM
 		CARTITEM
 		WHERE

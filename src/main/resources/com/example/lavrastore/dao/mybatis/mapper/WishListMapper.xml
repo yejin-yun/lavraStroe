@@ -28,16 +28,16 @@
   
   	<insert id="insertWishList" parameterType="WishList">
 		<selectKey keyProperty="wishListId" resultType="int" order="BEFORE">
-			SELECT seq_pk.nextval AS wishListId FROM DUAL
+			SELECT seq_pk_wish.nextval AS wishListId FROM DUAL
 		</selectKey>
-		INSERT INTO WISHLIST (wishlistId, ItemId, MemberId)
-		VALUES (#{ItemId}, #{MemberId})
+		INSERT INTO WISHLIST (wishListId, itemId, memberId)
+		VALUES (#{wishListId}, #{item.itemId}, #{memberId})
 	</insert>
 
-	<delete id="deleteWishList" parameterType="WishList">
+	<delete id="deleteWishList">
 		DELETE FROM
 		WISHLIST
 		WHERE
-		wishListId = #{value}
+		itemId = #{itemId}
 	</delete>
  </mapper>
