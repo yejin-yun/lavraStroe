@@ -1,58 +1,99 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Lavra</title>
+	<link type="text/css" rel="stylesheet" href="<c:url value='/style/view.css' />"> <%-- #paging 때문에 --%>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+	
+	<style>
+.funcs {
+			margin-top: 3%;
+			margin-bottom: 10%;
+		}
+		.funcs input 
+		{
+			margin-right: 10px;
+			padding: 5px;
+			background-color: white;
+			border: 1px solid #646EFF;
+			color: #646EFF;
+			border-top-left-radius: 5px; 
+			border-bottom-left-radius: 5px;
+			border-top-right-radius: 5px; 
+        	border-bottom-right-radius: 5px;
+      }
+		.funcs input:hover
+		{ 	
+			color:white; 
+			background-color: #646EFF; 
+		}
+	</style>
+
 </head>
 <body>
 <%@ include file="header.jsp"%>
 
-<table id="main-menu">
-  <tr>
-    <td><a href='<c:url value="/shop/index.do"/>'><b>
-      <font color="black" size="2">&lt;&lt; Main Menu</font></b></a></td>
-  </tr>
-</table>
-
-<div align="center">
-  <table class="n23">
-    <tr bgcolor="#CCCCCC">
-      <td>&nbsp;</td>
-      <td><b>Product ID</b></td>
-      <td><b>Name</b></td>
-    </tr>
-    <c:forEach var="product" items="${productList.pageList}">
-      <tr bgcolor="#FFFF88">
-        <td><a
-          href='<c:url value="/shop/viewProduct.do"><c:param name="productId" value="${product.productId}"/></c:url>'>
-            <c:out value="${product.description}" escapeXml="false" />
-        </a></td>
-        <td><b><a
-            href='<c:url value="/shop/viewProduct.do"><c:param name="productId" value="${product.productId}"/></c:url>'>
-              <font color="BLACK"><c:out value="${product.productId}" /></font>
-          </a></b></td>
-        <td><c:out value="${product.name}" /></td>
-      </tr>
-    </c:forEach>
-    <tr>
-      <td><c:if test="${!productList.firstPage}">
-          <a href="?page=previous"><font color="white"><B>&lt;&lt;
-                Prev</B></font></a>
-        </c:if> <c:if test="${!productList.lastPage}">
-          <a href="?page=next"><font color="white"><B>Next
-                &gt;&gt;</B></font></a>
-        </c:if></td>
-    </tr>
-  </table>
-</div>
+	<c:if test="${itemList.pageList == null }">
+	    	<h3 style = " margin-top :7%; text-align: center;">
+	    	<strong>검색 결과가 없습니다.</strong>
+	    	</h3>
+	    	</c:if>
+ 	<div class="container" style="margin-top: 5%;">
+		<table > <!-- class="table table-hover" -->
+	    <thead>
+	      <tr>
+	        <th>상품명</th>
+	        <th></th>
+	        <th>설명</th>
+	        <th>가격</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	    	
+	    	<c:forEach var="item" items="${itemList.pageList}">
+	    		<tr>
+	    			<td>${item.title}</td>
+	    			<td><img style="height: 50px;" src="<c:url value='${item.image}' />" /></td>
+	    			<td>${item.description}</td>
+	    			<td>
+	    			<c:choose>
+						<c:when test="${item.isSoldout == 0}">
+							<fmt:formatNumber value="${item.price}" pattern="###,###,###"/>원
+						</c:when>
+						<c:when test="${item.isSoldout == 1}">
+							<span>품절</span>
+						</c:when>
+					</c:choose>
+	    			</td>
+	    		</tr>
+	    	</c:forEach>
+	    </tbody>
+	    </table>
+	    <div id="paging">
+			<c:forEach var="val" begin="1" end="${totalPageSize}"
+				varStatus="status">
+				<a href='<c:url value="/cart/view/${categoryId}?page=${val}"/>'>
+					<font color="black"><B>${val}</B></font>
+				</a>
+				<c:if test="${!status.last}">&nbsp;|&nbsp;</c:if>
+			</c:forEach>
+		</div>
+	</div>
 
 </body>
 </html>

@@ -16,6 +16,10 @@ public class MybatisItemDao implements ItemDao {
 	@Autowired
 	private ItemMapper itemMapper;
 
+	public List<Item> searchItemList(String keywords){
+		return itemMapper.searchItemList(keywords);
+	}
+	
 	public List<Item> getItemListByProduct(int productId) throws DataAccessException {
 		return itemMapper.getItemListByProduct(productId);
 	}

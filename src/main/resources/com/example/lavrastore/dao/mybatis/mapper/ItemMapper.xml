@@ -19,6 +19,21 @@
 		FROM ITEM i, PRODUCT p
 		WHERE p.productId = i.productId AND i.productId = #{value}
 	</select>
+	
+	<select id="searchItemList" resultType="Item">
+    select
+     	itemId,
+		productId,
+		image,
+		description,
+		title,
+		price,
+		isSoldout,
+		likeCnt,
+		quantity
+	FROM ITEM
+    WHERE lower(title) like '%'||#{value}||'%'
+  </select>
 
 	<select id="getItem" resultType="Item">
 		SELECT

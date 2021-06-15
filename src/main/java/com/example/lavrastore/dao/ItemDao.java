@@ -16,7 +16,7 @@ public interface ItemDao {
 	Item getItem(int itemId) throws DataAccessException;
 	List<Item> getItemForNotUser(int productId) throws DataAccessException; // 인기순으로 되어 있음. 비로그인 용 
 	List<Item> getItemForUser(String memberId, int productId) throws DataAccessException;
-	
+	List<Item> searchItemList(String keywords) throws DataAccessException;
 	/*
 	 * //인기순 
 	 * List<Item> getItemOrderByHighLikeCntForUser(String memberId) throws DataAccessException; 

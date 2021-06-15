@@ -91,9 +91,6 @@ public class ViewWishlistController {
 					 petStore.deleteWishList(wishListId);
 				}
 		 		break;
-		 	case "order":
-		 		
-		 		break;
 		 	default:
 		 		return "redirect:error";
 		 }
