@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.repository.query.Param;
 
 import com.example.lavrastore.domain.GroupItem;
+import com.example.lavrastore.domain.Order;
 
 
 @Mapper
@@ -34,7 +36,7 @@ public interface GroupItemMapper {
 	
 	/* Update */
 	int updateGItem(GroupItem gItem); 
-	int updateNowBalance(int totalPrice);
+	int updateNowBalance(@Param("itemId") int itemId, @Param("total") int total);
 	
 	/* Delete */
 	int deleteGItem(int itemId);

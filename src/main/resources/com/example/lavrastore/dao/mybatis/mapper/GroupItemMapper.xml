@@ -44,4 +44,10 @@
 		from item i inner join groupitem g on i.itemid = g.itemid
 	</select>
 	
+	<update id="updateNowBalance" parameterType="int">
+		UPDATE groupItem
+		SET nowBalance = nowBalance + #{total}
+		WHERE itemId = #{itemId}
+	</update>
+	
 </mapper>

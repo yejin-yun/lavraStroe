@@ -89,11 +89,7 @@ public class groupOrderController {
 		
 		petStore.insertOrder(myOrder);
 		
-		GroupItem gitem = petStore.getGItem(itemid);
-		gitem.setPercent();
-		
-		model.addAttribute("gitem", gitem);
-		System.out.println("itemid : " + gitem.getItem().getItemId() + " 등록일 : " + gitem.getRegiDate() + " 마감일 : " + gitem.getPaymentDate());
-		return "groupItemPage";
+		model.addAttribute("success", true);
+		return "groupOrderConfirm";
 	}
 }

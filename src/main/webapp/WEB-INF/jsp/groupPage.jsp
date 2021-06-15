@@ -55,7 +55,7 @@
 				<c:set var="fillUpSize" value="${4 - listSize % 4}" />
 			</c:if>
 			<c:forEach var="groupitem" items="${gitemList}" varStatus="status">
-				<c:if test="${status.index % 3 == 0}">
+				<c:if test="${status.index % 4 == 0}">
 					<tr>
 				</c:if>
 					<td>
@@ -75,7 +75,7 @@
                     </div>
                   </td>
                 
-				<c:if test="${status.index % 3 == 2}">
+				<c:if test="${status.index % 4 == 3}">
 					</tr>
 				</c:if>
 			</c:forEach>
@@ -85,6 +85,15 @@
                 	<c:when test="${fillUpSize == 3}"><td></td><td></td><td></td></tr></c:when>
             </c:choose>
 		</table>
+		<div id="paging">
+			<c:forEach var="val" begin="1" end="${totalPageSize}"
+				varStatus="status">
+				<a href='<c:url value="/group?page=${val}"/>'>
+					<font color="black"><B>${val}</B></font>
+				</a>
+				<c:if test="${!status.last}">&nbsp;|&nbsp;</c:if>
+			</c:forEach>
+		</div>
 	</section>
 	
 </body>

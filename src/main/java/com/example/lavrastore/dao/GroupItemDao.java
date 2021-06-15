@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 
 import com.example.lavrastore.domain.GroupItem;
+import com.example.lavrastore.domain.Order;
 
 
 public interface GroupItemDao {
@@ -32,7 +33,7 @@ public interface GroupItemDao {
 	
 	/* Update */
 	int updateGItem(GroupItem gItem) throws DataAccessException; 
-	int updateNowBalance(int totalPrice) throws DataAccessException; 
+	int updateNowBalance(int itemId, int total) throws DataAccessException; 
 	
 	/* Delete */
 	int deleteGItem(int itemId) throws DataAccessException;
