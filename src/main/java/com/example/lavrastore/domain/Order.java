@@ -22,6 +22,7 @@ public class Order implements Serializable {
 	private String memberId;
 	private int categoryId;
 	
+	private int paymentId; 
 	private int payType; // 0 : 무통장입금, 1 : 카드결제
 	
 	//payType이 1일 경우 채워져야하는 변수들
@@ -175,6 +176,14 @@ public class Order implements Serializable {
 
 	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
+	}
+
+	public int getPaymentId() {
+		return paymentId;
+	}
+
+	public void setPaymentId(int paymentId) {
+		this.paymentId = paymentId;
 	}
 	
 	

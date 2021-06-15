@@ -26,7 +26,7 @@
 
 </head>
 <body>
-<header style = "background : yellow;">
+<header>
        <div class="search_header ">
             <a href="#"><img id="serch_btn" src="<c:url value='/images/bagic/magnifier-32.png' />"  style="padding-left: 40px; padding-top: 10px;"></a>
             <form method="post" action="<c:url value='/shop/searchProducts.do' />" style="display: inline-block; margin-left: 20px; margin-top:20px; width:80%; height: 50%;">

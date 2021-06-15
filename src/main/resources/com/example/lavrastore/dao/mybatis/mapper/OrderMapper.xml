@@ -3,26 +3,31 @@
 <mapper namespace="com.example.lavrastore.dao.mybatis.mapper.OrderMapper">
 	
 	<insert id="insertOrder" parameterType="Order">
-		<selectKey keyProperty="orderId" resultType="int" order="BEFORE">
-    		select SEQ_orderid.nextval FROM DUAL
-  		</selectKey>
 		insert into shopOrder (ORDERID, ORDERDATE, SHIPADDR1, SHIPADDR2, SHIPZIP, TOTALPRICE, SHIPNAME,
 		MEMBERID, CATEGORYID)
-    VALUES(#{orderId}, #{orderDate}, #{shipAddr1}, #{shipAddr2}, #{shipZip}, #{totalPrice}, 
+    	VALUES(#{orderId}, #{orderDate}, #{shipAddr1}, #{shipAddr2}, #{shipZip}, #{totalPrice}, 
       #{shipname}, #{memberId}, #{categoryId})
 	</insert>
 	
-	<insert id="insertPayment" parameterType="int">
+	<insert id="insertPayment" parameterType="Order">
+		<selectKey keyProperty="paymentId" resultType="int" order="BEFORE">
+    		select SEQ_paymentid.nextval FROM DUAL
+  		</selectKey>
  		insert into payment (paymentid, orderid , paytype)
-  		values (#{p.pay}, #{p.ord}, #{payType})
+  		values (#{paymentId}, #{orderId}, #{payType})
 	</insert>
 	
 	<insert id="insertCreditCard" parameterType="Order">
-		<selectKey keyProperty="paymentid" resultType="int" order="BEFORE">
-    		select SEQ_paymentid.currval FROM DUAL
+		<selectKey keyProperty="paymentId" resultType="int" order="BEFORE">
+    		select SEQ_paymentId.currval FROM DUAL
   		</selectKey>
- 		insert into payment (paymentid, CARDTYPE, CARDNUM, EXPIRYDATE,
-  		values (#{paymentid}, #{cardType}, #{cardNum}, #{expiryDate})
+ 		insert into creditcard (paymentId, CARDTYPE, CARDNUM, EXPIRYDATE)
+  		values (#{paymentId}, #{cardType}, #{cardNum}, #{expiryDate})
+	</insert>
+	
+	<insert id="insertGroupOrder" parameterType="GroupOrder">
+		insert into grouporder (orderId, itemId, status, quantity)
+		values (#{orderId}, #{itemId}, #{status}, #{quantity})
 	</insert>
 	
 </mapper>

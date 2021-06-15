@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.example.lavrastore.dao.GroupItemDao;
 import com.example.lavrastore.dao.mybatis.mapper.GroupItemMapper;
 import com.example.lavrastore.domain.GroupItem;
+import com.example.lavrastore.domain.Order;
 
 @Repository
 public class MybatisGroupItemDao implements GroupItemDao{
@@ -56,8 +57,8 @@ public class MybatisGroupItemDao implements GroupItemDao{
 		return groupItemMapper.deleteGItem(itemId);
 	}
 
-	public int updateNowBalance(int totalPrice) throws DataAccessException {
-		return groupItemMapper.updateNowBalance(totalPrice);
+	public int updateNowBalance(int itemId, int total) throws DataAccessException {
+		return groupItemMapper.updateNowBalance(itemId, total);
 	}
 
 	

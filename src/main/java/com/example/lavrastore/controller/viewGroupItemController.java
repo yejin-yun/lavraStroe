@@ -24,7 +24,8 @@ import com.example.lavrastore.service.PetStoreFacade;
 @SessionAttributes("gitemListPage")
 public class viewGroupItemController {
 	private PetStoreFacade petStore;
-
+	private int totalPageSize;
+	
 	@Autowired
 	public void setPetStore(PetStoreFacade petStore) {
 		this.petStore = petStore;
@@ -35,13 +36,18 @@ public class viewGroupItemController {
 			@RequestParam(value="page", defaultValue="1") int page,
 			Model model) { //@RequestParam(value="page", required=false) String page // https://pythonq.com/so/spring/1003345
 		
+		List<GroupItem> gList = null;
+		gList = petStore.getAllGItemList();
 		PagedListHolder<GroupItem> gitemListPage;
-		gitemListPage = new PagedListHolder<GroupItem>(petStore.getAllGItemList());
+		gitemListPage = new PagedListHolder<GroupItem>(gList);
 
 		gitemListPage.setPageSize(12);
 
-		gitemListPage.setPage(page);
-
+		gitemListPage.setPage(page -1 );
+		totalPageSize = gList.size() / 12;
+		if (gList.size() % 12 != 0) {
+			totalPageSize++;
+		}
 		
 		List<GroupItem> gitemList = gitemListPage.getPageList();
 		for(GroupItem g : gitemList) {
@@ -50,8 +56,9 @@ public class viewGroupItemController {
 		}
 		
 		model.addAttribute("gitemList", gitemList);
+		model.addAttribute("totalPageSize", totalPageSize);
 		
-		return "groupPage";
+		return "groupPage"; 
 	}
 	
 	
@@ -70,6 +77,5 @@ public class viewGroupItemController {
 		return "groupItemPage";
 	
 	}
-	
 		
 }

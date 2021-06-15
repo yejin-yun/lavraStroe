@@ -46,6 +46,7 @@ ${gitem.item.itemId} , ${amount} <br/>
 <div style="width: 90%; margin-left : 25%">
 <c:set var="targetUrl"><c:url value="/group/newOrderSubmitted.do" /></c:set>
 <form:form modelAttribute="myOrder"  action="${targetUrl}" method="post">
+ <form:errors cssClass="error" />
 <input type="hidden" name="itemId" value="${gitem.item.itemId}">
 상품 정보 :
 <table border = "0">
@@ -77,15 +78,15 @@ ${gitem.item.itemId} , ${amount} <br/>
 	</tr>
 	<tr>
 		<td>우편 번호 </td> 
-		<td> <form:input path="shipZip" /></td>
+		<td> <form:input path="shipZip" /> </br> <form:errors path="shipZip" /></td>
 	</tr>
 	<tr>
 		<td>배송지 주소1 </td> 
-		<td> <form:input path="shipAddr1"/> </td>
+		<td> <form:input path="shipAddr1"/> </br> <form:errors path="shipAddr1" /> </td>
 	</tr>
 	<tr>
 		<td>배송지 주소2 </td> 
-		<td> <form:input path="shipAddr2"/> </td>
+		<td> <form:input path="shipAddr2"/> </br> <form:errors path="shipAddr2" /> </td>
 	</tr>
 </table>
 <br/>
@@ -103,15 +104,15 @@ ${gitem.item.itemId} , ${amount} <br/>
  		<table border = "0">
  			 <tr>
       			<td>Card Type:</td>
-      			<td><form:select path="cardType" items="${creditCardTypes}" />
+      			<td><form:select path="cardType" items="${creditCardTypes}" /> </td>
     		</tr>
     		<tr>
 			     <td>Card Number:</td>
-			     <td><form:input path="cardNum" placeholder="ex : 9999 9999 9999 9999 "/> </td>
+			     <td><form:input path="cardNum" placeholder="ex : 9999 9999 9999 9999 "/> </br> <form:errors path="cardNum" />  </td>
 			</tr>
 			<tr>
 			     <td>Expiry Date : </td>
-			     <td><form:input path="expiryDate" placeholder="ex : (MM/YY)"/> </td>
+			     <td><form:input path="expiryDate" placeholder="ex : (MM/YY)"/> </br> <form:errors path="expiryDate" />  </td>
 			</tr>
  		</table>
  	</td>
