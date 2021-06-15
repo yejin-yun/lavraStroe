@@ -334,6 +334,10 @@ public class PetStoreImpl implements PetStoreFacade {
 	public int deleteWishList(int wishListId) throws DataAccessException{
 		return wishlistDao.deleteWishList(wishListId);
 	}
+	
+	public int deleteWishListByItemIdAndMemberId(int itemId, String memberId) throws DataAccessException {
+		return wishlistDao.deleteWishListByItemIdAndMemberId(itemId, memberId);
+	}
 
 	@Override
 	public void insertOrder(Order myOrder) {

@@ -157,7 +157,7 @@ public class ItemController {
 				return "success";
 			}
 		} else {
-			int rst = lavraStore.deleteWishList(itemId);
+			int rst = lavraStore.deleteWishListByItemIdAndMemberId(itemId, member.getMemberId());
 
 			if (rst == 0) {
 				return "falid";

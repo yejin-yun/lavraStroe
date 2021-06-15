@@ -38,6 +38,13 @@
 		DELETE FROM
 		WISHLIST
 		WHERE
-		itemId = #{itemId}
+		wishListId = #{wishListId}
+	</delete>
+	
+	<delete id="deleteWishListByItemIdAndMemberId">
+		DELETE FROM
+		WISHLIST
+		WHERE
+		itemId = #{itemId} AND memberId = #{memberId}
 	</delete>
  </mapper>

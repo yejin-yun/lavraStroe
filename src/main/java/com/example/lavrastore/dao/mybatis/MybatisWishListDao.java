@@ -37,5 +37,9 @@ public class MybatisWishListDao implements WishListDao {
 	public int deleteWishList(int wishListId) throws DataAccessException {
 		return wishListMapper.deleteWishList(wishListId);
 	}
+	
+	public int deleteWishListByItemIdAndMemberId(int itemId, String memberId) throws DataAccessException {
+		return wishListMapper.deleteWishListByItemIdAndMemberId(itemId, memberId);
+	}
 
 }

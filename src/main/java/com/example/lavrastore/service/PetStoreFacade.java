@@ -134,6 +134,7 @@ public interface PetStoreFacade {
 	int insertWishList(WishList wishList);
 	
 	/* Delete */
+	int deleteWishListByItemIdAndMemberId(int itemId, String memberId);
 	int deleteWishList(int wishListId);
 	List<WishList> findByMemberId(String memberId);
 	

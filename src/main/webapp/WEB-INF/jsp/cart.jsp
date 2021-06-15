@@ -163,8 +163,14 @@
 	    			<c:set var="item" value="${cartItem.item}" />
 	    			<c:set var="itemTotalCost" value="${item.price * cartItem.quantity}" />
 	    			<td><input type="checkbox" name="checkCartItem" value="${cartItem.cartItemId}" id="${cartItem.cartItemId}" class="checkWish allCheckbox"/> </td>
-	    			<td><img style="height: 50px;" src="<c:url value='${item.image}' />" /></td>
-	    			<td>${item.title}</td>
+	    			
+	    			<td>
+	    			<a href="<c:url value='/accessory/detail'>
+		            				<c:param name='no' value='${item.itemId}' /></c:url>">
+	    			<img style="height: 50px;" src="<c:url value='${item.image}' />" /></a></td>
+	    			<td><a href="<c:url value='/accessory/detail'>
+		            				<c:param name='no' value='${item.itemId}' /></c:url>">
+		            	${item.title}</a></td>
 	    			<td>
 	    			<c:choose>
 						<c:when test="${item.isSoldout == 0}">
@@ -195,7 +201,7 @@
          	<input type="button" value="전체 선택" id="allCheck" > 
          	<input type="button" value="전체 해제" id="allReset">
 			<input type="button" value="선택 상품 모두 삭제" onClick="checkConfirm('<c:url value='/cart/handling/del' />')">
-			<input type="button" value="선택 상품 장바구니 이동" onClick="checkConfirm('<c:url value='/cart/handling/order' />')">
+			<input type="button" value="선택 상품 모두 주문" onClick="checkConfirm('<c:url value='/cart/handling/order' />')">
 		 </div>
     </div>
 	</form>
