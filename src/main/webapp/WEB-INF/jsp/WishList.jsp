@@ -170,7 +170,7 @@
 	    <div id="paging">
 			<c:forEach var="val" begin="1" end="${totalPageSize}"
 				varStatus="status">
-				<a href='<c:url value="/cart/view/${categoryId}?page=${val}"/>'>
+				<a href='<c:url value="/shop/wishList.do?page=${val}"/>'>
 					<font color="black"><B>${val}</B></font>
 				</a>
 				<c:if test="${!status.last}">&nbsp;|&nbsp;</c:if>

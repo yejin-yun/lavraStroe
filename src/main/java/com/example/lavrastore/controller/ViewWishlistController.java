@@ -83,8 +83,8 @@ public class ViewWishlistController {
 		  }
 	  
 	 @Transactional
-	  @PostMapping("/wishlist/handling/{kind}")
-	  public String handleCart(
+	  @PostMapping("/wishlist/handling/del")
+	  public String Delwish(
 			  @PathVariable String kind,
 			  HttpServletRequest request) {
 		  
@@ -96,23 +96,15 @@ public class ViewWishlistController {
 		 
 		 String memberId = member.getMemberId();
 		 
-		 String[] checkWistListItem = request.getParameterValues("checkWistListItem");
+		 String[] checkWistListItem = request.getParameterValues("checkCartItem");
 		 
 		 if(checkWistListItem == null) {
 			 return "redirect:error";
 		 }
-		 
-		 switch(kind) {
-		 	case "del":
-		 		for(int i = 0; i < checkWistListItem.length; i++) {
-					 int wishListId = Integer.parseInt(checkWistListItem[i]);
-					 petStore.deleteWishList(wishListId);
-				}
-		 		break;
-		 	default:
-		 		return "redirect:error";
-		 }
-		 
+		 for(int i = 0; i < checkWistListItem.length; i++) {
+			 int wishListId = Integer.parseInt(checkWistListItem[i]);
+			 petStore.deleteWishList(wishListId);
+		}
 		 return "redirect:/shop/wishList.do";
 	  }
 	  
