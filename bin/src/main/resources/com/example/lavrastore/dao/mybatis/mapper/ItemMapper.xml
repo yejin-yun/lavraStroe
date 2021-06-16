@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.example.lavrastore.dao.mybatis.mapper.ItemMapper">
+	<cache />
+
+	<select id="getItemListByProduct" resultType="Item">
+		SELECT
+		itemId,
+		i.productId,
+		image,
+		description,
+		title,
+		price,
+		isSoldout,
+		likeCnt
+		quantity
+		FROM ITEM i, PRODUCT p
+		WHERE p.productId = i.productId AND i.productId = #{value}
+	</select>
+
+	<select id="getItem" resultType="Item">
+		SELECT
+		itemId,
+		productId,
+		image,
+		description,
+		title,
+		price,
+		isSoldout,
+		likeCnt,
+		quantity
+		FROM ITEM
+		WHERE itemId
+		= #{itemId}
+	</select>
+
+	<select id="getItemForUser"
+		resultMap="itemForUser">
+		SELECT
+		i.itemId AS itemId, 
+        i.productId AS productId, 
+        i.image AS image, 
+        i.description AS description, 
+        i.title AS title, 
+        i.price AS price,
+		i.isSoldout AS isSoldout, 
+        i.likeCnt AS likeCnt, 
+        i.quantity AS quantity, NVL(w.wishlistId, 0) AS wishlistId
+		FROM ITEM i, WISHLIST w
+		WHERE i.itemId = w.itemId(+)
+		AND w.memberId(+) = #{memberId}
+		AND i.productId = #{productId}
+		AND i.isSoldout = 0
+		ORDER BY likeCnt DESC
+	</select>
+
+	<resultMap id="itemForUser" type="Item"> <!-- 데베프 교재 649p -->
+		<id column="itemId" property="itemId" />
+		<result column="productId" property="productId" />
+		<result column="image" property="image" />
+		<result column="description" property="description" />
+		<result column="title" property="title" />
+		<result column="price" property="price" />
+		<result column="isSoldout" property="isSoldout" />
+		<result column="likeCnt" property="likeCnt" />
+		<result column="quantity" property="quantity" />
+		<result column="wishlistId" property="isInWishlist" />
+		<result column="cartItemId" property="isInCart" />
+	</resultMap>
+
+	<select id="getItemForNotUser" resultType="Item">
+		SELECT
+		itemId,
+		i.productId,
+		image,
+		description,
+		title,
+		price,
+		isSoldout,
+		likeCnt
+		quantity
+		FROM ITEM i, PRODUCT p
+		WHERE p.productId = i.productId AND i.productId = #{productId} AND isSoldout = 0
+		ORDER BY likeCnt DESC
+	</select>
+
+	<select id="getItemOrderByHighPriceForUser"
+		resultMap="itemOrderByHighPriceForUser">
+		SELECT
+		i.itemId AS itemId, 
+        i.productId AS productId, 
+        i.image AS image, 
+        i.description AS description, 
+        i.title AS title, 
+        i.price AS price,
+		i.isSoldout AS isSoldout, 
+        i.likeCnt AS likeCnt, 
+        i.quantity AS quantity, NVL(w.wishlistId, 0) AS wishlistId
+		FROM ITEM i, WISHLIST w
+		WHERE i.itemId = w.itemId(+)
+		AND w.memberId(+) = #{memberId}
+		AND i.productId = #{productId}
+		AND i.isSoldout = 0
+		ORDER BY price DESC
+	</select>
+
+	<resultMap id="itemOrderByHighPriceForUser" type="Item"> <!-- 데베프 교재 649p -->
+		<id column="itemId" property="itemId" />
+		<result column="productId" property="productId" />
+		<result column="image" property="image" />
+		<result column="description" property="description" />
+		<result column="title" property="title" />
+		<result column="price" property="price" />
+		<result column="isSoldout" property="isSoldout" />
+		<result column="likeCnt" property="likeCnt" />
+		<result column="quantity" property="quantity" />
+		<result column="wishlistId" property="isInWishlist" />
+		<result column="cartItemId" property="isInCart" />
+	</resultMap>
+
+	<select id="getItemOrderByHighPriceForNotUser" resultType="Item">
+		SELECT
+		itemId,
+		i.productId,
+		image,
+		description,
+		title,
+		price,
+		isSoldout,
+		likeCnt
+		quantity
+		FROM ITEM i, PRODUCT p
+		WHERE p.productId = i.productId AND i.productId = #{productId} AND isSoldout = 0
+		ORDER BY price DESC
+	</select>
+
+	<select id="getItemOrderByLowPriceForUser"
+		resultMap="itemOrderByLowPriceForUser">
+		SELECT
+		i.itemId AS itemId, 
+        i.productId AS productId, 
+        i.image AS image, 
+        i.description AS description, 
+        i.title AS title, 
+        i.price AS price,
+		i.isSoldout AS isSoldout, 
+        i.likeCnt AS likeCnt, 
+        i.quantity AS quantity, NVL(w.wishlistId, 0) AS wishlistId
+		FROM ITEM i, WISHLIST w
+		WHERE i.itemId = w.itemId(+)
+		AND w.memberId(+) = #{memberId}
+		AND i.productId = #{productId}
+		AND i.isSoldout = 0
+		ORDER BY price ASC
+	</select>
+
+	<resultMap id="itemOrderByLowPriceForUser" type="Item"> <!-- 데베프 교재 649p -->
+		<id column="itemId" property="itemId" />
+		<result column="productId" property="productId" />
+		<result column="image" property="image" />
+		<result column="description" property="description" />
+		<result column="title" property="title" />
+		<result column="price" property="price" />
+		<result column="isSoldout" property="isSoldout" />
+		<result column="likeCnt" property="likeCnt" />
+		<result column="quantity" property="quantity" />
+		<result column="wishlistId" property="isInWishlist" />
+		<result column="cartItemId" property="isInCart" />
+	</resultMap>
+
+	<select id="getItemOrderByLowPriceForNotUser" resultType="Item">
+		SELECT
+		itemId,
+		i.productId,
+		image,
+		description,
+		title,
+		price,
+		isSoldout,
+		likeCnt
+		quantity
+		FROM ITEM i, PRODUCT p
+		WHERE p.productId = i.productId AND i.productId = #{productId} AND isSoldout = 0
+		ORDER BY price ASC
+	</select>
+
+	<insert id="insertItem" parameterType="Item">
+		<selectKey keyProperty="itemId" resultType="int"
+			order="BEFORE">
+			SELECT seq_pk_item.nextval AS itemId FROM DUAL
+		</selectKey>
+		INSERT INTO Item (itemId, productId, image, description, title, price,
+		isSoldout, likeCnt, quantity)
+		VALUES (#{productId}, #{image},
+		#{description}, #{title}, #{price}, #{isSoldout}, #{likeCnt},
+		#{quantity})
+	</insert>
+
+	<update id="updateItem" parameterType="Item">
+		UPDATE Item
+		SET productId =
+		#{productId}, image = #{image}, description = #{description}, title =
+		#{title}, price = #{price}, isSoldout = #{isSoldout}, likeCnt =
+		#{likeCnt}, quantity = #{quantity}
+		WHERE itemId = #{itemId}
+	</update>
+
+	<delete id="deleteItem" parameterType="Item">
+		DELETE FROM
+		Item
+		WHERE
+		itemId = #{itemId}
+	</delete>
+
+	<!-- 아래 지울 것 -->
+	<select id="getInventoryQuantity" resultType="int"> SELECT QTY AS
+		value
+		FROM INVENTORY WHERE ITEMID = #{itemId}
+	</select>
+
+	<update id="updateInventoryQuantity">
+		UPDATE INVENTORY SET QTY = QTY - #{increment} WHERE ITEMID = #{itemId}
+	</update>
+</mapper>

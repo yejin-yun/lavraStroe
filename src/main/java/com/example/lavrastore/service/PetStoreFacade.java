@@ -11,6 +11,7 @@ import com.example.lavrastore.domain.GroupItem;
 import com.example.lavrastore.domain.Item;
 import com.example.lavrastore.domain.Member;
 import com.example.lavrastore.domain.Order;
+import com.example.lavrastore.domain.PTPItem;
 import com.example.lavrastore.domain.Product;
 import com.example.lavrastore.domain.WishList;
 
@@ -103,6 +104,19 @@ public interface PetStoreFacade {
 	int updateGItem(GroupItem gitem) throws DataAccessException; 
 	
 	int deleteGItem(int itemId) throws DataAccessException;
+	
+	/* ptpItem */
+	PTPItem getPItem(int itemid);
+	
+	List<PTPItem> getPItemListByProduct(int productId);
+	
+	// 가격순
+	List<PTPItem> getPItemListByHighPrice();
+	List<PTPItem> getPItemListByLowPrice();
+	
+	int insertPItem();
+	int updatePItem(int itemId);
+	int deletePItem(int itemId);
 	
 	
 	//order

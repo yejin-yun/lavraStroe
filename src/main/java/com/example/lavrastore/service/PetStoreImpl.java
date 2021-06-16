@@ -24,6 +24,7 @@ import com.example.lavrastore.domain.GroupItem;
 import com.example.lavrastore.domain.Item;
 import com.example.lavrastore.domain.Member;
 import com.example.lavrastore.domain.Order;
+import com.example.lavrastore.domain.PTPItem;
 import com.example.lavrastore.domain.Product;
 import com.example.lavrastore.domain.WishList;
 
@@ -314,11 +315,54 @@ public class PetStoreImpl implements PetStoreFacade {
 		return groupItemDao.getGItem(itemid);
 	}
 	
+	/* ptp Item */
+	@Override
+	public PTPItem getPItem(int itemid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PTPItem> getPItemListByProduct(int productId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PTPItem> getPItemListByHighPrice() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PTPItem> getPItemListByLowPrice() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int insertPItem() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int updatePItem(int itemId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deletePItem(int itemId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
 	@Override
 	public List<WishList> getAllWishList() throws DataAccessException{
 		return wishlistDao.getAllWishList();
 	}
-	
+
 	@Override
 	public List<Item> getItemByWishListId(String MemberId) throws DataAccessException{
 		return (List<Item>) wishlistDao.getWishListById(MemberId);

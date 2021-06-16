@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 수정중 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.lavrastore.dao.mybatis.mapper.WishListMapper">
+  <cache />
+	<select id="getAllWishList" resultType="WishList">
+		SELECT itemId, wishListId, MemderId
+		FROM WISHLIST
+	</select>
+
+	
+	<select id="getWishListById" parameterType="String" resultType="Item">
+		SELECT 
+		w.itemId,
+		i.poductId,
+		i.image,
+		i.description,
+		i.title,
+		i.price,
+		i.isSoldout,
+		i.likeCnt
+		i.quantity
+		FROM WISHLIST w, ITEM i
+		WHERE i.itemId = w.itemId
+		 AND w.MemberID = #{value}
+	</select>
+  
+  	<insert id="insertWishList" parameterType="WishList">
+		<selectKey keyProperty="wishListId" resultType="int" order="BEFORE">
+			SELECT seq_pk.nextval AS wishListId FROM DUAL
+		</selectKey>
+		INSERT INTO WISHLIST (wishlistId, ItemId, MemberId)
+		VALUES (#{ItemId}, #{MemberId})
+	</insert>
+
+	<delete id="deleteWishList" parameterType="WishList">
+		DELETE FROM
+		WISHLIST
+		WHERE
+		wishListId = #{value}
+	</delete>
+ </mapper>

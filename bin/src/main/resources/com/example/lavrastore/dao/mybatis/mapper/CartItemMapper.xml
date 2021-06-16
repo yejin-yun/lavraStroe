@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.lavrastore.dao.mybatis.mapper.CartItemMapper">
+  <cache />
+	<select id="getAllCartList" resultType="CartItem">
+		SELECT cartItemId, quantity, itemId, categoryId, memberId
+		FROM CARTITEM
+	</select>
+	<!-- parameter가 2개 이상인 경우 Mapper 메소드의 parameter의 이름과  #{} 안의 이름이 다르면 안되는 듯-->
+	<!-- 아래 3개 sql문 사실상 같은 거네.... -->
+	
+	<select id="getCartListByGeneralCategory" resultType="CartItem"> <!-- <select id="getCartListByGeneralCategory" parameterType="int" resultType="CartItem"> -->
+		SELECT cartItemId, quantity, itemId, categoryId, memberId
+		FROM CARTITEM
+		WHERE categoryId = #{categoryId} AND memberId = #{memberId}
+	</select>
+	<select id="getCartListByGroupCategory" resultType="CartItem">
+		SELECT cartItemId, quantity, itemId, categoryId, memberId
+		FROM CARTITEM
+		WHERE categoryId = #{categoryId} AND memberId = #{memberId}
+	</select>
+	<select id="getCartListByPTPCategory" resultType="CartItem">
+		SELECT cartItemId, quantity, itemId, categoryId, memberId
+		FROM CARTITEM
+		WHERE categoryId = #{categoryId} AND memberId = #{memberId}
+	</select>
+ 	
+	<!-- 	<resultMap id="cartItemResult" type="CartItem">
+		<id column="cartItemId" property="cartItemId"/>
+		<result column="quantity" property="quantity"/>
+		<result column="itemId" property="itemId"/>
+		<result column="categoryId" property="categoryId"/>
+		<result column="memberId" property="memberId"/>
+		
+		<association property="item" column="itemId" javaType="Item">
+		
+		</association>
+	</resultMap> -->
+	<select id="getItemByCartItemId" resultType="Item"> <!--  parameterType="int" 제거해줘야 함. memberId는 String임 -->
+		SELECT 
+		i.itemId,
+		productId,
+		image,
+		description,
+		title,
+		price,
+		isSoldout,
+		likeCnt,
+		i.quantity
+		FROM ITEM i, CARTITEM c
+		WHERE i.itemId = c.itemId
+		AND c.cartItemId = #{cartItemId} AND memberId = #{memberId}
+	</select>
+  
+  	<insert id="insertCartItem" parameterType="CartItem">
+		<selectKey keyProperty="cartItemId" resultType="int" order="BEFORE">
+			SELECT seq_pk_cart.nextval AS cartItemId FROM DUAL
+		</selectKey>
+		INSERT INTO CARTITEM (cartItemId, quantity, itemId, categoryId, memberId)
+		VALUES (#{cartItemId}, #{quantity}, #{item.itemId}, #{categoryId}, #{memberId})
+	</insert>
+
+	<update id="updateCartItem" parameterType="CartItem">
+		UPDATE CARTITEM
+		SET cartItemId = #{cartItemId}, quantity = #{quantity}, itemId = #{item.itemId}, categoryId = #{categoryId}, memberId = #{memberId}
+		WHERE cartItemId = #{value}
+	</update>
+	
+	<update id="updateQuantity">
+		UPDATE CARTITEM
+		SET quantity = #{quantity}
+		WHERE cartItemId = #{cartItemId}
+	</update>
+
+	<delete id="deleteCartItem" parameterType="CartItem">
+		DELETE FROM
+		CARTITEM
+		WHERE
+		cartItemId = #{value}
+	</delete>
+ </mapper>
