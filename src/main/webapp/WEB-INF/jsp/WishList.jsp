@@ -46,16 +46,30 @@
 	<script>
 		$(document).ready(function() {
 			$('#allCheck').click(function(){
+				$('input[name=checkWishList]:checkbox').attr('checked', true); // input type 중 name이 checkCartItem이고, type이 checkbox인 경우
+				//$('#quantity'+1029).val(String(1121));
+			});
+			$('#allReset').click(function(){
+				$('input[name=checkWishList]:checkbox').attr('checked', false); 
+			});
+		
+		});
+	</script>
+	<script>
+		$(document).ready(function() {
+			$('#allCheck').click(function(){
 				$('input[name=checkCartItem]:checkbox').attr('checked', true); // input type 중 name이 checkCartItem이고, type이 checkbox인 경우
 				//$('#quantity'+1029).val(String(1121));
 			});
 			$('#allReset').click(function(){
 				$('input[name=checkCartItem]:checkbox').attr('checked', false); 
 			});
-		
+					
 		});
+		
 	</script>
 	<script>
+	
 		function moveTarget(targetUri) {
 			form.action = targetUri;
 			form.submit();
@@ -82,51 +96,6 @@
 			moveTarget(targetUri);
 		}
 		
-	</script>
-	<script>	
-
-		function updateQuantity(id, itemQuantity, page){
-			var quantity = document.getElementById("quantity"+id).value;
-		
-			//document.getElementById("quantity"+id).value = quantity;
-			//$('#quantity'+id).val(quantity);
-			//alert(quantity + ' ' + "quantity"+id);
-			//console.log($.isNumeric(quantity));
-			if(quantity <= 0) {
-				alert('입력하신 값이 올바르지 않습니다.');
-				return false;
-			}
-			if(quantity > itemQuantity) {
-				alert('현재 재고가 충분하지 않습니다.');
-				return false;
-			} 
-			
-			var msg = {
-				"cartItemId" : id,
-				"quantity": quantity
-			}
-			var jsonStr = JSON.stringify(msg);
-
-			$.ajax({
-				type: "POST",
-				url: "/cart/uq",
-				contentType : "application/json",
-				data: jsonStr,
-				processData: false,
-				success: function(response) {
-					//alert('success = ' + response.cartItemId);
-					//alert(JSON.stringify(response));
-					//document.getElementById(response.cartItemId).value = response.quantity;
-					//$('#quantity'+response.cartItemId).val(String(response.quantity));
-					//$('input[name=quantity]').val(response.quantity); //.attr('value', response)
-					moveTarget('/cart/view/1?page='+page);
-					
-				},
-				error: function(){
-					alert("ERROR", arguments);
-				}
-			});
-		}
 	</script>
 </head>
 <body>
@@ -159,7 +128,9 @@
 	    			<c:set var="item" value="${wishlist.item}" />
 	    			<td><input type="checkbox" name="checkCartItem" value="${wishlist.wishListId}" id="${wishlist.wishListId}" class="checkWish allCheckbox"/> </td>
 	    			<td><img style="height: 50px;" src="<c:url value='${item.image}' />" /></td>
-	    			<td>${item.title}</td>
+	    			<td><a href="<c:url value='/accessory/detail'>
+		            				<c:param name='no' value='${item.itemId}' /></c:url>">
+		            	${item.title}</a></td>
 	    			<td>
 	    			<fmt:formatNumber value="${item.price}" pattern="###,###,###"/>원
 	    			</td>
@@ -179,7 +150,7 @@
 		<div class="w3-center funcs">
          	<input type="button" value="전체 선택" id="allCheck" > 
          	<input type="button" value="전체 해제" id="allReset">
-			<input type="button" value="선택 상품 모두 삭제" onClick="checkConfirm('<c:url value='/wishlit/handling/del' />')">
+			<input type="button" value="선택 상품 모두 삭제" onClick="checkConfirm('<c:url value='/wishlit/handling/del'/>')">
 			 </div>
     </div>
 	</form>

@@ -82,10 +82,9 @@ public class ViewWishlistController {
 			  return "WishList";
 		  }
 	  
-	 @Transactional
-	  @PostMapping("/wishlist/handling/del")
-	  public String Delwish(
-			  @PathVariable String kind,
+	  @Transactional
+	  @PostMapping("/wishlit/handling/del")
+	  public String handleCart(
 			  HttpServletRequest request) {
 		  
 		 Member member;
@@ -96,15 +95,16 @@ public class ViewWishlistController {
 		 
 		 String memberId = member.getMemberId();
 		 
-		 String[] checkWistListItem = request.getParameterValues("checkCartItem");
+		 String[] checkCartItem = request.getParameterValues("checkCartItem");
 		 
-		 if(checkWistListItem == null) {
+		 if(checkCartItem == null) {
 			 return "redirect:error";
 		 }
-		 for(int i = 0; i < checkWistListItem.length; i++) {
-			 int wishListId = Integer.parseInt(checkWistListItem[i]);
-			 petStore.deleteWishList(wishListId);
+		 for(int i = 0; i < checkCartItem.length; i++) {
+			int wishListId = Integer.parseInt(checkCartItem[i]);
+			petStore.deleteWishList(wishListId);
 		}
+		 
 		 return "redirect:/shop/wishList.do";
 	  }
 	  
