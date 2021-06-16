@@ -9,6 +9,7 @@ import com.example.lavrastore.domain.CartItem;
 import com.example.lavrastore.domain.Category;
 import com.example.lavrastore.domain.GroupItem;
 import com.example.lavrastore.domain.Item;
+import com.example.lavrastore.domain.LineItem;
 import com.example.lavrastore.domain.Member;
 import com.example.lavrastore.domain.Order;
 import com.example.lavrastore.domain.PTPItem;
@@ -73,7 +74,7 @@ public interface PetStoreFacade {
 	List<Item> getItemOrderByLowPriceForNotUser(int productId);
 
 	int insertItem(int itemId);
-	int updateItem(int itemId); // ppt ItemDao의 update 부분의 기능들을 다 합침.
+	int updateItem(Item item); // ppt ItemDao의 update 부분의 기능들을 다 합침.
 	int deleteItem(int itemId);
 	
 	
@@ -124,6 +125,7 @@ public interface PetStoreFacade {
 	List<CartItem> getCartListByGroupCategory(int categoryId, String memberId);
 	List<CartItem> getCartListByPTPCategory(int categoryId, String memberId);
 	Item getItemByCartItemId(int cartItemId, String memberId); //cartItemId로 cartItem에 있는 Item 가져오기
+	CartItem getCartItemById(int cartItemId);
 	
 	int insertCartItem(CartItem cartItem);
 	int updateCartItem(CartItem cartItem); // ppt에 있는 메소드들 합침. 
@@ -135,6 +137,7 @@ public interface PetStoreFacade {
 	WishList findBywishListId(int wishListId);
 	/* Read */
 	List<WishList> getAllWishList();
+	int getWishListByItemIdAndMemberId(int itemId, String memberId);
 	
 	/* Create */
 	int insertWishList(WishList wishList);
@@ -151,4 +154,8 @@ public interface PetStoreFacade {
 	void deleteCartItemById(int cartItemId);
 	CartItem findCartItemByItemItemIdAndMemberId(int itemId, String memberId);
 
+	/*LineItem*/
+	
+	List<LineItem> getLineItemByOrderId(int orderId);
+	int insertLineItem(LineItem lineItem);
 }

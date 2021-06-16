@@ -10,7 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import com.example.lavrastore.dao.LineItemDao;
 import com.example.lavrastore.dao.CartItemDao;
 import com.example.lavrastore.dao.CategoryDao;
 import com.example.lavrastore.dao.GroupItemDao;
@@ -25,6 +25,7 @@ import com.example.lavrastore.domain.CartItem;
 import com.example.lavrastore.domain.Category;
 import com.example.lavrastore.domain.GroupItem;
 import com.example.lavrastore.domain.Item;
+import com.example.lavrastore.domain.LineItem;
 import com.example.lavrastore.domain.Member;
 import com.example.lavrastore.domain.Order;
 import com.example.lavrastore.domain.PTPItem;
@@ -47,8 +48,9 @@ public class PetStoreImpl implements PetStoreFacade {
 	@Autowired
 	private MemberDao memberDao;
 	@Autowired
-
 	private WishListDao wishlistDao;
+	@Autowired
+	private LineItemDao lineItemDao;
 	
 	@Autowired
 	private CartItemRepository cartItemRepository;
@@ -195,8 +197,8 @@ public class PetStoreImpl implements PetStoreFacade {
 	}
 
 	@Override
-	public int updateItem(int itemId) {
-		return itemDao.updateItem(itemId);
+	public int updateItem(Item item) {
+		return itemDao.updateItem(item);
 	}
 
 	@Override
@@ -231,6 +233,10 @@ public class PetStoreImpl implements PetStoreFacade {
 		return cartItemDao.getItemByCartItemId(cartItemId, memberId);
 	}
 
+	public CartItem getCartItemById(int cartItemId) {
+		return cartItemDao.getCartItemById(cartItemId);
+	}
+	
 	@Override
 	public int insertCartItem(CartItem cartItem) {
 		return cartItemDao.insertCartItem(cartItem);
@@ -365,6 +371,11 @@ public class PetStoreImpl implements PetStoreFacade {
 	public Item getItemByWishListId(int wisilistId) throws DataAccessException{
 		return wishlistDao.getItemByWishListId(wisilistId);
 	}
+	
+	public int getWishListByItemIdAndMemberId(int itemId, String memberId) throws DataAccessException{ 
+		return wishlistDao.getWishListByItemIdAndMemberId(itemId, memberId);
+	}
+	
 	public WishList findBywishListId(int wishListId) {
 		return wishListRepository.findBywishListId(wishListId);
 	}
@@ -383,6 +394,16 @@ public class PetStoreImpl implements PetStoreFacade {
 	@Override
 	public void insertOrder(Order myOrder) {
 		orderDao.insertOrder(myOrder);
+	}
+	
+	@Override
+	public List<LineItem> getLineItemByOrderId(int orderId) {
+		return lineItemDao.getLineItemByOrderId(orderId);
+	}
+
+	@Override
+	public int insertLineItem(LineItem lineItem) {
+		return lineItemDao.insertLineItem(lineItem);
 	}
 
 }

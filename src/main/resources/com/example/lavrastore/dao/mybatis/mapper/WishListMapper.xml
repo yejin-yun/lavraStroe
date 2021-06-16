@@ -26,6 +26,10 @@
 		 AND w.MemberID = #{value}
 	</select>
 	
+	<select id="getWishListByItemIdAndMemberId" resultType="Integer">
+		select count(*) from wishList where itemId = #{itemId} AND memberId = #{memberId}
+	</select>
+	
 	<select id="getItemByWishListId" resultType="Item"> <!--  parameterType="int" 제거해줘야 함. memberId는 String임 -->
 		SELECT 
 		i.itemId,

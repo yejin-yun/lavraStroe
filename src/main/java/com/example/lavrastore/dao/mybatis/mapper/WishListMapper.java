@@ -12,6 +12,7 @@ public interface WishListMapper {
 	/* Read */
 	List<WishList> getAllWishList();
 	Item getItemByWishListId(int wishListId);
+	int getWishListByItemIdAndMemberId(int itemId, String memberId);
 	
 	/* Create */
 	int insertWishList(WishList wishList);

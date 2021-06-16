@@ -20,6 +20,10 @@ public class MybatisWishListDao implements WishListDao {
 	public List<WishList> getAllWishList() throws DataAccessException {
 		return wishListMapper.getAllWishList();
 	}
+	
+	public int getWishListByItemIdAndMemberId(int itemId, String memberId) throws DataAccessException {
+		return wishListMapper.getWishListByItemIdAndMemberId(itemId, memberId);
+	}
 
 
 	@Override
