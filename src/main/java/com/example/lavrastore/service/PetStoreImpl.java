@@ -352,10 +352,6 @@ public class PetStoreImpl implements PetStoreFacade {
 		return wishlistDao.getAllWishList();
 	}
 
-	@Override
-	public List<Item> getItemByWishListId(String MemberId) throws DataAccessException{
-		return (List<Item>) wishlistDao.getWishListById(MemberId);
-	}
 
 	@Override
 	public int insertWishList(WishList wishList) throws DataAccessException{
@@ -365,6 +361,14 @@ public class PetStoreImpl implements PetStoreFacade {
 		return wishListRepository.findByMemberId(MemberId);
 	}
 
+	@Override
+	public Item getItemByWishListId(int wisilistId) throws DataAccessException{
+		return wishlistDao.getItemByWishListId(wisilistId);
+	}
+	public WishList findBywishListId(int wishListId) {
+		return wishListRepository.findBywishListId(wishListId);
+	}
+	
 	// Delete
 
 	@Override

@@ -131,10 +131,10 @@ public interface PetStoreFacade {
 	int deleteCartItem(int cartItemId);
 	
 	/*wishlist */
-	
+	Item getItemByWishListId(int wishListId);
+	WishList findBywishListId(int wishListId);
 	/* Read */
 	List<WishList> getAllWishList();
-	List<Item> getItemByWishListId(String MemberId);
 	
 	/* Create */
 	int insertWishList(WishList wishList);
