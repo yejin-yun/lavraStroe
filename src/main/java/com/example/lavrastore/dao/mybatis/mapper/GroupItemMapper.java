@@ -1,5 +1,6 @@
 package com.example.lavrastore.dao.mybatis.mapper;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -31,15 +32,11 @@ public interface GroupItemMapper {
 	//group - 인기순
 	List<GroupItem> getGItmeListByPercent();
 		
-	/* Create */
-	int insertGItem();
-	
-	/* Update */
-	int updateGItem(GroupItem gItem); 
+	//공구 주문 시 현재 모인 금액 update
 	int updateNowBalance(@Param("itemId") int itemId, @Param("total") int total);
 	
-	/* Delete */
-	int deleteGItem(int itemId);
+	// 마감 시간이 되면, 공구 진행 상태 update
+	void closeEvent(Date curTime);
 
 	
 }

@@ -23,8 +23,8 @@ public class MybatisWishListDao implements WishListDao {
 
 
 	@Override
-	public Item getWishListById(String MemberId) throws DataAccessException {
-		return (Item) wishListMapper.getItemByWishListId(MemberId);
+	public Item getItemByWishListId(int wishListId) throws DataAccessException {
+		return (Item) wishListMapper.getItemByWishListId(wishListId);
 	}
 
 	@Override

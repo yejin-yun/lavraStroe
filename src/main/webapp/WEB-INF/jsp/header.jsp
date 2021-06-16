@@ -49,11 +49,11 @@
                 </li>
                 <li id="work1"><a>개인 거래</a>
                     <ul class="work_sub_menu1 sub_menu" style="z-index:1000; position:absolute;">
-                        <li><a href="<c:url value='/accessory/earring/1' />">귀걸이</a></li> 
-                        <li><a href="<c:url value='' />">목걸이</a></li>
-                        <li><a href="<c:url value='' />">반지</a></li>
-                        <li><a href="<c:url value='' />">팔찌</a></li>
-                        <li><a href="<c:url value='' />">헤어장식</a></li>
+                        <li><a href="<c:url value='/accessory/earring/3' />">귀걸이</a></li> 
+                        <li><a href="<c:url value='/accessory/necklace/3' />">목걸이</a></li>
+                        <li><a href="<c:url value='/accessory/ring/3' />">반지</a></li>
+                        <li><a href="<c:url value='/accessory/bracelet/3' />">팔찌</a></li>
+                        <li><a href="<c:url value='/accessory/hairdeco/3' />">헤어장식</a></li>
                     </ul>
                 </li>
                 <li><a href="<c:url value='/group' />">공동구매</a></li>

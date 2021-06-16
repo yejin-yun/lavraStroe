@@ -8,4 +8,5 @@ import com.example.lavrastore.domain.WishList;
 
 public interface WishListRepository extends JpaRepository<WishList, Integer> {
 	List<WishList> findByMemberId(String memberId);
+	WishList findBywishListId(int wishListId);
 }

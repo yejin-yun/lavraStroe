@@ -1,10 +1,13 @@
 package com.example.lavrastore.service;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +27,7 @@ import com.example.lavrastore.domain.GroupItem;
 import com.example.lavrastore.domain.Item;
 import com.example.lavrastore.domain.Member;
 import com.example.lavrastore.domain.Order;
+import com.example.lavrastore.domain.PTPItem;
 import com.example.lavrastore.domain.Product;
 import com.example.lavrastore.domain.WishList;
 
@@ -294,35 +298,60 @@ public class PetStoreImpl implements PetStoreFacade {
 		return groupItemDao.getGItmeListByPercent();
 	}
 
-	@Override
-	public int insertGItem() throws DataAccessException {
-		return groupItemDao.insertGItem();
-	}
-
-	@Override
-	public int updateGItem(GroupItem gitem) throws DataAccessException {
-		return groupItemDao.updateGItem(gitem);
-	}
-
-	@Override
-	public int deleteGItem(int itemId) throws DataAccessException {
-		return groupItemDao.deleteGItem(itemId);
-	}
 
 	@Override
 	public GroupItem getGItem(int itemid) {
 		return groupItemDao.getGItem(itemid);
 	}
 	
+	/* ptp Item */
+	@Override
+	public PTPItem getPItem(int itemid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PTPItem> getPItemListByProduct(int productId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PTPItem> getPItemListByHighPrice() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PTPItem> getPItemListByLowPrice() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int insertPItem() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int updatePItem(int itemId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deletePItem(int itemId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
 	@Override
 	public List<WishList> getAllWishList() throws DataAccessException{
 		return wishlistDao.getAllWishList();
 	}
-	
-	@Override
-	public List<Item> getItemByWishListId(String MemberId) throws DataAccessException{
-		return (List<Item>) wishlistDao.getWishListById(MemberId);
-	}
+
 
 	@Override
 	public int insertWishList(WishList wishList) throws DataAccessException{
@@ -332,6 +361,14 @@ public class PetStoreImpl implements PetStoreFacade {
 		return wishListRepository.findByMemberId(MemberId);
 	}
 
+	@Override
+	public Item getItemByWishListId(int wisilistId) throws DataAccessException{
+		return wishlistDao.getItemByWishListId(wisilistId);
+	}
+	public WishList findBywishListId(int wishListId) {
+		return wishListRepository.findBywishListId(wishListId);
+	}
+	
 	// Delete
 
 	@Override
@@ -346,12 +383,6 @@ public class PetStoreImpl implements PetStoreFacade {
 	@Override
 	public void insertOrder(Order myOrder) {
 		orderDao.insertOrder(myOrder);
-		// -- 해야할 일 정리 : 먼저 Order랑 groupOrder 테이블에 정보 insert
-		// payment insert, payment가 카드 일 경우 creditcard 정보 insert
-		 // total price만큼 groupItem의 nowBalance update; -> nowBalance update
-		//트랜잭션 처리하기...
-		
 	}
-
 
 }

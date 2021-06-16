@@ -11,6 +11,7 @@ import com.example.lavrastore.domain.GroupItem;
 import com.example.lavrastore.domain.Item;
 import com.example.lavrastore.domain.Member;
 import com.example.lavrastore.domain.Order;
+import com.example.lavrastore.domain.PTPItem;
 import com.example.lavrastore.domain.Product;
 import com.example.lavrastore.domain.WishList;
 
@@ -96,14 +97,19 @@ public interface PetStoreFacade {
 	
 	//group - 인기순
 	List<GroupItem> getGItmeListByPercent();
-		
 	
-	int insertGItem() throws DataAccessException;
+	/* ptpItem */
+	PTPItem getPItem(int itemid);
 	
-	int updateGItem(GroupItem gitem) throws DataAccessException; 
+	List<PTPItem> getPItemListByProduct(int productId);
 	
-	int deleteGItem(int itemId) throws DataAccessException;
+	// 가격순
+	List<PTPItem> getPItemListByHighPrice();
+	List<PTPItem> getPItemListByLowPrice();
 	
+	int insertPItem();
+	int updatePItem(int itemId);
+	int deletePItem(int itemId);
 	
 	//order
 	void insertOrder(Order myOrder);
@@ -125,10 +131,10 @@ public interface PetStoreFacade {
 	int deleteCartItem(int cartItemId);
 	
 	/*wishlist */
-	
+	Item getItemByWishListId(int wishListId);
+	WishList findBywishListId(int wishListId);
 	/* Read */
 	List<WishList> getAllWishList();
-	List<Item> getItemByWishListId(String MemberId);
 	
 	/* Create */
 	int insertWishList(WishList wishList);

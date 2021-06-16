@@ -67,7 +67,9 @@
 	    	
 	    	<c:forEach var="item" items="${itemList.pageList}">
 	    		<tr>
-	    			<td>${item.title}</td>
+	    			<td><a href="<c:url value='/accessory/detail'>
+		            				<c:param name='no' value='${item.itemId}' /></c:url>">
+		            	${item.title}</a></td>
 	    			<td><img style="height: 50px;" src="<c:url value='${item.image}' />" /></td>
 	    			<td>${item.description}</td>
 	    			<td>

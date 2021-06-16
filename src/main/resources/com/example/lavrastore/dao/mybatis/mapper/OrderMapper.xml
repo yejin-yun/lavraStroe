@@ -30,4 +30,12 @@
 		values (#{orderId}, #{itemId}, #{status}, #{quantity})
 	</insert>
 	
+	<update id="updateGroupOrderStatus">
+		UPDATE groupOrder
+    	SET status = (
+        	select distinct i.status from groupItem i, groupOrder o
+        	where i.itemid = o.itemid
+    	)
+	</update>
+	
 </mapper>
