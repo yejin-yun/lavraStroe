@@ -11,7 +11,7 @@ import com.example.lavrastore.domain.WishList;
 public interface WishListMapper {
 	/* Read */
 	List<WishList> getAllWishList();
-	List<Item> getItemByWishListId(String MemberId);
+	Item getItemByWishListId(int wishListId);
 	
 	/* Create */
 	int insertWishList(WishList wishList);

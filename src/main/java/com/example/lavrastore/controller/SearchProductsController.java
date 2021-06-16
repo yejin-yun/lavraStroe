@@ -34,7 +34,7 @@ public class SearchProductsController {
 				return new ModelAndView("Error", "message", "Please enter a keyword to search for, then press the search button.");
 			}
 			PagedListHolder<Item> itemList = new PagedListHolder<Item>(this.petStore.searchItemList(keyword.toLowerCase()));
-			itemList.setPageSize(4);
+			itemList.setPageSize(12);
 			request.getSession().setAttribute("SearchProductsController_productList", itemList);
 			return new ModelAndView("SearchProducts", "itemList", itemList);
 		}

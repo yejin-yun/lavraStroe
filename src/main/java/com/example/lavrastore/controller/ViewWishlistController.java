@@ -1,12 +1,16 @@
 package com.example.lavrastore.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,44 +30,58 @@ import com.example.lavrastore.service.PetStoreFacade;
 public class ViewWishlistController {
 	private PetStoreFacade petStore;
 	UserSession userSession;
-
+	private int totalPageSize;
+	private int perPageSize = 6;
+	
 	@Autowired
 	public void setPetStore(PetStoreFacade petStore) {
 		this.petStore = petStore;
 	}
 
-	protected void checkLogin(HttpServletRequest request) {
-		userSession = (UserSession) request.getSession().getAttribute("userSession");
+	protected UserSession checkLogin(HttpServletRequest request) {
+		return userSession = (UserSession) request.getSession().getAttribute("userSession");
 	}
 	
-	@RequestMapping("/shop/wishList.do")
-	public ModelAndView handleRequest(HttpServletRequest request,
-			@RequestParam(value="page", required=false) String page
-			) throws Exception {
-		if (userSession != null) {
-			if (userSession == null) {
-				return new ModelAndView("Error", "message", "Please enter a keyword to search for, then press the search button.");
-			}
-			PagedListHolder<WishList> wishList = new PagedListHolder<WishList>(this.petStore.findByMemberId(userSession.getMember().getMemberId()));
-			wishList.setPageSize(12);
-			request.getSession().setAttribute("ViewWishlistController_productList", wishList);
-			return new ModelAndView("WishList", "wishList", wishList);
-		}
-		else {
-			@SuppressWarnings("unchecked")
-			PagedListHolder<WishList> wishList = (PagedListHolder<WishList>)request.getSession().getAttribute("ViewWishlistController_productList");
-			/*if (productList == null) {
-				return new ModelAndView("Error", "message", "Your session has timed out. Please start over again.");
-			}*/
-			if ("next".equals(page)) {
-				 wishList.nextPage();
-			}
-			else if ("previous".equals(page)) {
-				 wishList.previousPage();
-			}
-			return new ModelAndView("WishList", "wishList", wishList);
-		}
-	}
+
+	  @GetMapping
+	  @RequestMapping("/shop/wishList.do") 
+	  public String viewWishList(HttpServletRequest request,
+			  @RequestParam(value="page", defaultValue="1") int page,
+			  Model model) {
+
+			 Member member;
+			 userSession = checkLogin(request);
+			 if(userSession == null) { return "LoginForm"; }
+			 else {
+				member = userSession.getMember(); 
+			 }
+			
+			  List<WishList> wishItemList = null;
+			  
+			  wishItemList = this.petStore.findByMemberId(userSession.getMember().getMemberId());
+			  PagedListHolder<WishList> itemListPage = new PagedListHolder<WishList>(wishItemList);
+			  itemListPage.setPageSize(perPageSize);
+			  itemListPage.setPage(page - 1);
+			  
+			  List<WishList> WishItemListPerPage = itemListPage.getPageList();
+			  totalPageSize = wishItemList.size() / perPageSize; //나눌때는 전체 아이템 개수에 나눠야 페이지 수를 구할 수 있음. 
+			  System.out.println("carttest = " + wishItemList.size());
+			  if(wishItemList.size() % perPageSize != 0) {
+				  totalPageSize++;
+			  }
+			  System.out.println("totalPageSize = " + totalPageSize);
+			  for(WishList wishlist : WishItemListPerPage) {
+				  wishlist.setItem(petStore.getItemByWishListId(wishlist.getWishListId()));
+				  //cartItem.setItem(lavraStore.findItemByCategoryIdAndMemberId(cartItem.getCartItemId(), member.getMemberId())); //에러남
+			  }
+			  
+			  model.addAttribute("wishlist", WishItemListPerPage);
+			  model.addAttribute("totalPageSize", totalPageSize);
+			  model.addAttribute("curPage", page);
+				
+			  return "WishList";
+		  }
+	  
 	 @Transactional
 	  @PostMapping("/wishlist/handling/{kind}")
 	  public String handleCart(
@@ -95,7 +113,7 @@ public class ViewWishlistController {
 		 		return "redirect:error";
 		 }
 		 
-		 return "redirect:/cart/view/1";
+		 return "redirect:/shop/wishList.do";
 	  }
 	  
 }

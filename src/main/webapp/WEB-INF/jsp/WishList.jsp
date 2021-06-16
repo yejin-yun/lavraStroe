@@ -154,12 +154,10 @@
 	      </tr>
 	    </thead>
 	    <tbody>
-	    	<c:set var="allTotalCost" value="0" />
-	    	<c:forEach var="wishlist" items="${WishList}">
-	    		<c:set var="wishlistI" value="${cartItem.categoryId}" />
+	    	<c:forEach var="wishlist" items="${wishlist}">
 	    		<tr>
-	    			<c:set var="item" value="${WishList.item}" />
-	    			<td><input type="checkbox" name="checkCartItem" value="${WishList.wishListId}" id="${WishList.wishListId}" class="checkWish allCheckbox"/> </td>
+	    			<c:set var="item" value="${wishlist.item}" />
+	    			<td><input type="checkbox" name="checkCartItem" value="${wishlist.wishListId}" id="${wishlist.wishListId}" class="checkWish allCheckbox"/> </td>
 	    			<td><img style="height: 50px;" src="<c:url value='${item.image}' />" /></td>
 	    			<td>${item.title}</td>
 	    			<td>
