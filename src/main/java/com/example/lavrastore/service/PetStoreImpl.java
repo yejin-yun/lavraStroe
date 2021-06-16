@@ -1,10 +1,13 @@
 package com.example.lavrastore.service;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -294,20 +297,6 @@ public class PetStoreImpl implements PetStoreFacade {
 		return groupItemDao.getGItmeListByPercent();
 	}
 
-	@Override
-	public int insertGItem() throws DataAccessException {
-		return groupItemDao.insertGItem();
-	}
-
-	@Override
-	public int updateGItem(GroupItem gitem) throws DataAccessException {
-		return groupItemDao.updateGItem(gitem);
-	}
-
-	@Override
-	public int deleteGItem(int itemId) throws DataAccessException {
-		return groupItemDao.deleteGItem(itemId);
-	}
 
 	@Override
 	public GroupItem getGItem(int itemid) {
@@ -346,12 +335,6 @@ public class PetStoreImpl implements PetStoreFacade {
 	@Override
 	public void insertOrder(Order myOrder) {
 		orderDao.insertOrder(myOrder);
-		// -- 해야할 일 정리 : 먼저 Order랑 groupOrder 테이블에 정보 insert
-		// payment insert, payment가 카드 일 경우 creditcard 정보 insert
-		 // total price만큼 groupItem의 nowBalance update; -> nowBalance update
-		//트랜잭션 처리하기...
-		
 	}
-
 
 }

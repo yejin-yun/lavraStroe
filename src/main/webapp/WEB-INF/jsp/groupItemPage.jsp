@@ -82,7 +82,7 @@
 									<input type="submit" value="구매 신청하기">
 								</c:if>
 								<c:if test="${gitem.status != 0}">
-									<input type="submit" value="구매 신청하기" disabled>
+									<input type="submit" value="마감되었습니다" disabled>
 								</c:if>
 							</form>
 						</td>

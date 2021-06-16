@@ -15,4 +15,6 @@ public interface OrderMapper {
 	void insertCreditCard(Order order);
 
 	void insertGroupOrder(GroupOrder go);
+
+	void updateGroupOrderStatus();
 }

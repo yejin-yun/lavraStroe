@@ -50,4 +50,14 @@
 		WHERE itemId = #{itemId}
 	</update>
 	
+	<update id="closeEvent" parameterType="Date">
+    <![CDATA[
+     UPDATE groupItem SET STATUS = 
+     case
+     when nowbalance >= targetbalance then 1
+     when nowbalance < targetbalance then 2 
+     end
+     WHERE to_date(paymentdate, 'YYYY/MM/DD') <= #{curTime}
+    ]]> 
+  </update>
 </mapper>

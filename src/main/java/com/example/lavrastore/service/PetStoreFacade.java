@@ -96,14 +96,6 @@ public interface PetStoreFacade {
 	
 	//group - 인기순
 	List<GroupItem> getGItmeListByPercent();
-		
-	
-	int insertGItem() throws DataAccessException;
-	
-	int updateGItem(GroupItem gitem) throws DataAccessException; 
-	
-	int deleteGItem(int itemId) throws DataAccessException;
-	
 	
 	//order
 	void insertOrder(Order myOrder);

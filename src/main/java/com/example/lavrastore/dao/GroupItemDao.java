@@ -1,5 +1,6 @@
 package com.example.lavrastore.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
@@ -28,14 +29,8 @@ public interface GroupItemDao {
 	//group - 인기순
 	List<GroupItem> getGItmeListByPercent() throws DataAccessException;
 		
-	/* Create */
-	int insertGItem() throws DataAccessException;
-	
-	/* Update */
-	int updateGItem(GroupItem gItem) throws DataAccessException; 
-	int updateNowBalance(int itemId, int total) throws DataAccessException; 
-	
-	/* Delete */
-	int deleteGItem(int itemId) throws DataAccessException;
+
+	// 시간이 되면 마감된 그룹 아이템의 상태와 관련 오더들의 상태를 update
+	void closeEvent(Date curTime);
 	
 }

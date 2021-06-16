@@ -69,7 +69,10 @@
             					</c:url>"> 
                             	<h2>${groupitem.item.title}</h2>
                             	<p>${groupitem.item.price}원 &emsp;
-                            		진행도 : ${groupitem.percent}%</p>
+                            		진행도 : ${groupitem.percent}%
+                            		<c:if test="${groupitem.status == 0}"> <font> 진행중 </font> </c:if>	
+                            		<c:if test="${groupitem.status != 0}"> <font color='red'> 마감</font> </c:if>	
+                            	</p>
                             </a>
                         </div>
                     </div>
