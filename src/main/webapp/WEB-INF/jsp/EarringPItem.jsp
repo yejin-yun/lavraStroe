@@ -20,7 +20,7 @@
 	
 	<div id="sortSelect">
 		<c:forEach var="element" items="${sortData}" varStatus="status">
-			<a href='<c:url value="/accessory/${productName}/2?sort=${element}"/>'>
+			<a href='<c:url value="/accessory/${productName}/3?sort=${element}"/>'>
 				<font color="black"><B>${element}</B></font>
 			</a>
 			<c:if test="${!status.last}">&nbsp;|&nbsp;</c:if>
@@ -72,7 +72,7 @@
 		<div id="paging">
 			<c:forEach var="val" begin="1" end="${totalPageSize}"
 				varStatus="status">
-				<a href='<c:url value="/accessory/${productName}/2?page=${val}&sort=${sort}"/>'>
+				<a href='<c:url value="/accessory/${productName}/3?page=${val}&sort=${sort}"/>'>
 					<font color="black"><B>${val}</B></font>
 				</a>
 				<c:if test="${!status.last}">&nbsp;|&nbsp;</c:if>

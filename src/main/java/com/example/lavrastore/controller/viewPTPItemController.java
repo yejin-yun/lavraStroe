@@ -51,7 +51,7 @@ public class viewPTPItemController {
 	}
 	
 	@GetMapping
-	@RequestMapping("/accessory/{productName}/2")
+	@RequestMapping("/accessory/{productName}/3")
 	@Transactional
 	public String ViewEarringPItem(@PathVariable String productName,
 			@RequestParam(value="page", defaultValue="1") int page,
