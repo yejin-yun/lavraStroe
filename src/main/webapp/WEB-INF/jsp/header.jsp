@@ -41,19 +41,19 @@
                 <li id="work"><a>악세사리</a>
                     <ul class="work_sub_menu sub_menu" style="z-index:1000; position:absolute;">
                         <li><a href="<c:url value='/accessory/earring/1' />">귀걸이</a></li> 
-                        <li><a href="<c:url value='' />">목걸이</a></li>
-                        <li><a href="<c:url value='' />">반지</a></li>
-                        <li><a href="<c:url value='' />">팔찌</a></li>
-                        <li><a href="<c:url value='' />">헤어장식</a></li>
+                        <li><a href="<c:url value='/accessory/necklace/1' />">목걸이</a></li>
+                        <li><a href="<c:url value='/accessory/ring/1' />">반지</a></li>
+                        <li><a href="<c:url value='/accessory/bracelet/1' />">팔찌/발찌</a></li>
+                        <li><a href="<c:url value='/accessory/hairdeco/1' />">헤어장식</a></li>
                     </ul>
                 </li>
                 <li id="work1"><a>개인 거래</a>
                     <ul class="work_sub_menu1 sub_menu" style="z-index:1000; position:absolute;">
-                        <li><a href="<c:url value='/accessory/earring/1' />">귀걸이</a></li> 
-                        <li><a href="<c:url value='' />">목걸이</a></li>
-                        <li><a href="<c:url value='' />">반지</a></li>
-                        <li><a href="<c:url value='' />">팔찌</a></li>
-                        <li><a href="<c:url value='' />">헤어장식</a></li>
+                        <li><a href="<c:url value='/accessory/earring/3' />">귀걸이</a></li> 
+                        <li><a href="<c:url value='/accessory/necklace/3' />">목걸이</a></li>
+                        <li><a href="<c:url value='/accessory/ring/3' />">반지</a></li>
+                        <li><a href="<c:url value='/accessory/bracelet/3' />">팔찌</a></li>
+                        <li><a href="<c:url value='/accessory/hairdeco/3' />">헤어장식</a></li>
                     </ul>
                 </li>
                 <li><a href="<c:url value='/group' />">공동구매</a></li>

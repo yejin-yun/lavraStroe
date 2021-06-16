@@ -10,7 +10,7 @@ import com.example.lavrastore.domain.WishList;
 
 public interface WishListDao {
 	List<WishList> getAllWishList() throws DataAccessException;
-	Item getWishListById(String MemberID) throws DataAccessException;
+	Item getItemByWishListId(int wishListId) throws DataAccessException;
 
 	// Create
 	int insertWishList(WishList wishList) throws DataAccessException; // 0이면 실패, 0 초과는 성공

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.lavrastore.dao.mybatis.mapper.OrderMapper">
+	
+	<insert id="insertOrder" parameterType="Order">
+		<selectKey keyProperty="orderId" resultType="int" order="BEFORE">
+    		select SEQ_orderid.nextval FROM DUAL
+  		</selectKey>
+		insert into shopOrder (ORDERID, ORDERDATE, SHIPADDR1, SHIPADDR2, SHIPZIP, TOTALPRICE, SHIPNAME,
+		MEMBERID, CATEGORYID)
+    VALUES(#{orderId}, #{orderDate}, #{shipAddr1}, #{shipAddr2}, #{shipZip}, #{totalPrice}, 
+      #{shipname}, #{memberId}, #{categoryId})
+	</insert>
+	
+	<insert id="insertPayment" parameterType="int">
+ 		insert into payment (paymentid, orderid , paytype)
+  		values (#{p.pay}, #{p.ord}, #{payType})
+	</insert>
+	
+	<insert id="insertCreditCard" parameterType="Order">
+		<selectKey keyProperty="paymentid" resultType="int" order="BEFORE">
+    		select SEQ_paymentid.currval FROM DUAL
+  		</selectKey>
+ 		insert into payment (paymentid, CARDTYPE, CARDNUM, EXPIRYDATE,
+  		values (#{paymentid}, #{cardType}, #{cardNum}, #{expiryDate})
+	</insert>
+	
+</mapper>
