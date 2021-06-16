@@ -209,17 +209,17 @@
 		</selectKey>
 		INSERT INTO Item (itemId, productId, image, description, title, price,
 		isSoldout, likeCnt, quantity)
-		VALUES (#{productId}, #{image},
+		VALUES (#{itemId}, #{productId}, #{image},
 		#{description}, #{title}, #{price}, #{isSoldout}, #{likeCnt},
 		#{quantity})
 	</insert>
 
 	<update id="updateItem" parameterType="Item">
 		UPDATE Item
-		SET productId =
-		#{productId}, image = #{image}, description = #{description}, title =
-		#{title}, price = #{price}, isSoldout = #{isSoldout}, likeCnt =
-		#{likeCnt}, quantity = #{quantity}
+		SET productId = #{productId}, image = #{image}, 
+		description = #{description}, title = #{title}, 
+		price = #{price}, isSoldout = #{isSoldout}, 
+		likeCnt = #{likeCnt}, quantity = #{quantity}
 		WHERE itemId = #{itemId}
 	</update>
 

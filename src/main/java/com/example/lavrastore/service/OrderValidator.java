@@ -26,6 +26,11 @@ public class OrderValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cardType", "CARD_TYPE_REQUIRED", "Card type is required.");
 	}
 	
+	public void validateNoBank(Order order, Errors errors) {
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "depositor", "DEPOSITOR_REQUIRED", "Depositor is required.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "bankType", "BANK_TYPE_REQUIRED", "Back type is required.");
+	}
+	
 	public void validateShippingAddress(Order order, Errors errors) {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "shipname", "NAME_REQUIRED", "Shipping Info: name is required.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "shipAddr1", "ADDRESS_REQUIRED", "Shipping Info: address is required.");

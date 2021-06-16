@@ -15,6 +15,7 @@ public interface CartItemDao {
 	List<CartItem> getCartListByGroupCategory(int categoryId, String memberId) throws DataAccessException;
 	List<CartItem> getCartListByPTPCategory(int categoryId, String memberId) throws DataAccessException;
 	Item getItemByCartItemId(int cartItemId, String memberId) throws DataAccessException; //cartItemId로 cartItem에 있는 Item 가져오기
+	CartItem getCartItemById(int cartItemId) throws DataAccessException;
 	
 	/* Create */
 	int insertCartItem(CartItem cartItem) throws DataAccessException;

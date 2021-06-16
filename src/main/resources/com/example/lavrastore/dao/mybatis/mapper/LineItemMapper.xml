@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.example.lavrastore.dao.mybatis.mapper.LineItemMapper">
+	<cache />
+	
+	<select  id="getLineItemByOrderId" resultType="LineItem"> 
+		SELECT lineItemId, itemId, orderId, quantity
+		FROM LINEITEM
+		WHERE oderId = #{orderId}
+	</select>
+	
+	<insert id="insertLineItem" parameterType="LineItem">
+		<selectKey keyProperty="lineItemId" resultType="int"
+			order="BEFORE">
+			SELECT seq_pk_lineItem.nextval AS lineItemId FROM DUAL
+		</selectKey>
+		INSERT INTO LineItem (lineItemId, itemId, orderId, quantity)
+		VALUES (#{lineItemId}, #{itemId}, #{orderId}, #{quantity})
+	</insert>
+	
+</mapper>

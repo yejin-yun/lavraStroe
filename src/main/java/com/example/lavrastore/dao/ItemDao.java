@@ -38,7 +38,7 @@ public interface ItemDao {
 	
 	/* Update */
 	
-	int updateItem(int itemId) throws DataAccessException; // ppt ItemDao의 update 부분의 기능들을 다 합침.
+	int updateItem(Item item) throws DataAccessException; // ppt ItemDao의 update 부분의 기능들을 다 합침.
 	
 	/* Delete */
 	

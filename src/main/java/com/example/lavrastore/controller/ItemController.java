@@ -144,25 +144,40 @@ public class ItemController {
 
 		System.out.println("wish test = " + wish);
 		WishList wishList = new WishList();
+		Item realItem = lavraStore.getItem(itemId);
 		if (wish == 0) { // wish 추가
-			Item realItem = lavraStore.getItem(itemId);
-
 			wishList.setMemberID(member.getMemberId());
 			wishList.setItem(realItem);
-
-			int rst = lavraStore.insertWishList(wishList);
+			
+			int cnt = lavraStore.getWishListByItemIdAndMemberId(itemId, member.getMemberId());
+			System.out.println("ccnt += " + cnt);
+			int rst;
+			if(cnt == 0) 
+			{
+				rst = lavraStore.insertWishList(wishList);
+				realItem.setLikeCnt(realItem.getLikeCnt() + 1);
+			}else {
+				rst = lavraStore.deleteWishListByItemIdAndMemberId(itemId, member.getMemberId());
+				if(realItem.getLikeCnt() != 0) {
+					realItem.setLikeCnt(realItem.getLikeCnt() - 1);
+				}
+			}
+			
 			
 			if (rst == 0) {
 				return "falid";
 			} else {
+				lavraStore.updateItem(realItem);
 				return "success";
 			}
 		} else {
 			int rst = lavraStore.deleteWishListByItemIdAndMemberId(itemId, member.getMemberId());
+			realItem.setLikeCnt(realItem.getLikeCnt() + 1);
 
 			if (rst == 0) {
 				return "falid";
 			} else {
+				lavraStore.updateItem(realItem);
 				return "success";
 			}
 		}
@@ -270,6 +285,7 @@ public class ItemController {
 		return "redirect:/accessory/detail?no=" + no;
 	}
 
+	
 	/*
 	 * @GetMapping
 	 * 

@@ -11,6 +11,20 @@
 <head>
 <meta charset="UTF-8">
 <title>${item.title} 페이지</title>
+<style>
+	html, body {
+		margin: 0;
+		padding: 0;
+		height: 100%;
+	}
+	td {
+		text-align: center;
+	}
+	#content_table{
+		border-spacing: 0 20px; /* %로 주면 안됨. margin-bottom: 20px;도 안됨 */
+		
+	}
+</style>
 <script>
 
 	function updateQuantity(num, stock, price, ths) {
@@ -70,11 +84,17 @@
 		if(user) {
 			var url = "/item/cart_uq?no=" + itemId + "&q=" + document.getElementById("quantity").value;
 			
-			moveTarget(url); //여기에 직접 넣으면 파라미터가 -1로 전달됨.
+			moveTarget(url); //여기에 직접 넣으면 파라미터가 -1로 전달됨. --> get으로 전달해서 그랬음. 
 			
 			// 카트로 이동하면 DB에 업데이트가 안됨
 			alert("카트에 추가했습니다.");
 		}
+	}
+	
+	function buyItem(itemId) {
+		var url = "/item/buy?no=" + itemId + "&q=" + document.getElementById("quantity").value;
+		
+		moveTarget(url);
 	}
 	
 	function moveNewCart(itemId){
@@ -124,15 +144,15 @@
 <c:if test="${dItem == '' || dItem eq null}">
 		<div style="width: 50%; margin-left:auto; margin-right: auto;">상품 로딩 중 문제가 발생하였습니다.</div>
 </c:if>
-<div align="center" style="width : 90%;">
-	<table border="1">
+<div align="center" style="width : 90%; margin-left:auto; margin-right: auto; height:100%;">
+	<table border="1" style="width: 80%; padding-bottom: 15%;">
 		<tr>
 			<td>
-				<img src="<c:url value='${dItem.item.image}' />" width="340" height="300">
+				<img src="<c:url value='${dItem.item.image}' />" width="400px" height="300px">
 			</td>
 			<td>
 				<form name="form1" class="btn" method="post">
-				<table border="1" style="height: 300px; width: 400px;">
+				<table style="height: 300px; width: 500px; margin: 0 auto; border-collapse:collapse; border: none;">
 					<tr align="center">
 						<td>상품명</td>
 						<td>${dItem.item.title}</td>
@@ -182,9 +202,9 @@
 								</c:choose>
 								<c:choose>
 									<c:when test="${dItem.item.isSoldout == 0}">
-										<a href="<c:url value='/item/buy?=no${dItem.item.itemId}' />">
-											<button type="button" id="buy">바로구매</button>
-										</a>
+										<%-- <a href="<c:url value='/item/buy?no=${dItem.item.itemId}&q=${dItem.item.quantity}' />"> --%>
+											<button type="button" id="buy" onClick="buyItem(${dItem.item.itemId})">바로구매</button>
+										<!-- </a> -->
 									</c:when>
 									<c:when test="${dItem.item.isSoldout == 1}">
 										<button type="button" id="buy">품절</button>
@@ -194,6 +214,22 @@
 					</tr>
 				</table>
 				</form>
+			</td>
+		</tr>
+		<tr>
+			<td colspan='2'>
+				<table id="content_table" style="width: 100%; padding-top: 10%; padding-bottom: 10%;"> <%-- 하나의 tr에 text, 사진 등 넣을 것 --%> 
+					<tr>
+						<td>
+							${dItem.item.description}
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<img src="<c:url value='${dItem.item.image}' />" width="60%" height="10%">
+						</td>
+					</tr>
+				</table>
 			</td>
 		</tr>
 	</table>

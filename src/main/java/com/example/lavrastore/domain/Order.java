@@ -9,9 +9,9 @@ import java.util.List;
 
 @SuppressWarnings("serial")
 public class Order implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private int orderId;
 	private String orderDate;
 	private String shipAddr1;
@@ -21,40 +21,101 @@ public class Order implements Serializable {
 	private String shipname;
 	private String memberId;
 	private int categoryId;
-	
-	private int paymentId; 
+
+	private int paymentId;
 	private int payType; // 0 : 무통장입금, 1 : 카드결제
-	
-	//payType이 1일 경우 채워져야하는 변수들
-	private String cardNum; 
+
+	// payType이 1일 경우 채워져야하는 변수들
+	private String cardNum;
 	private String expiryDate;
 	private String cardType;
-	
-	//각 주문별 선택 필드들...
+
+	// 각 주문별 선택 필드들...
 	private List<LineItem> lineItems = new ArrayList<LineItem>();
 	private GroupOrder groupOrder;
+
+	// 무통장 입금
+	private String depositor;
+	private String bankType;
+
+	private int isInCart; //카트에서 온건지 상세 페이지에서 온건지 구별을 위해
 	
-	//생성자
-	public Order() {}
-	
-	public void initGroupOrder(GroupItem gItem, Member member, int amount) {
-		this.categoryId = 2;
+	// 생성자
+	public Order() {
+	}
+
+	public void initItemOrder(Item item, Member member, int quantity) {
+		this.categoryId = 1;
 		this.memberId = member.getMemberId();
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");     
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 		this.orderDate = dateFormat.format(new Date());
-		
+
 		this.shipAddr1 = member.getAddr1();
 		this.shipAddr2 = member.getAddr2();
 		this.shipZip = member.getZip();
-		
-		this.totalPrice = gItem.getItem().getPrice() * amount;
+
+		this.totalPrice = item.getPrice() * quantity;
 		this.shipname = member.getUsername();
-		
+
 		this.payType = 1;
-		this.cardNum = ""; 
-		this.expiryDate ="";
+		this.cardNum = "";
+		this.expiryDate = "";
 		this.cardType = "Visa";
 		
+		this.depositor = "";
+		this.bankType = "농협중앙회";
+		
+		this.isInCart = 0;
+
+		this.lineItems.add(new LineItem(quantity, item.getItemId(), item));
+	}
+
+	public void initCartItemOrder(List<CartItem> cartItems, Member member) {
+		this.categoryId = 1;
+		this.memberId = member.getMemberId();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		this.orderDate = dateFormat.format(new Date());
+
+		this.shipAddr1 = member.getAddr1();
+		this.shipAddr2 = member.getAddr2();
+		this.shipZip = member.getZip();
+
+		for(CartItem c : cartItems) {
+			this.totalPrice += c.getItem().getPrice() * c.getQuantity();
+			this.lineItems.add(new LineItem(c.getQuantity(), c.getItem().getItemId(), c.getItem()));
+		}
+		
+		this.shipname = member.getUsername();
+
+		this.payType = 1;
+		this.cardNum = "";
+		this.expiryDate = "";
+		this.cardType = "Visa";
+		
+		this.depositor = "";
+		this.bankType = "농협중앙회";
+		
+		this.isInCart = 1;
+	}
+
+	public void initGroupOrder(GroupItem gItem, Member member, int amount) {
+		this.categoryId = 2;
+		this.memberId = member.getMemberId();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		this.orderDate = dateFormat.format(new Date());
+
+		this.shipAddr1 = member.getAddr1();
+		this.shipAddr2 = member.getAddr2();
+		this.shipZip = member.getZip();
+
+		this.totalPrice = gItem.getItem().getPrice() * amount;
+		this.shipname = member.getUsername();
+
+		this.payType = 1;
+		this.cardNum = "";
+		this.expiryDate = "";
+		this.cardType = "Visa";
+
 		this.groupOrder = new GroupOrder(amount, gItem);
 	}
 
@@ -185,6 +246,31 @@ public class Order implements Serializable {
 	public void setPaymentId(int paymentId) {
 		this.paymentId = paymentId;
 	}
+
+	public String getDepositor() {
+		return depositor;
+	}
+
+	public void setDepositor(String depositor) {
+		this.depositor = depositor;
+	}
+
+	public String getBankType() {
+		return bankType;
+	}
+
+	public void setBankType(String bankType) {
+		this.bankType = bankType;
+	}
+
+	public int getIsInCart() {
+		return isInCart;
+	}
+
+	public void setIsInCart(int isInCart) {
+		this.isInCart = isInCart;
+	}
 	
 	
+
 }

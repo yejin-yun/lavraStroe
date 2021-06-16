@@ -61,4 +61,7 @@ public class MybatisCartItemDao implements CartItemDao {
 		return cartItemMapper.updateQuantity(cartItemId, quantity);
 	}
 
+	public CartItem getCartItemById(int cartItemId) throws DataAccessException {
+		return cartItemMapper.getCartItemById(cartItemId);
+	}
 }

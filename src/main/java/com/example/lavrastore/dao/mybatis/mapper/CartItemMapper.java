@@ -16,6 +16,7 @@ public interface CartItemMapper {
 	List<CartItem> getCartListByGroupCategory(int categoryId, String memberId);
 	List<CartItem> getCartListByPTPCategory(int categoryId, String memberId);
 	Item getItemByCartItemId(int cartItemId, String memberId); //cartItemId로 cartItem에 있는 Item 가져오기
+	CartItem getCartItemById(int cartItemId);
 	
 	/* Create */
 	int insertCartItem(CartItem cartItem);

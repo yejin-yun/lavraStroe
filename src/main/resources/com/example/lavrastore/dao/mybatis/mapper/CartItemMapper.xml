@@ -3,6 +3,13 @@
 
 <mapper namespace="com.example.lavrastore.dao.mybatis.mapper.CartItemMapper">
   <cache />
+  
+  	<select id="getCartItemById" resultType="CartItem">
+  		SELECT cartItemId, quantity, itemId, categoryId, memberId
+  		FROM CARTITEM
+  		WHERE cartItemId = #{cartItemId}
+  	</select>
+  
 	<select id="getAllCartList" resultType="CartItem">
 		SELECT cartItemId, quantity, itemId, categoryId, memberId
 		FROM CARTITEM

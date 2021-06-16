@@ -228,7 +228,7 @@
          	<input type="button" value="전체 선택" id="allCheck" > 
          	<input type="button" value="전체 해제" id="allReset">
 			<input type="button" value="선택 상품 모두 삭제" onClick="checkConfirm('<c:url value='/cart/handling/del' />')">
-			<input type="button" value="선택 상품 모두 주문" onClick="checkConfirm('<c:url value='/cart/handling/order' />')">
+			<input type="button" value="선택 상품 모두 주문" onClick="checkConfirm('<c:url value='/cart/buy' />')">
 		 </div>
     </div>
 	</form>
