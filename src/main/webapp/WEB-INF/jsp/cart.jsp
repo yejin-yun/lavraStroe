@@ -53,11 +53,13 @@
 	<script>
 		$(document).ready(function() {
 			$('#allCheck').click(function(){
-				$('input[name=checkCartItem]:checkbox').attr('checked', true); // input type 중 name이 checkCartItem이고, type이 checkbox인 경우
+				$('input[name=checkCartItem]:checkbox').attr('checked', true);
+				$('input[name=soldoutCartItem]:checkbox').attr('checked', true);// input type 중 name이 checkCartItem이고, type이 checkbox인 경우
 				//$('#quantity'+1029).val(String(1121));
 			});
 			$('#allReset').click(function(){
 				$('input[name=checkCartItem]:checkbox').attr('checked', false); 
+				$('input[name=soldoutCartItem]:checkbox').attr('checked', false);
 			});
 					
 		});
@@ -70,9 +72,62 @@
 			form.submit();
 		}
 		
-		function checkConfirm(targetUri) {
+		function checkDelConfirm(targetUri) {
+			//삭제 검증일때는 soldoutFlag가 -1임. 상관없으니까.
 			//alert(targetUri);
 			var isChk = false;
+			
+			var products = document.getElementsByName("checkCartItem");
+			//console.log('console' + products[0]);
+			for(var i = 0; i < products.length; i++) {
+				if(products[i].checked == true){
+					isChk = true;
+					break;
+				}
+			}
+			
+			if(!isChk) {
+				var soldout = document.getElementsByName("soldoutCartItem");
+				
+				
+				for(var i = 0; i < soldout.length; i++) {
+					if(soldout[i].checked == true){
+						isChk = true;
+						break;
+					}
+				}
+			}
+			
+			
+			if(!isChk) {
+				alert('상품을 1개 이상 선택해주세요.');
+				return false;
+			}
+			
+			moveTarget(targetUri);
+		}
+		
+		function checkOrderConfirm(targetUri) {
+			//삭제 검증일때는 soldoutFlag가 -1임. 상관없으니까.
+			//alert(targetUri);
+			var isChk = false;
+		
+	/* 		var soldout = document.getElementsByName("soldoutCartItem");
+			
+			
+			for(var i = 0; i < soldout.length; i++) {
+				if(soldout[i].checked == true){
+					isChk = true;
+					break;
+				}
+			}
+			
+			if(!isChk) {
+				alert('품절된 상품이 포함되어 있습니다.');
+				return false;
+			}
+			
+			isChk = false; */ //컨트롤러에서 soldoutCartItem을 처리하지 않아 order로 넘어가지 않음. 
 			
 			var products = document.getElementsByName("checkCartItem");
 			//console.log('console' + products[0]);
@@ -136,6 +191,7 @@
 				}
 			});
 		}
+		
 	</script>
 </head>
 <body>
@@ -172,7 +228,19 @@
 	    			<c:set var="item" value="${cartItem.item}" />
 	    			<c:set var="itemTotalCost" value="${item.price * cartItem.quantity}" />
 	    			
-	    			<td><input type="checkbox" name="checkCartItem" value="${cartItem.cartItemId}" id="${cartItem.cartItemId}" class="checkWish allCheckbox"/></td>
+	    			<td>
+	    			
+	    			<c:choose>
+						<c:when test="${item.isSoldout == 1}">
+							<input type="checkbox" name="soldoutCartItem" value="${cartItem.cartItemId}" id="${cartItem.cartItemId}" class="checkWish allCheckbox"/> 
+						</c:when>
+						<c:when test="${item.isSoldout == 0}">
+							<input type="checkbox" name="checkCartItem" value="${cartItem.cartItemId}" id="${cartItem.cartItemId}" class="checkWish allCheckbox"/>
+						</c:when>
+					</c:choose>
+	    			
+	    			
+	    			</td>
 	    			
 	    			<td>
 	    			<a href="<c:url value='/accessory/detail'>
@@ -222,13 +290,14 @@
 			<c:set var="allTotalCost" value="${allTotalCost + deliver}" />
 			<div class="well-sm" style="left: 35%; top: 65%; position:absolute; ">
 				<B>전체 상품 주문 금액: <fmt:formatNumber value="${allTotalCost}" pattern="###,###,###"/>원</B></div>
-			<div class="well-sm" style="left:70%; top: 75%; position:absolute; "><font color="red">**20만원 이상 주문 시 <B>무료배송</B></font></div>
+			<div class="well-sm" style="left:70%; top: 75%; position:absolute; ">
+				<font color="red">**20만원 이상 주문 시 <B>무료배송</B></font></div>
 		</div>
 		<div class="w3-center funcs">
          	<input type="button" value="전체 선택" id="allCheck" > 
          	<input type="button" value="전체 해제" id="allReset">
-			<input type="button" value="선택 상품 모두 삭제" onClick="checkConfirm('<c:url value='/cart/handling/del' />')">
-			<input type="button" value="선택 상품 모두 주문" onClick="checkConfirm('<c:url value='/cart/buy' />')">
+			<input type="button" value="선택 상품 모두 삭제" onClick="checkDelConfirm('<c:url value='/cart/handling/del' />')">
+			<input type="button" value="선택 상품 모두 주문" onClick="checkOrderConfirm('<c:url value='/cart/buy' />')">
 		 </div>
     </div>
 	</form>

@@ -215,11 +215,13 @@ public class ItemController {
 			return "redirect:error";
 
 		Item item = lavraStore.getItem(no);
+		CartItem cartItem;
 		if (userSession != null) {
 			Member member = userSession.getMember();
-			CartItem cartItem = lavraStore.findCartItemByItemItemIdAndMemberId(no, member.getMemberId());
+			cartItem = lavraStore.findCartItemByItemItemIdAndMemberId(no, member.getMemberId());
 			if (cartItem != null) {
 				item.setIsInCart(1);
+				model.addAttribute("quantityInCart", cartItem.getQuantity());
 			} else {
 				item.setIsInCart(0);
 			}
@@ -285,6 +287,45 @@ public class ItemController {
 		return "redirect:/accessory/detail?no=" + no;
 	}
 
+	@PostMapping("/item/wish")
+	@ResponseBody
+	public String moveItemToWish(@RequestBody int no) {
+		if (no == -1)
+			return "redirect:error";
+
+		if (userSession == null) {
+			return "LoginForm";
+		}
+		
+		WishList wishList = new WishList();	
+		Item item = lavraStore.getItem(no);
+		Member member = userSession.getMember();
+		
+		wishList.setMemberID(member.getMemberId());
+		wishList.setItem(item);
+		
+		int cnt = lavraStore.getWishListByItemIdAndMemberId(no, member.getMemberId()); //해당 위시리스트가 존재하는지 확인하는 쿼리. 
+		System.out.println(no + " " + member.getMemberId());
+		System.out.println("ccnt += " + cnt);
+		int rst = 0;
+		if(cnt == 0) 
+		{
+			rst = lavraStore.insertWishList(wishList);
+			item.setLikeCnt(item.getLikeCnt() + 1);
+
+		}
+		
+		if(rst == 0 && cnt != 0) { //이미 위시리스트에 존재하는 경우 
+			return "exist";
+		}
+		
+		if (rst == 0) { // 여기 왔다는 건 기존에 위시리스트에 존재하지는 않았다는 거
+			return "falid";
+		} else {
+			lavraStore.updateItem(item);
+			return "success";
+		}
+	}
 	
 	/*
 	 * @GetMapping

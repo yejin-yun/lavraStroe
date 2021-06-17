@@ -107,6 +107,7 @@ public class CartController {
 		 String memberId = member.getMemberId();
 		 
 		 String[] checkCartItem = request.getParameterValues("checkCartItem");
+		 String[] soldoutCartItem = request.getParameterValues("soldoutCartItem");
 		 
 		 if(checkCartItem == null) {
 			 return "redirect:error";
@@ -116,6 +117,10 @@ public class CartController {
 		 	case "del":
 		 		for(int i = 0; i < checkCartItem.length; i++) {
 					 int cartItemId = Integer.parseInt(checkCartItem[i]);
+					 lavraStore.deleteCartItemById(cartItemId);
+				}
+		 		for(int i = 0; i < soldoutCartItem.length; i++) {
+					 int cartItemId = Integer.parseInt(soldoutCartItem[i]);
 					 lavraStore.deleteCartItemById(cartItemId);
 				}
 		 		break;
