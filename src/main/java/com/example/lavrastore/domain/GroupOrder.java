@@ -11,6 +11,7 @@ public class GroupOrder implements Serializable {
 	private int quantity;
 	private GroupItem groupItem;
 	
+	public GroupOrder() {}
 	
 	public GroupOrder(int q, GroupItem gitem) {
 		this.itemId = gitem.getItem().getItemId();
@@ -23,7 +24,7 @@ public class GroupOrder implements Serializable {
 	public int getOrderId() {
 		return orderId;
 	}
-
+ 
 
 	public void setOrderId(int orderId) {
 		this.orderId = orderId;

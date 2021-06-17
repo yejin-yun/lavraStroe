@@ -88,4 +88,16 @@ public class MybatisOrderDao implements OrderDao{
     	
 	}
 
+	public List<Order> getItemOrderListByMember(String memberId) throws DataAccessException {
+		return orderMapper.getItemOrderListByMember(memberId);
+	}
+
+	public List<Order> getPTPOrderListByMember(String memberId) throws DataAccessException {
+		return orderMapper.getPTPOrderListByMember(memberId);
+	}
+
+	public List<Order> getGroupOrderListByMember(String memberId) throws DataAccessException {
+		return orderMapper.getGroupOrderListByMember(memberId);
+	}
+
 }

@@ -158,4 +158,9 @@ public interface PetStoreFacade {
 	
 	List<LineItem> getLineItemByOrderId(int orderId);
 	int insertLineItem(LineItem lineItem);
+	
+	/*Order*/
+	List<Order> getItemOrderListByMember(String memberId);
+	List<Order> getPTPOrderListByMember(String memberId);
+	List<Order> getGroupOrderListByMember(String memberId);
 }

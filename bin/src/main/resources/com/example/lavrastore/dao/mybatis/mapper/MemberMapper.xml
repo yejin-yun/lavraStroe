@@ -14,7 +14,6 @@
           ZIP,
           PHONE
     FROM MEMBER
-    FROM MEMBER
     WHERE MEMBER.MEMBERID = #{memberId}
 
   </select>
