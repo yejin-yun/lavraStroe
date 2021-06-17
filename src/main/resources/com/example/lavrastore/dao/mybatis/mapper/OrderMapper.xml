@@ -38,4 +38,59 @@
     	)
 	</update>
 	
+ 
+	 <!-- 쇼핑몰 item의 order 조회 -->
+	<select id="getItemOrderListByMember" parameterType="String" resultType="Order">
+		select
+		o.orderId,
+		o.orderDate,
+		o.shipAddr1,
+		o.shipAddr2,
+		o.shipZip,
+		o.totalPrice,
+		o.shipname,
+		o.memberId,
+		o.categoryId
+		from shoporder o
+		where o.memberId = #{memberId} and
+		o.categoryId = 1
+	</select>
+	
+	<!-- 개인거래 item의 order 조회 -->
+	<select id="getPTPOrderListByMember" parameterType="String" resultType="Order">
+		select
+		o.orderId,
+		o.orderDate,
+		o.shipAddr1,
+		o.shipAddr2,
+		o.shipZip,
+		o.totalPrice,
+		o.shipname,
+		o.memberId,
+		o.categoryId
+		from shoporder o
+		where o.memberId = #{memberId} and
+		o.categoryId = 3
+	</select>
+	
+	<!-- 공동구매 item의 order 조회 -->
+	<select id="getGroupOrderListByMember" parameterType="String" resultType="Order">
+		select
+		o.orderId,
+		o.orderDate,
+		o.shipAddr1,
+		o.shipAddr2,
+		o.shipZip,
+		o.totalPrice,
+		o.shipname,
+		o.memberId,
+		o.categoryId,
+		g.itemId as "groupOrder.itemId",
+		g.status as "groupOrder.status"
+		from shoporder o, grouporder g
+		where o.orderId = g.orderId and 
+		o.memberId = #{memberId} and
+		o.categoryId = 2
+	</select>
+	
 </mapper>

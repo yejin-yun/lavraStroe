@@ -401,4 +401,19 @@ public class PetStoreImpl implements PetStoreFacade {
 		return lineItemDao.insertLineItem(lineItem);
 	}
 
+	@Override
+	public List<Order> getItemOrderListByMember(String memberId) {
+		return orderDao.getItemOrderListByMember(memberId);
+	}
+
+	@Override
+	public List<Order> getPTPOrderListByMember(String memberId) {
+		return orderDao.getPTPOrderListByMember(memberId);
+	}
+
+	@Override
+	public List<Order> getGroupOrderListByMember(String memberId) {
+		return orderDao.getGroupOrderListByMember(memberId);
+	}
+
 }
