@@ -1,7 +1,5 @@
 package com.example.lavrastore.dao.mybatis;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -14,9 +12,8 @@ import com.example.lavrastore.dao.GroupItemDao;
 import com.example.lavrastore.dao.mybatis.mapper.GroupItemMapper;
 import com.example.lavrastore.dao.mybatis.mapper.OrderMapper;
 import com.example.lavrastore.domain.GroupItem;
-import com.example.lavrastore.domain.Order;
 
-@Repository
+@Repository 
 public class MybatisGroupItemDao implements GroupItemDao{
 
 	@Autowired

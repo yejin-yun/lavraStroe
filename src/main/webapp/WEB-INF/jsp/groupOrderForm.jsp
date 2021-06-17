@@ -12,115 +12,149 @@
 <head>
 <meta charset="UTF-8">
 <title>공동 구매 신청 페이지</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script>
 function showMessage() {
 	alert("죄송합니다. 현재 공동구매 페이지는 카드결제만 지원하고 있습니다.");
 	document.getElementById('card').checked = true;
 	
 }
+function backPage() {
+	history.back();
+}
 </script>
-
+<style>
+	.interval {
+			margin: 3% 0;
+		}
+		.funcs {
+			margin-top: 5%;
+			margin-bottom: 10%;
+		}
+		.funcs input 
+		{
+			margin-right: 10px;
+			padding: 5px;
+			background-color: white;
+			border: 1px solid #646EFF;
+			color: #646EFF;
+			border-top-left-radius: 5px; 
+			border-bottom-left-radius: 5px;
+			border-top-right-radius: 5px; 
+        	border-bottom-right-radius: 5px;
+      }
+		.funcs input:hover
+		{ 	
+			color:white; 
+			background-color: #646EFF; 
+		}
+</style>
 </head>
 <body>
 <%@ include file="header.jsp" %>
 <br/>
 <br/>
 <p>
-<!--  
-받아와야하는 목록 :
-신청자 세션 - memer 객체 / 수량, 아이템 정보 <br/>
-${gitem.item.itemId} , ${amount} <br/>
 
-입력해야하는 정보 : 
-결제 정보 간단히 _ 카드타입, 카드정보, 마감날짜?
-
-배송지 정보: 주소1, 주소2 우편번호 수령인이름
-
-총 결제액 
-
-
-디자인 심각함. :
--->
 </br>
-<div style="width: 90%; margin-left : 25%">
+<div class="container">
 <c:set var="targetUrl"><c:url value="/group/newOrderSubmitted.do" /></c:set>
 <form:form modelAttribute="myOrder"  action="${targetUrl}" method="post">
- <form:errors cssClass="error" />
-<input type="hidden" name="itemId" value="${gitem.item.itemId}">
-상품 정보 :
-<table border = "0">
-	<tr>
-		<td rowspan="3">
-			<img src="${gitem.item.image}" width="240" height="200">
-		</td>
-		<td>
-			상품명 : ${gitem.item.title}
-		</td>
-	</tr>
-	<tr>
-		<td>
-			결제 비용 : ${gitem.item.price} * ${myOrder.groupOrder.quantity} = <fmt:formatNumber value="${myOrder.totalPrice}" pattern="###,###,###"/>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			결제 예정일 : ${gitem.paymentDate}
-		</td>
-	</tr>
-</table>
+ 	<form:errors cssClass="error" />
+	<input type="hidden" name="itemId" value="${gitem.item.itemId}">
+	<div id = "itemInfo">
+		<table class="table table-striped">
+    		<thead>
+     			 <tr>
+        			<th colspan = "3">| 상품정보</th>
+       			</tr>
+    		</thead>
+    		<tbody>
+    			<tr>
+       				<td rowspan = "4" style="width : 30%;" > <img src="${gitem.item.image}" width="300" height="250"> </td>
+      			</tr>
+      			<tr>
+        			<td style="width : 15%;" > <h5> 상품명 : </h5> </td>
+        			<td> ${gitem.item.title} </td>
+				</tr>
+				<tr>
+					<td style="width : 15%;" > <h5>  결제 비용 : </h5> </td>
+					<td> ${gitem.item.price} * ${myOrder.groupOrder.quantity} = <fmt:formatNumber value="${myOrder.totalPrice}" pattern="###,###,###"/> 원 </td>
+				</tr>
+				<tr>
+					<td style="width : 15%;" > <h5>  결제 예정일 : </h5> </td> 
+					<td>${gitem.paymentDate} </td>
+				</tr>
+   			 </tbody>
+  		</table>
+	</div>
 <br/>
-주문자 정보 :
-<table border = "0">
-	<tr>
-		<td > 주문자 성명 </td>
-		<td> <form:input path="shipname" readonly="true"/></td>
-	</tr>
-	<tr>
-		<td>우편 번호 </td> 
-		<td> <form:input path="shipZip" /> </br> <form:errors path="shipZip" /></td>
-	</tr>
-	<tr>
-		<td>배송지 주소1 </td> 
-		<td> <form:input path="shipAddr1"/> </br> <form:errors path="shipAddr1" /> </td>
-	</tr>
-	<tr>
-		<td>배송지 주소2 </td> 
-		<td> <form:input path="shipAddr2"/> </br> <form:errors path="shipAddr2" /> </td>
-	</tr>
-</table>
-<br/>
-결제 정보 :
-<table border = "0">
-<tr>
-<td> 결제 방법 : </td>
-<td>
-<form:radiobutton path="payType" value = "0" label="무통장 입금" onclick="showMessage()" />
-<form:radiobutton path="payType" id="card" value = "1" label="카드 결제" checked="true" />
-</td>
-</tr>
-<tr>
- 	<td colspan = "2">
- 		<table border = "0">
- 			 <tr>
-      			<td>Card Type:</td>
-      			<td><form:select path="cardType" items="${creditCardTypes}" /> </td>
-    		</tr>
-    		<tr>
-			     <td>Card Number:</td>
-			     <td><form:input path="cardNum" placeholder="ex : 9999 9999 9999 9999 "/> </br> <form:errors path="cardNum" />  </td>
-			</tr>
-			<tr>
-			     <td>Expiry Date : </td>
-			     <td><form:input path="expiryDate" placeholder="ex : (MM/YY)"/> </br> <form:errors path="expiryDate" />  </td>
-			</tr>
- 		</table>
- 	</td>
-</tr>
-</table>
-<input type="submit" value="구매 신청하기"/>
+	<div>
+		<table class="table table-striped">
+		  		<thead>
+		   			 <tr>
+		      			<th colspan = "3">| 주문자 정보</th>
+		     			</tr>
+		  		</thead>
+		  		<tbody>	
+		  			<tr>
+					<td > <label> 주문자 성명 </label></td>
+					<td><form:input path="shipname" readonly="true"/></td>
+				</tr>
+				<tr>
+					<td ><label>우편 번호 </label></td> 
+					<td><form:input path="shipZip"/> <font color="red"> <form:errors path="shipZip" /> </font>  </td>
+				</tr>
+				<tr>
+					<td  ><label> 배송지 주소1 </label> </td> 
+					<td><form:input path="shipAddr1" /> <font color="red"> <form:errors path="shipAddr1" /> </font> </td>
+				</tr>
+				<tr>
+					<td  ><label> 배송지 주소2 </label> </td> 
+					<td ><form:input path="shipAddr2"/> <font color="red"> <form:errors path="shipAddr2" /> </font>  </td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<br/>
+	<div>
+		<table class="table table-striped">
+	  		<thead>
+	   			 <tr>
+	      			<th colspan = "3">| 결제 정보 </th>
+	     			</tr>
+	  		</thead>
+	  		<tbody>	
+	  			<tr>
+					<td > <label> 결제 방법 </label> </td>
+					<td>
+						<form:radiobutton path="payType" value = "0" label="무통장 입금" onclick="showMessage()" />
+						<form:radiobutton path="payType" id="card" value = "1" label="카드 결제" checked="true" />
+					</td>
+				</tr>
+				<tr>
+					<td style="width : 32%;" ><label> Card Type</label> </td> 
+					<td><form:select path="cardType" items="${creditCardTypes}" /> </td>
+				</tr>
+				<tr>
+					<td style="width : 32%;" > <label>Card Number </label> </td> 
+					<td><form:input path="cardNum" placeholder="ex : 9999 9999 9999 9999 "/> <font color="red"> <form:errors path="cardNum" /> </font> </td>
+				</tr>
+				<tr>
+					<td style="width : 32%;"> <label> Expiry Date </label> </td> 
+					<td><form:input path="expiryDate" placeholder="ex : (MM/YY)"/>  <font color="red"> <form:errors path="expiryDate" /> </font> </td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="w3-center interval funcs" style="padding-bottom: 20%;">
+		  <input type="button" value="취소" style="padding-right: 10px;" onClick="backPage()")>
+		  <input type="submit" value="구매 신청하기"/>
+	 </div>
 </form:form>
-
 </div>
 
 
