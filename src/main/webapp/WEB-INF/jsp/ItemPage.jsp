@@ -27,7 +27,7 @@
 </style>
 <script>
 
-	function updateQuantity(num, stock, price, ths) {
+	function updateQuantity(num, stock, price, ths) { //num이 -1이면 감소버튼 누른거고, 1이면 증가 버튼 누른 거.
 		var input = document.getElementById("quantity");
 		var span = document.getElementById("totalCost");
 		//alert(span.innerHTML);
@@ -55,7 +55,7 @@
 			}
 		}
 		if(num == 1) {
-			if(cnt == stock) {
+			if(cnt == stock) { //현재 주문하려는 상품의 수가 stock과 동일하니 더 증가 시킬 수 없음.
 				alert('현재 재고가 충분하지 않습니다.');
 				return false;
 			}
@@ -78,11 +78,19 @@
 		form1.submit();
 	}
 
-	function moveAddCart(itemId) {
+	function moveAddCart(itemId, stock, quantityInCart) {
 		var user = confirm("카트에 동일한 상품이 있습니다. 추가하시겠습니까?");
+		var quantity = Number(document.getElementById("quantity").value);
+		quantityInCart = Number(quantityInCart)
+		if(quantity +  quantityInCart> stock) {
+			//alert(quantity + quantityInCart);
+			//alert(stock);
+			alert('현재 재고가 충분하지 않습니다.');
+			return false;
+		}
 		
 		if(user) {
-			var url = "/item/cart_uq?no=" + itemId + "&q=" + document.getElementById("quantity").value;
+			var url = "/item/cart_uq?no=" + itemId + "&q=" + quantity;
 			
 			moveTarget(url); //여기에 직접 넣으면 파라미터가 -1로 전달됨. --> get으로 전달해서 그랬음. 
 			
@@ -91,14 +99,24 @@
 		}
 	}
 	
-	function buyItem(itemId) {
-		var url = "/item/buy?no=" + itemId + "&q=" + document.getElementById("quantity").value;
+	function buyItem(itemId, stock) {
+		var quantity = document.getElementById("quantity").value;
+		if(quantity > stock) {
+			alert('현재 재고가 충분하지 않습니다.');
+			return false;
+		}
+		var url = "/item/buy?no=" + itemId + "&q=" + quantity;
 		
 		moveTarget(url);
 	}
 	
-	function moveNewCart(itemId){
-		//var msg = itemId; //itemId 하나만 json으로 보낼때. 아래 방식은 객체라서  int로 변환 못시킴
+	function moveNewCart(itemId, stock){
+		//var msg = itemId; //itemId 하나만 json으로 보낼때. 아래 방식은 객체라서  int로 변환 못시킴	
+		if(document.getElementById("quantity").value > stock) {
+			alert('현재 재고가 충분하지 않습니다.');
+			return false;
+		}
+		
 		var msg = {
 			"item":{"itemId":itemId},
 			"quantity": document.getElementById("quantity").value
@@ -116,6 +134,8 @@
 					var user = confirm("카트에 추가했습니다. 이동하시겠습니까?");
 					if(user) {
 						moveTarget("/cart/view/1");
+					} else {
+						history.go();
 					}
 				}
 				else if(response == "LoginForm") {
@@ -123,6 +143,35 @@
 				}
 				else {
 					alert('카트에 추가하는 것을 실패했습니다'); //사실상 failed면 error:에서 처리됨. 
+				}
+				
+			},
+			error: function(){
+				alert("ERROR", arguments);
+			}
+		});
+	}
+	
+	function moveWish(itemId){
+		//var msg = itemId; //itemId 하나만 json으로 보낼때. 아래 방식은 객체라서  int로 변환 못시킴	
+		
+		var msg = itemId;
+		var jsonStr = JSON.stringify(msg);
+	
+		$.ajax({
+			type: "POST",
+			url: "/item/wish",
+			contentType : "application/json",
+			data: jsonStr,
+			processData: false,
+			success: function(response) {
+				if(response == "success") {
+					alert("위시리스트에 추가했습니다.");
+				}
+				else if(response == "LoginForm") {
+					moveTarget("/shop/loginForm.do");
+				} else if(response == "exist") {
+					alert('이미 위시리스트에 담긴 상품입니다.');
 				}
 				
 			},
@@ -187,23 +236,32 @@
 					
 					<tr align="center"> <!-- 버튼들..  -->
 						<td colspan="2">
-								<a href="<c:url value='/item/wish?=no${dItem.item.itemId}' />">
-									<button type="button" id="wish">위시리스트</button>
-								</a>
+								<%-- ${dItem.item.isInWishlist} 계속 0으로 나옴. 값이 저장되어 있지 않나봄--%>
+								<button type="button" id="wish" onClick="moveWish(${dItem.item.itemId})">위시리스트</button>
+								<%-- <c:choose>
+									<c:when test="${dItem.item.isInWishlist == 0}">
+										<a href="<c:url value='/item/wish'><c:param name='no' value='${dItem.item.itemId}' /></c:url>">
+											<button type="button" id="wish" onClick="moveWish(${dItem.item.itemId})">위시리스트</button>
+										</a>
+									</c:when>
+									<c:when test="${dItem.item.isInWishlist == 1}">
+										<button type="button" id="wish" onClick="alert('이미 위시리스트에 담긴 상품입니다.')">위시리스트</button>
+									</c:when>
+								</c:choose> --%>
 								<c:choose>
 									<c:when test="${dItem.item.isInCart == 0}">
 										<%-- <a href="<c:url value='/item/cart?=no${dItem.item.itemId}' />"> --%>
-											<button type="button" id="cart" onClick="moveNewCart(${dItem.item.itemId})">카트담기</button>
+											<button type="button" id="cart" onClick="moveNewCart(${dItem.item.itemId}, ${dItem.item.quantity})">카트담기</button>
 										<!-- </a> -->
 									</c:when>
 									<c:when test="${dItem.item.isInCart != 0}">
-										<button type="button" id="cart" onClick="moveAddCart(${dItem.item.itemId})">카트담기</button>
+										<button type="button" id="cart" onClick="moveAddCart(${dItem.item.itemId}, ${dItem.item.quantity}, ${quantityInCart})">카트담기</button>
 									</c:when>
 								</c:choose>
 								<c:choose>
 									<c:when test="${dItem.item.isSoldout == 0}">
 										<%-- <a href="<c:url value='/item/buy?no=${dItem.item.itemId}&q=${dItem.item.quantity}' />"> --%>
-											<button type="button" id="buy" onClick="buyItem(${dItem.item.itemId})">바로구매</button>
+											<button type="button" id="buy" onClick="buyItem(${dItem.item.itemId}, ${dItem.item.quantity})">바로구매</button>
 										<!-- </a> -->
 									</c:when>
 									<c:when test="${dItem.item.isSoldout == 1}">

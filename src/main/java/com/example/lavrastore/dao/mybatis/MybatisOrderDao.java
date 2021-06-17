@@ -73,8 +73,14 @@ public class MybatisOrderDao implements OrderDao{
     			line.setOrderId(order.getOrderId()); //itemId, quantity는 이미 line에 있음. Order의 init method
     			lineItemMapper.insertLineItem(line);
     			Item item = line.getItem();
-    			item.setQuantity(item.getQuantity() - line.getQuantity());
-    			itemMapper.updateItem(item); //재고를 줄임.
+    			int stock = item.getQuantity() - line.getQuantity();
+    			item.setQuantity(stock);
+    			if(stock > 0) {
+    				itemMapper.updateItem(item); //재고를 줄임.
+    			} else if(stock == 0) {
+    				item.setIsSoldout(1);
+    				itemMapper.updateItem(item);
+    			}
     		}
     	}
     	
