@@ -33,10 +33,6 @@ public class MybatisGroupItemDao implements GroupItemDao{
 		return groupItemMapper.getAllGItemList();
 	}
 	
-	public List<GroupItem> getGItemListByProduct(int productId) throws DataAccessException {
-		return groupItemMapper.getGItemListByProduct(productId);
-	}
-	
 	public List<GroupItem> getGItemListByMember(String memberId) throws DataAccessException{
 		return groupItemMapper.getGItemListByMember(memberId);
 	}

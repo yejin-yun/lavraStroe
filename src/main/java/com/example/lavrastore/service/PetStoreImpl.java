@@ -280,11 +280,6 @@ public class PetStoreImpl implements PetStoreFacade {
 	}
 
 	@Override
-	public List<GroupItem> getGItemListByProduct(int productId) {
-		return groupItemDao.getGItemListByProduct(productId);
-	}
-
-	@Override
 	public List<GroupItem> getGItemListByMember(String memberId) {
 		return groupItemDao.getGItemListByMember(memberId);
 	}

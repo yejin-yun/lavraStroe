@@ -86,9 +86,8 @@ public interface PetStoreFacade {
 	GroupItem getGItem(int itemid);
 	
 	List<GroupItem> getAllGItemList();
-	List<GroupItem> getGItemListByProduct(int productId);
 	
-	//내 주문목록 조회용(login)
+	//groupItem - login용)
 	List<GroupItem> getGItemListByMember(String memberId);
 	
 	//group- 마감일 임박순 

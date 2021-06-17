@@ -19,10 +19,9 @@ public interface GroupItemMapper {
 	
 	//groupItem용 - read
 	List<GroupItem> getAllGItemList();
-	List<GroupItem> getGItemListByProduct(int productId);
 	
-	//내 주문목록 조회용(login)
-	List<GroupItem> getGItemListByMember(String memberId); 
+	//groupItem용 (login) 
+	List<GroupItem> getGItemListByMember(@Param("memberId")String memberId); 
 	
 	//group- 마감일 임박순 
 	List<GroupItem> getGItemListByDeadline();

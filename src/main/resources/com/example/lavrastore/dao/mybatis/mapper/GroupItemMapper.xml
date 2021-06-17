@@ -44,6 +44,29 @@
 		from item i inner join groupitem g on i.itemid = g.itemid
 	</select>
 	
+	<select id="getGItemListByMember" parameterType = "String" resultType="groupItem">
+		select 
+		i.itemid as "item.itemid",
+		i.productId as "item.productid",
+		i.image as "item.image",
+		i.description as "item.description",
+		i.title as "item.title", 
+		i.price as "item.price", 
+		i.isSoldout as "item.issoldout", 
+		i.likecnt as "item.likecnt", 
+		i.quantity as "item.quantity", 
+        NVL(w.wishlistId, 0) as "item.isInWishlist",
+		g.regidate, 
+		g.paymentdate, 
+		g.nowbalance, 
+		g.targetbalance, 
+		g.status 
+		from item i, groupitem g, wishlist w
+		where i.itemid = g.itemid
+		and i.itemid = w.itemid(+)
+		and w.memberid(+) = #{memberId}
+	</select>
+	
 	<update id="updateNowBalance" parameterType="int">
 		UPDATE groupItem
 		SET nowBalance = nowBalance + #{total}
