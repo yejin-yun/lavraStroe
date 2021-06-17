@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.example.lavrastore.dao.mybatis.mapper.PTPItemMapper">
+	<cache />
+	
+	<select id="getPItem" resultType="PTPItem">
+		select
+		i.itemid as "item.itemid",
+		i.productId as "item.productid",
+		i.image as "item.image",
+		i.description as "item.description",
+		i.title as "item.title",
+		i.price as "item.price",
+		i.likecnt as "item.likecnt",
+		p.state,
+		p.devP,
+		p.sellerId,
+		p.bank,
+		p.account
+		from item i inner join PTPItem p on i.itemid = p.itemid
+		where i.itemid = #{itemId}
+		and p.sellerId = #{value}
+	</select>
+	
+	<select id="getPItemListByProduct" resultType="PTPItem">
+		select
+		i.itemid as "item.itemid",
+		i.productId as "item.productid",
+		i.image as "item.image",
+		i.description as "item.description",
+		i.title as "item.title",
+		i.price as "item.price",
+		i.likecnt as "item.likecnt",
+		p.state,
+		p.devP,
+		p.sellerId,
+		p.bank,
+		p.account
+		from item i inner join PTPItem p, product pr
+		where i.itemid = p.itemid
+		and pr.productId = i.productId
+		and i.productId = p.productId
+		and p.productId = #{value}
+	</select>
+	
+	<select id = "getPItemListByHighPrice" resultType="PTPItem">
+		select
+		i.itemid as "item.itemid",
+		i.productId as "item.productid",
+		i.image as "item.image",
+		i.description as "item.description",
+		i.title as "item.title",
+		i.price as "item.price",
+		i.likecnt as "item.likecnt"
+		p.state,
+		p.devP,
+		p.sellerId,
+		p.bank,
+		p.account
+		from item i inner join PTPItem p on i.itemid = p.itemid
+		where i.itemid = #{itemId}
+		order by i.price DESC
+	</select>
+	
+	<select id = "getPItemListByLowPrice" resultType="PTPITEM">
+		select
+		i.itemid as "item.itemid",
+		i.productId as "item.productid",
+		i.image as "item.image",
+		i.description as "item.description",
+		i.title as "item.title",
+		i.price as "item.price",
+		i.likecnt as "item.likecnt"
+		p.state,
+		p.devP,
+		p.sellerId,
+		p.bank,
+		p.account
+		from item i inner join PTPItem p on i.itemid = p.itemid
+		where i.itemid = #{itemId}
+		order by i.price ASC
+	</select>
+
+</mapper>

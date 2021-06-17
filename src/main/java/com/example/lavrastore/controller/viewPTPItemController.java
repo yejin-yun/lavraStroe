@@ -57,7 +57,7 @@ public class viewPTPItemController {
 			@RequestParam(value="page", defaultValue="1") int page,
 			@RequestParam(value="sort", defaultValue="id") String sort, Model model) {
 		
-		Product prd = petStore.getProductByName(productName, 2);
+		Product prd = petStore.getProductByName(productName, 3);
 		
 		List<PTPItem> pList = null;
 		switch (sort) {
@@ -90,7 +90,7 @@ public class viewPTPItemController {
 		return "EarringPItem";
 	}
 	
-	@GetMapping("/accessory/viewItem")
+	@GetMapping("/accessory/viewPItem")
 	public String viewPTPItem(@RequestParam(value="ItemNo", defaultValue="-1") int itemid, Model model) {
 		PTPItem pitem = petStore.getPItem(itemid);
 		
