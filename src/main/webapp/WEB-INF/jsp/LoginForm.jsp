@@ -57,7 +57,7 @@
   </form>
   <div style = "text-align:center; width:500px; margin:auto;">
   		<br>
-	  <a href='<c:url value="/shop/newAccount.do"/>'> 
+	  <a href='<c:url value="/shop/newMember.do"/>'> 
 	    <h4 style=" background-color:black; color:white">new Account</h4>
 	  </a>
   </div>
