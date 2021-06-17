@@ -55,6 +55,9 @@ public class Order implements Serializable {
 		this.shipZip = member.getZip();
 
 		this.totalPrice = item.getPrice() * quantity;
+		if(totalPrice < 200000) {
+			totalPrice += 3000;
+		}
 		this.shipname = member.getUsername();
 
 		this.payType = 1;
@@ -67,6 +70,7 @@ public class Order implements Serializable {
 		
 		this.isInCart = 0;
 
+		this.lineItems.clear();
 		this.lineItems.add(new LineItem(quantity, item.getItemId(), item));
 	}
 
@@ -79,10 +83,16 @@ public class Order implements Serializable {
 		this.shipAddr1 = member.getAddr1();
 		this.shipAddr2 = member.getAddr2();
 		this.shipZip = member.getZip();
-
+		
+		this.lineItems.clear();
 		for(CartItem c : cartItems) {
 			this.totalPrice += c.getItem().getPrice() * c.getQuantity();
+			System.out.println("totalPrice  = " + totalPrice + " " +  c.getItem().getPrice() + " " + c.getQuantity() + " " + c.getItem().getPrice() * c.getQuantity());
 			this.lineItems.add(new LineItem(c.getQuantity(), c.getItem().getItemId(), c.getItem()));
+		}
+		
+		if(totalPrice < 200000) {
+			totalPrice += 3000;
 		}
 		
 		this.shipname = member.getUsername();
@@ -270,7 +280,6 @@ public class Order implements Serializable {
 	public void setIsInCart(int isInCart) {
 		this.isInCart = isInCart;
 	}
-	
 	
 
 }

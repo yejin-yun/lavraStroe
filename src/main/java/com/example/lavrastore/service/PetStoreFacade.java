@@ -59,6 +59,7 @@ public interface PetStoreFacade {
 	
 
 	/* Item */
+	List<Item> getItemListTopKByLikeCnt(int categoryId, int number);
 	List<Item> searchItemList(String keywords);
 	List<Item> getItemListByProduct(int productId);
 	Item getItem(int itemId);

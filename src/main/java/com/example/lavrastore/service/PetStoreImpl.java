@@ -148,6 +148,10 @@ public class PetStoreImpl implements PetStoreFacade {
 	}
 
 	/* Item */
+	
+	public List<Item> getItemListTopKByLikeCnt(int categoryId, int number)  {
+		return itemDao.getItemListTopKByLikeCnt(categoryId, number);
+	}
 
 	public List<Item> searchItemList(String keywords){
 		return itemDao.searchItemList(keywords);

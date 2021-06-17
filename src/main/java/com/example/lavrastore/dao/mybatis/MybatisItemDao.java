@@ -64,4 +64,8 @@ public class MybatisItemDao implements ItemDao {
 		return itemMapper.deleteItem(itemId);
 	}
 
+	public List<Item> getItemListTopKByLikeCnt(int categoryId, int number) throws DataAccessException {
+		return itemMapper.getItemListTopKByLikeCnt(categoryId, number);
+	}
+
 }

@@ -20,6 +20,17 @@
 		WHERE p.productId = i.productId AND i.productId = #{value}
 	</select>
 	
+	<select id="getItemListTopKByLikeCnt" resultType="Item"> <!-- mybatis에서 부등호 사용하면 에러남. https://yamea-guide.tistory.com/entry/Mybatis-%EB%B9%84%EA%B5%90%EC%97%B0%EC%82%B0%EC%9E%90-%EB%B6%80%EB%93%B1%ED%98%B8-%EC%95%88%EB%90%A0%EB%95%8C -->
+		SELECT itemId, productId, image, description, title,
+			price, isSoldout, likeCnt, quantity
+		FROM (SELECT itemId, i.productId as productId, image, description,
+					title, price, isSoldout, i.likeCnt as likeCnt, quantity
+				FROM ITEM i, PRODUCT p 
+				WHERE p.productId = i.productId AND p.categoryId = #{categoryId}
+				ORDER BY likeCnt DESC)
+		WHERE ROWNUM &lt;= #{number}
+	</select>
+	
 	<select id="searchItemList" resultType="Item">
     select
      	itemId,

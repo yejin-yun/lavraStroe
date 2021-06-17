@@ -90,7 +90,14 @@
 			color:white; 
 			background-color: #646EFF; 
 		}
-		
+	/* 	table {
+			margin-left: auto;
+			margin-right: auto;
+			width: 80%;
+		} */
+		ul {
+			list-style: none;
+		}
     </style>
     <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
      <script src="<c:url value='/js/base.js' />" ></script>
@@ -132,20 +139,20 @@
 </head>
 <body>
 	<%@ include file="header.jsp" %>
-	<section>
+	<section style="width: 90%; margin-left: auto; margin-right: auto;">
 		<div id="container" class="w3-center">
-			<c:set var="targetUrl"><c:url value="/item/orderSubmit/${item.itemId}/${isInCart}" /></c:set>
+			<c:set var="targetUrl"><c:url value="/item/orderSubmit/${isInCart}" /></c:set>
 			<form:form method="POST" action="${targetUrl}" modelAttribute="itemOrder">
 				<form:errors cssClass="error" />
 				<div class="menu interval">
-					<h3>상품 정보</h3>
-                    <a><button type="button" class="btn btn-info" id="submenu_click" style="margin-top: 10px;">주문 상품 보기</button></a>
+					<h3>| 상품 정보</h3>
+                    <a><button type="button" class="btn btn-default" id="submenu_click" style="margin-top: 10px;">주문 상품 보기</button></a>
 					<ul class="submenu"> <!--해당 리스트의 내용을 display:none;을 통해 안보이게 처리를 한 후 -->
                     	<c:if test="${isInCart == 0}" >
                     		<li>
                     			<div class="product">
                     				<label>
-                    					<input type="checkbox" name="payment_product" value="${item.itemId}" onClick="return false;" checked>
+                    					<input type="checkbox" name="payment_product" value="${item.itemId}" onClick="return false;" >
                     					<a href="<c:url value='/accessory/detail'>
                     						<c:param name='no' value='${item.itemId}' /></c:url>" >
                     						<img src="<c:url value='${item.image}' />" class="item_img"/>
@@ -162,7 +169,7 @@
                     			<li>
                     			<div class="product">
                     				<label>
-                    					<input type="checkbox" name="payment_product" value="${ci.item.itemId}" onClick="return false;" checked >
+                    					<input type="checkbox" name="payment_product" value="${ci.cartItemId}" onClick="return false;" checked >
                     					<a href="<c:url value='/accessory/detail'>
                     						<c:param name='no' value='${ci.item.itemId}' /></c:url>" >
                     						<img src="<c:url value='${ci.item.image}' />" class="item_img" />
@@ -177,65 +184,86 @@
 				</div>		
 		</div>
 		<div id="recipient_info" class="w3-center interval">
-			<p><font color="blue"><B>주문자 정보</B></font></p><br> 
-			<div class="form-group form-inline">
-				<label for="shipname">주문자 성명</label>
-    			<form:input path="shipname" class="form-control" placeholder="Enter Name" />
-			</div>	
-			<div class="form-group form-inline">
-				<label for="shipZip">우편 번호</label>
-    			<form:input class="form-control" path="shipZip" placeholder="Enter Zip" />
-			</div>		
-			<div class="form-group form-inline">
-				<label for="shipAddr1">배송지 주소1</label>
-    			<form:input path="shipAddr1" class="form-control"  placeholder="Enter Address1" />
-			</div>		
-			<div class="form-group form-inline">
-				<label for="shipAddr2">배송지 주소2</label>
-    			<form:input path="shipAddr2" class="form-control"  placeholder="Enter Address2" />
-			</div>	
+			<table class="table table-striped">
+		  		<thead>
+		   			 <tr>
+		      			<th colspan = "3">| 주문자 정보</th>
+		     			</tr>
+		  		</thead>
+		  		<tbody>	
+		  			<tr>
+					<td > <label> 주문자 성명 </label></td>
+					<td><form:input path="shipname" readonly="true"/></td>
+				</tr>
+				<tr>
+					<td ><label>우편 번호 </label></td> 
+					<td><form:input path="shipZip"/> <font color="red"> <form:errors path="shipZip" /> </font>  </td>
+				</tr>
+				<tr>
+					<td  ><label> 배송지 주소1 </label> </td> 
+					<td><form:input path="shipAddr1" /> <font color="red"> <form:errors path="shipAddr1" /> </font> </td>
+				</tr>
+				<tr>
+					<td  ><label> 배송지 주소2 </label> </td> 
+					<td ><form:input path="shipAddr2"/> <font color="red"> <form:errors path="shipAddr2" /> </font>  </td>
+				</tr>
+			</tbody>
+		</table>
 		</div>
+		<br/>
 		<div id="payment_info" class="w3-center interval">
-			 <p><font color="blue"><B>결제 정보</B></font></p><br> 
-		 	<form:radiobutton path="payType" value="0" label="무통장 입금" class="pm_nobackbook_click pay" />
-			<form:radiobutton path="payType" value="1" label="카드 결제" class="pay pm_card_click" checked="true" />
+			<table class="table table-striped">
+	  		<thead>
+	   			 <tr>
+	      			<th colspan = "3">| 결제 정보 </th>
+	     			</tr>
+	  		</thead>
+	  		<tbody>	
+	  			<tr>
+					<td > <label> 결제 방법 </label> </td>
+					<td>
+						<form:radiobutton path="payType" value="0" label="무통장 입금" class="pm_nobackbook_click pay" />
+						<form:radiobutton path="payType" value="1" label="카드 결제" class="pay pm_card_click" checked="true" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+					<div>
+            		<ul class="pm_nobackbook_apperance" >
+                		<li>
+                			<div class="form-group form-inline">
+	                    		<label>입금자명     </label>
+	                    		<input type="text" name="depositor" class="form-control"/> <font color="red"> <form:errors path="depositor" /> </font>
+                    		</div>
+                    	</li>
+                    	<li>
+	                    	<div class="form-group form-inline">
+		                        <label>입금은행     </label>
+		                        <form:select path="bankType" items="${bankTypes}" class="form-control"/> <font color="red"> <form:errors path="bankType" /> </font>
+	                        </div>
+                    	</li>
+               		</ul>  
+                	<ul class="pm_card_apperance" >
+                		<li>              		
+	                    	<label>Card Type </label>
+	                    	<form:select path="cardType" items="${creditCardTypes}" />                  	
+                    	</li>
+                    	<li>
+	                    	<label>Card Number </label>
+	                    	<form:input path="cardNum" placeholder="ex : 9999 9999 9999 9999 "/> <font color="red"> <form:errors path="cardNum" /> </font>
+                    	</li>
+                    	<li>
+	                    	<label> Expiry Date </label> 
+							<form:input path="expiryDate" placeholder="ex : (MM/YY)"/>  <font color="red"> <form:errors path="expiryDate" /> </font>
+                    	</li>
+                	</ul>  
+                	</div>
+                	</td>
+				</tr>
+            </tbody>
+            </table>
             
-            <div>
-            	<ul class="pm_nobackbook_apperance" >
-                	<li>
-                		<div class="form-group form-inline">
-	                    	<label>입금자명     </label>
-	                    	<input type="text" name="depositor" class="form-control"/>
-                    	</div>
-                    </li>
-                    <li>
-                    	<div class="form-group form-inline">
-	                        <label>입금은행     </label>
-	                        <form:select path="bankType" items="${bankTypes}" class="form-control"/>
-                        </div>
-                    </li>
-                </ul>  
-                <ul class="pm_card_apperance" >
-                	<li>
-                		<div class="form-group form-inline">
-	                    	<label>Card Type: </label>
-	                    	<form:select path="cardType" items="${creditCardTypes}" class="form-control"/>
-                    	</div>
-                    </li>
-                    <li>
-                    	<div class="form-group form-inline">
-	                        <label>Card Number: </label>
-	                        <form:input path="cardNum" class="form-control" placeholder="ex : 9999 9999 9999 9999 "/>
-                        </div>
-                    </li>
-                    <li>
-                    	<div class="form-group form-inline">
-	                    	<label>Expiry Date: </label>
-	                    	<form:input path="expiryDate" class="form-control" placeholder="ex : (MM/YY)"/>
-                    	</div>
-                    </li>
-                </ul>  
-	           </div>   
+           
 	           <div style="margin: 20px;" class="well-sm interval" >
 	                <span>최종 결제 금액 </span> 
 	                <c:if test="${totalCost < 200000}">

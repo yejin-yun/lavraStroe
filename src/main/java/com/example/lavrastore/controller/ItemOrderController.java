@@ -135,9 +135,9 @@ public class ItemOrderController {
 		 return "ItemOrder";
 	}
 	
-	@PostMapping("/item/orderSubmit/{itemId}/{isInCart}")
+	@PostMapping("/item/orderSubmit/{isInCart}")
 	public ModelAndView validateAndConfirmOrder(
-			@PathVariable int itemId,
+			HttpServletRequest request,
 			@PathVariable int isInCart,
 			@ModelAttribute("itemOrder") Order itemOrder,
 			BindingResult result,
@@ -161,8 +161,26 @@ public class ItemOrderController {
 				mav.addObject("isInCart", 0); //카트가 아닌 상세페이지에서 넘어가는 코드들 
 				mav.addObject("quantity", itemOrder.getLineItems().get(0).getQuantity());
 				return mav; 
-			}else {
+			} else {
+				 String[] payment_product = request.getParameterValues("payment_product");
+				 for(String s : payment_product) {
+					 System.out.println(s);
+				 }
+				 ArrayList<CartItem> list = new ArrayList<CartItem>();
+				 for(int i = 0; i < payment_product.length; i++) {
+					 int cartItemId = Integer.parseInt(payment_product[i]);
+					 System.out.println(lavraStore.getCartItemById(cartItemId).getCartItemId());
+					 list.add(lavraStore.getCartItemById(cartItemId));
+				 }
+				 
+				 for(CartItem cartItem : list) {
+					 cartItem.setItem(lavraStore.getItemByCartItemId(cartItem.getCartItemId(), itemOrder.getMemberId()));
+				 }
 				
+				mav = new ModelAndView("ItemOrder");
+				mav.addObject("cartItemList", list);
+				mav.addObject("isInCart", 1); //카트가 아닌 상세페이지에서 넘어가는 코드들 
+				return mav; 
 			}
 		}
 		
@@ -178,4 +196,5 @@ public class ItemOrderController {
 		
 		return mav;
 	}
+
 }
