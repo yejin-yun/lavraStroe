@@ -43,8 +43,9 @@ public class MemberFormController {
 		UserSession userSession = 
 			(UserSession) WebUtils.getSessionAttribute(request, "userSession");
 		if (userSession != null) {	// edit an existing account
-			return new MemberForm(
-				petStore.getMember(userSession.getMember().getMemberId()));
+			if(userSession.getMember() == null)
+				return new MemberForm();
+			return new MemberForm(petStore.getMember(userSession.getMember().getMemberId()));
 		}
 		else {	// create a new account
 			return new MemberForm();

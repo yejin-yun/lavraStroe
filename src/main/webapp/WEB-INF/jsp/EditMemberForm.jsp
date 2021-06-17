@@ -45,11 +45,24 @@
 		.member{
 			width:40%;
 		}
+		tr{
+			height:	2%;
+		}
 	</style>
 
 </head>
 <body>
 <%@ include file="header.jsp"%>
+<div class="container"  style="margin-left: auto; margin-right: auto; width: 90%; margin-top:5%;">
+		<ul class="nav nav-tabs">
+		<c:if test="${empty userSession.member}">
+		  <li  class="active"> 회원가입</li>
+        </c:if>
+        <c:if test="${!empty userSession.member}">
+		  <li  class="active"> 회원정보 수정</li>
+        </c:if>
+		</ul>
+	</div> 
 <div align="center">
 <form:form modelAttribute="memberForm" method="post">
   <form:errors cssClass="error" /> <br><br>
@@ -57,12 +70,12 @@
 		   <tr>
             <td>User ID:</td>
             <td>
-            <c:if test="${MemberForm.newAccount}">
+            <c:if test="${empty userSession.member}">
               <form:input path="member.memberId" />
               <B><form:errors path="member.memberId" cssClass="error" /></B>
             </c:if> 
-            <c:if test="${!MemberForm.newMember}">
-              <c:out value="${MemberForm.member.memberId}" />
+            <c:if test="${!empty userSession.member}">
+              <c:out value="${userSession.member.memberId}" />
             </c:if>
             </td>
           </tr>
@@ -100,7 +113,7 @@
 		  </tr>
 		  <tr>
 		    <td>우편 번호 :</td>
-		    <td><form:input path="member.zip" /> 
+		    <td><form:input path="member.zip" maxlength='5'/> 
 		      <form:errors path="member.zip" cssClass="error" /></td>
 		  </tr>
 		  <tr>
@@ -111,7 +124,7 @@
 		</table>
 		  <br />
     <input type="image" src="../images/button_submit.gif" name="submit"
-      value="Save Account Information" />
+      value="Save Member Information" />
 </form:form>
 <p></p>
 </div>

@@ -25,10 +25,11 @@ public class MemberFormValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "member.addr2", "ADDRESS1_REQUIRED", "Address (2) is required.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "member.zip", "ZIP_REQUIRED", "ZIP is required.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "member.phone", "PHONE_REQUIRED", "Phone number is required.");
+	
 		
 		if (memberForm.isNewMember()) {
 			member.setAccstauts(0);
-			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.username", "USER_ID_REQUIRED", "User ID is required.");
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "member.memberId", "USER_ID_REQUIRED", "User ID is required.");
 			if (member.getPassword() == null || member.getPassword().length() < 1 ||
 					!member.getPassword().equals(memberForm.getRepeatedPassword())) {
 				errors.reject("PASSWORD_MISMATCH",

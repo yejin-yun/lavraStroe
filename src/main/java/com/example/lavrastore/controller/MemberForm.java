@@ -30,6 +30,7 @@ public class MemberForm implements Serializable {
 	public Member getMember() {
 		return member;
 	}
+	
 
 	public boolean isNewMember() {
 		return newMember;
