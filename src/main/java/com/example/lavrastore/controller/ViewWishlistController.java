@@ -79,7 +79,7 @@ public class ViewWishlistController {
 			  itemListPage.setPage(page - 1);
 			  
 			  List<WishList> WishItemListPerPage = itemListPage.getPageList();
-			  totalPageSize = wishItemList.size() / perPageSize; //나눌때는 전체 아이템 개수에 나눠야 페이지 수를 구할 수 있음. 
+			  totalPageSize = wishItemList2.size() / perPageSize; //나눌때는 전체 아이템 개수에 나눠야 페이지 수를 구할 수 있음. 
 			  System.out.println("carttest = " + wishItemList.size());
 			  if(wishItemList.size() % perPageSize != 0) {
 				  totalPageSize++;
