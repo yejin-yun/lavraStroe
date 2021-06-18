@@ -96,6 +96,7 @@
                 <li><a href="<c:url value='/cart/1' />">Cart</a></li>
                 <li><a href="<c:url value='/user/wishlist' />">Wishlist</a></li>
                 <li><a href="<c:url value='/user/mypage' />">Mypage</a></li>
+                <li><a href="<c:url value='/user/sellList' />">Sell Item</a></li>
             </ul>
         </div>
     </div>

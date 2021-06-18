@@ -99,7 +99,7 @@
 		         	</li>
 		         	<li><a href="<c:url value='/wishlist/view/1' />">Wishlist</a></li>
 		         	<li><a href="<c:url value='/order/view/1' />">My Order</a></li>
-                
+                	<li><a href="<c:url value='/sellList/view/0' />">Sell Item</a></li>
 		      	</c:if>
                 
                 
