@@ -222,6 +222,7 @@ public class ItemController {
 		CartItem cartItem;
 		if (userSession != null) {
 			member = userSession.getMember();
+			model.addAttribute("memberId", member.getMemberId());
 			cartItem = lavraStore.findCartItemByItemItemIdAndMemberId(no, member.getMemberId());
 			if (cartItem != null) {
 				item.setIsInCart(1);
@@ -235,7 +236,7 @@ public class ItemController {
 		List<Review> reviewList = null;
 		reviewList = lavraStore.getReviewByItem(no);
 		model.addAttribute("reviewList", reviewList);
-		model.addAttribute("memberId", member.getMemberId());
+		
 
 		DetailItem dItem = new DetailItem();
 

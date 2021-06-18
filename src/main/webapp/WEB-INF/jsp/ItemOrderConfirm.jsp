@@ -46,7 +46,12 @@
 	}
 	
 </style>
-
+<script>
+function moveTarget(targetUri) {
+	form.action = targetUri;
+	form.submit();
+}
+</script>
 </head>
 <body>
 <%@ include file="header.jsp" %>
@@ -139,9 +144,10 @@
 		</div>
 	</div>
 	<br/>
-	<form action="<c:url value='/accessory/earring/1' />" method="get" style="margin : 0px auto;">
+	<form name="form" method="get" style="margin : 0px auto;">
 		<div class="w3-center interval funcs" style="padding-bottom: 20%;">
-		  		<input type="submit" value="다른 아이템 구경가기">
+		  		<input type="button" value="다른 아이템 구경가기" onClick="moveTarget('<c:url value='/accessory/earring/1' />')">
+		  		<input type="button" value="주문 조회로 이동" onClick="moveTarget('<c:url value='/order/view/1' />')">
 	  	</div>
 	</form>
 </div>
