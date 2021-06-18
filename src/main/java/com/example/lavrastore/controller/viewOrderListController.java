@@ -43,7 +43,7 @@ public class viewOrderListController {
 		return "order";
 	}
 	
-	@RequestMapping("/order/view/2") //공동구매 item인 경우
+	@RequestMapping("/order/view/2") //개인구매 item인 경우
 	public String viewPTPOrder(Model model) {
 		List<Order> orderList = null;
 		

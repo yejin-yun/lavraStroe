@@ -221,6 +221,7 @@ public class ItemController {
 		CartItem cartItem;
 		if (userSession != null) {
 			member = userSession.getMember();
+			model.addAttribute("memberId", member.getMemberId());
 			cartItem = lavraStore.findCartItemByItemItemIdAndMemberId(no, member.getMemberId());
 			if (cartItem != null) {
 				item.setIsInCart(1);
