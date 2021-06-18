@@ -95,7 +95,7 @@
 		        		<a href="<c:url value="/shop/logout.do"/>">logout</a>
                 	</li>
 		      		<li>
-		        		<a href="<c:url value="/shop/editAccount.do"/>">Mypage</a>
+		        		<a href="<c:url value="/shop/editMember.do"/>">Mypage</a>
 		         	</li>
 		         	<li><a href="<c:url value='/shop/wishList.do' />">Wishlist</a></li>
 		         	<li><a href="<c:url value='/order/view/1' />">My Order</a></li>

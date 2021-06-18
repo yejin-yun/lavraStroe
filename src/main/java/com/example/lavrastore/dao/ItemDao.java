@@ -12,6 +12,7 @@ public interface ItemDao {
   
   /* Read */
 	
+	List<Item> getItemListTopKByLikeCnt(int categoryId, int number) throws DataAccessException;
 	List<Item> getItemListByProduct(int productId) throws DataAccessException;
 	Item getItem(int itemId) throws DataAccessException;
 	List<Item> getItemForNotUser(int productId) throws DataAccessException; // 인기순으로 되어 있음. 비로그인 용 

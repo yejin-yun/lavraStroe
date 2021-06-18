@@ -14,7 +14,6 @@
           ZIP,
           PHONE
     FROM MEMBER
-    FROM MEMBER
     WHERE MEMBER.MEMBERID = #{memberId}
 
   </select>
@@ -39,26 +38,23 @@
     SELECT USERNAME AS VALUE FROM MEMBER
   </select>
 
-  <update id="updatemember" parameterType="Member">
+  <update id="updateMember" parameterType="Member">
     UPDATE MEMBER SET
       EMAIL = #{email},
+      PASSWORD = #{password},
       USERNAME = #{username},
-      STATUS = #{status},
-      ADDR1 = #{address1},
-      ADDR2 = #{address2,jdbcType=VARCHAR},
-      CITY = #{city},
-      ACCSTATE = #{accstate},
+      ADDR1 = #{addr1},
+      ADDR2 = #{addr2,jdbcType=VARCHAR},
       ZIP = #{zip},
-      COUNTRY = #{country},
       PHONE = #{phone}
-    WHERE USERID = #{userId}
+    WHERE MEMBERID = #{memberId}
   </update>
 
   <insert id="insertMember" parameterType="Member">
     INSERT INTO MEMBER
-      (EMAIL, USERNAME, ACCSTATUS, ADDR1, ADDR2, ZIP, PHONE, USERID)
+      (EMAIL, USERNAME, ACCSTATUS, ADDR1, ADDR2, ZIP, PHONE, MEMBERID, PASSWORD)
     VALUES
-      (#{email}, #{username}, #{status}, #{address1}, #{address2,jdbcType=VARCHAR}, #{zip}, #{phone}, #{userId})
+      (#{email}, #{username}, 1, #{addr1}, #{addr2,jdbcType=VARCHAR}, #{zip}, #{phone}, #{memberId}, #{password})
   </insert>
 
   <!--  

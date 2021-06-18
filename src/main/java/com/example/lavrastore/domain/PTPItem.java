@@ -6,10 +6,24 @@ import java.io.Serializable;
 public class PTPItem implements Serializable {
 
 	Item item;
-	int state; // 0: 진행중, 1: 구매 요청, 2: 거래 완료
+	int state; // 0: 진행중, 1: 거래중, 2: 거래 완료
 	int devP;
 	int sellerId;
+	String bank;
+	int account;
 	
+	public String getBank() {
+		return bank;
+	}
+	public void setBank(String bank) {
+		this.bank = bank;
+	}
+	public int getAccount() {
+		return account;
+	}
+	public void setAccount(int account) {
+		this.account = account;
+	}
 	public Item getItem() {
 		return item;
 	}

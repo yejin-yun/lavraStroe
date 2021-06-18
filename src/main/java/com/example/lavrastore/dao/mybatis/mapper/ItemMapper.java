@@ -32,6 +32,7 @@ import com.example.lavrastore.domain.Item;
 public interface ItemMapper {
 	/* Read */
 	
+	List<Item> getItemListTopKByLikeCnt(int categoryId, int number);
 	List<Item> getItemListByProduct(int productId);
 	Item getItem(int itemId);
 	List<Item> getItemForNotUser(int productId); // 인기순으로 되어 있음. 비로그인 용. defult로 출

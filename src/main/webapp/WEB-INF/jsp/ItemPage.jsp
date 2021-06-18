@@ -269,7 +269,7 @@
 					
 					<tr align="center">
 						<td> 배송비 </td>
-						<td> 3,000원 </td>
+						<td> 3,000원 (20만원 이상 구매시 무료배송)</td>
 					</tr>
 					<tr align="center">
 						<td> 수량 </td>

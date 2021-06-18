@@ -49,6 +49,24 @@
 			left: 70%;
 			right: 5%;
 		}
+		.select{ 
+			width: 5%;
+		}
+		.title{ 
+			width: 10%;
+		}
+		.price{ 
+			width: 10%;
+		}
+		.quan{ 
+			width: 10%;
+		}
+		.total{ 
+			width: 20%;
+		}
+		th, td {
+			text-align: center;
+		}
 	</style>
 	<script>
 		$(document).ready(function() {
@@ -209,15 +227,15 @@
 	</c:if> --%>
 	<form method="POST" name="form"> <%-- action이 없으면 얘를 부른 컨트롤러로 넘어간다. 체크한 것만 넘어가면 돼서 Command 객체 필요 없음. form:form을 사용안 한 건 여기서 하나만 선택한 결과를 알고 싶은 게 아니고, 어떤 것들이 선택 되었는지가 중요하기 때문. 즉 path를 설정할  게 없음--%>
 		<div class="container" style="margin-top: 5%;">
-		<table > <!-- class="table table-hover" -->
+		<table class="table-hover w-auto"> <!-- class="table table-hover w-auto" -->
 	    <thead>
 	      <tr>
-	        <th>선택</th>
-	        <th>상품명</th>
-	        <th></th>
-	        <th>가격</th>
-	        <th>수량</th>
-	        <th>합계</th>
+	        <th class="select">선택</th>
+	        <th class="title">상품명</th>
+	        <th class="title"></th>
+	        <th class="price">가격</th>
+	        <th class="quan">수량</th>
+	        <th class="total">합계</th>
 	      </tr>
 	    </thead>
 	    <tbody>
@@ -228,7 +246,7 @@
 	    			<c:set var="item" value="${cartItem.item}" />
 	    			<c:set var="itemTotalCost" value="${item.price * cartItem.quantity}" />
 	    			
-	    			<td>
+	    			<td class="select">
 	    			
 	    			<c:choose>
 						<c:when test="${item.isSoldout == 1}">
@@ -242,14 +260,14 @@
 	    			
 	    			</td>
 	    			
-	    			<td>
+	    			<td class="title">
 	    			<a href="<c:url value='/accessory/detail'>
 		            				<c:param name='no' value='${item.itemId}' /></c:url>">
 	    			<img style="height: 50px;" src="<c:url value='${item.image}' />" /></a></td>
-	    			<td><a href="<c:url value='/accessory/detail'>
+	    			<td class="title"><a href="<c:url value='/accessory/detail'>
 		            				<c:param name='no' value='${item.itemId}' /></c:url>">
 		            	${item.title}</a></td>
-	    			<td>
+	    			<td  class="price">
 	    			<c:choose>
 						<c:when test="${item.isSoldout == 0}">
 							<fmt:formatNumber value="${item.price}" pattern="###,###,###"/>원
@@ -259,8 +277,8 @@
 						</c:when>
 					</c:choose>
 	    			</td>
-	    			<td><input type="text" id="quantity${cartItem.cartItemId}" name="quantity" value="${cartItem.quantity}" size="2" style="text-align:center;"/>&nbsp;<button id="btnQuan" onClick="updateQuantity(${cartItem.cartItemId}, ${item.quantity}, ${curPage})">수정</button></td> 
-	    			<td><fmt:formatNumber value="${itemTotalCost}" pattern="###,###,###"/>원</td>
+	    			<td  class="quan"><input type="text" id="quantity${cartItem.cartItemId}" name="quantity" value="${cartItem.quantity}" size="2" style="text-align:center;"/>&nbsp;<button id="btnQuan" onClick="updateQuantity(${cartItem.cartItemId}, ${item.quantity}, ${curPage})">수정</button></td> 
+	    			<td  class="total"><fmt:formatNumber value="${itemTotalCost}" pattern="###,###,###"/>원</td>
 	    			<c:set var="allTotalCost" value="${allTotalCost + itemTotalCost}" />
 	    		</tr>
 	    	</c:forEach>
