@@ -306,6 +306,16 @@ public class Order implements Serializable {
 	public void setIsInCart(int isInCart) {
 		this.isInCart = isInCart;
 	}
+
+	public PtpOrder getPtpOrder() {
+		return ptpOrder;
+	}
+
+	public void setPtpOrder(PtpOrder ptpOrder) {
+		this.ptpOrder = ptpOrder;
+	}
+	
+	
 	
 
 }

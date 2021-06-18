@@ -13,6 +13,7 @@ public class PtpOrder implements Serializable {
 	private String shipCompany; //배송회사
 	private String trackNum; //송장번호
 	private int state; //0이면 구매가능 이 보다 크면 구매진행중이거나 거래 완료
+	private String depositor; //입금자명
 	
 	public PtpOrder(PTPItem pitem, String memberId) {
 		this.sellerId = pitem.sellerId;
@@ -20,6 +21,7 @@ public class PtpOrder implements Serializable {
 		this.state = 1;
 		this.shipCompany = "CJ"; //기본값
 		this.trackNum = "00000000000"; //기본값
+		this.depositor = "홍길동";
 	}
 
 	public void PtpOrder() {}
@@ -72,8 +74,14 @@ public class PtpOrder implements Serializable {
 		this.state = state;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public String getDepositor() {
+		return depositor;
 	}
+
+	public void setDepositor(String depositor) {
+		this.depositor = depositor;
+	}
+
+	
 	
 }
