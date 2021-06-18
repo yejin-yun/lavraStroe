@@ -16,6 +16,10 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script>
+
+</script>
+
 <style>
 .rating {
 	float : left;
@@ -220,6 +224,14 @@
 				</tr>
     		</table>
 		</div>
+	</form>
+	
+	<c:set var="targetUrl"><c:url value="/group" /></c:set>
+	<form name="bform" action="${targetUrl}" method="post" style="margin : 0px auto;">
+		<div class="w3-center interval funcs" style="padding-bottom: 20%;">
+		  		<input type="submit" value="공동구매 페이지로 "> &nbsp;&nbsp;&nbsp;
+	  	  		<a href="<c:url value='/order/view/3' />"><input type="button" value="주문조회 페이지로 "></a>
+	  	</div>
 	</form>
 </div>
 </body>
