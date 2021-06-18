@@ -125,7 +125,7 @@ public class ItemController {
 		model.addAttribute("totalPageSize", totalPageSize);
 		model.addAttribute("sort", sort);
 		model.addAttribute("productName", productName);
-		return "EarringItem";
+		return "ViewItems";
 	}
 
 	@PostMapping("/accessory/wish")
@@ -236,7 +236,7 @@ public class ItemController {
 		List<Review> reviewList = null;
 		reviewList = lavraStore.getReviewByItem(no);
 		model.addAttribute("reviewList", reviewList);
-		model.addAttribute("memberId", member.getMemberId());
+		
 
 		DetailItem dItem = new DetailItem();
 

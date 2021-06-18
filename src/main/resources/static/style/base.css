@@ -151,7 +151,7 @@ footer{
     clear: both;
     padding: 20px 0;
 }
-.work_sub_menu, .trade_sub_menu {display:none;}
+.work_sub_menu, .work_sub_menu1, .trade_sub_menu {display:none;}
 
 a {
 	text-decoration: none !important; /*!important 없으면 부트스트랩 때문에 밑줄 나옴*/

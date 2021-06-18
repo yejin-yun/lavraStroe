@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,7 @@ public class viewOrderListController {
 	}
 	
 	@RequestMapping("/order/view/1") //쇼핑몰 item인 경우 (기본)
+	@Transactional
 	public String viewItemOrder(Model model) {
 		List<Order> orderList = null;
 		
@@ -58,7 +60,7 @@ public class viewOrderListController {
 		return "order";
 	}
 	
-	@RequestMapping("/order/view/2") //개인구매 item인 경우
+	@RequestMapping("/order/view/2") //공동구매 item인 경우
 	public String viewPTPOrder(Model model) {
 		List<Order> orderList = null;
 		
