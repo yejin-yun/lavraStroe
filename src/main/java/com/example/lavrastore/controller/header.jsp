@@ -48,7 +48,7 @@
                 </li>
                 <li id="work1"><a>개인 거래</a>
                     <ul class="work_sub_menu1 sub_menu" style="z-index:1000; position:absolute;">
-                        <li><a href="<c:url value='/accessory/earring/1' />">귀걸이</a></li> 
+                        <li><a href="<c:url value='/accessory/earring/3' />">귀걸이</a></li> 
                         <li><a href="<c:url value='' />">목걸이</a></li>
                         <li><a href="<c:url value='' />">반지</a></li>
                         <li><a href="<c:url value='' />">팔찌</a></li>

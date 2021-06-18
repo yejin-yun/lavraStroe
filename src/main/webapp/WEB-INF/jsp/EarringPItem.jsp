@@ -43,7 +43,7 @@
 				<td>
 					<div class="w3-card-4 work">
 						<div class="img_div">						
-							<a href="<c:url value='/accessory/viewItem'>
+							<a href="<c:url value='/accessory/viewPItem'>
 								<c:param name='itemNo' value='${ptpitem.item.itemId}' />
 								</c:url>">
 								<img class="main_img" src="<c:url value='${ptpitem.item.image}' />" />
