@@ -29,6 +29,7 @@ import com.example.lavrastore.domain.DetailItem;
 import com.example.lavrastore.domain.Item;
 import com.example.lavrastore.domain.Member;
 import com.example.lavrastore.domain.Product;
+import com.example.lavrastore.domain.Review;
 import com.example.lavrastore.domain.WishList;
 import com.example.lavrastore.service.PetStoreFacade;
 
@@ -214,10 +215,12 @@ public class ItemController {
 		if (no == -1)
 			return "redirect:error";
 
+		Member member = null;
+		
 		Item item = lavraStore.getItem(no);
 		CartItem cartItem;
 		if (userSession != null) {
-			Member member = userSession.getMember();
+			member = userSession.getMember();
 			cartItem = lavraStore.findCartItemByItemItemIdAndMemberId(no, member.getMemberId());
 			if (cartItem != null) {
 				item.setIsInCart(1);
@@ -226,6 +229,12 @@ public class ItemController {
 				item.setIsInCart(0);
 			}
 		}
+		
+		
+		List<Review> reviewList = null;
+		reviewList = lavraStore.getReviewByItem(no);
+		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("memberId", member.getMemberId());
 
 		DetailItem dItem = new DetailItem();
 

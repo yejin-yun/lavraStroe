@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.example.lavrastore.dao.mybatis.mapper.ReviewMapper">
+	<cache />
+	
+	<select  id="getCntOfGroupItemByMember" parameterType="HashMap" resultType="int"> 
+		select count(*) as cnt from grouporder g
+		where g.orderid in (
+			select o.orderid 
+			from shoporder o
+			where o.memberid = #{memberId}) 
+		and g.itemid = to_number(#{itemId})
+	</select>
+	
+	<select  id="getCntOfItemByMember" parameterType="HashMap" resultType="int"> 
+		select count(*) as cnt from lineitem l
+		where l.orderid in (
+			select o.orderid 
+			from shoporder o
+			where o.memberid = #{memberId}) 
+		and l.itemid = to_number(#{itemId})
+	</select>
+	
+	<select id="getReviewByItem" parameterType="int" resultType="Review">
+		select reviewId, reviewContent, preference, reviewDate, memberId, itemId
+		from review
+		where itemId = #{itemId}
+	</select>
+	
+	<insert id="insertReview" parameterType="Review">
+		<selectKey keyProperty="reviewId" resultType="int" order="BEFORE">
+			select seq_reviewid.nextval from dual
+		</selectKey>
+		insert into review (REVIEWID, REVIEWCONTENT, PREFERENCE, REVIEWDATE, MEMBERID,ITEMID)
+		values( #{reviewId}, #{reviewContent}, #{preference}, #{reviewDate}, #{memberId}, #{itemId})
+	</insert>
+	
+	<delete id="deleteReview" parameterType="int">
+		delete from review where reviewid = #{reviewId}
+	</delete>
+</mapper>

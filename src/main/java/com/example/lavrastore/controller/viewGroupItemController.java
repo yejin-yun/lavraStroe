@@ -23,6 +23,7 @@ import com.example.lavrastore.domain.GroupItem;
 import com.example.lavrastore.domain.Item;
 import com.example.lavrastore.domain.Member;
 import com.example.lavrastore.domain.Product;
+import com.example.lavrastore.domain.Review;
 import com.example.lavrastore.domain.WishList;
 import com.example.lavrastore.service.PetStoreFacade;
 
@@ -87,8 +88,19 @@ public class viewGroupItemController {
 			@RequestParam(value="itemNo", defaultValue="11024") int itemid, Model model
 			) {
 		
+		Member member = null;
+		
+		List<Review> reviewList = null;
+		reviewList = petStore.getReviewByItem(itemid);
+		model.addAttribute("reviewList", reviewList);
+		
 		GroupItem gitem = petStore.getGItem(itemid);
 		gitem.setPercent();
+		
+		if(userSession != null) {
+			member = userSession.getMember();
+			model.addAttribute("memberId", member.getMemberId());
+		} 
 		
 		model.addAttribute("gitem", gitem);
 		System.out.println("itemid : " + gitem.getItem().getItemId() + " 등록일 : " + gitem.getRegiDate() + " 마감일 : " + gitem.getPaymentDate());

@@ -14,6 +14,7 @@ import com.example.lavrastore.domain.Member;
 import com.example.lavrastore.domain.Order;
 import com.example.lavrastore.domain.PTPItem;
 import com.example.lavrastore.domain.Product;
+import com.example.lavrastore.domain.Review;
 import com.example.lavrastore.domain.WishList;
 
 /**
@@ -162,4 +163,14 @@ public interface PetStoreFacade {
 	List<Order> getItemOrderListByMember(String memberId);
 	List<Order> getPTPOrderListByMember(String memberId);
 	List<Order> getGroupOrderListByMember(String memberId);
+	
+	/*review*/
+	//멤버가 그룹 아이템을 샀는지 확인.
+	int getCntOfGroupItemByMember(int itemid, String memberId);
+	//멤버가 쇼핑 아이템을 샀는지 확인.
+	int getCntOfItemByMember(int itemid, String memberId);
+	
+	int insertReview(Review review);
+	int deleteReview(int reviewId);
+	List<Review> getReviewByItem(int itemid);
 }
