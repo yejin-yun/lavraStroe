@@ -18,6 +18,7 @@ import com.example.lavrastore.dao.ItemDao;
 import com.example.lavrastore.dao.MemberDao;
 import com.example.lavrastore.dao.OrderDao;
 import com.example.lavrastore.dao.ProductDao;
+import com.example.lavrastore.dao.ReviewDao;
 import com.example.lavrastore.dao.WishListDao;
 import com.example.lavrastore.data.jpa.CartItemRepository;
 import com.example.lavrastore.data.jpa.WishListRepository;
@@ -30,6 +31,7 @@ import com.example.lavrastore.domain.Member;
 import com.example.lavrastore.domain.Order;
 import com.example.lavrastore.domain.PTPItem;
 import com.example.lavrastore.domain.Product;
+import com.example.lavrastore.domain.Review;
 import com.example.lavrastore.domain.WishList;
 
 @Service
@@ -60,6 +62,8 @@ public class PetStoreImpl implements PetStoreFacade {
 	@Autowired
 	private OrderDao orderDao;
 
+	@Autowired
+	private ReviewDao reviewDao;
 	// -------------------------------------------------------------------------
 	// Operation methods, implementing the PetStoreFacade interface
 	// -------------------------------------------------------------------------
@@ -418,6 +422,36 @@ public class PetStoreImpl implements PetStoreFacade {
 	@Override
 	public List<Order> getGroupOrderListByMember(String memberId) {
 		return orderDao.getGroupOrderListByMember(memberId);
+	}
+
+	@Override
+	public int getCntOfGroupItemByMember(int itemid, String memberId) {
+		// TODO Auto-generated method stub
+		return reviewDao.getCntOfGroupItemByMember(itemid, memberId);
+	}
+
+	@Override
+	public int getCntOfItemByMember(int itemid, String memberId) {
+		// TODO Auto-generated method stub
+		return reviewDao.getCntOfItemByMember(itemid, memberId);
+	}
+
+	@Override
+	public int insertReview(Review review) {
+		// TODO Auto-generated method stub
+		return reviewDao.insertReview(review);
+	}
+
+	@Override
+	public List<Review> getReviewByItem(int itemid) {
+		// TODO Auto-generated method stub
+		return reviewDao.getReviewByItem(itemid);
+	}
+
+	@Override
+	public int deleteReview(int reviewId) {
+		// TODO Auto-generated method stub
+		return reviewDao.deleteReview(reviewId);
 	}
 
 }

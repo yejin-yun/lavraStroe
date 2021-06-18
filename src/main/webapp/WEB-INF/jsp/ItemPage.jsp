@@ -10,6 +10,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <title>${item.title} 페이지</title>
 <style>
 	html, body {
@@ -24,6 +28,49 @@
 		border-spacing: 0 20px; /* %로 주면 안됨. margin-bottom: 20px;도 안됨 */
 		
 	}
+	
+/*review 부분 추가*/
+.rating {
+	float : left;
+ 	display: flex;
+    flex-direction: row-reverse;
+}
+
+.rating>input {
+    display: none
+}
+
+.rating>label {
+    position: relative;
+    width: 50px;
+    font-size: 30px;
+    color: #FFD600;
+    cursor: pointer
+}
+
+.rating>label::before {
+    content: "\2605";
+    position: absolute;
+    opacity: 0
+}
+
+.rating>label:hover:before,
+.rating>label:hover~label:before {
+    opacity: 1 !important
+}
+
+.rating>input:checked~label:before {
+    opacity: 1
+}
+
+.rating:hover>input:checked~label:before {
+    opacity: 0.4
+}
+
+.cover {
+    display: flex;
+    justify-content: space-between;
+}
 </style>
 <script>
 
@@ -193,6 +240,12 @@
 <c:if test="${dItem == '' || dItem eq null}">
 		<div style="width: 50%; margin-left:auto; margin-right: auto;">상품 로딩 중 문제가 발생하였습니다.</div>
 </c:if>
+<c:if test="${errReview}">
+		<script>
+			var msg = '<c:out value="${errMsg}"/>';
+			alert(msg);
+		</script>
+</c:if>
 <div align="center" style="width : 90%; margin-left:auto; margin-right: auto; height:100%;">
 	<table border="1" style="width: 80%; padding-bottom: 15%;">
 		<tr>
@@ -274,6 +327,7 @@
 				</form>
 			</td>
 		</tr>
+		
 		<tr>
 			<td colspan='2'>
 				<table id="content_table" style="width: 100%; padding-top: 10%; padding-bottom: 10%;"> <%-- 하나의 tr에 text, 사진 등 넣을 것 --%> 
@@ -290,7 +344,91 @@
 				</table>
 			</td>
 		</tr>
+		
 	</table>
+</div>
+
+
+
+<!-- 리뷰 부분 추가! -->
+
+<div style="width : 80%; margin : 0 auto; margin-top : 50px;">
+	<form class="wc-center" method="post" action="<c:url value='/accessory/insertReview.do'/>">
+		<input type="hidden" name="itemId" value="${dItem.item.itemId}">
+		<div class="form-group">
+			<label for="reviewContent"> 
+				<h3>| Review </h3>
+			</label>
+    		<div style="width : 90%">
+    			<div class="rating"> 
+					<input type="radio" name="rating" value="5" id="5"> <label for="5">☆</label>
+					<input type="radio" name="rating" value="4" id="4"><label for="4">☆</label>
+					<input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
+					<input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
+					<input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+				</div>
+    		</div>
+    		<table class="review">
+    			<tr>
+    				<td>
+    					<input type="text"  style="width: 780px; height:45px; font-size:20px; float:left;" class="form-control" name="content" placeholder="한 줄 리뷰를 입력해주세요. (최소 10글자)"> 
+    					<font color="white"> <input type="submit" type="button" style="float:left; margin-left : 10px;"class="btn btn-secondary btn-lg" value="등록"/> </font>
+    				</td>
+    				
+    			</tr>
+    			<tr>
+    				<td><small class="form-text text-muted" style="text-align : left;">리뷰는 해당 아이템을 구매한 회원에 한해서 작성할 수 있습니다. </small></td>
+    			</tr>
+    		</table>
+    		<br/>
+    		<table style="width : 100%;">
+    			<tr>
+    				<td>
+		   				<c:if test="${fn:length(reviewList) eq 0}">
+		   					<td><div style="text-align: center;"><h5>현재 상품은 작성된 리뷰가 없습니다! 첫 리뷰를 작성해 보세요.</h5></div></td>
+		   				</c:if>
+		   				<c:if test="${fn:length(reviewList) != 0}">
+		   					<c:forEach var="review" items="${reviewList}" varStatus="status">
+		   					
+   								<ul class="list-group list-group-flush" style="width : 100%;">
+									<li class="list-group-item" > 
+										<div class="cover">
+											<div>
+												<label> ${review.memberId}님 </label> &nbsp; &nbsp;
+												<font color="gray">${review.reviewDate }</font> 
+											</div>
+											<div>
+												<c:if test="${review.memberId eq memberId }">
+													<a href="<c:url value='/accessory/deleteReview.do'> 
+																<c:param name="reviewId" value="${review.reviewId }" />
+																<c:param name="itemId" value="${review.itemId }" />
+															</c:url>">
+														<font color="red"><b> X </b></font>
+													</a>
+												</c:if>
+											</div>
+										</div>
+									</li>
+									<li class="list-group-item" >
+										<div style="white-space: nowrap; text-align : left;">
+										 <label>
+											<c:if test="${review.preference eq 1 }">★☆☆☆☆</c:if>
+											<c:if test="${review.preference eq 2 }">★★☆☆☆</c:if>
+											<c:if test="${review.preference eq 3 }">★★★☆☆</c:if>
+											<c:if test="${review.preference eq 4 }">★★★★☆</c:if>
+											<c:if test="${review.preference eq 5 }">★★★★★</c:if>
+										</label> : &nbsp;
+										${review.reviewContent }</div>
+									</li> 
+								</ul>
+   							
+							</c:forEach>
+						</c:if>
+					</td>
+				</tr>
+    		</table>
+		</div>
+	</form>
 </div>
 </body>
 </html>
