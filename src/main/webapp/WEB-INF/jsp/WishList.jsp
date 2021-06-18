@@ -133,20 +133,20 @@
 	    			<c:set var="item" value="${wishlist.item}" />
 	    			<td><input type="checkbox" name="checkCartItem" value="${wishlist.wishListId}" id="${wishlist.wishListId}" class="checkWish allCheckbox"/> </td>
 	    			<td><img style="height: 50px;" src="<c:url value='${item.image}' />" /></td>
-	    			<c:if test="${item.itemId >= 1000 && item.itemId < 1000}">
-	    			<td><a href="<c:url value='/accessory/detail'>
+	    			<c:if test="${item.itemId >= 1000 && item.itemId < 10000}">
+	    			<td><a href="<c:url value='/group/viewItem'>
 		            				<c:param name='no' value='${item.itemId}' /></c:url>">
 		            	${item.title}</a></td>
 		            </c:if>
 		            <c:if test="${item.itemId >= 10000 && item.itemId < 20000}">
 	    			<td><a href="<c:url value='/group/viewItem'>
 		            				<c:param name='no' value='${item.itemId}' /></c:url>">
-		            	${item.title}</a></td> <!-- 여긴 개인거래 -->
+		            	${item.title}</a></td>
 		            </c:if>
-		            <c:if test="${item.itemId >= 10000 && item.itemId < 20000}">
+		            <c:if test="${item.itemId >= 20000 && item.itemId < 30000}">
 	    			<td><a href="<c:url value='/group/viewItem'>
 		            				<c:param name='no' value='${item.itemId}' /></c:url>">
-		            	${item.title}</a></td>
+		            	${item.title}</a></td> <!-- 개인거래 -->
 		            </c:if>
 	    			<td>
 	    			<fmt:formatNumber value="${item.price}" pattern="###,###,###"/>원
