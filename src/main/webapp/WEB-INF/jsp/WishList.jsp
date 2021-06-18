@@ -102,15 +102,11 @@
 	<%@ include file="header.jsp" %>
 	<div class="container"  style="margin-left: auto; margin-right: auto; width: 90%; margin-top:5%;">
 		<ul class="nav nav-tabs">
-		  <li  class="active"><a href="/cart/view/1">악세사리</a></li>
-		  <%--<li><a href="/cart/view/2">개인거래</a></li>
-		  <li><a href="/cart/view/3">공동구매</a></li>--%>
+		  <li  class="active"><a href="/wishlist/view/1">악세사리</a></li>
+		  <li><a href="/wishlist/view/2">개인거래</a></li>
+		  <li><a href="/wishlist/view/3">공동구매</a></li>
 		</ul>
 	</div> 
-<%-- <c:if test="${cartItemList == '' || cartItemList eq null}"> 
-		<div style="width: 50%; margin-left: auto; margin-right: auto;">
-		아직 상품 준비가 되지 않았습니다.</div>
-	</c:if> --%>
 	<form method="POST" name="form"> <%-- action이 없으면 얘를 부른 컨트롤러로 넘어간다. 체크한 것만 넘어가면 돼서 Command 객체 필요 없음. form:form을 사용안 한 건 여기서 하나만 선택한 결과를 알고 싶은 게 아니고, 어떤 것들이 선택 되었는지가 중요하기 때문. 즉 path를 설정할  게 없음--%>
 		<div class="container" style="margin-top: 5%;">
 		<table > <!-- class="table table-hover" -->

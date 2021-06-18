@@ -97,7 +97,7 @@
 		      		<li>
 		        		<a href="<c:url value="/shop/editMember.do"/>">Mypage</a>
 		         	</li>
-		         	<li><a href="<c:url value='/shop/wishList.do' />">Wishlist</a></li>
+		         	<li><a href="<c:url value='/wishlist/view/1' />">Wishlist</a></li>
 		         	<li><a href="<c:url value='/order/view/1' />">My Order</a></li>
                 
 		      	</c:if>
