@@ -32,7 +32,7 @@ public class ViewWishlistController {
 	private PetStoreFacade petStore;
 	UserSession userSession;
 	private int totalPageSize;
-	private int perPageSize = 6;
+	private int perPageSize = 30;
 	
 	@Autowired
 	public void setPetStore(PetStoreFacade petStore) {
@@ -81,7 +81,7 @@ public class ViewWishlistController {
 			  List<WishList> WishItemListPerPage = itemListPage.getPageList();
 			  totalPageSize = wishItemList2.size() / perPageSize; //나눌때는 전체 아이템 개수에 나눠야 페이지 수를 구할 수 있음. 
 			  System.out.println("carttest = " + wishItemList.size());
-			  if(wishItemList.size() % perPageSize != 0) {
+			  if(wishItemList2.size() % perPageSize != 0) {
 				  totalPageSize++;
 			  }
 			  System.out.println("totalPageSize = " + totalPageSize);
