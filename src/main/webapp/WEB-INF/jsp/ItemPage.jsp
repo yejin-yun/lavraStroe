@@ -24,11 +24,23 @@
 	td {
 		text-align: center;
 	}
-	#content_table{
-		border-spacing: 0 20px; /* %로 주면 안됨. margin-bottom: 20px;도 안됨 */
-		
+	#main_table {
+		border-collapse: separate;
+		border-spacing: 0 80px;
+		/* border: 1px solid red; */
 	}
-	
+	#content_table{
+	 	border-collapse: separate; /* 이상하게 이거 없으면 적용이 안되네.. */
+		width: 100%; 
+		/* padding-top: 10%;  */
+		/* padding-bottom: 10%; */
+		margin: 5% auto;
+		border-spacing: 0 30px; /* %로 주면 안됨. margin-bottom: 20px;도 안됨 */
+	}
+	.content_img{
+		width: 400px;
+		height: 300px;
+	}
 /*review 부분 추가*/
 .rating {
 	float : left;
@@ -71,6 +83,7 @@
     display: flex;
     justify-content: space-between;
 }
+
 </style>
 <script>
 
@@ -246,8 +259,8 @@
 			alert(msg);
 		</script>
 </c:if>
-<div align="center" style="width : 90%; margin-left:auto; margin-right: auto; height:100%;">
-	<table border="1" style="width: 80%; padding-bottom: 15%;">
+<div align="center" style="width : 90%; margin-left:auto; margin-right: auto; margin-bottom: 10%;">
+	<table id="main_table" style="width: 80%; "> <%-- padding-bottom: 15%; --%>
 		<tr>
 			<td>
 				<img src="<c:url value='${dItem.item.image}' />" width="400px" height="300px">
@@ -327,10 +340,16 @@
 				</form>
 			</td>
 		</tr>
-		
+		<tr>
+			<td colspan='2' style="text-align:left;">
+				<label> 
+					<h3>| Content </h3>
+				</label>
+			</td>
+		</tr>
 		<tr>
 			<td colspan='2'>
-				<table id="content_table" style="width: 100%; padding-top: 10%; padding-bottom: 10%;"> <%-- 하나의 tr에 text, 사진 등 넣을 것 --%> 
+				<table id="content_table"> <%-- 하나의 tr에 text, 사진 등 넣을 것 --%> 
 					<tr>
 						<td>
 							${dItem.item.description}
@@ -338,13 +357,12 @@
 					</tr>
 					<tr>
 						<td>
-							<img src="<c:url value='${dItem.item.image}' />" width="60%" height="10%">
+							<img src="<c:url value='${dItem.item.image}' />" class="content_img">
 						</td>
 					</tr>
 				</table>
 			</td>
 		</tr>
-		
 	</table>
 </div>
 
@@ -352,7 +370,7 @@
 
 <!-- 리뷰 부분 추가! -->
 
-<div style="width : 80%; margin : 0 auto; margin-top : 50px;">
+<div style="width : 70%; margin : 5% auto; padding-bottom: 10%;">
 	<form class="wc-center" method="post" action="<c:url value='/accessory/insertReview.do'/>">
 		<input type="hidden" name="itemId" value="${dItem.item.itemId}">
 		<div class="form-group">
