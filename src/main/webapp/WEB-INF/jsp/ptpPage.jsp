@@ -63,7 +63,7 @@
 			<td colspan="2">
 				<form name="form1" method="post" action="<c:url value='/accessory/newPtpOrder.do'/>">
 					<input type="hidden" name="itemId" value="${pitem.item.itemId}">
-					<input type="hidden" name="sellerId" value="${pitem.item.itemId}">
+					<input type="hidden" name="sellerId" value="${pitem.sellerId}">
 					<c:if test="${pitem.state == 0}"> <!-- 진행 중인 구매 가능 -->
 						<input type="submit" value="구매하기">
 					</c:if>

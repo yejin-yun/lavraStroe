@@ -117,7 +117,7 @@ public class viewPTPItemController {
 		
 		System.out.println("title :" + pitem.getItem().getTitle());
 		model.addAttribute("pitem", pitem);
-		
+
 		return "ptpPage";
 	}
 	@PostMapping("/ptop/wish")
