@@ -69,6 +69,15 @@
 		
 	</script>
 	<script>
+	 $(function(){
+	  var sBtn = $("ul > li");    //  ul > li 이를 sBtn으로 칭한다. (클릭이벤트는 li에 적용 된다.)
+	  sBtn.find("a").click(function(){   // sBtn에 속해 있는  a 찾아 클릭 하면.
+	   sBtn.removeClass("active");     // sBtn 속에 (active) 클래스를 삭제 한다.
+	   $(this).parent().addClass("active"); // 클릭한 a에 (active)클래스를 넣는다.
+	  })
+	 })
+	</script>
+	<script>
 	
 		function moveTarget(targetUri) {
 			form.action = targetUri;
@@ -102,9 +111,9 @@
 	<%@ include file="header.jsp" %>
 	<div class="container"  style="margin-left: auto; margin-right: auto; width: 90%; margin-top:5%;">
 		<ul class="nav nav-tabs">
-		  <li  class="active"><a href="/wishlist/view/1">악세사리</a></li>
-		  <li><a href="/wishlist/view/2">개인거래</a></li>
-		  <li><a href="/wishlist/view/3">공동구매</a></li>
+		  <li  class="#;"><a href="/wishlist/view/1">악세사리</a></li>
+		  <li class="#;"><a href="/wishlist/view/2">개인거래</a></li>
+		  <li class="#;"><a href="/wishlist/view/3">공동구매</a></li>
 		</ul>
 	</div> 
 	<form method="POST" name="form"> <%-- action이 없으면 얘를 부른 컨트롤러로 넘어간다. 체크한 것만 넘어가면 돼서 Command 객체 필요 없음. form:form을 사용안 한 건 여기서 하나만 선택한 결과를 알고 싶은 게 아니고, 어떤 것들이 선택 되었는지가 중요하기 때문. 즉 path를 설정할  게 없음--%>
@@ -124,9 +133,21 @@
 	    			<c:set var="item" value="${wishlist.item}" />
 	    			<td><input type="checkbox" name="checkCartItem" value="${wishlist.wishListId}" id="${wishlist.wishListId}" class="checkWish allCheckbox"/> </td>
 	    			<td><img style="height: 50px;" src="<c:url value='${item.image}' />" /></td>
+	    			<c:if test="${item.itemId >= 1000 && item.itemId < 1000}">
 	    			<td><a href="<c:url value='/accessory/detail'>
 		            				<c:param name='no' value='${item.itemId}' /></c:url>">
 		            	${item.title}</a></td>
+		            </c:if>
+		            <c:if test="${item.itemId >= 10000 && item.itemId < 20000}">
+	    			<td><a href="<c:url value='/group/viewItem'>
+		            				<c:param name='no' value='${item.itemId}' /></c:url>">
+		            	${item.title}</a></td> <!-- 여긴 개인거래 -->
+		            </c:if>
+		            <c:if test="${item.itemId >= 10000 && item.itemId < 20000}">
+	    			<td><a href="<c:url value='/group/viewItem'>
+		            				<c:param name='no' value='${item.itemId}' /></c:url>">
+		            	${item.title}</a></td>
+		            </c:if>
 	    			<td>
 	    			<fmt:formatNumber value="${item.price}" pattern="###,###,###"/>원
 	    			</td>
