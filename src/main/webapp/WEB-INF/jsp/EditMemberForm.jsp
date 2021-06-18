@@ -44,6 +44,7 @@
 		}
 		.member{
 			width:40%;
+			heihgt : 200px;
 		}
 		tr{
 			height:	2%;
@@ -123,10 +124,13 @@
 		  </tr>
 		</table>
 		  <br />
-    <input type="image" src="../images/button_submit.gif" name="submit"
-      value="Save Member Information" />
+    <input type="text" name="submit" value="Save Member Information" />
 </form:form>
-<p></p>
+<p>
+
+
+</p>
 </div>
+<br><br><br><br><br><br><br><br>
 </body>
 </html>

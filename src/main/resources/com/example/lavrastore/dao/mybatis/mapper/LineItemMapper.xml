@@ -8,7 +8,7 @@
 	<select  id="getLineItemByOrderId" resultType="LineItem"> 
 		SELECT lineItemId, itemId, orderId, quantity
 		FROM LINEITEM
-		WHERE oderId = #{orderId}
+		WHERE orderId = #{orderId}
 	</select>
 	
 	<insert id="insertLineItem" parameterType="LineItem">

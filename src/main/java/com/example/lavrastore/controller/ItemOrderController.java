@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.lavrastore.domain.CartItem;
 import com.example.lavrastore.domain.Item;
+import com.example.lavrastore.domain.LineItem;
 import com.example.lavrastore.domain.Member;
 import com.example.lavrastore.domain.Order;
 import com.example.lavrastore.service.OrderValidator;
@@ -75,6 +77,7 @@ public class ItemOrderController {
 	}
 
 	@PostMapping("/item/buy")
+	@Transactional
 	public String buyItem(
 			@RequestParam(value="no", defaultValue = "-1") int no,
 			@RequestParam(value="q", defaultValue= "-1") int q,
@@ -101,6 +104,7 @@ public class ItemOrderController {
 	}
 	
 	@PostMapping("/cart/buy") 
+	@Transactional
 	public String buyCartItem(
 			HttpServletRequest request, @ModelAttribute("itemOrder") Order itemOrder, Model model) {
 		
@@ -136,6 +140,7 @@ public class ItemOrderController {
 	}
 	
 	@PostMapping("/item/orderSubmit/{isInCart}")
+	@Transactional
 	public ModelAndView validateAndConfirmOrder(
 			HttpServletRequest request,
 			@PathVariable int isInCart,
@@ -193,6 +198,29 @@ public class ItemOrderController {
 		mav.addObject("lineItems", itemOrder.getLineItems()); //item 꺼낼 수 있음.
 		
 		status.setComplete();  // remove sessionCart and orderForm from session
+		
+		return mav;
+	}
+	
+	@GetMapping("/item/viewOrder")
+	@Transactional
+	public ModelAndView itemViewOrder(
+			@RequestParam(value = "no", defaultValue = "-1") int no) {
+		Order order = lavraStore.getOrderById(no);
+		List<LineItem> lineItems = lavraStore.getLineItemByOrderId(no);
+		
+
+		for(LineItem lineItem : lineItems) {
+			lineItem.setItem(lavraStore.getItem(lineItem.getItemId()));
+		}
+		
+		order.setLineItems(lineItems);
+		
+		ModelAndView mav = new ModelAndView("ItemOrderConfirm");
+		
+		mav.addObject("itemOrder", order);
+		mav.addObject("success", true);
+		mav.addObject("lineItems", lineItems);
 		
 		return mav;
 	}

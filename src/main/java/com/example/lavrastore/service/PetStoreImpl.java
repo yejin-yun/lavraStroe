@@ -464,5 +464,8 @@ public class PetStoreImpl implements PetStoreFacade {
 		return reviewDao.deleteReview(reviewId);
 	}
 
-
+	@Override
+	public Order getOrderById(int orderId) {
+		return orderDao.getOrderById(orderId);
+	}
 }

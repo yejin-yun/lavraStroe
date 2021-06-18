@@ -53,13 +53,13 @@
 			width: 5%;
 		}
 		.title{ 
-			width: 10%;
+			width: 15%;
 		}
 		.price{ 
-			width: 10%;
+			width: 15%;
 		}
 		.quan{ 
-			width: 10%;
+			width: 15%;
 		}
 		.total{ 
 			width: 20%;

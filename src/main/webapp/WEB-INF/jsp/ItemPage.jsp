@@ -41,6 +41,25 @@
 		width: 400px;
 		height: 300px;
 	}
+	.funcs button
+	{
+		margin-right: 10px;
+		padding: 5px;
+		background-color: white;
+		border: 1px solid #646EFF;
+		color: #646EFF;
+		border-top-left-radius: 5px; 
+		border-bottom-left-radius: 5px;
+		border-top-right-radius: 5px; 
+       	border-bottom-right-radius: 5px;
+     }
+	.funcs button:hover
+	{ 	
+		color:white; 
+		background-color: #646EFF; 
+	}
+	
+	
 /*review 부분 추가*/
 .rating {
 	float : left;
@@ -287,9 +306,9 @@
 					<tr align="center">
 						<td> 수량 </td>
 						<td> 
-						<a href="#" onClick="updateQuantity(-1, ${dItem.item.quantity}, ${dItem.price}, this)"><img id="down" src="<c:url value='/images/item/btn_count_down.gif' />"/></a>
+						<a href="javascript:;" onClick="updateQuantity(-1, ${dItem.item.quantity}, ${dItem.price}, this)"><img id="down" src="<c:url value='/images/item/btn_count_down.gif' />"/></a>
 						<input type="text" id="quantity" value="${dItem.quantity}" name="quantity" size="2" style="text-align:center;"/>
-						<a href="#" onClick="updateQuantity(1, ${dItem.item.quantity}, ${dItem.price}, this)"><img id="up" src="<c:url value='/images/item/btn_count_up.gif' />" /></a>
+						<a href="javascript:;" onClick="updateQuantity(1, ${dItem.item.quantity}, ${dItem.price}, this)"><img id="up" src="<c:url value='/images/item/btn_count_up.gif' />" /></a>
 						</td>
 					</tr>
 					<tr align="center">
@@ -302,6 +321,7 @@
 					
 					<tr align="center"> <!-- 버튼들..  -->
 						<td colspan="2">
+								<div class="w3-center funcs"">
 								<%-- ${dItem.item.isInWishlist} 계속 0으로 나옴. 값이 저장되어 있지 않나봄--%>
 								<button type="button" id="wish" onClick="moveWish(${dItem.item.itemId})">위시리스트</button>
 								<%-- <c:choose>
@@ -334,6 +354,7 @@
 										<button type="button" id="buy">품절</button>
 									</c:when>
 								</c:choose>
+							</div>
 						</td>
 					</tr>
 				</table>
