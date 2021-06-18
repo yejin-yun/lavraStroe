@@ -113,14 +113,16 @@ function wishItem(itemId, wish){
 							</div>
 							<div class="img_div">						
 								<a href="<c:url value='/accessory/viewPItem'>
-									<c:param name='itemNo' value='${ptpitem.item.itemId}' />
+									<c:param name='itemId' value='${ptpitem.item.itemId}' />
+									<c:param name='sellerId' value='${ptpitem.sellerId}' />
 									</c:url>">
 									<img class="main_img" src="<c:url value='${ptpitem.item.image}' />" />
 								</a>
 							</div>
 							<div class="content">
-								<a href="<c:url value='/accessory/viewItem'>
-									<c:param name='itemNo' value='${ptpitem.item.itemId}' />
+								<a href="<c:url value='/accessory/viewPItem'>
+									<c:param name='itemId' value='${ptpitem.item.itemId}' />
+									<c:param name='sellerId' value='${ptpitem.sellerId}' />
 									</c:url>">
 									<h3>${ptpitem.item.title}</h3>
 									<p><fmt:formatNumber value="${ptpitem.item.price}" pattern="###,###,###"/>원</p>

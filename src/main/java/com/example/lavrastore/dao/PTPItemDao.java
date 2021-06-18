@@ -8,7 +8,7 @@ import com.example.lavrastore.domain.PTPItem;
 
 public interface PTPItemDao {
 
-	PTPItem getPItem(int itemid) throws DataAccessException;
+	PTPItem getPItem(int itemid, String sellerId) throws DataAccessException;
 	
 	List<PTPItem> getPItemListByProduct(int productId) throws DataAccessException;
 	List<PTPItem> getPItemListByMemberAndProduct(String memberId, int productId) throws DataAccessException;

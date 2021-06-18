@@ -321,9 +321,8 @@ public class PetStoreImpl implements PetStoreFacade {
 	
 	/* ptp Item */
 	@Override
-	public PTPItem getPItem(int itemid) {
-		// TODO Auto-generated method stub
-		return ptpItemDao.getPItem(itemid);
+	public PTPItem getPItem(int itemid, String sellerid) {
+		return ptpItemDao.getPItem(itemid, sellerid);
 	}
 
 	@Override

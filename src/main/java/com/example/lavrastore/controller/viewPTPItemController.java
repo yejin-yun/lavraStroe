@@ -106,9 +106,16 @@ public class viewPTPItemController {
 	}
 	
 	@GetMapping("/accessory/viewPItem")
-	public String viewPTPItem(@RequestParam(value="ItemNo", defaultValue="-1") int itemid, Model model) {
-		PTPItem pitem = petStore.getPItem(itemid);
+	public String viewPTPItem(
+			@RequestParam(value="itemId", defaultValue="-1")int itemid,
+			@RequestParam(value="sellerId", defaultValue="-1")String sellerid,
+			Model model) {
 		
+		System.out.println("itemid" + itemid + "sellerID" + sellerid);
+		
+		PTPItem pitem = petStore.getPItem(itemid, sellerid);
+		
+		System.out.println("title :" + pitem.getItem().getTitle());
 		model.addAttribute("pitem", pitem);
 		
 		return "ptpPage";

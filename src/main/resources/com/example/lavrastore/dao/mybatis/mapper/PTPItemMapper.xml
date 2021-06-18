@@ -5,7 +5,7 @@
 	namespace="com.example.lavrastore.dao.mybatis.mapper.PTPItemMapper">
 	<cache />
 	
-	<select id="getPItem" resultType="PTPItem">
+	<select id="getPItem" parameterType="HashMap" resultType="PTPItem">
 		select
 		i.itemid as "item.itemid",
 		i.productId as "item.productid",
@@ -20,8 +20,8 @@
 		p.bank,
 		p.account
 		from item i inner join PTPItem p on i.itemid = p.itemid
-		where i.itemid = #{itemId}
-		and p.sellerId = #{value}
+		where i.itemid = to_number(#{itemId})
+		and p.sellerId = #{sellerId}
 	</select>
 	
 	<select id="getPItemListByProduct" resultType="PTPItem">

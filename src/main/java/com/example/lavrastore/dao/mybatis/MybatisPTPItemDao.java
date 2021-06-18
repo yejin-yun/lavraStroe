@@ -17,8 +17,12 @@ public class MybatisPTPItemDao implements PTPItemDao {
 	@Autowired
 	private PTPItemMapper PTPItemMapper;
 	
-	public PTPItem getPItem(int itemId) throws DataAccessException {
-		return PTPItemMapper.getPItem(itemId);
+	public PTPItem getPItem(int itemId, String sellerId) throws DataAccessException {
+		HashMap<String, String> hm = new HashMap<String, String>(); 
+		hm.put("itemId", String.valueOf(itemId));
+		hm.put("sellerId", sellerId);
+		
+		return PTPItemMapper.getPItem(hm);
 	}
 	
 	public List<PTPItem> getPItemListByProduct(int productId) throws DataAccessException {
