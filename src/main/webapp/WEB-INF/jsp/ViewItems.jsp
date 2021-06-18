@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Lavra: Earring</title>
+<title>Lavra</title>
 <link type="text/css" rel="stylesheet" href="<c:url value='/style/view.css' />">
 
 <script src="<c:url value='/js/item.js' />" ></script>
