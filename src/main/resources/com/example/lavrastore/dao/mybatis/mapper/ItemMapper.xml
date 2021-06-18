@@ -240,6 +240,16 @@
 		WHERE
 		itemId = #{itemId}
 	</delete>
+	
+	
+	<!-- 가격이랑 설명 수정 용 ptp-->
+	<update id="updateDescAndPriceItem" parameterType="HashMap">
+		UPDATE item SET
+		description = #{description}, 
+		price = to_number(#{price})
+		WHERE itemId = to_number(#{itemId})
+	</update>
+	
 
 	<!-- 아래 지울 것 -->
 	<select id="getInventoryQuantity" resultType="int"> SELECT QTY AS

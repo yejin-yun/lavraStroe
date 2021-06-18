@@ -14,6 +14,7 @@
 		i.title as "item.title",
 		i.price as "item.price",
 		i.likecnt as "item.likecnt",
+		p.itemid,
 		p.state,
 		p.devP,
 		p.sellerId,
@@ -33,6 +34,7 @@
 		i.title as "item.title",
 		i.price as "item.price",
 		i.likecnt as "item.likecnt",
+		p.itemid,
 		p.state,
 		p.devP,
 		p.sellerId,
@@ -54,6 +56,7 @@
 		i.likecnt as "item.likecnt",
 		i.quantity as "item.quantity", 
         NVL(w.wishlistId, 0) as "item.isInWishlist",
+        p.itemid,
 		p.state,
 		p.devP,
 		p.sellerId,
@@ -103,5 +106,21 @@
 		where i.itemid = #{itemId}
 		order by i.price ASC
 	</select>
+	
+	<insert id="insertPTPItem" parameterType="PTPItem">
+		insert into PTPItem ( STATE, ITEMID, SELLERID, DEVP, BANK, ACCOUNT)
+		VALUES (#{state}, #{itemId}, #{sellerId}, #{devP}, #{bank}, #{account})
+	</insert>
+	
+	<update id="updatePTPItem" parameterType="PTPItem">
+		update PTPItem set state = #{state}, sellerid = #{sellerId},
+		devp = #{devP}, bank = #{bank}, account = #{account}
+		where itemid = #{itemId}
+	</update>
+	
+	<delete id="deletePTPItem" parameterType="int">
+		delete from ptpItem where itemId = #{itemId}
+	</delete>
+	
 
 </mapper>
