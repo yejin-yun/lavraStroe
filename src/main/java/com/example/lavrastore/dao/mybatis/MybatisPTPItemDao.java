@@ -1,5 +1,6 @@
 package com.example.lavrastore.dao.mybatis;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,12 @@ public class MybatisPTPItemDao implements PTPItemDao {
 	@Autowired
 	private PTPItemMapper PTPItemMapper;
 	
-	public PTPItem getPItem(int itemId) throws DataAccessException {
-		return PTPItemMapper.getPItem(itemId);
+	public PTPItem getPItem(int itemId, String sellerId) throws DataAccessException {
+		HashMap<String, String> hm = new HashMap<String, String>(); 
+		hm.put("itemId", String.valueOf(itemId));
+		hm.put("sellerId", sellerId);
+		
+		return PTPItemMapper.getPItem(hm);
 	}
 	
 	public List<PTPItem> getPItemListByProduct(int productId) throws DataAccessException {
@@ -42,6 +47,15 @@ public class MybatisPTPItemDao implements PTPItemDao {
 	
 	public int deletePItem(int itemId) throws DataAccessException {
 		return PTPItemMapper.deletePItem(itemId);
+	}
+
+	@Override
+	public List<PTPItem> getPItemListByMemberAndProduct(String memberId, int productId) throws DataAccessException {
+		HashMap<String, String> hm = new HashMap<String, String>(); 
+		hm.put("productId", String.valueOf(productId));
+		hm.put("memberId", memberId);
+		
+		return PTPItemMapper.getPItemListByMemberAndProduct(hm);
 	}
 
 }

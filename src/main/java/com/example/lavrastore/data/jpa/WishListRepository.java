@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.example.lavrastore.domain.Item;
 import com.example.lavrastore.domain.WishList;
 
 public interface WishListRepository extends JpaRepository<WishList, Integer> {

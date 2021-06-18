@@ -33,6 +33,7 @@ public class Order implements Serializable {
 	// 각 주문별 선택 필드들...
 	private List<LineItem> lineItems = new ArrayList<LineItem>();
 	private GroupOrder groupOrder;
+	private PtpOrder ptpOrder;
 
 	// 무통장 입금
 	private String depositor;
@@ -127,6 +128,31 @@ public class Order implements Serializable {
 		this.cardType = "Visa";
 
 		this.groupOrder = new GroupOrder(amount, gItem);
+	}
+	
+	public void initPtPOrder(PTPItem pitem, Member member) {
+		this.categoryId = 3;
+		this.memberId = member.getMemberId();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		this.orderDate = dateFormat.format(new Date());
+
+		this.shipAddr1 = member.getAddr1();
+		this.shipAddr2 = member.getAddr2();
+		this.shipZip = member.getZip();
+
+		this.totalPrice = pitem.getItem().getPrice() + pitem.getDevP();
+		this.shipname = member.getUsername();
+
+		this.payType = 0;
+		this.cardNum = "";
+		this.expiryDate = "";
+		this.cardType = "Visa";
+		
+		this.depositor = "";
+		this.bankType = "농협중앙회";
+		
+		this.ptpOrder = new PtpOrder(pitem, memberId);
+		
 	}
 
 	public int getOrderId() {
@@ -280,6 +306,16 @@ public class Order implements Serializable {
 	public void setIsInCart(int isInCart) {
 		this.isInCart = isInCart;
 	}
+
+	public PtpOrder getPtpOrder() {
+		return ptpOrder;
+	}
+
+	public void setPtpOrder(PtpOrder ptpOrder) {
+		this.ptpOrder = ptpOrder;
+	}
+	
+	
 	
 
 }

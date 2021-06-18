@@ -78,6 +78,7 @@
 			left: 70%;
 			right: 5%;
 		}
+		
 </style>
 </head>
 <body>
@@ -159,6 +160,15 @@
 	    			<td> ${order.shipname}</td>
 	    			<td> ${order.shipAddr1} ${order.shipAddr2}</td>
 	    		</tr>
+	    		<tr>
+	    			<td colspan="8">
+	    				<div style="text-align : center;">
+	    					<c:if test="${order.payType eq 0}"> 결제방법 : 무통장 입금  &nbsp;&nbsp;&nbsp; ${order.orderDate }일 정상적으로 입금 확인되셨습니다.</c:if>
+	    					<c:if test="${order.payType eq 1}"> 결제방법 : 카드결제 &nbsp;&nbsp;&nbsp; 결제 카드 : ${order.cardType} 카드번호 : ${order.cardNum }</c:if>
+	    				</div>
+	    			</td>	
+	    		</tr>
+	    		
 	    	</c:forEach>
 	    </tbody>
 	</table>

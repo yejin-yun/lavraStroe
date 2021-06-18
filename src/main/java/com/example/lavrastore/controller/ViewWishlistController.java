@@ -1,5 +1,6 @@
 package com.example.lavrastore.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,8 +45,9 @@ public class ViewWishlistController {
 	
 
 	  @GetMapping
-	  @RequestMapping("/shop/wishList.do") 
+	  @RequestMapping("/wishlist/view/{categoryId}") 
 	  public String viewWishList(HttpServletRequest request,
+			  @PathVariable int categoryId,
 			  @RequestParam(value="page", defaultValue="1") int page,
 			  Model model) {
 
@@ -57,9 +59,22 @@ public class ViewWishlistController {
 			 }
 			
 			  List<WishList> wishItemList = null;
-			  
+			  List<WishList> wishItemList2 = new ArrayList<WishList>();
 			  wishItemList = this.petStore.findByMemberId(userSession.getMember().getMemberId());
-			  PagedListHolder<WishList> itemListPage = new PagedListHolder<WishList>(wishItemList);
+				 
+			  for(WishList wishlist : wishItemList) {
+				  Item citem = petStore.getItemByWishListId(wishlist.getWishListId());
+				  if(citem.getItemId() >= 1000 && citem.getItemId() < 10000 && categoryId == 1)
+					 wishItemList2.add(wishlist);
+				  else if(citem.getItemId() >= 10000 && citem.getItemId() < 20000 && categoryId == 3)
+					  wishItemList2.add(wishlist);
+				  else if(citem.getItemId() >= 20000 && citem.getItemId() < 30000 && categoryId == 2){
+					  wishItemList2.add(wishlist);
+				  }
+			  }
+			  
+			  
+			  PagedListHolder<WishList> itemListPage = new PagedListHolder<WishList>(wishItemList2);
 			  itemListPage.setPageSize(perPageSize);
 			  itemListPage.setPage(page - 1);
 			  
@@ -72,7 +87,6 @@ public class ViewWishlistController {
 			  System.out.println("totalPageSize = " + totalPageSize);
 			  for(WishList wishlist : WishItemListPerPage) {
 				  wishlist.setItem(petStore.getItemByWishListId(wishlist.getWishListId()));
-				  //cartItem.setItem(lavraStore.findItemByCategoryIdAndMemberId(cartItem.getCartItemId(), member.getMemberId())); //에러남
 			  }
 			  
 			  model.addAttribute("wishlist", WishItemListPerPage);
@@ -105,7 +119,7 @@ public class ViewWishlistController {
 			petStore.deleteWishList(wishListId);
 		}
 		 
-		 return "redirect:/shop/wishList.do";
+		 return "redirect:/shop/wishList/1";
 	  }
 	  
 }

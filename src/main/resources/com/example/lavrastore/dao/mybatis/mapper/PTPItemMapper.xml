@@ -5,7 +5,7 @@
 	namespace="com.example.lavrastore.dao.mybatis.mapper.PTPItemMapper">
 	<cache />
 	
-	<select id="getPItem" resultType="PTPItem">
+	<select id="getPItem" parameterType="HashMap" resultType="PTPItem">
 		select
 		i.itemid as "item.itemid",
 		i.productId as "item.productid",
@@ -20,8 +20,8 @@
 		p.bank,
 		p.account
 		from item i inner join PTPItem p on i.itemid = p.itemid
-		where i.itemid = #{itemId}
-		and p.sellerId = #{value}
+		where i.itemid = to_number(#{itemId})
+		and p.sellerId = #{sellerId}
 	</select>
 	
 	<select id="getPItemListByProduct" resultType="PTPItem">
@@ -38,11 +38,32 @@
 		p.sellerId,
 		p.bank,
 		p.account
-		from item i inner join PTPItem p, product pr
+		from item i, PTPItem p
 		where i.itemid = p.itemid
-		and pr.productId = i.productId
-		and i.productId = p.productId
-		and p.productId = #{value}
+		and i.productId = #{productId}
+	</select>
+	
+	<select id="getPItemListByMemberAndProduct" parameterType="HashMap" resultType="PTPItem">
+		select
+		i.itemid as "item.itemid",
+		i.productId as "item.productid",
+		i.image as "item.image",
+		i.description as "item.description",
+		i.title as "item.title",
+		i.price as "item.price",
+		i.likecnt as "item.likecnt",
+		i.quantity as "item.quantity", 
+        NVL(w.wishlistId, 0) as "item.isInWishlist",
+		p.state,
+		p.devP,
+		p.sellerId,
+		p.bank,
+		p.account
+		from item i, PTPItem p, wishlist w
+		where i.itemid = p.itemid
+		and i.productId = to_number(#{productId})
+		and i.itemid = w.itemid(+)
+		and w.memberid(+) = #{memberId}
 	</select>
 	
 	<select id = "getPItemListByHighPrice" resultType="PTPItem">

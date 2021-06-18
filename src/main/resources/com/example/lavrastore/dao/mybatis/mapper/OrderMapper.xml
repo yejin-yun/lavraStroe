@@ -50,10 +50,17 @@
 		o.totalPrice,
 		o.shipname,
 		o.memberId,
-		o.categoryId
-		from shoporder o
+		o.categoryId,
+		p.payType,
+        p.cardType,
+        p.cardNum
+		from shoporder o,
+        (select p.orderid, p.paytype, c.cardtype, c.cardnum from payment p, creditcard c
+        where p.paymentid = c.paymentid(+)) p
 		where o.memberId = #{memberId} and
+        o.orderId = p.orderId and
 		o.categoryId = 1
+		ORDER BY o.orderDate desc
 	</select>
 	
 	<!-- 개인거래 item의 order 조회 -->
@@ -67,10 +74,17 @@
 		o.totalPrice,
 		o.shipname,
 		o.memberId,
-		o.categoryId
-		from shoporder o
+		o.categoryId,
+		p.payType,
+        p.cardType,
+        p.cardNum
+		from shoporder o,
+        (select p.orderid, p.paytype, c.cardtype, c.cardnum from payment p, creditcard c
+        where p.paymentid = c.paymentid(+)) p
 		where o.memberId = #{memberId} and
+        o.orderId = p.orderId and
 		o.categoryId = 3
+		ORDER BY o.orderDate desc
 	</select>
 	
 	<!-- 공동구매 item의 order 조회 -->
@@ -85,12 +99,19 @@
 		o.shipname,
 		o.memberId,
 		o.categoryId,
+        p.payType,
+        p.cardType,
+        p.cardNum,
 		g.itemId as "groupOrder.itemId",
 		g.status as "groupOrder.status"
-		from shoporder o, grouporder g
+		from shoporder o, grouporder g,
+        (select p.orderid, p.paytype, c.cardtype, c.cardnum from payment p, creditcard c
+        where p.paymentid = c.paymentid(+)) p
 		where o.orderId = g.orderId and 
+        o.orderId = p.orderId and
 		o.memberId = #{memberId} and
-		o.categoryId = 2
+		o.categoryId = 2 
+		ORDER BY o.orderDate desc
 	</select>
 	
 	<!-- orderId로 order 가지고 오기 -->

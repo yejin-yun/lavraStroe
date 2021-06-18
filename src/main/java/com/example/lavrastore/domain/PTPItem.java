@@ -8,9 +8,9 @@ public class PTPItem implements Serializable {
 	Item item;
 	int state; // 0: 진행중, 1: 거래중, 2: 거래 완료
 	int devP;
-	int sellerId;
+	String sellerId;
 	String bank;
-	int account;
+	String account;
 	
 	public String getBank() {
 		return bank;
@@ -18,10 +18,10 @@ public class PTPItem implements Serializable {
 	public void setBank(String bank) {
 		this.bank = bank;
 	}
-	public int getAccount() {
+	public String getAccount() {
 		return account;
 	}
-	public void setAccount(int account) {
+	public void setAccount(String account) {
 		this.account = account;
 	}
 	public Item getItem() {
@@ -42,10 +42,10 @@ public class PTPItem implements Serializable {
 	public void setDevP(int devP) {
 		this.devP = devP;
 	}
-	public int getSellerId() {
+	public String getSellerId() {
 		return sellerId;
 	}
-	public void setSellerId(int sellerId) {
+	public void setSellerId(String sellerId) {
 		this.sellerId = sellerId;
 	}
 	

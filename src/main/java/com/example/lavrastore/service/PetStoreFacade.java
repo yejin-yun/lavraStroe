@@ -101,9 +101,10 @@ public interface PetStoreFacade {
 	List<GroupItem> getGItmeListByPercent();
 	
 	/* ptpItem */
-	PTPItem getPItem(int itemid);
+	PTPItem getPItem(int itemid, String sellerid);
 	
 	List<PTPItem> getPItemListByProduct(int productId);
+	List<PTPItem> getPItemListByMemberAndProduct(String memberId, int productId);
 	
 	// 가격순
 	List<PTPItem> getPItemListByHighPrice();

@@ -43,7 +43,7 @@ function wishItem(itemId, wish){
 		processData: false,
 		success: function(response) {
 			if(response === "success") {
-				alert(wish);
+				//alert(wish);
 			}
 			else if(response === "LoginForm") {
 				var allow = confirm('로그인을 먼저 해주세요');
