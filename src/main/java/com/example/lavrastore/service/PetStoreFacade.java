@@ -110,8 +110,8 @@ public interface PetStoreFacade {
 	List<PTPItem> getPItemListByHighPrice();
 	List<PTPItem> getPItemListByLowPrice();
 	
-	int insertPItem();
-	int updatePItem(int itemId);
+	int insertPItem(PTPItem pitem);
+	int updatePItem(PTPItem pitem);
 	int deletePItem(int itemId);
 	
 	//order

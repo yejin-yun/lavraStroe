@@ -225,14 +225,7 @@
     		</table>
 		</div>
 	</form>
-	
-	<c:set var="targetUrl"><c:url value="/group" /></c:set>
-	<form name="bform" action="${targetUrl}" method="post" style="margin : 0px auto;">
-		<div class="w3-center interval funcs" style="padding-bottom: 20%;">
-		  		<input type="submit" value="공동구매 페이지로 "> &nbsp;&nbsp;&nbsp;
-	  	  		<a href="<c:url value='/order/view/3' />"><input type="button" value="주문조회 페이지로 "></a>
-	  	</div>
-	</form>
+
 </div>
 </body>
 </html>

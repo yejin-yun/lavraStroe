@@ -349,21 +349,21 @@ public class PetStoreImpl implements PetStoreFacade {
 	}
 
 	@Override
-	public int insertPItem() {
+	public int insertPItem(PTPItem pitem) {
 		// TODO Auto-generated method stub
-		return ptpItemDao.insertPItem();
+		return ptpItemDao.insertPItem(pitem);
 	}
 
 	@Override
-	public int updatePItem(int itemId) {
+	public int updatePItem(PTPItem pitem) {
 		// TODO Auto-generated method stub
-		return ptpItemDao.updatePItem(itemId);
+		return ptpItemDao.updatePItem(pitem);
 	}
 
 	@Override
 	public int deletePItem(int itemId) {
 		// TODO Auto-generated method stub
-		return ptpItemDao.updatePItem(itemId);
+		return ptpItemDao.deletePItem(itemId);
 	}
 	
 	@Override

@@ -236,7 +236,6 @@ public class ItemController {
 		List<Review> reviewList = null;
 		reviewList = lavraStore.getReviewByItem(no);
 		model.addAttribute("reviewList", reviewList);
-		model.addAttribute("memberId", member.getMemberId());
 
 		DetailItem dItem = new DetailItem();
 
