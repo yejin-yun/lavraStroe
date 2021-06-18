@@ -129,6 +129,7 @@ public class ItemController {
 	}
 
 	@PostMapping("/accessory/wish")
+	@Transactional
 	@ResponseBody
 	public String wishAccessory(@RequestBody Item item) {
 		// if(itemId == -1) return "error";
@@ -249,6 +250,7 @@ public class ItemController {
 	}
 
 	@PostMapping("/item/cart")
+	@Transactional
 	@ResponseBody
 	public String moveCart(@RequestBody CartItem cartItem) { // int itemId
 		Member member;
@@ -277,6 +279,7 @@ public class ItemController {
 		}
 	}
 
+	@Transactional
 	@PostMapping("/item/cart_uq")
 	public String updateCart(@RequestParam(value = "no", defaultValue = "-1") int no,
 			@RequestParam(value = "q", defaultValue = "-1") int q) {
@@ -296,6 +299,7 @@ public class ItemController {
 		return "redirect:/accessory/detail?no=" + no;
 	}
 
+	@Transactional
 	@PostMapping("/item/wish")
 	@ResponseBody
 	public String moveItemToWish(@RequestBody int no) {

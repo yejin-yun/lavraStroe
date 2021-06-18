@@ -26,4 +26,6 @@ public interface OrderMapper {
 	List<Order> getPTPOrderListByMember(String memberId) ;
 
 	List<Order> getGroupOrderListByMember(String memberId); 
+	
+	Order getOrderById(int orderId);
 }

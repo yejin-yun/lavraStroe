@@ -18,5 +18,7 @@ public interface OrderDao {
 	List<Order> getPTPOrderListByMember(String memberId) throws DataAccessException;
 
 	List<Order> getGroupOrderListByMember(String memberId) throws DataAccessException;
+	
+	Order getOrderById(int orderId) throws DataAccessException;
 
 }

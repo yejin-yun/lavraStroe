@@ -152,7 +152,7 @@
                     		<li>
                     			<div class="product">
                     				<label>
-                    					<input type="checkbox" name="payment_product" value="${item.itemId}" onClick="return false;" >
+                    					<input type="checkbox" name="payment_product" value="${item.itemId}" onClick="return false;" checked>
                     					<a href="<c:url value='/accessory/detail'>
                     						<c:param name='no' value='${item.itemId}' /></c:url>" >
                     						<img src="<c:url value='${item.image}' />" class="item_img"/>

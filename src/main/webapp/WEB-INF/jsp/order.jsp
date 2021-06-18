@@ -123,7 +123,19 @@
 	    			<td> ${order.orderDate}</td>
 	    			<td> 
 	    				<!-- 주문 내역. 각자, 자신의 주문 상태에 맞게 아이템 표시해주세요. (링크 걸기는 자유) -->
-	    				<c:if test="${view == 1 }"> </c:if>
+	    				<c:if test="${view == 1 }"> 
+	    					<c:set var="listSize" value="${fn:length(order.lineItems)}" />
+	    					<a href="<c:url value='/item/viewOrder'>
+	            						<c:param name='no' value='${order.orderId}' /> 
+	            					</c:url>"> 
+	            					<c:if test="${listSize > 1}" >
+	                            		<font color="blue"> ${order.lineItems[0].item.title} 외</font>
+	                            	</c:if>
+	                            	<c:if test="${listSize == 1}" >
+	                            		<font color="blue"> ${order.lineItems[0].item.title}</font>
+	                            	</c:if>
+	                         </a>
+	    				</c:if>
 	    				<c:if test="${view == 2 }"> </c:if>
 	    				<c:if test="${view == 3 }"> 
 		    				<a href="<c:url value='/group/viewItem'>

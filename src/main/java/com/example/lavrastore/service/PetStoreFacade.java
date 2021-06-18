@@ -164,6 +164,7 @@ public interface PetStoreFacade {
 	List<Order> getItemOrderListByMember(String memberId);
 	List<Order> getPTPOrderListByMember(String memberId);
 	List<Order> getGroupOrderListByMember(String memberId);
+	Order getOrderById(int orderId);
 	
 	/*review*/
 	//멤버가 그룹 아이템을 샀는지 확인.

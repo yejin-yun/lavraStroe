@@ -93,4 +93,12 @@
 		o.categoryId = 2
 	</select>
 	
+	<!-- orderId로 order 가지고 오기 -->
+	<select id="getOrderById" resultType="Order">
+		SELECT orderId, orderdate, shipAddr1, shipAddr2, totalPrice,
+			shipname, memberId
+		FROM shopOrder
+		WHERE orderId = #{orderId}
+	</select>
+	
 </mapper>

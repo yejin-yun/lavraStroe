@@ -135,7 +135,7 @@ public class CartController {
 	  }
 	  
 	  @PostMapping("/cart/uq")
-	  //@Transactional
+	  @Transactional
 	  @ResponseBody
 	  public CartItem updateQuantity(@RequestBody CartItem cartItem) {
 		  //System.out.println(cartItem.getCartItemId()); //잘넘어옴. 
