@@ -17,6 +17,7 @@ import com.example.lavrastore.dao.GroupItemDao;
 import com.example.lavrastore.dao.ItemDao;
 import com.example.lavrastore.dao.MemberDao;
 import com.example.lavrastore.dao.OrderDao;
+import com.example.lavrastore.dao.PTPItemDao;
 import com.example.lavrastore.dao.ProductDao;
 import com.example.lavrastore.dao.ReviewDao;
 import com.example.lavrastore.dao.WishListDao;
@@ -64,6 +65,9 @@ public class PetStoreImpl implements PetStoreFacade {
 
 	@Autowired
 	private ReviewDao reviewDao;
+	
+	@Autowired
+	private PTPItemDao ptpItemDao;
 	// -------------------------------------------------------------------------
 	// Operation methods, implementing the PetStoreFacade interface
 	// -------------------------------------------------------------------------
@@ -313,47 +317,54 @@ public class PetStoreImpl implements PetStoreFacade {
 		return groupItemDao.getGItem(itemid);
 	}
 	
+	
+	
 	/* ptp Item */
 	@Override
 	public PTPItem getPItem(int itemid) {
 		// TODO Auto-generated method stub
-		return null;
+		return ptpItemDao.getPItem(itemid);
 	}
 
 	@Override
 	public List<PTPItem> getPItemListByProduct(int productId) {
 		// TODO Auto-generated method stub
-		return null;
+		return ptpItemDao.getPItemListByProduct(productId);
+	}
+	
+	@Override
+	public List<PTPItem> getPItemListByMemberAndProduct(String memberId, int productId) {
+		return ptpItemDao.getPItemListByMemberAndProduct(memberId, productId);
 	}
 
 	@Override
 	public List<PTPItem> getPItemListByHighPrice() {
 		// TODO Auto-generated method stub
-		return null;
+		return ptpItemDao.getPItemListByHighPrice();
 	}
 
 	@Override
 	public List<PTPItem> getPItemListByLowPrice() {
 		// TODO Auto-generated method stub
-		return null;
+		return ptpItemDao.getPItemListByLowPrice();
 	}
 
 	@Override
 	public int insertPItem() {
 		// TODO Auto-generated method stub
-		return 0;
+		return ptpItemDao.insertPItem();
 	}
 
 	@Override
 	public int updatePItem(int itemId) {
 		// TODO Auto-generated method stub
-		return 0;
+		return ptpItemDao.updatePItem(itemId);
 	}
 
 	@Override
 	public int deletePItem(int itemId) {
 		// TODO Auto-generated method stub
-		return 0;
+		return ptpItemDao.updatePItem(itemId);
 	}
 	
 	@Override
@@ -453,5 +464,6 @@ public class PetStoreImpl implements PetStoreFacade {
 		// TODO Auto-generated method stub
 		return reviewDao.deleteReview(reviewId);
 	}
+
 
 }
