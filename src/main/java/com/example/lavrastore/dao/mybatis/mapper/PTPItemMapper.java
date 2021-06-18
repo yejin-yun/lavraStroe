@@ -20,10 +20,10 @@ public interface PTPItemMapper {
 	List<PTPItem> getPItemListByLowPrice(); // 낮은 가격순 정렬
 	
 	/* CREATE */
-	int insertPItem();
+	int insertPItem(PTPItem pItem);
 	
 	/* UPDATE */
-	int updatePItem(int itemId);
+	int updatePItem(PTPItem pItem);
 	
 	/* DELETE */
 	int deletePItem(int itemId);

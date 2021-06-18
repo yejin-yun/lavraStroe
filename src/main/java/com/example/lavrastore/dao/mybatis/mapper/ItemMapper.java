@@ -16,6 +16,7 @@
 
 package com.example.lavrastore.dao.mybatis.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -61,4 +62,7 @@ public interface ItemMapper {
 	/* Delete */
 	
 	int deleteItem(int itemId);
+	
+	int updateDescAndPriceItem(HashMap<String, String> hm);
+	
 }

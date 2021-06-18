@@ -18,10 +18,10 @@ public interface PTPItemDao {
 	List<PTPItem> getPItemListByLowPrice() throws DataAccessException;
 	
 	/* CREATE */
-	int insertPItem() throws DataAccessException;
+	int insertPItem(PTPItem pitem) throws DataAccessException;
 	
 	/* UPDATE */
-	int updatePItem(int itemId) throws DataAccessException;
+	int updatePItem(PTPItem pitem) throws DataAccessException;
 	
 	/* DELETE */
 	int deletePItem(int itemId) throws DataAccessException;

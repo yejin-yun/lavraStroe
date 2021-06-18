@@ -11,6 +11,9 @@ public class PTPItem implements Serializable {
 	String sellerId;
 	String bank;
 	String account;
+	int itemId;
+	
+	public PTPItem() {}
 	
 	public String getBank() {
 		return bank;
@@ -47,6 +50,14 @@ public class PTPItem implements Serializable {
 	}
 	public void setSellerId(String sellerId) {
 		this.sellerId = sellerId;
+	}
+
+	public int getItemId() {
+		return itemId;
+	}
+
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
 	}
 	
 	

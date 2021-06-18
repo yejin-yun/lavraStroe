@@ -37,12 +37,12 @@ public class MybatisPTPItemDao implements PTPItemDao {
 		return PTPItemMapper.getPItemListByLowPrice();
 	}
 	
-	public int insertPItem() throws DataAccessException {
-		return PTPItemMapper.insertPItem();
+	public int insertPItem(PTPItem pitem) throws DataAccessException {
+		return PTPItemMapper.insertPItem(pitem);
 	}
 	
-	public int updatePItem(int itemId) throws DataAccessException {
-		return PTPItemMapper.updatePItem(itemId);
+	public int updatePItem(PTPItem pitem) throws DataAccessException {
+		return PTPItemMapper.updatePItem(pitem);
 	}
 	
 	public int deletePItem(int itemId) throws DataAccessException {

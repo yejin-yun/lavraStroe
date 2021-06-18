@@ -67,5 +67,15 @@ public class MybatisItemDao implements ItemDao {
 	public List<Item> getItemListTopKByLikeCnt(int categoryId, int number) throws DataAccessException {
 		return itemMapper.getItemListTopKByLikeCnt(categoryId, number);
 	}
+	
+	public int updateDescAndPriceItem(String description, int price, int itemId) throws DataAccessException {
+		HashMap<String, String> hm = new HashMap<String, String>(); 
+		hm.put("itemId", String.valueOf(itemId));
+		hm.put("price", String.valueOf(price));
+		hm.put("description", description);
+		
+		return itemMapper.updateDescAndPriceItem(hm);
+		
+	}
 
 }
