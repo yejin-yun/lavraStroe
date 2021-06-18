@@ -108,7 +108,7 @@ public class reviewController {
 			redirectAttribute.addFlashAttribute("errMsg", "최소 10글자 이상 기록해주세요!");
 			return "redirect:/accessory/detail?no=" + itemid;
 		}
-		
+		 
 		int shopping = 0;
 		shopping = petStore.getCntOfItemByMember(itemid, member.getMemberId());
 		System.out.println(itemid + ", " + shopping + ","+ member.getMemberId() +"shopping");
