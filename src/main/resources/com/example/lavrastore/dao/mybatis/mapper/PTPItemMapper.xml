@@ -107,13 +107,9 @@
 		order by i.price ASC
 	</select>
 	
-	<insert id="insertPTPItem" parameterType="PTPItem">
-	<selectKey keyProperty="PTPItemId" resultType="int"
-			order="BEFORE">
-			SELECT seq_pk_ptp.nextval AS PTPItemId FROM DUAL
-	</selectKey>
-		insert into PTPItem ( PTPITEMID, STATE, ITEMID, SELLERID, DEVP, BANK, ACCOUNT)
-		VALUES (#{PTPItemId}, #{state}, #{PTPItemId}, #{sellerId}, #{devP}, #{bank}, #{account})
+	<insert id="insertPItem" parameterType="PTPItem">
+		insert into PTPItem ( PTPITEMID, ITEMID, STATE, SELLERID, DEVP, BANK, ACCOUNT)
+		VALUES (#{PTPItemId}, #{PTPItemId}, #{state}, #{sellerId}, #{devP}, #{bank}, #{account})
 	</insert>
 	
 	<update id="updatePTPItem" parameterType="PTPItem">

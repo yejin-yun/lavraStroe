@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,7 +33,7 @@ public class ptpOrderController {
 	protected void checkLogin(HttpServletRequest request) {
 		userSession = (UserSession) request.getSession().getAttribute("userSession");
 	}
-	
+	//판매자가 올린 글에 대한 주문
 	@ModelAttribute("myOrder")
 	public Order createNewOrder(HttpSession session) {
 		Order myOrder = (Order)session.getAttribute("myOrder");
@@ -70,6 +71,7 @@ public class ptpOrderController {
 		
 		return "ptpOrderForm";
 	}
+	
 	
 
 }

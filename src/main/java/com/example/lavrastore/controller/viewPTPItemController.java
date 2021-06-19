@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
@@ -46,10 +47,7 @@ public class viewPTPItemController {
 	
 	
 	@Autowired
-	private PtPFormValidator validator;
-	public void setValidator(PtPFormValidator validator) {
-		this.validator = validator;
-	}
+	private PtPFormValidator ptpFormValidator;
 	
 	@Autowired
 	public void setPetStore(PetStoreFacade petStore) {
@@ -194,11 +192,30 @@ public class viewPTPItemController {
 			@ModelAttribute("ptp")PTPItemForm ptp,
 			BindingResult result){
 		
-		validator.validate(ptp, result);
+		MultipartFile file = ptp.getProductPhoto();
+		String fn = file.getName();
 		
-		if (result.hasErrors()) return formViewName;
+		PTPItem pi = ptp.getPtpitem();
+		Item ii = ptp.getItem();
 		
-		String filename = "";
+	
+		
+		if(pi != null) {
+			System.out.println("PI" + pi.getBank());
+		}
+		if(ii != null) {
+			System.out.println("II" + ii.getTitle());
+		}
+		
+		ptpFormValidator.validateItem(ii, result);
+		ptpFormValidator.validatePTPItem(pi, result);
+		
+		
+		if (result.hasErrors()) { return formViewName; }
+		
+		
+		/*
+		 * String filename = "";
 		// 첨부파일(상품사진)이 있으면
 		if(!ptp.getProductPhoto().isEmpty()){
 			filename = ptp.getProductPhoto().getOriginalFilename();
@@ -221,7 +238,18 @@ public class viewPTPItemController {
 			item.setItemId(ptpitemid);
 			petStore.insertPTPItem(item);
 		}
-		return "redirect:/shop/product/list.do";
+		*/
+		
+		//fileImage를 고정하고 개발을 진행합니다. image 넣는 부분만 처리해주세요.
+		String imageUrl = "/images/gitem/gold_brac.png";
+		ii.setImage(imageUrl);
+		
+		//작업한 부분. insert 처리 해놨으니까 아래는 건들이지 말아요.
+		pi.setItem(ii);
+		pi.setSellerId(userSession.getMember().getMemberId());
+		petStore.insertPItem(pi);
+		
+		return "redirect:/accessory/earring/3";
 	}
 	
 	@RequestMapping("/item/ptpwrite.do")

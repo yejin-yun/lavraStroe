@@ -15,13 +15,12 @@ public class PTPItemForm implements Serializable {
 	private Item item;
 	private PTPItem ptpitem;
 
-	public MultipartFile getProductPhoto() {
-		return productPhoto;
-	}
-
-	public void setProductPhoto(MultipartFile productPhoto) {
-		this.productPhoto = productPhoto;
-	}
+	
+	  public MultipartFile getProductPhoto() { return productPhoto; }
+	  
+	  public void setProductPhoto(MultipartFile productPhoto) { this.productPhoto =
+	  productPhoto; }
+	 
 
 	public Item getItem() {
 		return item;

@@ -6,8 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.lavrastore.dao.PTPItemDao;
+import com.example.lavrastore.dao.SequenceDao;
+import com.example.lavrastore.dao.mybatis.mapper.ItemMapper;
 import com.example.lavrastore.dao.mybatis.mapper.PTPItemMapper;
 import com.example.lavrastore.domain.PTPItem;
 
@@ -16,6 +19,13 @@ public class MybatisPTPItemDao implements PTPItemDao {
 
 	@Autowired
 	private PTPItemMapper PTPItemMapper;
+	
+	@Autowired
+	private ItemMapper itemMapper;
+	
+	@Autowired
+	private SequenceDao sequenceDao;
+	
 	
 	public PTPItem getPItem(int itemId, String sellerId) throws DataAccessException {
 		HashMap<String, String> hm = new HashMap<String, String>(); 
@@ -37,8 +47,15 @@ public class MybatisPTPItemDao implements PTPItemDao {
 		return PTPItemMapper.getPItemListByLowPrice();
 	}
 	
+	@Transactional
 	public int insertPItem(PTPItem pitem) throws DataAccessException {
-		return PTPItemMapper.insertPItem(pitem);
+		pitem.setPTPItemId(sequenceDao.getNextId("seq_pk_ptp"));
+		pitem.getItem().setItemId(pitem.getPTPItemId());
+		System.out.println("[[ptpItemId : " + pitem.getPTPItemId());
+		itemMapper.insertPTPItem(pitem.getItem());
+		PTPItemMapper.insertPItem(pitem);
+		
+		return 1;
 	}
 	
 	public int updatePItem(PTPItem pitem) throws DataAccessException {

@@ -23,8 +23,8 @@
 <%@ include file="header.jsp" %>
 <br/>
 <br/>
-<c:set var="targetUrl"><c:url value="/이동할 url 입력" /></c:set>
-<form:form modelAttribute="ptp" method="post" action = "${targetUrl}" > 
+<c:set var="targetUrl"><c:url value="/shop/productinsert.do" /></c:set>
+<form:form modelAttribute="ptp" method="post" action = "${targetUrl}" enctype="multipart/form-data"> 
 <form:errors cssClass="error" />
 		<table class = "table table-striped" style="width : 70%; margin-left : 15%; margin-top : 50px; ">
 			<thead>
@@ -53,6 +53,7 @@
 	              <font color="red"> <form:errors path="item.productId" /> </font> 
 	              </td>
 	          </tr>
+	          
 	          <tr>
 				<td>사진</td>
 				<td>
