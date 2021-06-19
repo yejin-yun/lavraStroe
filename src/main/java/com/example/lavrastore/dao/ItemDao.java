@@ -36,6 +36,7 @@ public interface ItemDao {
 	/* Create */
 	
 	int insertItem(int itemId) throws DataAccessException;
+	int insertPTPItem(Item item) throws DataAccessException;
 	
 	/* Update */
 	

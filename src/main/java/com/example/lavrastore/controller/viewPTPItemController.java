@@ -1,5 +1,6 @@
 package com.example.lavrastore.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,9 +17,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.WebUtils;
 
 import com.example.lavrastore.domain.Item;
 import com.example.lavrastore.domain.Member;
@@ -35,7 +39,6 @@ public class viewPTPItemController {
 	private int perPageSize = 12;
 	private int totalPageSize;
 	UserSession userSession;
-	
 	@Autowired
 	public void setPetStore(PetStoreFacade petStore) {
 		this.petStore = petStore;
@@ -174,4 +177,14 @@ public class viewPTPItemController {
 		
 	}
 	
-}
+	@RequestMapping("/item/ptpwrite.do")
+	public String write(Model model){
+		PTPItem ptp = new PTPItem();
+		model.addAttribute("ptp",ptp);
+		return "PTPItemWrite";
+	}
+
+
+}	
+	
+

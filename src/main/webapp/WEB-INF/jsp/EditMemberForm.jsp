@@ -124,7 +124,7 @@
 		  </tr>
 		</table>
 		  <br />
-    <input type="text" name="submit" value="Save Member Information" />
+    <input name="submit" value="Save Member Information"  type="image" src="../images/bagic/submit.png"  style = "width:80px"/>
 </form:form>
 <p>
 

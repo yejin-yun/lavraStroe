@@ -54,6 +54,7 @@ public interface ItemMapper {
 	/* Create */
 	
 	int insertItem(int itemId);
+	int insertPTPItem(Item item);
 	
 	/* Update */
 	

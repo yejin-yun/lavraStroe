@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import org.springframework.web.multipart.MultipartFile;
+
 @SuppressWarnings("serial")
 public class PTPItem implements Serializable {
 
@@ -17,6 +19,7 @@ public class PTPItem implements Serializable {
 	String sellerId;
 	String bank;
 	String account;
+	private MultipartFile productPhoto;
 	
 	public PTPItem() {}
 	
@@ -55,6 +58,14 @@ public class PTPItem implements Serializable {
 	}
 	public void setSellerId(String sellerId) {
 		this.sellerId = sellerId;
+	}
+
+	public MultipartFile getProductPhoto() {
+		return productPhoto;
+	}
+
+	public void setProductPhoto(MultipartFile productPhoto) {
+		this.productPhoto = productPhoto;
 	}
 	
 }

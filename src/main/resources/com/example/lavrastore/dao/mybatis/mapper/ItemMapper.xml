@@ -224,6 +224,14 @@
 		#{description}, #{title}, #{price}, #{isSoldout}, #{likeCnt},
 		#{quantity})
 	</insert>
+	
+	<insert id="insertPTPItem" parameterType="Item">
+		INSERT INTO Item (itemId, productId, image, description, title, price,
+		isSoldout, likeCnt, quantity)
+		VALUES (#{itemId}, #{productId}, #{image},
+		#{description}, #{title}, #{price}, #{isSoldout}, 0,
+		1)
+	</insert>
 
 	<update id="updateItem" parameterType="Item">
 		UPDATE Item
