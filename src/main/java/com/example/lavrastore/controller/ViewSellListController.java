@@ -49,4 +49,28 @@ public class ViewSellListController {
 		
 		return "SellList";
 	}
+	
+	@RequestMapping("/sellList/view/write.do")
+	public String writePItem() {
+		return "/sellList/view/pItemWirte";
+	}
+	
+	@RequestMapping("sellList/view/insert.do")
+	public String insertPItem(PTPItem pItem) {
+		
+		
+		return "SellList";
+	}
+	
+	@RequestMapping("sellList/view/update.do")
+	public String updatePItem(PTPItem pItem) {
+		
+		return "SellList";
+	}
+	
+	@RequestMapping("sellList/view/delete.do")
+	public String deletePItem(@RequestParam int itemId) {
+		
+		return "SellList";
+	}
 }
