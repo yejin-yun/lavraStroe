@@ -16,6 +16,7 @@
 </head>
 <body>
 	<%@ include file="header.jsp" %>
+	<br>
 	<button type="button" id="btnAdd">상품 등록</button><br>
 	
 	<div class="container"  style="margin-left: auto; margin-right: auto; width: 90%; margin-top:5%;">

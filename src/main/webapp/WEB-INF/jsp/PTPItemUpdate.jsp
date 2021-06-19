@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Lavra: ptp item insert</title>
+<title>Lavra: ptp item update</title>
 
 <script>
 	function backPage() {
@@ -14,8 +14,7 @@
 </head>
 <body>
 	<%@ include file="header.jsp" %>
-	<form name="form" enctype="multipart/form-data" method="POST"
-		action="<c:url value='/sellList/view/insert.do' />">
+	<form name="form" method="POST" action="<c:url value='/sellList/view/update.do' />">
 		<table border="1">
 			<thead>
 				<tr>
@@ -26,30 +25,13 @@
 				<tr>
 				<td>상품명</td>
 					<td>
-						<input type="text" class="form-control" name="title"
-							placeholder="상품명을 입력해주세요.">
-					</td>
-				</tr>
-				<tr>
-					<td>종류</td>
-					<td>
-					<!-- 
-						<select name="productName">
-							<option value="">종류 선택</option>
-							<option value="earring">귀걸이</option>
-							<option value="necklace">목걸이</option>
-							<option value="ring">반지</option>
-							<option value="bracelet">팔찌</option>
-							<option value="harideco">머리장식</option>
-						</select>
-					 -->
-						<select path="productName" items="${productList} class="form-control" />
+						${pitem.item.title}
 					</td>
 				</tr>
 				<tr>
 					<td>사진</td>
 					<td>
-						<input type="file" class="form-control-file" name="image">
+						${pitem.item.image}
 					</td>
 				</tr>
 				<tr>
@@ -69,8 +51,7 @@
 				<tr>
 					<td>배송비</td>
 					<td>
-						<input type="number" class="form-control" name="devP"
-							placeholder="배송비를 입력해주세요.">
+						${pitem.devP}
 					</td>
 				</tr>
 				<tr>
@@ -79,15 +60,13 @@
 				<tr>
 					<td>은행</td>
 					<td>
-						<input type="text" class="form-control" name="bank"
-							placeholder="계좌가 등록된 은행명을 입력해주세요.">
+						${pitem.bank}
 					</td>
 				</tr>
 				<tr>
 					<td>계좌번호</td>
 					<td>
-						<input type="number" class="form-control" name="account"
-							placeholder="계좌번호를 입력해주세요.">
+						${pitem.account}
 					</td>
 				</tr>
 			</tbody>
