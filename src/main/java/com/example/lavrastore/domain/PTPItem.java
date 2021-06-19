@@ -2,16 +2,21 @@ package com.example.lavrastore.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
 @SuppressWarnings("serial")
 public class PTPItem implements Serializable {
 
-	Item item;
+
+	@OneToOne
+	@JoinColumn(name="itemId")
+	private Item item;
 	int state; // 0: 진행중, 1: 거래중, 2: 거래 완료
 	int devP;
 	String sellerId;
 	String bank;
 	String account;
-	int itemId;
 	
 	public PTPItem() {}
 	
@@ -51,14 +56,5 @@ public class PTPItem implements Serializable {
 	public void setSellerId(String sellerId) {
 		this.sellerId = sellerId;
 	}
-
-	public int getItemId() {
-		return itemId;
-	}
-
-	public void setItemId(int itemId) {
-		this.itemId = itemId;
-	}
-	
 	
 }
