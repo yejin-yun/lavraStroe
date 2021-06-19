@@ -22,6 +22,7 @@
 		g.status 
 		from item i inner join groupitem g on i.itemid = g.itemid
 		where i.itemid = #{itemid}
+		
 	</select>
 	
 	<select id="getAllGItemList" resultType="groupItem">
@@ -42,6 +43,7 @@
 		g.status 
 		
 		from item i inner join groupitem g on i.itemid = g.itemid
+		order by paymentdate desc
 	</select>
 	
 	<select id="getGItemListByMember" parameterType = "String" resultType="groupItem">
@@ -65,6 +67,97 @@
 		where i.itemid = g.itemid
 		and i.itemid = w.itemid(+)
 		and w.memberid(+) = #{memberId}
+		order by paymentdate desc
+	</select>
+	
+	<select id="getGItmeListByPercent" resultType="groupItem">
+		select 
+		i.itemid as "item.itemid",
+		i.productId as "item.productid",
+		i.image as "item.image",
+		i.description as "item.description",
+		i.title as "item.title", 
+		i.price as "item.price", 
+		i.isSoldout as "item.issoldout", 
+		i.likecnt as "item.likecnt", 
+		i.quantity as "item.quantity", 
+		g.regidate, 
+		g.paymentdate, 
+		g.nowbalance, 
+		g.targetbalance, 
+		g.status 
+		
+		from item i inner join groupitem g on i.itemid = g.itemid
+		order by (g.nowbalance / g.targetbalance) desc
+	</select>
+	
+	<select id="getGItemListByPercentAndMember" parameterType = "String" resultType="groupItem">
+		select 
+		i.itemid as "item.itemid",
+		i.productId as "item.productid",
+		i.image as "item.image",
+		i.description as "item.description",
+		i.title as "item.title", 
+		i.price as "item.price", 
+		i.isSoldout as "item.issoldout", 
+		i.likecnt as "item.likecnt", 
+		i.quantity as "item.quantity", 
+        NVL(w.wishlistId, 0) as "item.isInWishlist",
+		g.regidate, 
+		g.paymentdate, 
+		g.nowbalance, 
+		g.targetbalance, 
+		g.status 
+		from item i, groupitem g, wishlist w
+		where i.itemid = g.itemid
+		and i.itemid = w.itemid(+)
+		and w.memberid(+) = #{memberId}
+		order by (g.nowbalance / g.targetbalance) desc
+	</select>
+	
+	<select id="getGItmeListByLowPercent" resultType="groupItem">
+		select 
+		i.itemid as "item.itemid",
+		i.productId as "item.productid",
+		i.image as "item.image",
+		i.description as "item.description",
+		i.title as "item.title", 
+		i.price as "item.price", 
+		i.isSoldout as "item.issoldout", 
+		i.likecnt as "item.likecnt", 
+		i.quantity as "item.quantity", 
+		g.regidate, 
+		g.paymentdate, 
+		g.nowbalance, 
+		g.targetbalance, 
+		g.status 
+		
+		from item i inner join groupitem g on i.itemid = g.itemid
+		order by (g.nowbalance / g.targetbalance) asc
+	</select>
+	
+	<select id="getGItemListByLowPercentAndMember" parameterType = "String" resultType="groupItem">
+		select 
+		i.itemid as "item.itemid",
+		i.productId as "item.productid",
+		i.image as "item.image",
+		i.description as "item.description",
+		i.title as "item.title", 
+		i.price as "item.price", 
+		i.isSoldout as "item.issoldout", 
+		i.likecnt as "item.likecnt", 
+		i.quantity as "item.quantity", 
+        NVL(w.wishlistId, 0) as "item.isInWishlist",
+		g.regidate, 
+		g.paymentdate, 
+		g.nowbalance, 
+		g.targetbalance, 
+		g.status 
+		from item i, groupitem g, wishlist w
+		where i.itemid = g.itemid
+		and i.itemid = w.itemid(+)
+		and w.memberid(+) = #{memberId}
+		order by (g.nowbalance / g.targetbalance) asc
 	</select>
 	
 	<update id="updateNowBalance" parameterType="int">

@@ -297,14 +297,20 @@ public class PetStoreImpl implements PetStoreFacade {
 	}
 
 	@Override
-	public List<GroupItem> getGItemListByDeadline() {
-		return groupItemDao.getGItemListByDeadline();
+	public List<GroupItem> getGItmeListByLowPercentAndMember(String memberId) {
+		return groupItemDao.getGItemListByLowPercentAndMember(memberId);
 	}
 
 	@Override
-	public List<GroupItem> getGItemListByWindUp() {
-		return groupItemDao.getGItemListByWindUp();
+	public List<GroupItem> getGItmeListByLowPercent() {
+		return groupItemDao.getGItemListByLowPercent();
 	}
+
+	@Override
+	public List<GroupItem> getGItmeListByPercentAndMember(String memberId) {
+		return groupItemDao.getGItmeListByPercentAndMember(memberId);
+	}
+	
 
 	@Override
 	public List<GroupItem> getGItmeListByPercent() {
@@ -468,4 +474,5 @@ public class PetStoreImpl implements PetStoreFacade {
 	public Order getOrderById(int orderId) {
 		return orderDao.getOrderById(orderId);
 	}
+
 }

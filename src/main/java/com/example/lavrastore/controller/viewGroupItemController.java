@@ -1,5 +1,6 @@
 package com.example.lavrastore.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -44,19 +45,48 @@ public class viewGroupItemController {
 		userSession = (UserSession) request.getSession().getAttribute("userSession");
 	}
 	
+	@ModelAttribute("sortData") 
+	public List<String> sortData() {
+		List<String> list = new ArrayList<String>();
+		list.add("basic");
+		list.add("high achievement");
+		list.add("low achievement");
+
+		return list;
+	}
+	
 	@RequestMapping("/group")
 	public String viewAllGroupItem(
 			@RequestParam(value="page", defaultValue="1") int page,
-			Model model) { //@RequestParam(value="page", required=false) String page // https://pythonq.com/so/spring/1003345
+			@RequestParam(value ="sort", defaultValue = "basic") String sort, 
+			Model model) { 
 		
 		List<GroupItem> gList = null;
 		
-		
-		if(userSession == null) {
-			gList = petStore.getAllGItemList();
-		} else {
-			gList = petStore.getGItemListByMember(userSession.getMember().getMemberId());
+		switch(sort) {
+		case "basic":
+			if(userSession == null) {
+				gList = petStore.getAllGItemList();
+			} else {
+				gList = petStore.getGItemListByMember(userSession.getMember().getMemberId());
+			}
+			break;
+		case "high achievement":
+			if(userSession == null) {
+				gList = petStore.getGItmeListByPercent();
+			} else {
+				gList = petStore.getGItmeListByPercentAndMember(userSession.getMember().getMemberId());
+			}
+			break;
+		case "low achievement":
+			if(userSession == null) {
+				gList = petStore.getGItmeListByLowPercent();
+			} else {
+				gList = petStore.getGItmeListByLowPercentAndMember(userSession.getMember().getMemberId());
+			}
+			break;
 		}
+		
 		PagedListHolder<GroupItem> gitemListPage;
 		gitemListPage = new PagedListHolder<GroupItem>(gList);
 
@@ -74,6 +104,7 @@ public class viewGroupItemController {
 			System.out.println("itemid : " + g.getItem().getItemId() + " 진행도 : " + g.getPercent() + g.getItem().getIsInWishlist());
 		}
 		
+		model.addAttribute("sort", sort);
 		model.addAttribute("gitemList", gitemList);
 		model.addAttribute("totalPageSize", totalPageSize);
 		

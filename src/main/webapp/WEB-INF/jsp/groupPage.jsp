@@ -67,7 +67,14 @@ function wishItem(itemId, wish){
 <body>
 	<%@ include file="header.jsp" %>
 	</br>
-	
+	<div id="sortSelect" style="margin-right : 10%;">
+		<c:forEach var="element" items="${sortData}" varStatus="status">
+			<a href='<c:url value="/group?sort=${element}"/>'>
+				<font color="black"><B>${element}</B></font>
+			</a>
+			<c:if test="${!status.last}">&nbsp;|&nbsp;</c:if>
+		</c:forEach>
+	</div>
 	<c:if test="${gitemList == '' || gitemList eq null}">
 		<div style="width: 50%; margin-left:auto; margin-right: auto;">아직 상품 준비가 되지 않았습니다.</div>
 	</c:if>

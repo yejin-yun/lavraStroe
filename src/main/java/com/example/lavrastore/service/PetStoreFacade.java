@@ -92,13 +92,11 @@ public interface PetStoreFacade {
 	//groupItem - login용)
 	List<GroupItem> getGItemListByMember(String memberId);
 	
-	//group- 마감일 임박순 
-	List<GroupItem> getGItemListByDeadline();
-	//group - 마감된 것
-	List<GroupItem> getGItemListByWindUp();
-	
 	//group - 인기순
 	List<GroupItem> getGItmeListByPercent();
+	List<GroupItem> getGItmeListByLowPercent();
+	List<GroupItem> getGItmeListByPercentAndMember(String memberId);
+	List<GroupItem> getGItmeListByLowPercentAndMember(String memberId);
 	
 	/* ptpItem */
 	PTPItem getPItem(int itemid, String sellerid);
