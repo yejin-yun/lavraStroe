@@ -76,6 +76,7 @@ public interface PetStoreFacade {
 	List<Item> getItemOrderByLowPriceForNotUser(int productId);
 
 	int insertItem(int itemId);
+	int insertPTPItem(Item item);
 	int updateItem(Item item); // ppt ItemDao의 update 부분의 기능들을 다 합침.
 	int deleteItem(int itemId);
 	

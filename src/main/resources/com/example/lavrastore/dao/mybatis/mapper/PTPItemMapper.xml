@@ -108,8 +108,12 @@
 	</select>
 	
 	<insert id="insertPTPItem" parameterType="PTPItem">
-		insert into PTPItem ( STATE, ITEMID, SELLERID, DEVP, BANK, ACCOUNT)
-		VALUES (#{state}, #{itemId}, #{sellerId}, #{devP}, #{bank}, #{account})
+	<selectKey keyProperty="PTPItemId" resultType="int"
+			order="BEFORE">
+			SELECT seq_pk_ptp.nextval AS PTPItemId FROM DUAL
+	</selectKey>
+		insert into PTPItem ( PTPITEMID, STATE, ITEMID, SELLERID, DEVP, BANK, ACCOUNT)
+		VALUES (#{PTPItemId}, #{state}, #{PTPItemId}, #{sellerId}, #{devP}, #{bank}, #{account})
 	</insert>
 	
 	<update id="updatePTPItem" parameterType="PTPItem">

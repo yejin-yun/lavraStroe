@@ -7,10 +7,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,16 +31,26 @@ import com.example.lavrastore.domain.Member;
 import com.example.lavrastore.domain.PTPItem;
 import com.example.lavrastore.domain.Product;
 import com.example.lavrastore.domain.WishList;
+import com.example.lavrastore.service.PtPFormValidator;
 import com.example.lavrastore.service.PetStoreFacade;
 
 @Controller
 @SessionAttributes("pitemListPage")
 public class viewPTPItemController {
-
+	@Value("PTPItemWrite")
+	private String formViewName;
 	private PetStoreFacade petStore;
 	private int perPageSize = 12;
 	private int totalPageSize;
 	UserSession userSession;
+	
+	
+	@Autowired
+	private PtPFormValidator validator;
+	public void setValidator(PtPFormValidator validator) {
+		this.validator = validator;
+	}
+	
 	@Autowired
 	public void setPetStore(PetStoreFacade petStore) {
 		this.petStore = petStore;
@@ -177,9 +189,44 @@ public class viewPTPItemController {
 		
 	}
 	
+	@RequestMapping("/shop/productinsert.do")
+	public String insert(
+			@ModelAttribute("ptp")PTPItemForm ptp,
+			BindingResult result){
+		
+		validator.validate(ptp, result);
+		
+		if (result.hasErrors()) return formViewName;
+		
+		String filename = "";
+		// 첨부파일(상품사진)이 있으면
+		if(!ptp.getProductPhoto().isEmpty()){
+			filename = ptp.getProductPhoto().getOriginalFilename();
+			// 개발디렉토리 - 파일 업로드 경로
+			//String path = "C:\\Users\\doubles\\Desktop\\workspace\\gitSpring\\spring02\\src\\main\\webapp\\WEB-INF\\views\\images"; //
+			// 배포디렉토리 - 파일 업로드 경로
+			String path = "C:\\Users\\00\\Documents\\GitHub\\JPetStore\\lavraStroe\\src\\main\\resources\\static\\images\\upload";
+			try {
+				new File(path).mkdirs(); // 디렉토리 생성
+				// 임시디렉토리(서버)에 저장된 파일을 지정된 디렉토리로 전송
+				ptp.getProductPhoto().transferTo(new File(path+filename));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			Item item = ptp.getItem();
+			
+			item.setImage(filename);
+			petStore.insertPItem(ptp.getPtpitem());
+			int ptpitemid = ptp.getPtpitem().getPTPItemId();
+			item.setItemId(ptpitemid);
+			petStore.insertPTPItem(item);
+		}
+		return "redirect:/shop/product/list.do";
+	}
+	
 	@RequestMapping("/item/ptpwrite.do")
 	public String write(Model model){
-		PTPItem ptp = new PTPItem();
+		PTPItemForm ptp = new PTPItemForm();
 		model.addAttribute("ptp",ptp);
 		return "PTPItemWrite";
 	}

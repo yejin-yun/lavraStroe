@@ -229,7 +229,7 @@
 		INSERT INTO Item (itemId, productId, image, description, title, price,
 		isSoldout, likeCnt, quantity)
 		VALUES (#{itemId}, #{productId}, #{image},
-		#{description}, #{title}, #{price}, #{isSoldout}, 0,
+		#{description}, #{title}, #{price}, #{isSoldout}, #{likeCnt},
 		1)
 	</insert>
 

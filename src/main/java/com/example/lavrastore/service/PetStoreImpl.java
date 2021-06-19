@@ -207,6 +207,11 @@ public class PetStoreImpl implements PetStoreFacade {
 	public int insertItem(int itemId) {
 		return itemDao.insertItem(itemId);
 	}
+	
+	@Override
+	public int insertPTPItem(Item item) {
+		return itemDao.insertPTPItem(item);
+	}
 
 	@Override
 	public int updateItem(Item item) {

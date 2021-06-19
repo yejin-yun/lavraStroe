@@ -75,8 +75,8 @@
 			  </tr>
 			  <tr>
 			    <td>배송비</td>
-			    <td><form:input path="devP" type="number"/>
-			    <font color="red"> <form:errors path="devP" /> </font> 
+			    <td><form:input path="ptpitem.devP" type="number"/>
+			    <font color="red"> <form:errors path="ptpitem.devP" /> </font> 
 			     </td>
 			  </tr>
 			  <tr><td colspan="5"></td></tr>
@@ -84,14 +84,14 @@
 			   	<th colspan="2">계좌 정보</th></tr>
 			  <tr>
 			    <td>은행</td>
-			    <td><form:input path="bank" placeholder="ex : 농협 " /> 
-			    <font color="red"> <form:errors path="bank" /> </font> 
+			    <td><form:input path="ptpitem.bank" placeholder="ex : 농협 " /> 
+			    <font color="red"> <form:errors path="ptpitem.bank" /> </font> 
 			    </td>
 			  </tr>
 			  <tr>
 			    <td>계좌번호</td>
-			    <td><form:input  path="account" placeholder="ex : 9999 9999 9999 9999" />
-			    <font color="red"> <form:errors path="account"/> </font> 
+			    <td><form:input  path="ptpitem.account" placeholder="ex : 9999 9999 9999 9999" />
+			    <font color="red"> <form:errors path="ptpitem.account"/> </font> 
 			     </td>
 			  </tr>
 			  </tbody>

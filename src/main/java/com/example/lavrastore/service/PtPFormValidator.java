@@ -1,5 +1,6 @@
 package com.example.lavrastore.service;
 
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -7,6 +8,7 @@ import org.springframework.validation.Validator;
 import com.example.lavrastore.domain.Item;
 import com.example.lavrastore.domain.PTPItem;
 
+@Component
 public class PtPFormValidator implements Validator{
 
 	@Override
