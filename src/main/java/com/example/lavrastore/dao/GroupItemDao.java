@@ -29,7 +29,7 @@ public interface GroupItemDao {
 	
 	List<GroupItem> getGItmeListByPercent() throws DataAccessException;
 	//group - 인기순
-	List<GroupItem> getGItmeListByPercentAndMember(String memberId) throws DataAccessException;
+	List<GroupItem> getGItmeListByPercentAndMember(String memberId) throws DataAccessException; 
 		
 
 	// 시간이 되면 마감된 그룹 아이템의 상태와 관련 오더들의 상태를 update

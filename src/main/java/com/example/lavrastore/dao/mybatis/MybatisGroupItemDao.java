@@ -37,8 +37,8 @@ public class MybatisGroupItemDao implements GroupItemDao{
 	public List<GroupItem> getGItmeListByPercent() throws DataAccessException{
 		return groupItemMapper.getGItmeListByPercent();
 	}
-	public List<GroupItem> getGItmeListByPercentAndMember(String memberId) throws DataAccessException{
-		return groupItemMapper.getGItmeListByPercentAndMember(memberId);
+	public List<GroupItem>  getGItmeListByPercentAndMember(String memberId) throws DataAccessException{
+		return groupItemMapper.getGItemListByPercentAndMember(memberId);
 	}
 
 	public int updateNowBalance(int itemId, int total) throws DataAccessException {
@@ -58,7 +58,7 @@ public class MybatisGroupItemDao implements GroupItemDao{
 	}
 
 	public List<GroupItem> getGItemListByLowPercentAndMember(String memberId) throws DataAccessException {
-		return groupItemMapper.getGItmeListByLowPercentAndMember(memberId);
+		return groupItemMapper.getGItemListByLowPercentAndMember(memberId);
 	}
 
 	

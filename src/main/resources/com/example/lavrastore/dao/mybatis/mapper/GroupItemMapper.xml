@@ -131,7 +131,6 @@
 		g.nowbalance, 
 		g.targetbalance, 
 		g.status 
-		
 		from item i inner join groupitem g on i.itemid = g.itemid
 		order by (g.nowbalance / g.targetbalance) asc
 	</select>
