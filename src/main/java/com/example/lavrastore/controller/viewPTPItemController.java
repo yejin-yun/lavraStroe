@@ -246,7 +246,23 @@ public class viewPTPItemController {
 		return "PTPItemWrite";
 	}
 
-
+	@RequestMapping("/item/productupdate.do")
+	public String update(
+			@ModelAttribute("ptp")PTPItemForm ptp,
+			BindingResult result) {
+		
+		
+		return "redirect:/sellList/view/0";
+	}
+	
+	@RequestMapping("/item/productdelete.do")
+	public String delete(
+			@ModelAttribute("ptp")PTPItemForm ptp,
+			BindingResult result) {
+		
+		
+		return "redirect:/sellList/view/0";
+	}
 }	
 	
 

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,42 +48,37 @@ public class ViewSellListController {
 			member = userSession.getMember();
 		}
 		
+		List<PTPItem> sellItemList = null;
+		List<PTPItem> sellItemList2 = new ArrayList<PTPItem>();
+		sellItemList = this.petStore.findPItemListBySellerId(userSession.getMember().getMemberId());
 		
-		
-		return "SellList";
-	}
-	
-	@ModelAttribute("productList")
-	public List<String> getProductList() {
-		List<Product> products = petStore.getProductListByCategory(3);
-		List<String> productList = new ArrayList<String>();
-		for (Product product : products) {
-			productList.add(product.getName());
+		for (PTPItem sellList : sellItemList) {
+			PTPItem pitem = petStore.getPItem(sellList.getPTPItemId(), sellList.getSellerId());
+			
+			if (pitem.getState() == 0)
+				sellItemList2.add(sellList);
+			else if (pitem.getState() == 1)
+				sellItemList2.add(sellList);
 		}
 		
-		return productList;
-	}
-	
-	@RequestMapping("/sellList/view/write.do")
-	public String writePItem() {
-		return "PTPItemWrite";
-	}
-	
-	@RequestMapping("sellList/view/insert.do")
-	public String insertPItem(PTPItem pItem) {
+		PagedListHolder<PTPItem> sellListPage = new PagedListHolder<PTPItem>(sellItemList2);
+		sellListPage.setPageSize(perPageSize);
+		sellListPage.setPage(page - 1);
 		
+		List<PTPItem> sellItemListPerPage = sellListPage.getPageList();
+		totalPageSize = sellItemList2.size() / perPageSize;
+		System.out.println("carttest = " + sellItemList.size());
+		if (sellItemList2.size() % perPageSize != 0) {
+			totalPageSize++;
+		}
+		System.out.println("totalPageSize = " + totalPageSize);
+		for (PTPItem sellList : sellItemListPerPage) {
+			sellList.setItem(petStore.getItem(sellList.getItem().getItemId()));
+		}
 		
-		return "SellList";
-	}
-	
-	@RequestMapping("sellList/view/update.do")
-	public String updatePItem(PTPItem pItem) {
-		
-		return "SellList";
-	}
-	
-	@RequestMapping("sellList/view/delete.do")
-	public String deletePItem(@RequestParam int itemId) {
+		model.addAttribute("sellItemList2", sellItemListPerPage);
+		model.addAttribute("totalPageSize", totalPageSize);
+		model.addAttribute("curPage", page);
 		
 		return "SellList";
 	}
