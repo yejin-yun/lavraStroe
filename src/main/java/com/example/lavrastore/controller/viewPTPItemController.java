@@ -213,36 +213,23 @@ public class viewPTPItemController {
 		
 		if (result.hasErrors()) { return formViewName; }
 		
+		String imageUrl = "/images/gitem/gold_brac.png";
+		imageUrl = ptp.getProductPhoto().getOriginalFilename();
+		String path = "/images/upload/";
+		String path1 = "C:\\Users\\00\\Documents\\GitHub\\JPetStore\\lavraStroe\\src\\main\\resources\\static\\images\\upload\\";
 		
-		/*
-		 * String filename = "";
-		// 첨부파일(상품사진)이 있으면
-		if(!ptp.getProductPhoto().isEmpty()){
-			filename = ptp.getProductPhoto().getOriginalFilename();
-			// 개발디렉토리 - 파일 업로드 경로
-			//String path = "C:\\Users\\doubles\\Desktop\\workspace\\gitSpring\\spring02\\src\\main\\webapp\\WEB-INF\\views\\images"; //
-			// 배포디렉토리 - 파일 업로드 경로
-			String path = "C:\\Users\\00\\Documents\\GitHub\\JPetStore\\lavraStroe\\src\\main\\resources\\static\\images\\upload";
-			try {
-				new File(path).mkdirs(); // 디렉토리 생성
+		try {
+				new File(path1).mkdirs(); // 디렉토리 생성
 				// 임시디렉토리(서버)에 저장된 파일을 지정된 디렉토리로 전송
-				ptp.getProductPhoto().transferTo(new File(path+filename));
+				ptp.getProductPhoto().transferTo(new File(path1+imageUrl));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			Item item = ptp.getItem();
-			
-			item.setImage(filename);
-			petStore.insertPItem(ptp.getPtpitem());
-			int ptpitemid = ptp.getPtpitem().getPTPItemId();
-			item.setItemId(ptpitemid);
-			petStore.insertPTPItem(item);
-		}
-		*/
 		
 		//fileImage를 고정하고 개발을 진행합니다. image 넣는 부분만 처리해주세요.
-		String imageUrl = "/images/gitem/gold_brac.png";
-		ii.setImage(imageUrl);
+		
+		path += imageUrl;
+		ii.setImage(path);
 		
 		//작업한 부분. insert 처리 해놨으니까 아래는 건들이지 말아요.
 		pi.setItem(ii);
