@@ -33,6 +33,7 @@
 				<tr>
 					<td>종류</td>
 					<td>
+					<!-- 
 						<select name="productName">
 							<option value="">종류 선택</option>
 							<option value="earring">귀걸이</option>
@@ -41,6 +42,8 @@
 							<option value="bracelet">팔찌</option>
 							<option value="harideco">머리장식</option>
 						</select>
+					 -->
+						<select path="productName" items="${productList} class="form-control" />
 					</td>
 				</tr>
 				<tr>

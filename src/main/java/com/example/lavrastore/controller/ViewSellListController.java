@@ -9,12 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.lavrastore.domain.Member;
 import com.example.lavrastore.domain.PTPItem;
+import com.example.lavrastore.domain.Product;
 import com.example.lavrastore.service.PetStoreFacade;
 
 @Controller
@@ -50,9 +52,20 @@ public class ViewSellListController {
 		return "SellList";
 	}
 	
+	@ModelAttribute("productList")
+	public List<String> getProductList() {
+		List<Product> products = petStore.getProductListByCategory(3);
+		List<String> productList = new ArrayList<String>();
+		for (Product product : products) {
+			productList.add(product.getName());
+		}
+		
+		return productList;
+	}
+	
 	@RequestMapping("/sellList/view/write.do")
 	public String writePItem() {
-		return "/sellList/view/pItemWirte";
+		return "PTPItemWrite";
 	}
 	
 	@RequestMapping("sellList/view/insert.do")
