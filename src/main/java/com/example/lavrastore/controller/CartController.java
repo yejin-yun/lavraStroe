@@ -51,7 +51,7 @@ public class CartController {
 			  Model model) {
 
 			 Member member;
-			 if(userSession == null) { return "LoginForm"; }
+			 if(userSession == null) { return "redirect:/shop/loginForm.do"; }
 			 else {
 				member = userSession.getMember(); 
 			 }
