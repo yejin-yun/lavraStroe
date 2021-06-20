@@ -490,4 +490,9 @@ public class PetStoreImpl implements PetStoreFacade {
 		return orderDao.getOrderById(orderId);
 	}
 
+	@Override
+	public int updateItem2(Item item) {
+		return itemDao.updateItem2(item);
+	}
+
 }

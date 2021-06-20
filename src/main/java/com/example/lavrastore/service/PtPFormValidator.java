@@ -20,6 +20,7 @@ public class PtPFormValidator implements Validator{
 	public void validate(Object target, Errors errors) {
 		validateItem((Item)target, errors);
 		validatePTPItem((PTPItem)target, errors);
+		validatePTPItemUpdate((PTPItem)target, errors);
 	}
 	
 	public void validateItem(Item item, Errors errors) {
@@ -32,6 +33,12 @@ public class PtPFormValidator implements Validator{
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "ptpitem.devP", "DEVP_REQUIRED", "Dev Price is required!");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "ptpitem.bank", "BANK_REQUIRED", "Bank is required!");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "ptpitem.account", "ACCOUNT_REQUIRED", "ACCOUNT is required!");		
+	}
+	
+	public void validatePTPItemUpdate(PTPItem item, Errors errors) {
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "devP", "DEVP_REQUIRED", "Dev Price is required!");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "bank", "BANK_REQUIRED", "Bank is required!");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account", "ACCOUNT_REQUIRED", "ACCOUNT is required!");		
 	}
 	
 	

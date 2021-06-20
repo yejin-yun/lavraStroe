@@ -248,15 +248,36 @@ public class viewPTPItemController {
 	
 	@RequestMapping("/shop/productupdate.do")
 	public String update(
-			@ModelAttribute("ptp")PTPItemForm ptp,
+			@RequestParam(value="itemId", defaultValue="-1")int itemid,
+			@ModelAttribute("pitem")PTPItem edPitem,
 			BindingResult result) {
+		System.out.println("edit pitem : " + edPitem.getItem().getDescription() + ", " + edPitem.getBank() + ", " + edPitem.getItem().getPrice());
+		
+		ptpFormValidator.validateItem(edPitem.getItem(), result);
+		ptpFormValidator.validatePTPItemUpdate(edPitem, result);
+		
+		edPitem.setPTPItemId(itemid);
+		edPitem.getItem().setItemId(itemid);
+		edPitem.setSellerId(userSession.getMember().getMemberId());
+		petStore.updatePItem(edPitem);
 		
 		return "redirect:/sellList/view/0";
 	}
 	
 	@RequestMapping("/item/ptpedit.do")
-	public String edit(Model model) {
+	public String ptpEdit(
+			@RequestParam(value="itemNo", defaultValue="20000") int itemid,
+			Model model) {
 		
+		if (userSession == null) {
+			return "LoginForm";
+		} 
+			
+		String sellerid = userSession.getMember().getMemberId();
+		PTPItem pitem = petStore.getPItem(itemid, sellerid);
+		
+		model.addAttribute("sellerid", sellerid);
+		model.addAttribute("pitem", pitem);
 		
 		return "PTPItemUpdate";
 	}

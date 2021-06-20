@@ -78,6 +78,7 @@ public interface PetStoreFacade {
 	int insertItem(int itemId);
 	int insertPTPItem(Item item);
 	int updateItem(Item item); // ppt ItemDao의 update 부분의 기능들을 다 합침.
+	int updateItem2(Item item); //개인거래 항목 수정 시 쓰는 녀석 
 	int deleteItem(int itemId);
 	
 	
@@ -117,9 +118,6 @@ public interface PetStoreFacade {
 	
 	//order
 	void insertOrder(Order myOrder);
-	 // -- 해야할 일 정리 : 먼저 Order랑 groupOrder 테이블에 정보 insert
-	// payment insert, payment가 카드 일 경우 creditcard 정보 insert
-	 // total price만큼 groupItem의 nowBalance update; -> nowBalance update
 	
 	/* CartItem */
 	

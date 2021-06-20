@@ -250,12 +250,12 @@
 	</delete>
 	
 	
-	<!-- 가격이랑 설명 수정 용 ptp-->
-	<update id="updateDescAndPriceItem" parameterType="HashMap">
-		UPDATE item SET
-		description = #{description}, 
-		price = to_number(#{price})
-		WHERE itemId = to_number(#{itemId})
+	<update id="updateItem2" parameterType="Item">
+		UPDATE Item
+		SET 
+		description = #{description},
+		price = #{price}
+		WHERE itemId = #{itemId}
 	</update>
 	
 

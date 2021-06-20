@@ -64,6 +64,6 @@ public interface ItemMapper {
 	
 	int deleteItem(int itemId);
 	
-	int updateDescAndPriceItem(HashMap<String, String> hm);
+	int updateItem2(Item item);
 	
 }

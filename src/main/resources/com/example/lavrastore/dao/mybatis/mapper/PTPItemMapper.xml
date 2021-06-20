@@ -112,14 +112,14 @@
 		VALUES (#{PTPItemId}, #{PTPItemId}, #{state}, #{sellerId}, #{devP}, #{bank}, #{account})
 	</insert>
 	
-	<update id="updatePTPItem" parameterType="PTPItem">
+	<update id="updatePItem" parameterType="PTPItem">
 		update PTPItem set state = #{state}, sellerid = #{sellerId},
 		devp = #{devP}, bank = #{bank}, account = #{account}
-		where itemid = #{itemId}
+		where itemid = #{PTPItemId}
 	</update>
 	
-	<delete id="deletePTPItem" parameterType="int">
-		delete from ptpItem where itemId = #{itemId}
+	<delete id="deletePItem" parameterType="int">
+		delete from ptpItem where itemId = #{PTPItemId}
 	</delete>
 	
 
