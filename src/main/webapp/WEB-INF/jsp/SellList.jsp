@@ -20,6 +20,9 @@
 		$("#btnAdd").click(function() {
 			location.href="/아이템 등록 페이지 url로 이동"
 		}); */
+	function add() {
+			location.href='/item/ptpwrite.do'
+	}
 		
 	function del() {
 		var chk = confirm("삭제하시겠습니까?");
@@ -32,7 +35,7 @@
 <body>
 	<%@ include file="header.jsp" %>
 	<div class="container" style="margin-left: 5%; margin-right: auto; margin-top: 5%;">
-		<!-- <button type="button" id="btnAdd">상품 등록</button> -->
+		<button type="button" onClick="add()">상품 등록</button>
 	</div>
 	
 	<div class="container"  style="margin-left: auto; margin-right: auto; width: 90%; margin-top:5%;">

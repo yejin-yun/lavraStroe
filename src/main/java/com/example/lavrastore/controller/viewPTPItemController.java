@@ -236,7 +236,7 @@ public class viewPTPItemController {
 		pi.setSellerId(userSession.getMember().getMemberId());
 		petStore.insertPItem(pi);
 		
-		return "redirect:/accessory/earring/3";
+		return "redirect:/sellList/view/0";
 	}
 	
 	@RequestMapping("/item/ptpwrite.do")
@@ -247,7 +247,7 @@ public class viewPTPItemController {
 	}
 	
 	@RequestMapping("/shop/productdelete.do")
-	public String delete(@RequestParam int PTPItemId) {
+	public String delete(@RequestParam("PTPItemId") int PTPItemId) {
 		petStore.deletePItem(PTPItemId);
 		
 		return "redirect:/sellList/view/0";
