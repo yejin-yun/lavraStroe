@@ -76,7 +76,10 @@
 								${item.price}
 							</td>
 							<td>
-								<button type="button" onClick="upd()">수정</button>
+								<a href="<c:url value='/item/ptpedit.do'>
+									<c:param name='itemNo' value='${item.itemId}' /> </c:url>">
+									<button type="button" > 수정</button>
+								</a>
 								<button type="button" onClick="del()">삭제</button>
 							</td>
 						</tr>

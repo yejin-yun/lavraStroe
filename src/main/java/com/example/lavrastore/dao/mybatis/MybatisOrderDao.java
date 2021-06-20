@@ -56,7 +56,7 @@ public class MybatisOrderDao implements OrderDao{
     		orderMapper.insertCreditCard(order);
     	}
   
-		//아직 구현이 안됨. _ 틀 짜둔거    
+		 
 		//groupOrder용 추가 _ order의 카테고리가 공동구매(2)일 경우
     	if(order.getCategoryId() == 2) {
     		

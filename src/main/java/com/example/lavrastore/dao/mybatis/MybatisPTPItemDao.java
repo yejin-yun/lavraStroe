@@ -58,8 +58,13 @@ public class MybatisPTPItemDao implements PTPItemDao {
 		return 1;
 	}
 	
+	@Transactional
 	public int updatePItem(PTPItem pitem) throws DataAccessException {
-		return PTPItemMapper.updatePItem(pitem);
+		
+		itemMapper.updateItem2(pitem.getItem());
+		System.out.println("pierr");
+		PTPItemMapper.updatePItem(pitem);
+		return 1;
 	}
 	
 	public int deletePItem(int itemId) throws DataAccessException {

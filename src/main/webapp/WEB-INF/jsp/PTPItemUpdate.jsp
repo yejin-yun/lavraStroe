@@ -21,10 +21,18 @@
 </head>
 <body>
 	<%@ include file="header.jsp" %>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	
 	<c:set var="targetUrl"><c:url value="/shop/productupdate.do" /></c:set>
-	<form:form modelAttribute="ptp" method="post" action = "${targetUrl}" enctype="multipart/form-data"> 
+	<p style=" width : 100%; text-align : center;"> <b> [!!] 상품명과 사진은 수정하실 수 없습니다. </b></p>
+	<form:form modelAttribute="pitem" method="post" action = "${targetUrl}" style="width : 80%; margin-left : 20%;"> 
 	<form:errors cssClass="error" />
-		<table class = "table table-striped" style="width : 70%; margin-left : 15%; margin-top : 50px; ">
+		<input type="hidden" name="itemId" value="${pitem.item.itemId}">
+		<table class = "table table-striped" style="width : 65%;">
 			<thead>
 				<tr>
 					<th colspan="2">| 제품 정보</th>
@@ -34,33 +42,34 @@
 				<tr>
 				<td>상품명 :</td>
 					<td>
-						${item.title}
+						${pitem.item.title}
 					</td>
 				</tr>
 				<tr>
 					<td>사진</td>
 					<td>
-						${item.image}
+						${pitem.item.image}
 					</td>
 				</tr>
 				<tr>
 					<td>설명</td>
 					<td>
-						<form:input path="item.description" value="${item.description}" placeholder="ex : 상품 설명을 입력해주세요" /> 
+						<form:input path="item.description" value="${ptiem.item.description}" placeholder="ex : 상품 설명을 입력해주세요" /> 
 			    		<font color="red"> <form:errors path="item.description" /> </font> 
 					</td>
 				</tr>
 				<tr>
 					<td>가격</td>
 					<td>
-						<form:input path="item.price" value="${item.price}" type="number"/> 
+						<form:input path="item.price" value="${pitem.item.price}" type="number" placeholder="ex : 상품 가격을 입력해주세요."/> 
 			  			<font color="red"> <form:errors path="item.price" /> </font> 
 					</td>
 				</tr>
 				<tr>
 					<td>배송비</td>
 					<td>
-						${ptpitem.devP}
+						<form:input path="devP" value="${ptiem.devP}" placeholder="ex : 배송비를 입력해주세요" /> 
+			    		<font color="red"> <form:errors path="devP" /> </font> 
 					</td>
 				</tr>
 				<tr>
@@ -69,19 +78,21 @@
 				<tr>
 					<td>은행</td>
 					<td>
-						${ptpitem.bank}
+						<form:input path="bank" value="${ptiem.bank}" placeholder="ex : 은행을 입력해주세요" /> 
+			    		<font color="red"> <form:errors path="bank" /> </font> 
 					</td>
 				</tr>
 				<tr>
 					<td>계좌번호</td>
 					<td>
-						${ptpitem.account}
+						<form:input path="account" value="${ptiem.account}" placeholder="ex : 계좌를 입력해주세요" /> 
+			    		<font color="red"> <form:errors path="account" /> </font> 
 					</td>
 				</tr>
 			</tbody>
 		</table>
 		<br>
-		<input name="check" type="image" src="../images/bagic/submit.png"  style = "width:80px; margin-left : 45%;"/>
+		<input name="check" type="image" src="../images/bagic/submit.png"  style = "width:80px; margin-left : 30%;"/>
 	</form:form>
 </body>
 </html>
