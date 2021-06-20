@@ -24,6 +24,10 @@
 			location.href='/item/ptpwrite.do'
 	}
 		
+	function upd() {
+			location.href='/item/ptpedit.do'
+	}
+		
 	function del() {
 		var chk = confirm("삭제하시겠습니까?");
 		if (chk) {
@@ -50,8 +54,8 @@
 			<table>
 				<thead>
 					<tr>
-						<th>상품명</th>
 						<th></th>
+						<th>상품명</th>
 						<th>설명</th>
 						<th>가격</th>
 						<th>정보</th>
@@ -72,6 +76,7 @@
 								${item.price}
 							</td>
 							<td>
+								<button type="button" onClick="upd()">수정</button>
 								<button type="button" onClick="del()">삭제</button>
 							</td>
 						</tr>

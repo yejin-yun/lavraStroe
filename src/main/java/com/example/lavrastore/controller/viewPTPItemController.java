@@ -246,6 +246,21 @@ public class viewPTPItemController {
 		return "PTPItemWrite";
 	}
 	
+	@RequestMapping("/shop/productupdate.do")
+	public String update(
+			@ModelAttribute("ptp")PTPItemForm ptp,
+			BindingResult result) {
+		
+		return "redirect:/sellList/view/0";
+	}
+	
+	@RequestMapping("/item/ptpedit.do")
+	public String edit(Model model) {
+		
+		
+		return "PTPItemUpdate";
+	}
+	
 	@RequestMapping("/shop/productdelete.do")
 	public String delete(@RequestParam("PTPItemId") int PTPItemId) {
 		petStore.deletePItem(PTPItemId);
