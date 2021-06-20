@@ -291,6 +291,4 @@ public class viewPTPItemController {
 		
 		return "redirect:/sellList/view/0";
 	}
-}	
-	
-
+}
