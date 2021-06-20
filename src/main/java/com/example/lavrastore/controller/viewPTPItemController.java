@@ -6,9 +6,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.support.PagedListHolder;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -23,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
@@ -37,7 +41,7 @@ import com.example.lavrastore.service.PetStoreFacade;
 
 @Controller
 @SessionAttributes("pitemListPage")
-public class viewPTPItemController {
+public class viewPTPItemController implements ApplicationContextAware {
 	@Value("PTPItemWrite")
 	private String formViewName;
 	private PetStoreFacade petStore;
@@ -45,6 +49,15 @@ public class viewPTPItemController {
 	private int totalPageSize;
 	UserSession userSession;
 	
+	String uploadDir; // = System.getProperty("java.io.tmpdir");
+	private WebApplicationContext context = null;
+	@Override // life-cycle callback method
+	public void setApplicationContext(ApplicationContext appContext)
+	throws BeansException {
+	context = (WebApplicationContext) appContext;
+	uploadDir = context.getServletContext().getRealPath("/WEB-INF/uploadDir");
+	}
+
 	
 	@Autowired
 	private PtPFormValidator ptpFormValidator;
@@ -213,15 +226,13 @@ public class viewPTPItemController {
 		
 		if (result.hasErrors()) { return formViewName; }
 		
-		String imageUrl = "/images/gitem/gold_brac.png";
-		imageUrl = ptp.getProductPhoto().getOriginalFilename();
+		String imageUrl = ptp.getProductPhoto().getOriginalFilename();
 		String path = "/images/upload/";
-		String path1 = "C:\\Users\\00\\Documents\\GitHub\\JPetStore\\lavraStroe\\src\\main\\resources\\static\\images\\upload\\";
 		
 		try {
-				new File(path1).mkdirs(); // 디렉토리 생성
+				new File(uploadDir).mkdirs(); // 디렉토리 생성
 				// 임시디렉토리(서버)에 저장된 파일을 지정된 디렉토리로 전송
-				ptp.getProductPhoto().transferTo(new File(path1+imageUrl));
+				ptp.getProductPhoto().transferTo(new File(uploadDir, file.getOriginalFilename()));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
