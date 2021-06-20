@@ -245,21 +245,10 @@ public class viewPTPItemController {
 		model.addAttribute("ptp",ptp);
 		return "PTPItemWrite";
 	}
-
-	@RequestMapping("/item/productupdate.do")
-	public String update(
-			@ModelAttribute("ptp")PTPItemForm ptp,
-			BindingResult result) {
-		
-		
-		return "redirect:/sellList/view/0";
-	}
 	
-	@RequestMapping("/item/productdelete.do")
-	public String delete(
-			@ModelAttribute("ptp")PTPItemForm ptp,
-			BindingResult result) {
-		
+	@RequestMapping("/shop/productdelete.do")
+	public String delete(@RequestParam int PTPItemId) {
+		petStore.deletePItem(PTPItemId);
 		
 		return "redirect:/sellList/view/0";
 	}
