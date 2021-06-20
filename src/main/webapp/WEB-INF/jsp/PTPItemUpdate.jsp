@@ -46,14 +46,14 @@
 				<tr>
 					<td>설명</td>
 					<td>
-						<form:input path="item.description" placeholder="ex : 상품 설명을 입력해주세요" /> 
+						<form:input path="item.description" value="${item.description}" placeholder="ex : 상품 설명을 입력해주세요" /> 
 			    		<font color="red"> <form:errors path="item.description" /> </font> 
 					</td>
 				</tr>
 				<tr>
 					<td>가격</td>
 					<td>
-						<form:input path="item.price" type="number"/> 
+						<form:input path="item.price" value="${item.price}" type="number"/> 
 			  			<font color="red"> <form:errors path="item.price" /> </font> 
 					</td>
 				</tr>
