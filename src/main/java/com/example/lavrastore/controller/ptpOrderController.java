@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.lavrastore.domain.GroupItem;
 import com.example.lavrastore.domain.Member;
@@ -72,6 +74,23 @@ public class ptpOrderController {
 		return "ptpOrderForm";
 	}
 	
-	
+	@RequestMapping("/accessory/newPtpOrderSubmitted.do")
+	public ModelAndView validateAndConfirmNewPtpOrder(
+				@RequestParam(value="itemId") int itemid,
+				@ModelAttribute("myOrder") Order myOrder,
+				BindingResult result,
+				SessionStatus status) {
+		
+		petStore.insertOrder(myOrder);
+		
+		ModelAndView mav = new ModelAndView("ptpOrderConfirm");
+		mav.addObject("myOrder", myOrder);
+		mav.addObject("success", true);
+		mav.addObject("ptpOrder", myOrder.getPtpOrder());
+		
+		status.setComplete();
+		
+		return mav;
+	}
 
 }
