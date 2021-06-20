@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.lavrastore.domain.PTPItem;
 
 public interface PTPItemRepository extends JpaRepository<PTPItem, Integer> {
-	List<PTPItem> findBySellerId(String sellerId);
+	List<PTPItem> findPItemListBySellerId(String sellerId);
 }

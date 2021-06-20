@@ -52,17 +52,15 @@
 				<thead>
 					<tr>
 						<th>상품명</th>
-						<th></th>
 						<th>설명</th>
 						<th>가격</th>
 						<th>정보</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="sellItemList2" items="${sellItemList2}">
+					<c:forEach var="PTPItem" items="${sellList}">
 						<tr>
-							<c:set var="item" value="${sellItemList2.item}" />
-							<td><img style="height: 50px;" src="<c:url value='${item.image}' />" /></td>
+							<c:set var="item" value="${sellList.item }" />
 							<td>
 								${item.title}
 							</td>
@@ -70,7 +68,7 @@
 								${item.description}
 							</td>
 							<td>
-								${item.price}
+								<fmt:formatNumber value="${item.price}" pattern="###,###,###"/>원
 							</td>
 							<td>
 								<button type="button" id="btnUpd">수정</button> &nbsp;
