@@ -29,9 +29,11 @@
 	}
 		
 	function del() {
+		var form = document.getElementById("form1");
+
 		var chk = confirm("삭제하시겠습니까?");
 		if (chk) {
-			location.href='/shop/productdelete.do'
+			form.submit();
 		}
 	}
 </script>
@@ -49,7 +51,7 @@
 	  		<!-- <li><a href="/SellList/view/2">판매 완료</a></li> -->
 		</ul>
 	</div>
-	<form method="POST" name="form">
+	<form method="POST" name="form" id="form1">
 		<div class="container" style="margin-top: 5%;">
 			<table>
 				<thead>
@@ -80,7 +82,12 @@
 									<c:param name='itemNo' value='${item.itemId}' /> </c:url>">
 									<button type="button" > 수정</button>
 								</a>
-								<button type="button" onClick="del()">삭제</button>
+								<button type="button" onclick="del(<c:url value='/shop/productdelete.do'>
+									<c:param name='itemNo' value='${item.itemId}' /> </c:url>)"> 삭제 </button>
+								<a href="<c:url value='/shop/productdelete.do'>
+									<c:param name='itemNo' value='${item.itemId}' /> </c:url>">
+									<button type="button" onclick="confirm('삭제하시겠습니까?')"> 삭제 </button>
+								</a>
 							</td>
 						</tr>
 					</c:forEach>

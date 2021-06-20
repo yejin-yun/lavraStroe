@@ -19,5 +19,6 @@ public interface WishListMapper {
 	
 	/* Delete */
 	int deleteWishList(int wishListId);
+	int deleteWishList2(int itemId);
 	int deleteWishListByItemIdAndMemberId(int itemId, String memberId);
 }

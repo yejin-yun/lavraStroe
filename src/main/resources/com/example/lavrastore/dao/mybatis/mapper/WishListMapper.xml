@@ -61,6 +61,13 @@
 		wishListId = #{wishListId}
 	</delete>
 	
+	<delete id="deleteWishList2" parameterType="int">
+		DELETE FROM
+		WISHLIST
+		WHERE
+		itemId = #{itemId}
+	</delete>
+	
 	<delete id="deleteWishListByItemIdAndMemberId">
 		DELETE FROM
 		WISHLIST

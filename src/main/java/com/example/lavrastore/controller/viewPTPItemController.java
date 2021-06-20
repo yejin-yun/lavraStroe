@@ -283,8 +283,11 @@ public class viewPTPItemController {
 	}
 	
 	@RequestMapping("/shop/productdelete.do")
-	public String delete(@RequestParam("PTPItemId") int PTPItemId) {
-		petStore.deletePItem(PTPItemId);
+	public String delete(
+			@RequestParam(value="itemNo", defaultValue="20000") int itemid,
+			Model model) {
+		
+		petStore.deletePItem(itemid);
 		
 		return "redirect:/sellList/view/0";
 	}

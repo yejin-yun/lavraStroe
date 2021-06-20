@@ -12,6 +12,7 @@ import com.example.lavrastore.dao.PTPItemDao;
 import com.example.lavrastore.dao.SequenceDao;
 import com.example.lavrastore.dao.mybatis.mapper.ItemMapper;
 import com.example.lavrastore.dao.mybatis.mapper.PTPItemMapper;
+import com.example.lavrastore.dao.mybatis.mapper.WishListMapper;
 import com.example.lavrastore.domain.PTPItem;
 
 @Repository
@@ -22,6 +23,9 @@ public class MybatisPTPItemDao implements PTPItemDao {
 	
 	@Autowired
 	private ItemMapper itemMapper;
+	
+	@Autowired
+	private WishListMapper wishListMapper;
 	
 	@Autowired
 	private SequenceDao sequenceDao;
@@ -68,7 +72,10 @@ public class MybatisPTPItemDao implements PTPItemDao {
 	}
 	
 	public int deletePItem(int itemId) throws DataAccessException {
-		return PTPItemMapper.deletePItem(itemId);
+		wishListMapper.deleteWishList2(itemId);
+		PTPItemMapper.deletePItem(itemId);
+		itemMapper.deleteItem(itemId);
+		return 1;
 	}
 
 	@Override

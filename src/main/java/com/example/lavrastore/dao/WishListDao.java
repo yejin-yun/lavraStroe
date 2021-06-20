@@ -19,5 +19,6 @@ public interface WishListDao {
 	// Delete
 
 	int deleteWishList(int wishListId) throws DataAccessException;
+	//int deleteWishList2(int itemId) throws DataAccessException;
 	int deleteWishListByItemIdAndMemberId(int itemId, String memberId);
 }
