@@ -102,7 +102,7 @@ public interface PetStoreFacade {
 	/* ptpItem */
 	PTPItem getPItem(int itemid, String sellerid);
 	
-	List<PTPItem> findPItemListBySellerId(String sellerId);
+	List<PTPItem> findBySellerId(String sellerId);
 	
 	List<PTPItem> getPItemListByProduct(int productId);
 	List<PTPItem> getPItemListByMemberAndProduct(String memberId, int productId);
