@@ -50,14 +50,12 @@ public class ViewSellListController {
 		
 		List<PTPItem> sellItemList = null;
 		List<PTPItem> sellItemList2 = new ArrayList<PTPItem>();
-		sellItemList = this.petStore.findPItemListBySellerId(userSession.getMember().getMemberId());
+		sellItemList = this.petStore.findBySellerId(userSession.getMember().getMemberId());
 		
 		for (PTPItem sellList : sellItemList) {
-			PTPItem pitem = petStore.getPItem(sellList.getPTPItemId(), sellList.getSellerId());
-			
-			if (pitem.getState() == 0)
+			if (sellList.getState() == 0)
 				sellItemList2.add(sellList);
-			else if (pitem.getState() == 1)
+			else if (sellList.getState() == 1)
 				sellItemList2.add(sellList);
 		}
 		

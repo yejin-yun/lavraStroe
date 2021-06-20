@@ -341,9 +341,9 @@ public class PetStoreImpl implements PetStoreFacade {
 	}	
 
 	@Override
-	public List<PTPItem> findPItemListBySellerId(String sellerId) {
+	public List<PTPItem> findBySellerId(String sellerId) {
 		// TODO Auto-generated method stub
-		return ptpItemRepository.findPItemListBySellerId(sellerId);
+		return ptpItemRepository.findBySellerId(sellerId);
 	}
 
 	@Override
