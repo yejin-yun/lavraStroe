@@ -15,7 +15,10 @@ import com.example.lavrastore.domain.GroupOrder;
 import com.example.lavrastore.domain.Item;
 import com.example.lavrastore.domain.LineItem;
 import com.example.lavrastore.domain.Order;
+import com.example.lavrastore.domain.PtpOrder;
+
 import java.util.List;
+import java.util.Random;
 
 @Repository
 public class MybatisOrderDao implements OrderDao{
@@ -87,7 +90,19 @@ public class MybatisOrderDao implements OrderDao{
     			// 이때 초기화 전에 order.setPtpOrder().set송장번호, set택배사를 해준다. 
     		// 1. orderMapper.insertPtpOrder(....)을 추가해준다. 
     		// 2. ptpItemMapper에 state 를 update 하는 쿼리를 만들어서. state를 2로 update해준다.
-    			
+    		PtpOrder po = order.getPtpOrder();
+    		po.setOrderId(order.getOrderId());
+    		po.setShipCompany("CJ");
+    		
+    		Random r = new Random();
+    		String s =  "";
+    		for (int i = 0; i < 10; i++)
+    			s += Integer.toString(r.nextInt(9));
+    		
+    		po.setTrackNum(s);
+    		
+    		orderMapper.insertPtpOrder(po);
+    		
     	}
     	
     	//쇼핑몰일 경우 카테고리가 1일 경우로 if문 묶어서, 개인은 카테고리가 3일 경우로 if문 묶어서 작업.

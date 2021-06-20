@@ -107,15 +107,20 @@
 		order by i.price ASC
 	</select>
 	
+	<update id="updateState" parameterType="PTPItem">
+		update PTPItem set state= #{state}
+		where itemId = #{PTPItemId}
+	</update>
+	
 	<insert id="insertPItem" parameterType="PTPItem">
 		insert into PTPItem ( PTPITEMID, ITEMID, STATE, SELLERID, DEVP, BANK, ACCOUNT)
 		VALUES (#{PTPItemId}, #{PTPItemId}, #{state}, #{sellerId}, #{devP}, #{bank}, #{account})
 	</insert>
 	
 	<update id="updatePItem" parameterType="PTPItem">
-		update PTPItem set state = #{state}, sellerid = #{sellerId},
-		devp = #{devP}, bank = #{bank}, account = #{account}
-		where itemid = #{PTPItemId}
+		update PTPItem set state = #{state}, sellerId = #{sellerId},
+		devP = #{devP}, bank = #{bank}, account = #{account}
+		where itemId = #{PTPItemId}
 	</update>
 	
 	<delete id="deletePItem" parameterType="int">

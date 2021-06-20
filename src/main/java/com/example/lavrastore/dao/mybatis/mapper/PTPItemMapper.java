@@ -19,6 +19,8 @@ public interface PTPItemMapper {
 	List<PTPItem> getPItemListByHighPrice(); // 높은 가격순 정렬
 	List<PTPItem> getPItemListByLowPrice(); // 낮은 가격순 정렬
 	
+	int updateState(PTPItem pItem);
+	
 	/* CREATE */
 	int insertPItem(PTPItem pItem);
 	

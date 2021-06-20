@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.example.lavrastore.domain.GroupItem;
 import com.example.lavrastore.domain.GroupOrder;
 import com.example.lavrastore.domain.Order;
+import com.example.lavrastore.domain.PtpOrder;
 
 @Mapper
 public interface OrderMapper {
@@ -18,6 +19,8 @@ public interface OrderMapper {
 	void insertCreditCard(Order order);
 
 	void insertGroupOrder(GroupOrder go);
+	
+	void insertPtpOrder(PtpOrder po);
 
 	void updateGroupOrderStatus();
 
