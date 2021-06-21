@@ -41,6 +41,9 @@
 		color:white; 
 		background-color: #646EFF; 
 	}
+	.info {
+		width : 90%;
+	}
 </style>
 </head>
 <body>
@@ -54,6 +57,56 @@
 		<div class="w3-center">
 			<h2> ${myOrder.memberId}님 항상 Lavra를 이용해주셔서 감사합니다! </h2>
 			<p>[주문번호 : <strong>${myOrder.orderId}</strong>]가 성공적으로 신청되었습니다.</p>
+		</div>
+		
+		<div class="info">
+			<h3><b>| 상품 정보 :</b></h3>
+			<div>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th></th>
+							<th>상품명</th>
+							<th>가격</th>
+							<th>배송비</th>
+							<th>합계</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<img style="height: 120px; src='${pItem.item.image}' />" />
+							</td>
+							<td>
+								${pItem.item.title }
+							</td>
+							<td>
+								<fmt:formatNumber value="${pItem.item.price }" pattern="###,###,###"/>원
+							</td>
+							<td>
+								<fmt:formatNumber value="${pItem.devP }" pattern="###,###,###"/>원
+							</td>
+							<td>
+								<fmt:formatNumber value="${myOrder.totalPrice}" pattern="###,###,###"/>원
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<br>
+		<div class="info">
+			<h3><b>| 배송 정보 :</b></h3>
+			<div >
+			<ul class="list-group list-group-flush" >
+				<li class="list-group-item" > 
+					<label>받는분 : </label> &nbsp; &nbsp; &nbsp; &nbsp; ${myOrder.shipname}
+				</li>
+				<li class="list-group-item" >
+					<label>주소 :</label> &nbsp; &nbsp; &nbsp; &nbsp; ${myOrder.shipAddr1 } ${myOrder.shipAddr2 }
+				</li> 
+			</ul>
+		</div>
 		</div>
 		
 		<br>

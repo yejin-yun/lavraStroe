@@ -47,7 +47,7 @@
 	<div class="container"  style="margin-left: auto; margin-right: auto; width: 90%; margin-top:5%;">
 		<ul class="nav nav-tabs">
 			<li><a href="/sellList/view/0">진열중</a></li>
-	  		<li><a href="/sellList/view/1">구매 요청</a></li>
+	  		<!-- <li><a href="/sellList/view/1">구매 요청</a></li> -->
 	  		<!-- <li><a href="/SellList/view/2">판매 완료</a></li> -->
 		</ul>
 	</div>
