@@ -80,8 +80,7 @@
 		            </c:if>
 		            <c:if test="${item.itemId >= 20000 && item.itemId < 30000}">
 	    			<td><a href="<c:url value='/accessory/viewPItem'>
-									<c:param name='itemId' value='${ptpitem.item.itemId}' />
-									<c:param name='sellerId' value='${ptpitem.sellerId}' /></c:url>">
+									<c:param name='itemId' value='${item.itemId}' /></c:url>">
 		            	${item.title}</a></td> <!-- 개인거래 -->
 		            </c:if>
 	    			<td><img style="height: 50px;" src="<c:url value='${item.image}' />" /></td>

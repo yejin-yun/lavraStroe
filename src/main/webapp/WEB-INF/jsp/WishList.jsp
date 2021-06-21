@@ -144,8 +144,8 @@
 		            	${item.title}</a></td>
 		            </c:if>
 		            <c:if test="${item.itemId >= 20000 && item.itemId < 30000}">
-	    			<td><a href="<c:url value='/group/viewItem'>
-		            				<c:param name='no' value='${item.itemId}' /></c:url>">
+	    			<td><a href="<c:url value='/accessory/viewPItem'>
+		            				<c:param name='itemId' value='${item.itemId}' /></c:url>">
 		            	${item.title}</a></td> <!-- 개인거래 -->
 		            </c:if>
 	    			<td>

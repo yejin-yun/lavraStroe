@@ -40,6 +40,10 @@ public class MybatisPTPItemDao implements PTPItemDao {
 		return PTPItemMapper.getPItem(hm);
 	}
 	
+	public PTPItem getPItem2(int itemId) throws DataAccessException {
+		return PTPItemMapper.getPItem2(itemId);
+	}
+	
 	public List<PTPItem> getPItemListByProduct(int productId) throws DataAccessException {
 		return PTPItemMapper.getPItemListByProduct(productId);
 	}

@@ -140,7 +140,12 @@ public class viewPTPItemController implements ApplicationContextAware {
 		
 		System.out.println("itemid" + itemid + "sellerID" + sellerid);
 		
-		PTPItem pitem = petStore.getPItem(itemid, sellerid);
+		PTPItem pitem;
+		if (sellerid.equals("-1")) {
+			pitem = petStore.getPItem2(itemid);
+		} else {
+			pitem = petStore.getPItem(itemid, sellerid);
+		}
 		
 		System.out.println("title :" + pitem.getItem().getTitle());
 		

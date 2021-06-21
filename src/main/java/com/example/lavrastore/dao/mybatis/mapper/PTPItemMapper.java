@@ -12,6 +12,7 @@ public interface PTPItemMapper {
 
 	/* READ */
 	PTPItem getPItem(HashMap<String, String> hm); //sellerid랑 itemid
+	PTPItem getPItem2(int itemId);
 	
 	List<PTPItem> getPItemListByProduct(int productId);
 	List<PTPItem> getPItemListByMemberAndProduct(HashMap<String, String> hm);
