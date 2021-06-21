@@ -119,7 +119,7 @@ public class ViewWishlistController {
 			petStore.deleteWishList(wishListId);
 		}
 		 
-		 return "redirect:/shop/wishList/1";
+		 return "redirect:/wishlist/view/1";
 	  }
 	  
 }
