@@ -46,16 +46,39 @@
 	<script>
 		$(document).ready(function() {
 			$('#allCheck').click(function(){
+				$('input[name=checkWishList]:checkbox').attr('checked', true); // input type 중 name이 checkCartItem이고, type이 checkbox인 경우
+				//$('#quantity'+1029).val(String(1121));
+			});
+			$('#allReset').click(function(){
+				$('input[name=checkWishList]:checkbox').attr('checked', false); 
+			});
+		
+		});
+	</script>
+	<script>
+		$(document).ready(function() {
+			$('#allCheck').click(function(){
 				$('input[name=checkCartItem]:checkbox').attr('checked', true); // input type 중 name이 checkCartItem이고, type이 checkbox인 경우
 				//$('#quantity'+1029).val(String(1121));
 			});
 			$('#allReset').click(function(){
 				$('input[name=checkCartItem]:checkbox').attr('checked', false); 
 			});
-		
+					
 		});
+		
 	</script>
 	<script>
+	 $(function(){
+	  var sBtn = $("ul > li");    //  ul > li 이를 sBtn으로 칭한다. (클릭이벤트는 li에 적용 된다.)
+	  sBtn.find("a").click(function(){   // sBtn에 속해 있는  a 찾아 클릭 하면.
+	   sBtn.removeClass("active");     // sBtn 속에 (active) 클래스를 삭제 한다.
+	   $(this).parent().addClass("active"); // 클릭한 a에 (active)클래스를 넣는다.
+	  })
+	 })
+	</script>
+	<script>
+	
 		function moveTarget(targetUri) {
 			form.action = targetUri;
 			form.submit();
@@ -83,65 +106,16 @@
 		}
 		
 	</script>
-	<script>	
-
-		function updateQuantity(id, itemQuantity, page){
-			var quantity = document.getElementById("quantity"+id).value;
-		
-			//document.getElementById("quantity"+id).value = quantity;
-			//$('#quantity'+id).val(quantity);
-			//alert(quantity + ' ' + "quantity"+id);
-			//console.log($.isNumeric(quantity));
-			if(quantity <= 0) {
-				alert('입력하신 값이 올바르지 않습니다.');
-				return false;
-			}
-			if(quantity > itemQuantity) {
-				alert('현재 재고가 충분하지 않습니다.');
-				return false;
-			} 
-			
-			var msg = {
-				"cartItemId" : id,
-				"quantity": quantity
-			}
-			var jsonStr = JSON.stringify(msg);
-
-			$.ajax({
-				type: "POST",
-				url: "/cart/uq",
-				contentType : "application/json",
-				data: jsonStr,
-				processData: false,
-				success: function(response) {
-					//alert('success = ' + response.cartItemId);
-					//alert(JSON.stringify(response));
-					//document.getElementById(response.cartItemId).value = response.quantity;
-					//$('#quantity'+response.cartItemId).val(String(response.quantity));
-					//$('input[name=quantity]').val(response.quantity); //.attr('value', response)
-					moveTarget('/cart/view/1?page='+page);
-					
-				},
-				error: function(){
-					alert("ERROR", arguments);
-				}
-			});
-		}
-	</script>
 </head>
 <body>
 	<%@ include file="header.jsp" %>
 	<div class="container"  style="margin-left: auto; margin-right: auto; width: 90%; margin-top:5%;">
 		<ul class="nav nav-tabs">
-		  <li  class="active"><a href="/cart/view/1">악세사리</a></li>
-		  <%--<li><a href="/cart/view/2">개인거래</a></li>
-		  <li><a href="/cart/view/3">공동구매</a></li>--%>
+		  <li  class="#;"><a href="/wishlist/view/1">악세사리</a></li>
+		  <li class="#;"><a href="/wishlist/view/2">개인거래</a></li>
+		  <li class="#;"><a href="/wishlist/view/3">공동구매</a></li>
 		</ul>
 	</div> 
-<%-- <c:if test="${cartItemList == '' || cartItemList eq null}"> 
-		<div style="width: 50%; margin-left: auto; margin-right: auto;">
-		아직 상품 준비가 되지 않았습니다.</div>
-	</c:if> --%>
 	<form method="POST" name="form"> <%-- action이 없으면 얘를 부른 컨트롤러로 넘어간다. 체크한 것만 넘어가면 돼서 Command 객체 필요 없음. form:form을 사용안 한 건 여기서 하나만 선택한 결과를 알고 싶은 게 아니고, 어떤 것들이 선택 되었는지가 중요하기 때문. 즉 path를 설정할  게 없음--%>
 		<div class="container" style="margin-top: 5%;">
 		<table > <!-- class="table table-hover" -->
@@ -154,14 +128,26 @@
 	      </tr>
 	    </thead>
 	    <tbody>
-	    	<c:set var="allTotalCost" value="0" />
-	    	<c:forEach var="wishlist" items="${WishList}">
-	    		<c:set var="wishlistI" value="${cartItem.categoryId}" />
+	    	<c:forEach var="wishlist" items="${wishlist}">
 	    		<tr>
-	    			<c:set var="item" value="${WishList.item}" />
-	    			<td><input type="checkbox" name="checkCartItem" value="${WishList.wishListId}" id="${WishList.wishListId}" class="checkWish allCheckbox"/> </td>
+	    			<c:set var="item" value="${wishlist.item}" />
+	    			<td><input type="checkbox" name="checkCartItem" value="${wishlist.wishListId}" id="${wishlist.wishListId}" class="checkWish allCheckbox"/> </td>
 	    			<td><img style="height: 50px;" src="<c:url value='${item.image}' />" /></td>
-	    			<td>${item.title}</td>
+	    			<c:if test="${item.itemId >= 1000 && item.itemId < 1000}">
+	    			<td><a href="<c:url value='/accessory/detail'>
+		            				<c:param name='no' value='${item.itemId}' /></c:url>">
+		            	${item.title}</a></td>
+		            </c:if>
+		            <c:if test="${item.itemId >= 10000 && item.itemId < 20000}">
+	    			<td><a href="<c:url value='/accessory/viewPItem'>
+		            				<c:param name='no' value='${item.itemId}' /></c:url>">
+		            	${item.title}</a></td> <!-- 여긴 개인거래 -->
+		            </c:if>
+		            <c:if test="${item.itemId >= 10000 && item.itemId < 20000}">
+	    			<td><a href="<c:url value='/group/viewItem'>
+		            				<c:param name='no' value='${item.itemId}' /></c:url>">
+		            	${item.title}</a></td>
+		            </c:if>
 	    			<td>
 	    			<fmt:formatNumber value="${item.price}" pattern="###,###,###"/>원
 	    			</td>
