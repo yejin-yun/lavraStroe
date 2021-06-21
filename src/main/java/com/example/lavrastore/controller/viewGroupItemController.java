@@ -56,60 +56,61 @@ public class viewGroupItemController {
 	}
 	
 	@RequestMapping("/group")
-	public String viewAllGroupItem(
-			@RequestParam(value="page", defaultValue="1") int page,
-			@RequestParam(value ="sort", defaultValue = "basic") String sort, 
-			Model model) { 
-		
-		List<GroupItem> gList = null;
-		
-		switch(sort) {
-		case "basic":
-			if(userSession == null) {
-				gList = petStore.getAllGItemList();
-			} else {
-				gList = petStore.getGItemListByMember(userSession.getMember().getMemberId());
-			}
-			break;
-		case "high achievement":
-			if(userSession == null) {
-				gList = petStore.getGItmeListByPercent();
-			} else {
-				gList = petStore.getGItmeListByPercentAndMember(userSession.getMember().getMemberId());
-			}
-			break;
-		case "low achievement":
-			if(userSession == null) {
-				gList = petStore.getGItmeListByLowPercent();
-			} else {
-				gList = petStore.getGItmeListByLowPercentAndMember(userSession.getMember().getMemberId());
-			}
-			break;
-		}
-		
-		PagedListHolder<GroupItem> gitemListPage;
-		gitemListPage = new PagedListHolder<GroupItem>(gList);
+	   public String viewAllGroupItem(
+	         @RequestParam(value="page", defaultValue="1") int page,
+	         @RequestParam(value ="sort", defaultValue = "basic") String sort, 
+	         Model model) { 
+	      
+	      List<GroupItem> gList = null;
+	      
+	      switch(sort) {
+	      case "basic":
+	         if(userSession == null) {
+	            gList = petStore.getAllGItemList();
+	         } else {
+	            gList = petStore.getGItemListByMember(userSession.getMember().getMemberId());
+	         }
+	         break;
+	      case "high achievement":
+	         if(userSession == null) {
+	            gList = petStore.getGItmeListByPercent();
+	         } else {
+	            gList = petStore.getGItmeListByPercentAndMember(userSession.getMember().getMemberId());
+	         }
+	         break;
+	      case "low achievement":
+	         if(userSession == null) {
+	            gList = petStore.getGItmeListByLowPercent();
+	         } else {
+	            gList = petStore.getGItmeListByLowPercentAndMember(userSession.getMember().getMemberId());
+	         }
+	         break;
+	      }
+	      
+	      PagedListHolder<GroupItem> gitemListPage;
+	      gitemListPage = new PagedListHolder<GroupItem>(gList);
 
-		gitemListPage.setPageSize(12);
+	      gitemListPage.setPageSize(12);
 
-		gitemListPage.setPage(page -1 );
-		totalPageSize = gList.size() / 12;
-		if (gList.size() % 12 != 0) {
-			totalPageSize++;
-		}
-		
-		List<GroupItem> gitemList = gitemListPage.getPageList();
-		for(GroupItem g : gitemList) {
-			g.setPercent();
-			System.out.println("itemid : " + g.getItem().getItemId() + " 진행도 : " + g.getPercent() + g.getItem().getIsInWishlist());
-		}
-		
-		model.addAttribute("sort", sort);
-		model.addAttribute("gitemList", gitemList);
-		model.addAttribute("totalPageSize", totalPageSize);
-		
-		return "groupPage"; 
-	}
+	      gitemListPage.setPage(page -1 );
+	      totalPageSize = gList.size() / 12;
+	      if (gList.size() % 12 != 0) {
+	         totalPageSize++;
+	      }
+	      
+	      List<GroupItem> gitemList = gitemListPage.getPageList();
+	      for(GroupItem g : gitemList) {
+	         g.setPercent();
+	         System.out.println("itemid : " + g.getItem().getItemId() + " 진행도 : " + g.getPercent() + g.getItem().getIsInWishlist());
+	      }
+	      
+	      model.addAttribute("sort", sort);
+	      model.addAttribute("gitemList", gitemList);
+	      model.addAttribute("totalPageSize", totalPageSize);
+	      
+	      return "groupPage"; 
+	   }
+	   
 	
 	
 	

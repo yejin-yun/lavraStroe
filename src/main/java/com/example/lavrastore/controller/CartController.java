@@ -119,10 +119,13 @@ public class CartController {
 					 int cartItemId = Integer.parseInt(checkCartItem[i]);
 					 lavraStore.deleteCartItemById(cartItemId);
 				}
-		 		for(int i = 0; i < soldoutCartItem.length; i++) {
-					 int cartItemId = Integer.parseInt(soldoutCartItem[i]);
-					 lavraStore.deleteCartItemById(cartItemId);
-				}
+		 		//System.out.println("leng = " + soldoutCartItem); // soldout된 상품이 없으면 soldoutCartItem은 null이 됨. 
+		 		if(soldoutCartItem != null) {
+		 			for(int i = 0; i < soldoutCartItem.length; i++) {
+						 int cartItemId = Integer.parseInt(soldoutCartItem[i]);
+						 lavraStore.deleteCartItemById(cartItemId);
+					}
+		 		}
 		 		break;
 		 	case "order":
 		 		
