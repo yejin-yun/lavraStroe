@@ -48,12 +48,14 @@
 <body>
 <%@ include file="header.jsp"%>
 
-	<c:if test="${itemList.pageList == null }">
+	<c:if test="${ fn:length(itemList.pageList) == 0}">
+			<br/><br/>
 	    	<h3 style = " margin-top :7%; text-align: center;">
 	    	<strong>검색 결과가 없습니다.</strong>
 	    	</h3>
-	    	</c:if>
+	</c:if>
  	<div class="container" style="margin-top: 5%;">
+ 	<c:if test="${ fn:length(itemList.pageList) != 0}">
 		<table > <!-- class="table table-hover" -->
 	    <thead>
 	      <tr>
@@ -64,7 +66,6 @@
 	      </tr>
 	    </thead>
 	    <tbody>
-	    	
 	    	<c:forEach var="item" items="${itemList.pageList}">
 	    		<tr>
 	    			<c:if test="${item.itemId >= 1000 && item.itemId < 10000}">
@@ -97,8 +98,10 @@
 	    			</td>
 	    		</tr>
 	    	</c:forEach>
+	    	
 	    </tbody>
 	    </table>
+	    </c:if>
 	    <div id="paging">
 			<c:forEach var="val" begin="1" end="${totalPageSize}"
 				varStatus="status">
