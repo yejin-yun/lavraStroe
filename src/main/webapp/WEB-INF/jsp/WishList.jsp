@@ -134,13 +134,13 @@
 	    			<td><input type="checkbox" name="checkCartItem" value="${wishlist.wishListId}" id="${wishlist.wishListId}" class="checkWish allCheckbox"/> </td>
 	    			<td><img style="height: 50px;" src="<c:url value='${item.image}' />" /></td>
 	    			<c:if test="${item.itemId >= 1000 && item.itemId < 10000}">
-	    			<td><a href="<c:url value='/group/viewItem'>
+	    			<td><a href="<c:url value='/accessory/detail'>
 		            				<c:param name='no' value='${item.itemId}' /></c:url>">
 		            	${item.title}</a></td>
 		            </c:if>
 		            <c:if test="${item.itemId >= 10000 && item.itemId < 20000}">
 	    			<td><a href="<c:url value='/group/viewItem'>
-		            				<c:param name='no' value='${item.itemId}' /></c:url>">
+		            				<c:param name='itemNo' value='${item.itemId}' /></c:url>">
 		            	${item.title}</a></td>
 		            </c:if>
 		            <c:if test="${item.itemId >= 20000 && item.itemId < 30000}">
