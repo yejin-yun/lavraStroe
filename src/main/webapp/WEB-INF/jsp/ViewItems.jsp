@@ -35,11 +35,18 @@
 			<c:if test="${!status.last}">&nbsp;|&nbsp;</c:if>
 		</c:forEach>
 	</div>
-	<c:if test="${itemList == '' || itemList eq null}">
+	<c:set var="listSize" value="${fn:length(itemList)}" />
+	<c:if test="${ listSize == 0}">
+			<br/><br/>
+	    	<h3 style = " margin-top :7%; text-align: center;">
+	    	<strong>검색 결과가 없습니다.</strong>
+	    	</h3>
+	</c:if>
+	<%-- <c:if test="${itemList == '' || itemList eq null}">
 		<div style="width: 50%; margin-left: auto; margin-right: auto;">아직
 			상품 준비가 되지 않았습니다.</div>
-	</c:if>
-	<c:set var="listSize" value="${fn:length(itemList)}" />
+	</c:if> --%>
+	<c:if test="${ listSize != 0}">
 	<section>
 		<table>
 			<c:if test="${listSize % 4 != 0}">
@@ -121,7 +128,7 @@
 			</c:forEach>
 		</div>
 	</section>
-
+	</c:if>
 	<%-- <a href="<c:url value='/user/wishlistLike'>
 	
 	<a href="<c:url value='/accessory/earring/detail'>

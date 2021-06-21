@@ -47,7 +47,7 @@
                         <li><a href="<c:url value='/accessory/hairdeco/1' />">헤어장식</a></li>
                     </ul>
                 </li>
-                <li id="work1"><a>개인 거래</a>
+                <li id="work1"><a>개인거래</a>
                     <ul class="work_sub_menu1 sub_menu" style="z-index:1000; position:absolute;">
                         <li><a href="<c:url value='/accessory/earring/3' />">귀걸이</a></li> 
                         <li><a href="<c:url value='/accessory/necklace/3' />">목걸이</a></li>
