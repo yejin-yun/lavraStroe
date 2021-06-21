@@ -108,7 +108,7 @@
 	</select>
 	
 	<update id="updateState" parameterType="int">
-		update PTPItem set state= 2
+		update PTPItem set state= #{state}
 		where itemId = #{PTPItemId}
 	</update>
 	
