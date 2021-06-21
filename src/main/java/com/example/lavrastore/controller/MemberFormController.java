@@ -7,12 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.WebUtils;
 
+import com.example.lavrastore.domain.Member;
 import com.example.lavrastore.service.MemberFormValidator;
 import com.example.lavrastore.service.PetStoreFacade;
 
@@ -73,7 +75,17 @@ public class MemberFormController {
 				petStore.insertMember(memberForm.getMember());
 			}
 			else {
+				
+				if(memberForm.getRepeatedPassword().equals("") || memberForm.getMember().getPassword().equals("")) {
+					Member m = petStore.getMember(memberForm.getMember().getMemberId()); 
+				
+					
+					memberForm.getMember().setPassword(m.getPassword());
+				}
+				
 				petStore.updateMember(memberForm.getMember());
+				return "EditMemberForm";
+				
 			}
 		}
 		catch (DataIntegrityViolationException ex) {
