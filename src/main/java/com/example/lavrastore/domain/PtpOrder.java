@@ -14,7 +14,16 @@ public class PtpOrder implements Serializable {
 	private String trackNum; //송장번호
 	private int state; //0이면 구매가능 이 보다 크면 구매진행중이거나 거래 완료
 	private String depositor; //입금자명
+	private PTPItem ptpItem;
 	
+	public PTPItem getPtpItem() {
+		return ptpItem;
+	}
+
+	public void setPtpItem(PTPItem ptpItem) {
+		this.ptpItem = ptpItem;
+	}
+
 	public PtpOrder(PTPItem pitem, String memberId) {
 		this.sellerId = pitem.sellerId;
 		this.buyerId = memberId;

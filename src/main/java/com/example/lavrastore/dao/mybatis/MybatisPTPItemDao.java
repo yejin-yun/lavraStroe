@@ -51,9 +51,8 @@ public class MybatisPTPItemDao implements PTPItemDao {
 		return PTPItemMapper.getPItemListByLowPrice();
 	}
 	
-	public int updateState(PTPItem pitem) throws DataAccessException {
-		pitem.setState(2);
-		return PTPItemMapper.updateState(pitem);
+	public int updateState(int itemId) throws DataAccessException {
+		return PTPItemMapper.updateState(itemId);
 	}
 	
 	@Transactional

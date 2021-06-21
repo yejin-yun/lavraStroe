@@ -11,10 +11,12 @@ import com.example.lavrastore.dao.mybatis.mapper.GroupItemMapper;
 import com.example.lavrastore.dao.mybatis.mapper.ItemMapper;
 import com.example.lavrastore.dao.mybatis.mapper.LineItemMapper;
 import com.example.lavrastore.dao.mybatis.mapper.OrderMapper;
+import com.example.lavrastore.dao.mybatis.mapper.PTPItemMapper;
 import com.example.lavrastore.domain.GroupOrder;
 import com.example.lavrastore.domain.Item;
 import com.example.lavrastore.domain.LineItem;
 import com.example.lavrastore.domain.Order;
+import com.example.lavrastore.domain.PTPItem;
 import com.example.lavrastore.domain.PtpOrder;
 
 import java.util.List;
@@ -101,8 +103,11 @@ public class MybatisOrderDao implements OrderDao{
     		
     		po.setTrackNum(s);
     		
+    		PTPItem pi = order.getPtpOrder().getPtpItem();
     		orderMapper.insertPtpOrder(po);
-    		
+    		// PTPItemMapper.updateState(pi.getPTPItemId());
+    		pi.getItem().setIsSoldout(1);
+    		itemMapper.updateItem(pi.getItem());
     	}
     	
     	//쇼핑몰일 경우 카테고리가 1일 경우로 if문 묶어서, 개인은 카테고리가 3일 경우로 if문 묶어서 작업.

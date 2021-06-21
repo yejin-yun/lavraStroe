@@ -107,8 +107,8 @@
 		order by i.price ASC
 	</select>
 	
-	<update id="updateState" parameterType="PTPItem">
-		update PTPItem set state= #{state}
+	<update id="updateState" parameterType="int">
+		update PTPItem set state= 2
 		where itemId = #{PTPItemId}
 	</update>
 	
