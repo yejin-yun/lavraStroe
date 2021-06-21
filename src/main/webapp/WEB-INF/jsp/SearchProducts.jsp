@@ -68,18 +68,19 @@
 	    	<c:forEach var="item" items="${itemList.pageList}">
 	    		<tr>
 	    			<c:if test="${item.itemId >= 1000 && item.itemId < 10000}">
-	    			<td><a href="<c:url value='/group/viewItem'>
+	    			<td><a href="<c:url value='/accessory/detail'>
 		            				<c:param name='no' value='${item.itemId}' /></c:url>">
 		            	${item.title}</a></td>
 		            </c:if>
 		            <c:if test="${item.itemId >= 10000 && item.itemId < 20000}">
 	    			<td><a href="<c:url value='/group/viewItem'>
-		            				<c:param name='no' value='${item.itemId}' /></c:url>">
+		            				<c:param name='itemNo' value='${item.itemId}' /></c:url>">
 		            	${item.title}</a></td>
 		            </c:if>
 		            <c:if test="${item.itemId >= 20000 && item.itemId < 30000}">
-	    			<td><a href="<c:url value='/group/viewItem'>
-		            				<c:param name='no' value='${item.itemId}' /></c:url>">
+	    			<td><a href="<c:url value='/accessory/viewPItem'>
+									<c:param name='itemId' value='${ptpitem.item.itemId}' />
+									<c:param name='sellerId' value='${ptpitem.sellerId}' /></c:url>">
 		            	${item.title}</a></td> <!-- 개인거래 -->
 		            </c:if>
 	    			<td><img style="height: 50px;" src="<c:url value='${item.image}' />" /></td>
