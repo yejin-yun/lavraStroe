@@ -36,6 +36,7 @@ public class MybatisPTPItemDao implements PTPItemDao {
 		hm.put("itemId", String.valueOf(itemId));
 		hm.put("sellerId", sellerId);
 		
+		System.out.println("gPItem : " + itemId + "," + sellerId);
 		return PTPItemMapper.getPItem(hm);
 	}
 	

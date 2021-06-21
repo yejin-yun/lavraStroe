@@ -143,8 +143,13 @@ public class viewPTPItemController implements ApplicationContextAware {
 		PTPItem pitem = petStore.getPItem(itemid, sellerid);
 		
 		System.out.println("title :" + pitem.getItem().getTitle());
+		
 		model.addAttribute("pitem", pitem);
-
+		if(userSession != null) {
+			model.addAttribute("memberId", userSession.getMember().getMemberId());
+		} else {
+			model.addAttribute("memberId", "akjdfklajeoSDFifaelkvlc!ga@lgasgdvnl");
+		}
 		return "ptpPage";
 	}
 	@PostMapping("/ptop/wish")

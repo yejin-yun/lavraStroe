@@ -67,6 +67,8 @@ public class ptpOrderController {
 		
 		PTPItem pitem = petStore.getPItem(itemid, sellerid);
 		
+		System.out.println("new ptp order form :" + pitem.getPTPItemId());
+		
 		myOrder.initPtPOrder(pitem, member);
 		
 		model.addAttribute("pitem", pitem);
@@ -77,9 +79,13 @@ public class ptpOrderController {
 	@RequestMapping("/accessory/newPtpOrderSubmitted.do")
 	public ModelAndView validateAndConfirmNewPtpOrder(
 				@RequestParam(value="itemId") int itemid,
+				@RequestParam(value="depositor") String depositor,
 				@ModelAttribute("myOrder") Order myOrder,
 				BindingResult result,
 				SessionStatus status) {
+		
+		myOrder.getPtpOrder().setDepositor(depositor);
+		myOrder.getPtpOrder().setPtpItem(petStore.getPItem(itemid, myOrder.getPtpOrder().getSellerId()));
 		
 		petStore.insertOrder(myOrder);
 		

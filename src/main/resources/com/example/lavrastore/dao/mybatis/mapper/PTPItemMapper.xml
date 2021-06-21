@@ -14,7 +14,7 @@
 		i.title as "item.title",
 		i.price as "item.price",
 		i.likecnt as "item.likecnt",
-		p.itemid,
+		p.itemid as "PTPItemId",
 		p.state,
 		p.devP,
 		p.sellerId,
@@ -108,7 +108,7 @@
 	</select>
 	
 	<update id="updateState" parameterType="int">
-		update PTPItem set state= #{state}
+		update PTPItem set state= 2
 		where itemId = #{PTPItemId}
 	</update>
 	

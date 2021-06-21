@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.example.lavrastore.domain.GroupItem;
 import com.example.lavrastore.domain.LineItem;
 import com.example.lavrastore.domain.Order;
+import com.example.lavrastore.domain.PTPItem;
 import com.example.lavrastore.service.PetStoreFacade;
 
 @Controller
@@ -66,6 +67,11 @@ public class viewOrderListController {
 		
 		orderList = petStore.getPTPOrderListByMember(
 				userSession.getMember().getMemberId());
+		
+		for(Order odr : orderList) {
+			PTPItem tmp = petStore.getPItem(odr.getPtpOrder().getItemId(), odr.getPtpOrder().getSellerId());
+			odr.getPtpOrder().setPtpItem(tmp);
+		}
 		
 		model.addAttribute("view" , 2);
 		model.addAttribute("orderList", orderList);

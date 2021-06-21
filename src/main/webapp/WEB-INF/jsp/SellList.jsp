@@ -82,8 +82,6 @@
 									<c:param name='itemNo' value='${item.itemId}' /> </c:url>">
 									<button type="button" > 수정</button>
 								</a>
-								<button type="button" onclick="del(<c:url value='/shop/productdelete.do'>
-									<c:param name='itemNo' value='${item.itemId}' /> </c:url>)"> 삭제 </button>
 								<a href="<c:url value='/shop/productdelete.do'>
 									<c:param name='itemNo' value='${item.itemId}' /> </c:url>">
 									<button type="button" onclick="confirm('삭제하시겠습니까?')"> 삭제 </button>

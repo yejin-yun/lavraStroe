@@ -40,6 +40,9 @@ public class MybatisOrderDao implements OrderDao{
 	protected ItemMapper itemMapper;
 	
 	@Autowired
+	protected PTPItemMapper ptpItemMapper;
+	
+	@Autowired
 	private SequenceDao sequenceDao;
 	
 	@Transactional
@@ -105,8 +108,12 @@ public class MybatisOrderDao implements OrderDao{
     		
     		PTPItem pi = order.getPtpOrder().getPtpItem();
     		orderMapper.insertPtpOrder(po);
-    		// PTPItemMapper.updateState(pi.getPTPItemId());
-    		pi.setState(2);
+    		
+    		pi.setState(2); 
+    		
+    		
+    		ptpItemMapper.updateState(pi.getPTPItemId());
+    		
     		pi.getItem().setQuantity(0);
     		pi.getItem().setIsSoldout(1);
     		itemMapper.updateItem(pi.getItem());

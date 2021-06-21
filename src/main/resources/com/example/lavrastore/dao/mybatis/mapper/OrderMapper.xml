@@ -38,6 +38,11 @@
     	)
 	</update>
 	
+	<insert id="insertPtpOrder" parameterType="PtpOrder">
+		insert into ptporder (orderid, sellerid, buyerid, state, shipcompany, tracknum, DEPOSITOR, itemid)
+		values (#{orderId}, #{sellerId}, #{buyerId}, #{state}, #{shipCompany}, #{trackNum}, #{depositor}, #{itemId})
+	</insert>
+	
  
 	 <!-- 쇼핑몰 item의 order 조회 -->
 	<select id="getItemOrderListByMember" parameterType="String" resultType="Order">
@@ -77,12 +82,18 @@
 		o.categoryId,
 		p.payType,
         p.cardType,
-        p.cardNum
-		from shoporder o,
+        p.cardNum,
+        t.itemId as "ptpOrder.itemId",
+        t.sellerId as "ptpOrder.sellerId",
+        t.depositor as "ptpOrder.depositor",
+        t.shipCompany as "ptpOrder.shipCompany",
+        t.trackNum as "ptpOrder.trackNum"
+		from shoporder o, ptporder t,
         (select p.orderid, p.paytype, c.cardtype, c.cardnum from payment p, creditcard c
         where p.paymentid = c.paymentid(+)) p
 		where o.memberId = #{memberId} and
         o.orderId = p.orderId and
+        o.orderId = t.orderId and
 		o.categoryId = 3
 		ORDER BY o.orderDate desc
 	</select>

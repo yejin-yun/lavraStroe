@@ -137,7 +137,14 @@
 	                            	</c:if>
 	                         </a>
 	    				</c:if>
-	    				<c:if test="${view == 2 }"> </c:if>
+	    				<c:if test="${view == 2 }"> 
+	    					<a href="<c:url value='/accessory/viewPItem'>
+	            						<c:param name='itemId' value='${order.ptpOrder.itemId}' /> 
+	            						<c:param name='sellerId' value='${order.ptpOrder.sellerId}' /> 
+	            					</c:url>"> 
+	                            	<font color="blue"> ${order.ptpOrder.ptpItem.item.title } </font>
+	                         </a>
+	    				</c:if>
 	    				<c:if test="${view == 3 }"> 
 		    				<a href="<c:url value='/group/viewItem'>
 	            						<c:param name='itemNo' value='${groupitem.item.itemId}' /> 
@@ -163,7 +170,13 @@
 	    		<tr>
 	    			<td colspan="8">
 	    				<div style="text-align : center;">
-	    					<c:if test="${order.payType eq 0}"> 결제방법 : 무통장 입금  &nbsp;&nbsp;&nbsp; ${order.orderDate }일 정상적으로 입금 확인되셨습니다.</c:if>
+	    					<c:if test="${order.payType eq 0}"> 
+	    					결제방법 : 무통장 입금  &nbsp;&nbsp;&nbsp; ${order.orderDate }일, &nbsp;
+	    						<c:if test="${view == 2 }"> 입금자명 : "${order.ptpOrder.depositor}" 으로 </c:if>
+	    					입금 확인되셨습니다. <br/>
+	    						<c:if test="${view == 2 }">[ 택배정보 ] &nbsp;&nbsp;&nbsp; 택배사 :  ${order.ptpOrder.shipCompany}  &nbsp;&nbsp;&nbsp; 송장번호 :  ${order.ptpOrder.trackNum}</c:if>
+	    					</c:if>
+	    					
 	    					<c:if test="${order.payType eq 1}"> 결제방법 : 카드결제 &nbsp;&nbsp;&nbsp; 결제 카드 : ${order.cardType} 카드번호 : ${order.cardNum }</c:if>
 	    				</div>
 	    			</td>	

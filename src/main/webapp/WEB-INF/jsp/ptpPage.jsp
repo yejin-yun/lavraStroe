@@ -15,6 +15,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link type="text/css" rel="stylesheet" href="<c:url value='/style/view.css' />" >
+
+<script>
+
+function myShop() {
+	alert("자기 자신의 상품은 구매하실 수 없습니다!");
+}
+</script>
 </head>
 <body>
 <%@ include file="header.jsp" %>
@@ -65,10 +72,15 @@
 					<input type="hidden" name="itemId" value="${pitem.item.itemId}">
 					<input type="hidden" name="sellerId" value="${pitem.sellerId}">
 					<c:if test="${pitem.state == 0}"> <!-- 진행 중인 구매 가능 -->
-						<input type="submit" value="구매하기">
+						<c:if test="${pitem.sellerId == memberId}"> <!-- 진행 중인 구매 가능 -->
+							<input type="button" value="구매하기" onClick="myShop()">
+						</c:if>
+						<c:if test="${pitem.sellerId != memberId}">
+							<input type="submit" value="구매하기">
+						</c:if>
 					</c:if>
 					<c:if test="${pitem.state != 0}">
-						<input type="submit" value="구매하기" disabled>
+						<input type="submit" value="거래 완료" disabled>
 					</c:if>
 				</form>
 			</td>
