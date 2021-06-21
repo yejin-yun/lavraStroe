@@ -89,8 +89,6 @@ public class viewOrderListController {
 		for(Order odr : orderList) {
 			GroupItem tmp = petStore.getGItem(odr.getGroupOrder().getItemId());
 			odr.getGroupOrder().setGroupItem(tmp);
-			
-			System.out.println(odr.getGroupOrder().getGroupItem().getItem().getTitle());
 		}
 		
 		model.addAttribute("view" , 3);

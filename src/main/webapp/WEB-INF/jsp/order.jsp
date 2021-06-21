@@ -147,7 +147,7 @@
 	    				</c:if>
 	    				<c:if test="${view == 3 }"> 
 		    				<a href="<c:url value='/group/viewItem'>
-	            						<c:param name='itemNo' value='${groupitem.item.itemId}' /> 
+	            						<c:param name='itemNo' value='${order.groupOrder.itemId}' /> 
 	            					</c:url>"> 
 	                            	<font color="blue"> ${order.groupOrder.groupItem.item.title } </font>
 	                         </a>
