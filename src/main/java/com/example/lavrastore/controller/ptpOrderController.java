@@ -93,6 +93,7 @@ public class ptpOrderController {
 		mav.addObject("myOrder", myOrder);
 		mav.addObject("success", true);
 		mav.addObject("ptpOrder", myOrder.getPtpOrder());
+		mav.addObject("pItem", myOrder.getPtpOrder().getPtpItem());
 		
 		status.setComplete();
 		
