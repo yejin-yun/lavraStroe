@@ -76,7 +76,7 @@
               <B><form:errors path="member.memberId" cssClass="error" /></B>
             </c:if> 
             <c:if test="${!empty userSession.member}">
-              <c:out value="${userSession.member.memberId}" />
+              <form:input path="member.memberId" value="${userSession.member.memberId}" readonly="true" />
             </c:if>
             </td>
           </tr>

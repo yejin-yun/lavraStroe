@@ -12,7 +12,8 @@
           ADDR1,
           ADDR2,
           ZIP,
-          PHONE
+          PHONE,
+          password
     FROM MEMBER
     WHERE MEMBER.MEMBERID = #{memberId}
 
