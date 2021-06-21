@@ -49,13 +49,14 @@ public class viewPTPItemController implements ApplicationContextAware {
 	private int totalPageSize;
 	UserSession userSession;
 	
+	
 	String uploadDir; // = System.getProperty("java.io.tmpdir");
 	private WebApplicationContext context = null;
 	@Override // life-cycle callback method
 	public void setApplicationContext(ApplicationContext appContext)
 	throws BeansException {
 	context = (WebApplicationContext) appContext;
-	uploadDir = context.getServletContext().getRealPath("/WEB-INF/uploadDir");
+	uploadDir = context.getServletContext().getRealPath("/images/upload");
 	}
 
 	
