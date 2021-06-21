@@ -106,6 +106,7 @@ public class MybatisOrderDao implements OrderDao{
     		PTPItem pi = order.getPtpOrder().getPtpItem();
     		orderMapper.insertPtpOrder(po);
     		// PTPItemMapper.updateState(pi.getPTPItemId());
+    		pi.getItem().setQuantity(0);
     		pi.getItem().setIsSoldout(1);
     		itemMapper.updateItem(pi.getItem());
     	}
