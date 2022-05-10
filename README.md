@@ -9,3 +9,14 @@
 
 ## Use Case
 
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbKTOAV%2FbtrBLVBn9My%2FdX712of6KNhIrKOxNv31F0%2Fimg.jpg">
+
+
+## Database Schema
+
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcBFA5g%2FbtrBIge0zS6%2FZU9Z3bHfXLsuFMw5XKT5i1%2Fimg.jpg">
+
+
+## 실행 화면
+
+![image](https://user-images.githubusercontent.com/59862820/167560310-a6eb429a-6d93-4458-93f0-2fc12f790312.png)
