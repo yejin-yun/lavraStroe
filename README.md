@@ -91,9 +91,11 @@
 
 Spring Boot, Spring Data JPA, Spring Sheduler,
 
-MyBatis, Oracle DB, ERWIN, Java 1.8
+MyBatis, Oracle DB, ERWIN, 
 
-Bootstrap, Rest API, AJAX
+Bootstrap, Rest API, AJAX,
+
+HTML/CSS, JSP, Java 1.8, Javascript
 
 ⭐ 저는 spring sheduler를 제외한 나머지 스택을 사용했습니다. 
 
