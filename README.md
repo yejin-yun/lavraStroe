@@ -87,7 +87,7 @@
 
 </br>
 
-## 사용 스택
+## 사용 기술 스택
 
 Spring Boot, Spring Data JPA, Spring Sheduler,
 
