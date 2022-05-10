@@ -7,21 +7,21 @@
 
 💙 주제: Spring MVC를 기반으로 개발한 액세서리 쇼핑몰(일반 쇼핑, 개인거래, 공동구매)_Lavra
 
-### Use Case
+## Use Case
 
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbKTOAV%2FbtrBLVBn9My%2FdX712of6KNhIrKOxNv31F0%2Fimg.jpg">
 
 
-### Database Schema
+## Database Schema
 
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcBFA5g%2FbtrBIge0zS6%2FZU9Z3bHfXLsuFMw5XKT5i1%2Fimg.jpg">
 
 
-### 실행 화면
+## 실행 화면
 
 <img src="https://blog.kakaocdn.net/dn/N1mZF/btrBLGdCoU3/nDC26ukhV8KFlW0xtuOTqk/img.gif" >
 
-### 핵심 기능 설명 
+## 핵심 기능 설명 
 
 :cherry_blossom: **회원가입 및 로그인**
 
@@ -79,13 +79,13 @@ Bootstrap, Rest API, AJAX
 
 ⭐ 저는 spring sheduler를 제외한 나머지 스택을 사용했습니다. 
 
-### 협업 방식
+## 협업 방식
 
 git을 통해서 코드를 올려 관리했으며, Discord를 통해 매주 회의를 하였습니다.
 
 매주 회의에서는 다음주의 개발 목표를 설정하고, 이전에 개발한 것에 대한 결과 공유 및 피드백을 받고, 어려운 점에 대한 조언을 구하였습니다. 
 
-### 프로젝트 구조 
+## 프로젝트 구조 
 
 src / main / java
 
@@ -119,7 +119,7 @@ src / main
 
 pom.xml
 
-### 역할 
+## 역할 
 * [강민주](https://github.com/Minjoo-kang123) : 위시리스트, 로그인, 회원가입, 마이페이지, 필요 이미지 업로드
 * [안시현](https://github.com/ash0520) : 개인거래( 목록, 상세페이지, 등록, 구매)
 * [윤예진](https://github.com/yejin-yun) : 일반 쇼핑( 목록, 상세페이지, 구매 ), 위시리스트(+하트 버튼), 카트 , 메인페이지 등
